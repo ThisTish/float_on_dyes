@@ -1,8 +1,8 @@
+import AnotherButton from "@/components/ui/buttons/CtaButton";
 import { Button } from "@/components/ui/button"
-import CtaButton from "@/components/ui/CtaButton";
-import { ArrowBigRightIcon, ArrowRightFromLine, ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
-import { BiRightArrow } from "react-icons/bi";
+import SubmitButton from "@/components/ui/buttons/SubmitButton";
+import CtaButton from "@/components/ui/buttons/CtaButton";
+import LoginLogoutButton from "@/components/ui/buttons/LoginLogoutButton";
 
 const HomePage = () => {
 
@@ -65,19 +65,14 @@ const HomePage = () => {
         </>
       ))}
       <div>
-        {/* <button className="cta relative mx-auto py-3 px-5 transition-all duration-75 ease-in-out border-0 bg-transparent cursor-pointer active:scale-95">
-          <Link href="/shop">
-          <div className="relative text-lg flex flex-col items-center font-semibold pt-3 text-white">
-            <span >Go to the shop</span>
-            <span ><ArrowRightIcon /></span>
-            </div>
-            <svg className="relative top-0 ml-2 fill-none stroke-2 transform -translate-x-[-5px] transition-all duration-75 ease-in-out hover:translate-x-5" width="15px" height="10px" viewBox="0 0 13 10">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M1,5 L11,5"></path>
-              <polyline points="8 1 12 5 8 9"></polyline>
-            </svg>
-          </Link>
-        </button> */}
-        <CtaButton > <span>Go to shop</span> <ArrowRightIcon /></CtaButton>
+      
+      
+
+      <SubmitButton />
+      <CtaButton />
+      <LoginLogoutButton />
+
+        {/* <CtaButton > <span>Go to shop</span> <ArrowRightIcon /></CtaButton> */}
       </div>
     </main>
   )
