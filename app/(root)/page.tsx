@@ -57,15 +57,16 @@ const HomePage = () => {
   return (
     <main className="h-auto space-y-3 mt-32 gap-2">
       <h1 className="h1-bold">hey ho</h1>
-      <div className="flex flex-wrap"></div>
+      <div className="flex flex-wrap gap-3">
       {buttonVariants.map((buttonVariant, index) => (
         <>
-          <Button key={buttonVariant.name} variant={`${buttonVariant.name as ButtonVariantKeys}`}>
+          <Button key={index} variant={`${buttonVariant.name as ButtonVariantKeys}`}>
             <p >{buttonVariant.name}</p>
 
           </Button>
         </>
       ))}
+      </div>
       <div className="space-y-3">
 
 

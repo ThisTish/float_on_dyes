@@ -99,8 +99,8 @@ const Footer = () => {
 						<p className="text-lg text-black font-semibold ">Site Links</p>
 						<ul className="space-y-2 items-center text-end">
 
-							{PAGE_LINKS.map((link) => (
-								<li className="text-sm" key={link.name}>
+							{PAGE_LINKS.map((link, index) => (
+								<li className="text-sm" key={index}>
 									<Links href={link.href} name={link.name} />
 								</li>
 							)

@@ -12,19 +12,19 @@ const buttonVariants = cva(
         default:
           "bg-primary text-primary-foreground before:bg-white hover:text-primary shadow-xl",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground shadow-sm before:bg-destructive-foreground hover:text-destructive hover:ring-4 hover:ring-destructive",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-secondary shadow-xl before:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        cta: "bg-lightCta text-white before:bg-white hover:text-lightCta shadow-xl "
+          "bg-darkBlue text-primary-foreground shadow-sm before:bg-brightBlue hover:text-accent-foreground",
+        ghost: "before:bg-lightGreen hover:text-popover-foreground",
+        link: " text-primary hover:text-darkBlue underline-offset-4 hover:underline hover:underline-darkBlue",
+        cta: "bg-lightCta text-white before:bg-white hover:text-secondary-foreground shadow-xl "
       },
       size: {
         default: "h-10 px-3 tracking-wider font-semibold gap-2",
         sm: "h-8 px-2 tracking-widest text-xs gap-1 ",
-        lg: "h-10  px-8",
+        lg: "h-12 px-6 text-lg",
         icon: "h-9 w-9",
       },
     },
@@ -40,8 +40,9 @@ const divVariants = cva(
   {
     variants:{
       variant:{
-        default: "group-hover:bg-white group-hover:text-white group-hover:bg-primary",
-        cta: "group-hover:bg-white group-hover:text-white group-hover:bg-lightCta"
+        default: "group-hover:text-white group-hover:bg-primary",
+        destructive: "group-hover:text-white group-hover:bg-lightCta",
+        cta: "group-hover:text-white group-hover:bg-lightCta",
 
       }
     }
