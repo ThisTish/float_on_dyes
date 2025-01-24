@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button"
 import SubmitButton from "@/components/ui/buttons/SubmitButton";
 import CtaButton from "@/components/ui/buttons/CtaButton";
 import LoginLogoutButton from "@/components/ui/buttons/LoginLogoutButton";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, MoveUpRight, Send } from "lucide-react";
+import { AnimatedDiv } from "@/components/ui/animatedDiv";
 
 const HomePage = () => {
 
@@ -60,38 +61,47 @@ const HomePage = () => {
       <div className="flex flex-wrap gap-3">
       {buttonVariants.map((buttonVariant, index) => (
         <>
-          <Button key={index} variant={`${buttonVariant.name as ButtonVariantKeys}`}>
+          <Button key={index} variant={`${buttonVariant.name as ButtonVariantKeys}`} size={"default"}>
             <p >{buttonVariant.name}</p>
-
           </Button>
         </>
       ))}
+      <Button variant={"icon"} ><Send /></Button>
       </div>
+
+      <div className="bg-white w-fit flex flex-wrap gap-4">
+        <Button variant={"icon"} size={"default"}>
+        <MoveUpRight />
+          <AnimatedDiv variant={"icon"} size={"icon"} animation={"show"}>movin
+          </AnimatedDiv>
+        </Button>
+      </div>
+
+
+
       <div className="space-y-3">
-
-
-
-
+        
         <SubmitButton />
 
+
         <div className="flex gap-3">
+        
           <button className="group flex items-center justify-center gap-3 shadow-xl text-lg  lg:font-semibold relative overflow-hidden z-10 p-2 before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 px-4
 
     before:bg-darkGreen hover:text-white bg-secondary border">
             Contact
             <div className="p-1 content-center ease-linear duration-300 rounded-full  
             group-hover:bg-white group-hover:border-none group-hover:text-primary  
-          group-hover:scale-x-125 group-hover:scale-y-125">
+          group-hover:scale-125">
               <MessageCircle size={16} />
             </div>
           </button>
 
           <CtaButton />
         </div>
-
+        
+        
         <LoginLogoutButton />
-
-        {/* <CtaButton > <span>Go to shop</span> <ArrowRightIcon /></CtaButton> */}
       </div>
     </main>
   )
