@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import SubmitButton from "@/components/ui/buttons/SubmitButton";
 import CtaButton from "@/components/ui/buttons/CtaButton";
 import LoginLogoutButton from "@/components/ui/buttons/LoginLogoutButton";
+import { MessageCircle } from "lucide-react";
 
 const HomePage = () => {
 
@@ -47,6 +48,7 @@ const HomePage = () => {
     { name: "secondary", style: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80" },
     { name: "ghost", style: "hover:bg-accent hover:text-accent-foreground" },
     { name: "link", style: "text-primary underline-offset-4 hover:underline" },
+    {name: "cta", style: "bg-lightCta text-white before:bg-white hover:text-lightCta shadow-xl "},
   ]
 
   type ButtonVariantKeys =
@@ -64,13 +66,29 @@ const HomePage = () => {
           </Button>
         </>
       ))}
-      <div>
-      
-      
+      <div className="space-y-3">
 
-      <SubmitButton />
-      <CtaButton />
-      <LoginLogoutButton />
+
+
+
+        <SubmitButton />
+
+        <div className="flex gap-3">
+          <button className="group flex items-center justify-center gap-3 shadow-xl text-lg  lg:font-semibold relative overflow-hidden z-10 p-2 before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 px-4
+
+    before:bg-darkGreen hover:text-white bg-secondary border">
+            Contact
+            <div className="p-1 content-center ease-linear duration-300 rounded-full  
+            group-hover:bg-white group-hover:border-none group-hover:text-primary  
+          group-hover:scale-x-125 group-hover:scale-y-125">
+              <MessageCircle size={16} />
+            </div>
+          </button>
+
+          <CtaButton />
+        </div>
+
+        <LoginLogoutButton />
 
         {/* <CtaButton > <span>Go to shop</span> <ArrowRightIcon /></CtaButton> */}
       </div>
