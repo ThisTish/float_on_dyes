@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Work_Sans } from 'next/font/google'
+import { Work_Sans, Comfortaa } from 'next/font/google'
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 
-const workSans = Work_Sans({subsets: ['latin']})
+const comfortaa = Comfortaa({subsets: ['latin']})
 
 export const metadata: Metadata = {
   title: {
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${workSans.className} antialiased bg-black`}
+      <body className={`${comfortaa.className} antialiased bg-black`}
       >
         {children}
       </body>

@@ -162,7 +162,7 @@
 } */
 
 
-/* .group::before {
+.mask {
   mask-image: url('/inkmask.webp');
   -webkit-mask-image: url('/inkmask.webp');
   mask-size: cover;
@@ -171,4 +171,4 @@
   -webkit-mask-position: center;
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
-} */
+}
