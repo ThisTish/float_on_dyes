@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
 	darkMode: ["class"],
@@ -79,5 +80,17 @@ export default {
 	},
 	plugins: [
 		require("tailwindcss-animate"),
+		plugin(function ({ addUtilities }: { addUtilities: (utilities: Record<string, any>, options?: { variants?: string[], respectPrefix?: boolean, respectImportant?: boolean }) => void }) {
+			addUtilities({
+				'.mask': {
+					maskImage: 'url("/inkmask.webp")',
+					WebkitMaskImage: 'url("/inkmask.webp")'
+				},
+				'.mask-cover': {
+					maskSize: 'cover',
+					WebkitMaskSize: 'cover'
+				}	
+			})
+		})
 	],
 } satisfies Config;

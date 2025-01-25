@@ -114,7 +114,6 @@ const HomePage = () => {
       </div>
 
 
-
       {/* <div className="bg-white w-fit flex flex-wrap gap-4">
         <Button variant={"icon"} size={"default"}>
         <MoveUpRight className="group-hover:rotate-45" />
