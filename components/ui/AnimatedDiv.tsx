@@ -11,8 +11,8 @@ const divVariants = cva(
 				destructive: "group-hover:text-primary-foreground group-hover:bg-lightCta",
 				outline: "group-hover:text-accent group-hover:bg-primary-foreground",
 				secondary: "group-hover:text-brightBlue group-hover:bg-primary-foreground",
-				ghost: "group-hover:text-primary-foreground group-hover:bg-primary",
-				link: "group-hover:text-primary-foreground group-hover:bg-lightCta",
+				ghost: " group-hover:bg-transparent",
+				link: " group-hover:bg-transparent",
 				cta: "group-hover:text-primary-foreground group-hover:bg-lightCta",
 				icon: "group-hover:text-primary-foreground group-hover:bg-lightCta",
 			},
@@ -26,11 +26,11 @@ const divVariants = cva(
 			animation: {
 				default: "",
 				rotate: "group-hover:rotate-45",
-				scale: "group-hover:scale-125",
+				scale: "group-hover:scale-125 group-hover:transition-all group-hover:duration-700",
 				show: "absolute left-10 transform translate-x-full opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 group-hover:bg-transparent group-hover:text-primary ",
 				pulse: "group-hover:animate-pulse group-hover:transition-all group-hover:duration-900 ",
 				ping: "group-hover:animate-ping group-hover:transition-all group-hover:duration-900 ",
-				hide: "group-hover:opacity-0 group-hover:transition-all group-hover:duration-1000 ",
+				hide: "bg-transparent group-hover:opacity-0 group-hover:transition-all group-hover:duration-1000 ",
 				
 			}
 		},
