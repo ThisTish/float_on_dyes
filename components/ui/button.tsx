@@ -20,13 +20,13 @@ const buttonVariants = cva(
         ghost: "before:bg-lightGreen hover:text-popover-foreground",
         link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before: before:bottom-0",
         cta: " bg-lightCta text-white before:bg-white hover:text-secondary-foreground shadow-xl ",
-        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-32 ",
+        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-24 ",
       },
       size: {
         default: "h-10 px-3 tracking-wider font-semibold gap-2",
         sm: "h-8 px-2 tracking-widest text-xs gap-1 ",
         lg: "h-12 px-6 text-lg",
-        icon: "h-9 w-9",
+        icon: "h-8 w-9 p-2",
       },
     },
     defaultVariants: {

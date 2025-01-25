@@ -51,6 +51,7 @@ const HomePage = () => {
     { name: "ghost", style: "hover:bg-accent hover:text-accent-foreground" },
     { name: "link", style: "text-primary underline-offset-4 hover:underline" },
     { name: "cta", style: "bg-lightCta text-white before:bg-white hover:text-lightCta shadow-xl " },
+    { name: "icon", style: "bg-lightCta text-white before:bg-white hover:text-lightCta shadow-xl " },
   ]
 
   type ButtonVariantKeys =
@@ -72,42 +73,42 @@ const HomePage = () => {
 
       <div className="flex flex-wrap gap-3">
 
-        <Button variant={'default'} size={'default'}>
+        <Button variant={'default'} size={'lg'}>
           Default
-          <AnimatedDiv variant={"default"} size={"default"} animation={"rotate"}><MoveUpRight /></AnimatedDiv>
+          <AnimatedDiv variant={"default"} size={"lg"} animation={"rotate"}><MoveUpRight /></AnimatedDiv>
         </Button>
 
-        <Button variant={'destructive'} size={'default'} >
+        <Button variant={'destructive'} size={'lg'} >
           destructive
-          <AnimatedDiv variant={"destructive"} size={"default"} animation={"pulse"}><AlertTriangle /></AnimatedDiv>
+          <AnimatedDiv variant={"destructive"} size={"lg"} animation={"pulse"}><AlertTriangle /></AnimatedDiv>
         </Button>
 
-        <Button variant={'outline'} size={'default'} >
+        <Button variant={'outline'} size={'lg'} >
           outline
-          <AnimatedDiv variant={"outline"} size={"default"} animation={"scale"}><Signal /></AnimatedDiv>
+          <AnimatedDiv variant={"outline"} size={"lg"} animation={"scale"}><Signal /></AnimatedDiv>
         </Button>
 
-        <Button variant={'secondary'} size={'default'} >
+        <Button variant={'secondary'} size={'lg'} >
           secondary
-          <AnimatedDiv variant={"secondary"} size={"default"} animation={"ping"}><SearchCodeIcon /></AnimatedDiv>
+          <AnimatedDiv variant={"secondary"} size={"lg"} animation={"ping"}><SearchCodeIcon /></AnimatedDiv>
         </Button>
 
-        <Button variant={'ghost'} size={'default'} >
+        <Button variant={'ghost'} size={'lg'} >
           ghost
-          <AnimatedDiv variant={"ghost"} size={"default"} animation={"hide"}><GhostIcon /></AnimatedDiv>
+          <AnimatedDiv variant={"ghost"} size={"lg"} animation={"hide"}><GhostIcon /></AnimatedDiv>
         </Button>
 
-        <Button variant={'link'} size={'default'} >
+        <Button variant={'link'} size={'lg'} >
           link
-          <AnimatedDiv variant={"link"} size={"default"} animation={"hide"}><GhostIcon /></AnimatedDiv>
+          <AnimatedDiv variant={"link"} size={"lg"} animation={"hide"}><GhostIcon /></AnimatedDiv>
         </Button>
 
-        <Button variant={'cta'} size={'default'} >
+        <Button variant={'cta'} size={'lg'} >
         CTA
-          <AnimatedDiv variant={"cta"} size={"default"} animation={"rotate"}>  <MoveLeft /></AnimatedDiv>
+          <AnimatedDiv variant={"cta"} size={"lg"} animation={"rotate"}>  <MoveLeft /></AnimatedDiv>
         </Button>
 
-        <Button variant={"icon"} ><Send className="group-hover:rotate-45" />
+        <Button variant={"icon"} size={'icon'}><Send className="group-hover:rotate-45" />
           <AnimatedDiv variant={"icon"} size={"icon"} animation={"show"}>send</AnimatedDiv>
         </Button>
       </div>

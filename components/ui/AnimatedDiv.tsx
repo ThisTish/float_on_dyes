@@ -19,15 +19,15 @@ const divVariants = cva(
 			size: {
 				default: "p-2",
 				sm: "p-1",
-				lg: "p-3",
-				icon: "p-2",
+				lg: "p-3 ml-3",
+				icon: "p-0",
 
 			},
 			animation: {
 				default: "",
 				rotate: "group-hover:rotate-45",
 				scale: "group-hover:scale-125",
-				show: "absolute right-5 transform translate-x-full opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 group-hover:bg-transparent group-hover:text-primary ",
+				show: "absolute left-10 transform translate-x-full opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 group-hover:bg-transparent group-hover:text-primary ",
 				pulse: "group-hover:animate-pulse group-hover:transition-all group-hover:duration-900 ",
 				ping: "group-hover:animate-ping group-hover:transition-all group-hover:duration-900 ",
 				hide: "group-hover:opacity-0 group-hover:transition-all group-hover:duration-1000 ",
