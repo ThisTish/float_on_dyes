@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button"
 import SubmitButton from "@/components/ui/buttons/SubmitButton";
 import CtaButton from "@/components/ui/buttons/CtaButton";
 import LoginLogoutButton from "@/components/ui/buttons/LoginLogoutButton";
-import { MessageCircle, MoveUpRight, Send } from "lucide-react";
-import { AnimatedDiv } from "@/components/ui/animatedDiv";
+import { AlertTriangle, GhostIcon, MessageCircle, MoveLeft, MoveUpRight, SearchCodeIcon, Send, Signal } from "lucide-react";
+import { AnimatedDiv } from "@/components/ui/AnimatedDiv";
+
 
 const HomePage = () => {
 
@@ -49,7 +50,7 @@ const HomePage = () => {
     { name: "secondary", style: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80" },
     { name: "ghost", style: "hover:bg-accent hover:text-accent-foreground" },
     { name: "link", style: "text-primary underline-offset-4 hover:underline" },
-    {name: "cta", style: "bg-lightCta text-white before:bg-white hover:text-lightCta shadow-xl "},
+    { name: "cta", style: "bg-lightCta text-white before:bg-white hover:text-lightCta shadow-xl " },
   ]
 
   type ButtonVariantKeys =
@@ -59,23 +60,69 @@ const HomePage = () => {
     <main className="h-auto space-y-3 mt-32 gap-2">
       <h1 className="h1-bold">hey ho</h1>
       <div className="flex flex-wrap gap-3">
-      {buttonVariants.map((buttonVariant, index) => (
-        <>
-          <Button key={index} variant={`${buttonVariant.name as ButtonVariantKeys}`} size={"default"}>
-            <p >{buttonVariant.name}</p>
-          </Button>
-        </>
-      ))}
-      <Button variant={"icon"} ><Send /></Button>
+        {buttonVariants.map((buttonVariant, index) => (
+          <>
+            <Button key={index} variant={`${buttonVariant.name as ButtonVariantKeys}`} size={"default"}>
+              <p >{buttonVariant.name}</p>
+            </Button>
+          </>
+        ))}
+
       </div>
 
-      <div className="bg-white w-fit flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3">
+
+        <Button variant={'default'} size={'default'}>
+          Default
+          <AnimatedDiv variant={"default"} size={"default"} animation={"rotate"}><MoveUpRight /></AnimatedDiv>
+        </Button>
+
+        <Button variant={'destructive'} size={'default'} >
+          destructive
+          <AnimatedDiv variant={"destructive"} size={"default"} animation={"pulse"}><AlertTriangle /></AnimatedDiv>
+        </Button>
+
+        <Button variant={'outline'} size={'default'} >
+          outline
+          <AnimatedDiv variant={"outline"} size={"default"} animation={"scale"}><Signal /></AnimatedDiv>
+        </Button>
+
+        <Button variant={'secondary'} size={'default'} >
+          secondary
+          <AnimatedDiv variant={"secondary"} size={"default"} animation={"ping"}><SearchCodeIcon /></AnimatedDiv>
+        </Button>
+
+        <Button variant={'ghost'} size={'default'} >
+          ghost
+          <AnimatedDiv variant={"ghost"} size={"default"} animation={"hide"}><GhostIcon /></AnimatedDiv>
+        </Button>
+
+        <Button variant={'link'} size={'default'} >
+          link
+          <AnimatedDiv variant={"link"} size={"default"} animation={"hide"}><GhostIcon /></AnimatedDiv>
+        </Button>
+
+        <Button variant={'cta'} size={'default'} >
+        CTA
+          <AnimatedDiv variant={"cta"} size={"default"} animation={"rotate"}>  <MoveLeft /></AnimatedDiv>
+        </Button>
+
+        <Button variant={"icon"} ><Send className="group-hover:rotate-45" />
+          <AnimatedDiv variant={"icon"} size={"icon"} animation={"show"}>send</AnimatedDiv>
+        </Button>
+      </div>
+
+
+
+      {/* <div className="bg-white w-fit flex flex-wrap gap-4">
         <Button variant={"icon"} size={"default"}>
-        <MoveUpRight />
+        <MoveUpRight className="group-hover:rotate-45" />
           <AnimatedDiv variant={"icon"} size={"icon"} animation={"show"}>movin
           </AnimatedDiv>
         </Button>
       </div>
+
+      <CtaButton />
 
 
 
@@ -97,12 +144,11 @@ const HomePage = () => {
             </div>
           </button>
 
-          <CtaButton />
         </div>
         
         
         <LoginLogoutButton />
-      </div>
+      </div> */}
     </main>
   )
 }

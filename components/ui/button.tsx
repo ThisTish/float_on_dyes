@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 active:translate-x-1 active:translate-y-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 group relative overflow-hidden z-10 before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 ",
+  "group inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 active:translate-x-1 active:translate-y-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 group relative overflow-hidden z-10 before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 ",
   {
     variants: {
       variant: {
@@ -18,9 +18,9 @@ const buttonVariants = cva(
         secondary:
           "bg-darkBlue text-primary-foreground shadow-sm before:bg-brightBlue hover:text-accent-foreground",
         ghost: "before:bg-lightGreen hover:text-popover-foreground",
-        link: " text-primary hover:text-darkBlue underline-offset-4 hover:underline hover:underline-darkBlue",
-        cta: "bg-lightCta text-white before:bg-white hover:text-secondary-foreground shadow-xl ",
-        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-fit",
+        link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before: before:bottom-0",
+        cta: " bg-lightCta text-white before:bg-white hover:text-secondary-foreground shadow-xl ",
+        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-32 ",
       },
       size: {
         default: "h-10 px-3 tracking-wider font-semibold gap-2",
