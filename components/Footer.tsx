@@ -1,14 +1,14 @@
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants"
-import { Instagram, Mail, ShipIcon } from "lucide-react"
+import { Instagram, Mail } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { TbBrandBluesky } from 'react-icons/tb'
-import Links from "../shared/lists/Links"
+import Links from "./shared/lists/Links"
 import PAGE_LINKS from "@/lib/constants/page-links"
-import { Button } from "../ui/button"
-import ContactForm from "../shared/contactForm/Form"
+import { Button } from "./ui/button"
+import ContactForm from "./shared/contactForm/Form"
 import payments from "@/lib/constants/payments"
-import { AnimatedDiv } from "../ui/AnimatedDiv"
+import { AnimatedDiv } from "./ui/AnimatedDiv"
 import { FaShippingFast } from "react-icons/fa"
 
 
@@ -18,10 +18,10 @@ const Footer = () => {
 
 
 	return (
-		<footer className="w-full border-t pt-12 bg-darkGreen md:bg-brightBlue">
-			<div className="wrapper lg:flex lg:justify-evenly space-y-12 lg:space-y-0">
+		<footer className="w-full border-t pt-12 bg-darkGreen">
+			<div className="wrapper lg:flex lg:justify-between space-y-12 lg:space-y-0">
 
-				<div className="space-y-12 md:space-y-0 md:flex md:justify-between lg:grid lg:grid-cols-2 lg:justify-normal ">
+				<div className="space-y-12 md:space-y-0 md:flex md:justify-between lg:grid lg:grid-cols-2 lg:justify-normal">
 					{/* Left Side */}
 					<div className="text-white space-y-12">
 						<div className="flex gap-3 items-center justify-end lg:grid ">
@@ -99,7 +99,7 @@ const Footer = () => {
 				</div>
 
 				{/* Form */}
-				<div className="space-y-1 text-primary-foreground min-w-64">
+				<div className="space-y-1 text-primary-foreground min-w-64 lg:w-96">
 					<p className="footer-header">Contact Form</p>
 					<ContactForm />
 				</div>
@@ -109,27 +109,27 @@ const Footer = () => {
 
 				{/* footer of footer */}
 			</div>
-				<div className="space-y-1 justify-end text-end wrapper">
-					<p className="footer-header">We accept</p>
-					<ul className="flex space-x-1 items-center justify-end text-primary-foreground text-3xl">
-						{payments.map((payment) => (
-							<li key={payment.name}>
-								<Links name={payment.name} >
-									<payment.icon />
-								</Links>
-							</li>
-						))}
+			<div className="space-y-1 justify-end text-end wrapper">
+				<p className="footer-header">We accept</p>
+				<ul className="flex space-x-1 items-center justify-end text-primary-foreground text-3xl">
+					{payments.map((payment) => (
+						<li key={payment.name}>
+							<Links name={payment.name} >
+								<payment.icon />
+							</Links>
+						</li>
+					))}
 
-					</ul>
-				</div>
-				<div >
-					<hr className="m-3" />
-					<div className="grid items-center justify-center sm:flex sm:justify-between text-sm px-5">
+				</ul>
+			</div>
+			<div >
+				<hr className="m-3" />
+				<div className="grid items-center justify-center sm:flex sm:justify-between text-sm px-5">
 
 					<p >{currentYear} {APP_NAME}. All rights reserved.</p>
 					<p className=" text-white">Website created by <a href="https://tish-sirface-portfolio.netlify.app/" target="blank" className="text-lightBlue">SirFaceSites</a></p>
-					</div>
 				</div>
+			</div>
 
 
 
