@@ -3,6 +3,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { LogIn, ShoppingCart } from "lucide-react"
+import PAGE_LINKS from "@/lib/constants/page-links"
+import Links from "../shared/lists/Links"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
+import Hamburger from "./Hamburger"
 
 const Header = () => {
 	return (
@@ -23,31 +27,18 @@ const Header = () => {
 				</div>
 
 				<nav className="hidden space-x-1 md:block">
-					<Button variant={'ghost'} asChild>
-						<Link href={'/'}>Home</Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/shop'}>Shop</Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/custom'}>Custom Orders</Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/gallery'}>Gallery</Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/about'}>About Us</Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/contact'}>Contact</Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/cart'}><ShoppingCart /></Link>
-					</Button>
-					<Button variant={'ghost'} asChild>
-						<Link href={'/sign-in'}><LogIn />Login</Link>
-					</Button>
+					{PAGE_LINKS.map((link) => (
+						<Button variant={'link'} size={'sm'} key={link.name} asChild>
+							<AnimatedDiv variant={'link'}>
+							<Links {...link} />
+							</AnimatedDiv>
+						</Button>
+					))}
+					
 				</nav>
+					<div className="md:hidden">
+						<Hamburger />
+					</div>
 
 			</div>
 		</header>
