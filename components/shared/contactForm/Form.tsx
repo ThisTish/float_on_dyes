@@ -15,8 +15,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
+import { Send } from "lucide-react"
 
-const formSchema = z.object({
+const contactFormSchema = z.object({
 	name: z.string().min(2, {
 		message: "Username must be at least 2 characters.",
 	}),
@@ -30,22 +32,22 @@ export function ContactForm() {
 	// ...
 
 	const form = useForm({
-		resolver: zodResolver(formSchema),
+		resolver: zodResolver(contactFormSchema),
 	})
 
 	
 
 	return (
 		<Form {...form}>
-			<form onSubmit={() => console.log('submitted')} className="space-y-8">
+			<form onSubmit={() => console.log('submitted')} className="space-y-5">
 				<FormField
 					control={form.control}
-					name="username"
+					name="name"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Username</FormLabel>
+							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="shadcn" {...field} />
+								<Input {...field} />
 							</FormControl>
 				
 							<FormMessage />
@@ -59,7 +61,7 @@ export function ContactForm() {
 						<FormItem>
 							<FormLabel>Email</FormLabel>
 							<FormControl>
-								<Input placeholder="shadcn@gmail.com" {...field} />
+								<Input {...field} />
 							</FormControl>
 						
 							<FormMessage />
@@ -68,10 +70,10 @@ export function ContactForm() {
 				/>
 				<FormField
 					control={form.control}
-					name="username"
+					name="message"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Username</FormLabel>
+							<FormLabel>Message</FormLabel>
 							<FormControl>
 								<Textarea {...field} />
 							</FormControl>
@@ -80,7 +82,12 @@ export function ContactForm() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit">Submit</Button>
+				<Button variant={'icon'} type="submit" className="">
+						<Send size={24} />
+					<AnimatedDiv variant={'icon'} size={'icon'} animation={'show'}>
+					Submit
+					</AnimatedDiv>
+					</Button>
 			</form>
 		</Form>
 	)

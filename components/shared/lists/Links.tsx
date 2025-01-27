@@ -1,14 +1,14 @@
 import Link from "next/link"
 
 type LinksProps = {
-	href: string,
+	href?: string,
 	name: string,
 	children?: React.ReactNode
 }
 
 const Links = ({ href, children, name }: LinksProps) => {
 	return (
-		<Link href={href}>{children ? children : name}</Link>
+		<Link href={href ? href : ''}>{children ? children : name}</Link>
 	)
 }
 

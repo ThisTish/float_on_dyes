@@ -34,6 +34,10 @@
   .h3-bold {
     @apply font-bold text-xl lg:text-2xl;
   }
+
+  .footer-header {
+    @apply text-lg text-black font-semibold tracking-wide;
+  }
 }
 
  /* :root {
@@ -160,15 +164,3 @@
     @apply bg-primary text-secondary;
   }
 } */
-
-
-.mask {
-  mask-image: url('/inkmask.webp');
-  -webkit-mask-image: url('/inkmask.webp');
-  mask-size: cover;
-  -webkit-mask-size: cover;
-  mask-position: center;
-  -webkit-mask-position: center;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-}

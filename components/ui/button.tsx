@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost: "before:bg-lightGreen hover:text-popover-foreground",
         link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before: before:bottom-0",
         cta: " bg-lightCta text-white before:bg-white hover:text-secondary-foreground shadow-xl ",
-        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-24 ",
+        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-28 ",
       },
       size: {
         default: "h-10 px-3 tracking-wider font-semibold gap-2",

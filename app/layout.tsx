@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${comfortaa.className} antialiased bg-black`}
+      <body className={`${comfortaa.className} antialiased`}
       >
         {children}
       </body>
