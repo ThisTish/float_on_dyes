@@ -7,13 +7,14 @@ import PAGE_LINKS from "@/lib/constants/page-links"
 import Links from "../shared/lists/Links"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import Hamburger from "./Hamburger"
+import ModeToggle from "./ModeToggle"
 
 const Header = () => {
 	return (
 		<header className="w-full fixed top-0 z-50  backdrop-blur-md shadow-md text-darkBlue ">
 
 			<div className="flex-between wrapper">
-
+				{/* logo & name */}
 				<div className="flex-start">
 					<Link href="/" className="flex-start">
 						<Image
@@ -26,6 +27,10 @@ const Header = () => {
 					</Link>
 				</div>
 
+				{/* light/dark mode */}
+				<ModeToggle />
+
+				{/* page links */}
 				<nav className="hidden space-x-1 md:block">
 					{PAGE_LINKS.map((link) => (
 						<Button variant={'link'} size={'sm'} key={link.name} asChild>
@@ -34,11 +39,11 @@ const Header = () => {
 							</AnimatedDiv>
 						</Button>
 					))}
-					
+
 				</nav>
-					<div className="md:hidden">
+					<nav className="md:hidden">
 						<Hamburger />
-					</div>
+					</nav>
 
 			</div>
 		</header>
