@@ -106,7 +106,20 @@ export default {
 				'100%': {
 					transform: 'scale(1);'
 				},
+			},
+			'rotate-center': {
+				'0%': {
+					transform: 'rotate(0deg);'
+				},
+				'100%': {
+					transform: 'rotate(360deg);'
+				}
 			}
+		},
+		animation: {
+			'cloud-move': 'cloud-move 6s infinite',
+			'star-twinkle': 'star-twinkle 2s infinite',
+			'rotate-center': 'rotate-center .6s ease-in-out both'
 		}
 	},
 	plugins: [
