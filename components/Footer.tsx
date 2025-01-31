@@ -18,7 +18,7 @@ const Footer = () => {
 
 
 	return (
-		<footer className="w-full border-t pt-12 bg-darkGreen">
+		<footer className="w-full border-t pt-12 bg-lightGreen">
 			<div className="wrapper lg:flex lg:justify-between space-y-12 lg:space-y-0">
 
 				<div className="space-y-12 md:space-y-0 md:flex md:justify-between lg:grid lg:grid-cols-2 lg:justify-normal">
