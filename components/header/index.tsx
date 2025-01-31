@@ -28,7 +28,7 @@ const Header = () => {
 				</div>
 
 				{/* light/dark mode */}
-				{/* <ModeToggle /> */}
+				<ModeToggle />
 
 				{/* page links */}
 				<nav className="hidden space-x-1 md:block">
