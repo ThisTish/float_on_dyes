@@ -20,9 +20,9 @@ const ModeToggle = () => {
 	return (
 		<label className="relative inline-block w-16 cursor-pointer h-9 overflow-hidden">
 			<input id="input" type="checkbox" onChange={toggleTheme} checked={resolvedTheme === 'dark'} className="sr-only opacity-0 size-0 peer" />
-			<div className="absolute z-0 inset-0 bg-blue-500 transition-all duration-300 ease-linear peer-checked::bg-black peer-checked:bg-black"></div>
+			<div className="absolute z-0 inset-0 bg-lightBlue transition-all duration-300 ease-linear peer-checked::bg-black peer-checked:bg-black"></div>
 			{/* sun moon */}
-			<div className="absolute left-1 bottom-1 w-7 h-7 bg-yellow-400 dark:bg-white rounded-full transition-all duration-300 ease-linear peer-checked:translate-x-7"></div>
+			<div className="absolute left-1 bottom-1 w-7 h-7 bg-yellow-300 dark:bg-white rounded-full transition-all duration-300 ease-linear peer-checked:translate-x-7"></div>
 			{/* moon dots */}
 			<div className="absolute left-[43px] top-[6px] size-[6px] bg-gray-700 rounded-full opacity-0 peer-checked:opacity-100"></div>
 			<div className="absolute left-[35px] top-[15px] size-[10px] bg-gray-600 rounded-full opacity-0 peer-checked:opacity-100"></div>

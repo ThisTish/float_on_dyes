@@ -1,15 +1,29 @@
+"use client"
+
+import { useState } from "react" 
 import { APP_NAME } from "@/lib/constants"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "../ui/button"
-import { LogIn, ShoppingCart } from "lucide-react"
 import PAGE_LINKS from "@/lib/constants/page-links"
 import Links from "../shared/lists/Links"
-import { AnimatedDiv } from "../ui/AnimatedDiv"
 import Hamburger from "./Hamburger"
 import ModeToggle from "./ModeToggle"
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import { Button } from "../ui/button"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
 
 const Header = () => {
+	const [isOpen, setIsOpen] = useState(false)
+
+
 	return (
 		<header className="w-full fixed top-0 z-50  backdrop-blur-md shadow-md text-darkBlue ">
 
@@ -28,22 +42,42 @@ const Header = () => {
 				</div>
 
 				{/* light/dark mode */}
+				<div className="hidden md:block">
 				<ModeToggle />
+
+				</div>
 
 				{/* page links */}
 				<nav className="hidden space-x-1 md:block">
 					{PAGE_LINKS.map((link) => (
-						<Button variant={'link'} size={'sm'} key={link.name} asChild>
+						<Button variant={'link'} key={link.name} asChild>
 							<AnimatedDiv variant={'link'}>
-							<Links {...link} />
+								<Links {...link} />
 							</AnimatedDiv>
 						</Button>
 					))}
 
 				</nav>
-					<nav className="md:hidden">
-						<Hamburger />
-					</nav>
+				<nav className="md:hidden">
+					<DropdownMenu onOpenChange={(prev) => setIsOpen(prev)}>
+						<DropdownMenuTrigger className="cursor-pointer">	
+							<Hamburger isOpen={isOpen}/>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent>
+							<DropdownMenuLabel>Menu</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							{PAGE_LINKS.map((link) => (
+								<DropdownMenuItem key={link.name}>
+									<Links {...link} />
+								</DropdownMenuItem>
+							))}
+							<DropdownMenuSeparator />
+							<DropdownMenuItem className="flex justify-center">
+								<ModeToggle />
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				</nav>
 
 			</div>
 		</header>
