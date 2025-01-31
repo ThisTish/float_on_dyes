@@ -83,7 +83,7 @@ const Footer = () => {
 						</div>
 
 						{/* Tracking */}
-						<Button variant={'cta'} className="text-xs px-1">
+						<Button variant={'cta'} className="text-xs px-2">
 							Track Order
 							<AnimatedDiv variant={'cta'} animation={'pulse'}>
 								<FaShippingFast />
@@ -115,7 +115,7 @@ const Footer = () => {
 					{payments.map((payment) => (
 						<li key={payment.name}>
 							<Links name={payment.name} >
-								<payment.icon />
+								<payment.icon className="cursor-default" />
 							</Links>
 						</li>
 					))}

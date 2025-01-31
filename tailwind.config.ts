@@ -89,7 +89,7 @@ export default {
 						transform: 'translateX(-4px);'
 					},
 					'100%': {
-						transform: 'translateX(0px);'				
+						transform: 'translateX(0px);'
 					},
 				},
 				'star-twinkle': {
@@ -106,24 +106,53 @@ export default {
 						transform: 'scale(1);'
 					},
 				},
-				'rotate-center': {
+				'loading-disc': {
 					'0%': {
-						transform: 'rotate(0deg);'
+						backgroundColor: 'var(--darkBlue);'
+					},
+					'25%': {
+						backgroundColor: 'var(--brightBlue);'
+					},
+					'50%': {
+						backgroundColor: 'var(--darkGreen);'
+					},
+					'75%': {
+						backgroundColor: 'var(--lightBlue);'
 					},
 					'100%': {
-						transform: 'rotate(360deg);'
+						backgroundColor: 'transparent'
 					}
+				},
+				'loading': {
+					'0%': {
+						opacity: '1',
+						color: 'var(--darkBlue);'
+					},
+					'50%': {
+						opacity: '0',
+						color: 'green;'
+					},
+					'100%': {
+						opacity: '1',
+						color: 'var(---primary-foreground);'
+					},
 				}
 			},
 			animation: {
 				'cloud-move': 'cloud-move 6s infinite',
 				'star-twinkle': 'star-twinkle 2s infinite',
-				'rotate-center': 'rotate-center .6s ease-in-out both'
+				'loading-disc': 'loading-disc 4s ease-in-out infinite',
+				'loading': 'loading 2s ease-in-out infinite'
+			},
+			transitionDelay:{
+				'1300' : '1300ms',
+				'1700': '1700ms',
+				'2000': '2000ms',
 			}
 		},
 	},
 	plugins: [
 		require("tailwindcss-animate"),
-		
+
 	],
 } satisfies Config;
