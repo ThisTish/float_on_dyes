@@ -76,51 +76,51 @@ export default {
 				2: 'calc(var(--border-width) + 2px)',
 				4: 'calc(var(--border-width) +  4px)',
 				8: 'calc(var(--border-width) + 8px)'
-			}
-		},
-		keyframes: {
-			'cloud-move': {
-				'0%': {
-					transform: 'translateX(0px);'
-				},
-				'40%': {
-					transform: 'translateX(4px);'
-				},
-				'80%': {
-					transform: 'translateX(-4px);'
-				},
-				'100%': {
-					transform: 'translateX(0px);'				
-				},
 			},
-			'star-twinkle': {
-				'0%': {
-					transform: 'scale(1);'
+			keyframes: {
+				'cloud-move': {
+					'0%': {
+						transform: 'translateX(0px);'
+					},
+					'40%': {
+						transform: 'translateX(4px);'
+					},
+					'80%': {
+						transform: 'translateX(-4px);'
+					},
+					'100%': {
+						transform: 'translateX(0px);'				
+					},
 				},
-				'40%': {
-					transform: 'scale(1.2);'
+				'star-twinkle': {
+					'0%': {
+						transform: 'scale(1);'
+					},
+					'40%': {
+						transform: 'scale(1.2);'
+					},
+					'80%': {
+						transform: 'scale(.8);'
+					},
+					'100%': {
+						transform: 'scale(1);'
+					},
 				},
-				'80%': {
-					transform: 'scale(.8);'
-				},
-				'100%': {
-					transform: 'scale(1);'
-				},
-			},
-			'rotate-center': {
-				'0%': {
-					transform: 'rotate(0deg);'
-				},
-				'100%': {
-					transform: 'rotate(360deg);'
+				'rotate-center': {
+					'0%': {
+						transform: 'rotate(0deg);'
+					},
+					'100%': {
+						transform: 'rotate(360deg);'
+					}
 				}
+			},
+			animation: {
+				'cloud-move': 'cloud-move 6s infinite',
+				'star-twinkle': 'star-twinkle 2s infinite',
+				'rotate-center': 'rotate-center .6s ease-in-out both'
 			}
 		},
-		animation: {
-			'cloud-move': 'cloud-move 6s infinite',
-			'star-twinkle': 'star-twinkle 2s infinite',
-			'rotate-center': 'rotate-center .6s ease-in-out both'
-		}
 	},
 	plugins: [
 		require("tailwindcss-animate"),

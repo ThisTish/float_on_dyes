@@ -10,23 +10,23 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground before:bg-white hover:text-primary shadow-xl",
+          "bg-primary text-primary-foreground before:bg-primary-foreground hover:text-primary shadow-xl",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm before:bg-destructive-foreground hover:text-destructive border border-destructive",
         outline:
-          "border border-input bg-secondary shadow-xl before:bg-accent hover:text-accent-foreground",
+          "border border-input bg-secondary shadow-xl before:bg-primary hover:text-accent-foreground",
         secondary:
           "bg-darkBlue text-primary-foreground shadow-sm before:bg-brightBlue hover:text-accent-foreground",
         ghost: "before:bg-lightGreen hover:text-popover-foreground",
         link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before: before:bottom-0",
-        cta: " bg-lightCta text-white before:bg-white hover:text-secondary-foreground shadow-xl ",
-        icon: "justify-start bg-lightCta text-primary-foreground aspect-square before:bg-white hover:text-primary hover:w-28 ",
+        cta: " bg-lightCta text-primary-foreground before:bg-white hover:text-black shadow-xl ",
+        icon: "justify-center w-10 bg-lightCta text-primary-foreground aspect-square transition-all duration-300 ease-out before:bg-white hover:justify-start hover:text-black hover:w-[125px] ",
       },
       size: {
         default: "h-10 px-3 tracking-wider font-semibold gap-2",
         sm: "h-8 px-2 tracking-widest text-xs gap-1 ",
         lg: "h-12 px-6 text-lg",
-        icon: "h-8 w-9 p-2",
+        icon: "size-10 p-2",
       },
     },
     defaultVariants: {

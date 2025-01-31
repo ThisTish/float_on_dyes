@@ -84,10 +84,14 @@ export function ContactForm() {
 						</FormItem>
 					)}
 				/>
-				<Button variant={'icon'} type="submit" className="">
-						<Send size={24} />
+				<Button variant={'icon'} type="submit">
+					<AnimatedDiv animation={"rotate"} >
+						<Send size={24}/>
+					</AnimatedDiv>
 					<AnimatedDiv variant={'icon'} size={'icon'} animation={'show'}>
-					Submit
+					<span className="ml-2"> 
+						Submit
+					</span>
 					</AnimatedDiv>
 					</Button>
 			</form>
