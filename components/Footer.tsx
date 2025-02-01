@@ -127,7 +127,7 @@ const Footer = () => {
 				<div className="grid items-center justify-center sm:flex sm:justify-between text-sm px-5">
 
 					<p >{currentYear} {APP_NAME}. All rights reserved.</p>
-					<p className=" text-white">Website created by <a href="https://tish-sirface-portfolio.netlify.app/" target="blank" className="text-lightBlue">SirFaceSites</a></p>
+					<p className=" text-white">Website created by <a href="https://tish-sirface-portfolio.netlify.app/" target="blank" className="text-primary-foreground"><strong>Tish Sirface</strong></a></p>
 				</div>
 			</div>
 

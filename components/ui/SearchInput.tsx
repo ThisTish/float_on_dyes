@@ -15,7 +15,7 @@ const SearchInput = () => {
 				className="sr-only"
 				htmlFor="search"
 			>Search</label>
-				<div className="relative">
+				<div className="relative ">
 					<Input
 						type="search"
 						id="search"
