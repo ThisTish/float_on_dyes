@@ -111,13 +111,13 @@ export default {
 						backgroundColor: 'var(--darkBlue);'
 					},
 					'25%': {
-						backgroundColor: 'var(--brightBlue);'
-					},
-					'50%': {
 						backgroundColor: 'var(--darkGreen);'
 					},
+					'50%': {
+						backgroundColor: 'var(--brightBlue);'
+					},
 					'75%': {
-						backgroundColor: 'var(--lightBlue);'
+						backgroundColor: 'var(--lightGreen);'
 					},
 					'100%': {
 						backgroundColor: 'transparent'
@@ -130,7 +130,7 @@ export default {
 					},
 					'50%': {
 						opacity: '0',
-						color: 'green;'
+						color: 'var(--darkGreen);'
 					},
 					'100%': {
 						opacity: '1',
@@ -145,7 +145,13 @@ export default {
 				'loading': 'loading 2s ease-in-out infinite'
 			},
 			transitionDelay:{
+				'400' : '400ms',
+				'600' : '600ms',
+				'800' : '800ms',
+				'1200' : '1200ms',
 				'1300' : '1300ms',
+				'1400' : '1400ms',
+				'1600' : '1600ms',
 				'1700': '1700ms',
 				'2000': '2000ms',
 			}

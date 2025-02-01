@@ -1,7 +1,9 @@
+import Loader from "@/components/ui/Loader"
+
 const LoadingPage = () => {
 	return (
-		<div className="loading">
-			<div className="loading__spinner"></div>
+		<div className="flex items-center justify-center h-screen">
+			<Loader />
 		</div>
 	)
 }
