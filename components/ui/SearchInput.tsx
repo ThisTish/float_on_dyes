@@ -1,5 +1,5 @@
 "use client"
-import { Search, Send } from "lucide-react"
+import { ArrowDownRightSquareIcon, ArrowRightCircle, ArrowUpAZ, ArrowUpRight, Search, Send } from "lucide-react"
 import { Form } from "./form"
 import { Input } from "./input"
 import { Button } from "./button"
@@ -25,14 +25,14 @@ const SearchInput = () => {
 					/>
 					<Button
 						type="submit"
-						className={cn(`absolute end-0 top-0 transition duration-200`, isActive ? "focus-within:rotate-45 focus-within:rounded-full" : null) }
+						className={cn(`absolute end-0 top-0 transition duration-200`, isActive ? "focus-within:rotate-45 focus-within:rounded-full focus-within:size-8 focus-within:mt-[2px] focus-within:mr-1" : null) }
 						size={"icon"}
 						variant={'secondary'}
 					>
 						{!isActive ? (
 							<Search size={24} />
 						): (
-							<Send size={24}/>
+							<ArrowUpRight size={24}/>
 						)}
 					</Button>
 				</div>
