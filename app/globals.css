@@ -142,8 +142,8 @@
     --darkBlue: hsl(207, 77%, 64%);
     --lightBlue: hsl(192, 17%, 33%);
     --brightBlue: hsl(214, 63%, 38%);
-    --lightCta: hsl(355, 100%, 55%);
-    --darkCta: hsl(351, 73%, 30%);
+    --darkCta: hsl(355, 100%, 55%);
+    --lightCta: hsl(351, 73%, 30%);
   }
 }
 

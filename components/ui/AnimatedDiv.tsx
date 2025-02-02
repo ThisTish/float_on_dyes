@@ -13,7 +13,7 @@ const divVariants = cva(
 				secondary: "group-hover:text-brightBlue group-hover:bg-primary-foreground",
 				ghost: " group-hover:bg-transparent",
 				link: " group-hover:bg-transparent",
-				cta: "group-hover:text-primary-foreground group-hover:bg-lightCta",
+				cta: "group-hover:text-white group-hover:bg-lightCta",
 				icon: "group-hover:text-primary-foreground group-hover:bg-lightCta",
 			},
 			size: {

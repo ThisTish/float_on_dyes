@@ -25,7 +25,7 @@ const Header = () => {
 
 
 	return (
-		<header className="w-full fixed top-0 z-50  backdrop-blur-md shadow-md text-darkBlue ">
+		<header className="w-full fixed top-0 z-50 backdrop-blur-md shadow-md text-darkBlue ">
 
 			<div className="flex-between wrapper">
 				{/* logo & name */}
