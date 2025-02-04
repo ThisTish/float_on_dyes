@@ -7,8 +7,9 @@ import Image from "next/image"
 import { BiDetail } from "react-icons/bi"
 import ProductPrice from "./ProductPrice"
 import Link from "next/link"
+import { Product } from "@/types"
 
-const ProductCard = ({ product }: { product: any }) => {
+const ProductCard = ({ product }: { product: Product }) => {
 	return (
 		<Card key={product.id}>
 			<CardContent>
