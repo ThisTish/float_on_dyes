@@ -9,7 +9,6 @@ const Header = () => {
 
 	return (
 		<header className="w-full fixed top-0 z-50 backdrop-blur-md shadow-md text-darkBlue ">
-
 			<div className="flex-between wrapper">
 				{/* logo & name */}
 				<div className="flex-start">
@@ -22,16 +21,14 @@ const Header = () => {
 						/>
 					</Link>
 				</div>
-
-				{/* light/dark mode */}
 				<div className="flex">
-				<Menu />
-				<div className="hidden md:block">
-
-					<ModeToggle />
+					{/* page links */}
+					<Menu />
+					<div className="hidden md:block">
+						{/* light/dark mode */}
+						<ModeToggle />
+					</div>
 				</div>
-				</div>
-				{/* page links */}
 
 			</div>
 		</header>

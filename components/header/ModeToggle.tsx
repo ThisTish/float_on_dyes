@@ -56,9 +56,7 @@ const ModeToggle = () => {
 				<svg id="cloud-6" className="cloud-light absolute top-6 left-5 size-10 fill-blue rounded-full fill-blue-50 animate-cloud-move" viewBox="0 0 100 100">
 					<circle cx="50" cy="50" r="50"></circle>
 				</svg>
-				{/* <div className="absolute w-10 h-10 bg-gray-300 rounded-full animate-cloud-move"></div>
-				<div className="absolute w-5 h-5 bg-gray-400 rounded-full animate-cloud-move left-4 top-2"></div>
-				<div className="absolute w-7 h-7 bg-gray-500 rounded-full animate-cloud-move left-8 top-4"></div> */}
+				
 			</div>
 			{/* stars */}
 			<div className="relative opacity-0 transition-all duration-300 ease-linear peer-checked:opacity-100  ">

@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  slug         String   @unique(map: "product_slug_idx")
+  brand        String
+  category     String
+  description  String
+  images       String[]
+  discType     String[]
+  tags         String[]
+  color        String[]
+  dyeType      String[]
+  price        Decimal  @default(0) @db.Decimal(12, 2)
+  speed        Int      @default(0)
+  glide        Int      @default(0)
+  turn         Int      @default(0)
+  fade         Int      @default(0)
+  weight       Float    @default(0)
+  isAvailable  Boolean  @default(true)
+  isFeatured   Boolean  @default(false)
+  isDiscounted Boolean  @default(false)
+  createdAt    DateTime @default(now()) @db.Timestamp(6)
+}
