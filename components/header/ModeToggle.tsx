@@ -18,7 +18,7 @@ const ModeToggle = () => {
 	if (!mounted) return null
 
 	return (
-		<label className="relative inline-block w-16 cursor-pointer h-9 overflow-hidden">
+		<label className="relative w-16 cursor-pointer h-9 overflow-hidden inline-block">
 			<input id="input" type="checkbox" onChange={toggleTheme} checked={resolvedTheme === 'dark'} className="sr-only opacity-0 size-0 peer" />
 			<div className="absolute z-0 inset-0 bg-lightBlue transition-all duration-300 ease-linear peer-checked::bg-black peer-checked:bg-black"></div>
 			{/* sun moon */}

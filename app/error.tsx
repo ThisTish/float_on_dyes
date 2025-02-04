@@ -1,5 +1,5 @@
 "use client"
-import Header from "@/components/header"
+import Header from "@/components/header/Header"
 import { Button } from "@/components/ui/button"
 import SearchInput from "@/components/ui/SearchInput"
 import Link from "next/link"

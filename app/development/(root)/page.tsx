@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card"
 
 const HomePage = async () => {
 
-  throw new Error('This is a test error')
 
   return (
     <main className="h-auto">

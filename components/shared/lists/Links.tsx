@@ -4,11 +4,12 @@ type LinksProps = {
 	href?: string,
 	name: string,
 	children?: React.ReactNode
+	className?: string
 }
 
-const Links = ({ href, children, name }: LinksProps) => {
+const Links = ({ href, children, name, className }: LinksProps) => {
 	return (
-		<Link href={href ? href : ''}>{children ? children : name}</Link>
+		<Link href={href ? href : ''} className={className}>{children ? children : name}</Link>
 	)
 }
 
