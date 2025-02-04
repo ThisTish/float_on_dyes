@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -13,6 +14,7 @@ model Product {
   slug         String   @unique(map: "product_slug_idx")
   brand        String
   category     String
+  plastic      String
   description  String
   images       String[]
   discType     String[]
