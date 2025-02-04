@@ -13,7 +13,7 @@ const HomePage = async () => {
 
       <Hero />
       
-      <section className="mt-[40rem]">
+      <section className="mt-[40rem] flex flex-wrap justify-center bg-darkBlue w-fit gap-2 p-2">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

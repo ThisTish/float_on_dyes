@@ -1,6 +1,6 @@
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { formatNumberWithDecimal } from "@/lib/utils"
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
@@ -11,7 +11,7 @@ import { Product } from "@/types"
 
 const ProductCard = ({ product }: { product: Product }) => {
 	return (
-		<Card key={product.id}>
+		<Card key={product.id} className="w-72">
 			<CardContent>
 				{/* image */}
 				<Image
@@ -23,17 +23,16 @@ const ProductCard = ({ product }: { product: Product }) => {
 				/>
 			</CardContent>
 
-			<CardHeader>
 				{/* title */}
-				<CardTitle>
+				<CardTitle className="h-20">
 					<Link href={`/products/${product.slug}`}>
 					<span className="text-lg font-bold">{product.name} </span>
 					<span className="text-lg font-light">- {product.dyeType}</span>
 					</Link>
 				</CardTitle>
-			</CardHeader>
 
-			<CardContent className="flex justify-between items-baseline">
+			<CardDescription className="flex justify-between items-stretch">
+
 				<ProductPrice value={Number(product.price)} />
 				<Button variant={'cta'}>
 					See Details
@@ -42,9 +41,9 @@ const ProductCard = ({ product }: { product: Product }) => {
 						{/* <ArrowUpRight /> */}
 					</AnimatedDiv>
 				</Button>
-			</CardContent>
+			</CardDescription>
 			{/* tags */}
-			<CardFooter className="flex flex-wrap gap-1">
+			<CardFooter className="">
 				{product.tags.map((tag: string) => (
 					<Button variant={'chip'} size={'sm'}key={`${product.id}-${tag}`}>{tag}</Button>
 				))}
