@@ -6,11 +6,14 @@ import { getLatestProducts } from "@/lib/actions/product.actions"
 
 const HomePage = async () => {
   const products = await getLatestProducts()
+  console.log(typeof(products[0].price))
 
   return (
-    <div className="flex flex-col">
+    <div>
+
       <Hero />
-      <section className="mt-[40rem]"> {/* Add margin-top to separate from Hero */}
+      
+      <section className="mt-[40rem]">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
