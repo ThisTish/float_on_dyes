@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils"
 
 const ProductPrice = ({ value, className }: { value: number, className?: string }) => {
-	console.log(typeof(value))
 	const stringValue = value.toFixed(2)
 	const [int, decimal] = stringValue.split('.')
 

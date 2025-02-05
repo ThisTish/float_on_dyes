@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 active:translate-x-1 active:translate-y-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 group relative overflow-hidden z-10 before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 ",
+  "group inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 active:translate-x-1 active:translate-y-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring  disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 group relative overflow-hidden z-10 before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 ",
   {
     variants: {
       variant: {
@@ -19,15 +19,17 @@ const buttonVariants = cva(
           "bg-darkBlue text-primary-foreground shadow-sm before:bg-brightBlue hover:text-accent-foreground",
         ghost: "before:bg-lightGreen hover:text-popover-foreground",
         link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before: before:bottom-0",
-        cta: " bg-lightCta text-white before:bg-white hover:text-black shadow-xl ",
+        cta: " bg-lightCta text-white before:bg-white hover:text-black shadow-md ",
         icon: "justify-center w-10 bg-lightCta text-primary-foreground aspect-square transition-all duration-300 ease-out before:bg-white hover:justify-start hover:text-black hover:w-[125px] ",
-        chip: "bg-darkBlue text-white font-extralight hover:border-t hover:border-b hover:border-primary-foreground",
+        chip: "bg-primary-foreground text-darkBlue border-darkBlue border-[2px] hover:border-t hover:border-b hover:border-primary-foreground focus-visible:border-t focus-visible:border-b focus-visible:border-primary-foreground focus-visible:ring-0",
       },
       size: {
-        default: "h-10 px-3 tracking-wider font-semibold gap-2",
+        default: "h-11 px-3 tracking-wider font-semibold gap-2",
         sm: "h-8 px-2 tracking-widest text-xs gap-1 ",
         lg: "h-12 px-6 text-lg",
         icon: "size-9 p-2",
+        chip: "h-6 px-1 text-xs",
+
       },
     },
     defaultVariants: {
@@ -41,7 +43,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
