@@ -5,7 +5,7 @@ import Link from "next/link"
 
 const Hero = () => {
 	return (
-		<div className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/heroLandscape.svg')] bg-cover bg-center bg-no-repeat  ">
+		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/heroLandscape.svg')] bg-cover bg-center bg-no-repeat  ">
 			<hgroup className="relative mx-auto my-auto w-20">
 
 				<h1 className="grid text-5xl text-darkBlue dark:text-lightBlue absolute -left-20 -top-40 tracking-tighter leading-9 md:text-6xl lg:text-7xl lg:-left-32">
@@ -46,7 +46,7 @@ const Hero = () => {
 					</Link>
 				</Button>
 			</div>
-		</div>
+		</section>
 	)
 }
 

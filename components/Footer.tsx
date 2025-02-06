@@ -114,9 +114,7 @@ const Footer = () => {
 				<ul className="flex space-x-1 items-center justify-end text-primary-foreground text-3xl">
 					{payments.map((payment) => (
 						<li key={payment.name}>
-							<Links name={payment.name} >
-								<payment.icon className="cursor-default" />
-							</Links>
+								<payment.icon  />
 						</li>
 					))}
 

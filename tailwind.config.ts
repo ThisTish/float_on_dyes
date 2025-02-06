@@ -154,6 +154,10 @@ export default {
 				'1600' : '1600ms',
 				'1700': '1700ms',
 				'2000': '2000ms',
+			},
+			fontFamily: {
+				'work-sans': 'var(--font-work-sans)',
+				'comfortaa': 'var(--font-comfortaa)'
 			}
 		},
 	},
