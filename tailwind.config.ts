@@ -156,8 +156,8 @@ export default {
 				'2000': '2000ms',
 			},
 			fontFamily: {
-				'work-sans': 'var(--font-work-sans)',
-				'comfortaa': 'var(--font-comfortaa)'
+				'work-sans': ['var(--font-work-sans)'],
+				'comfortaa': ['var(--font-comfortaa)']
 			}
 		},
 	},

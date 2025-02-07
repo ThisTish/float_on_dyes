@@ -10,13 +10,21 @@ import { Product } from "@/types"
 const ProductCard = ({ product }: { product: Product }) => {
 	return (
 		<Card key={product.id} className="relative group w-64 max-w-72 border-2 border-darkBlue">
-			<div className="grid gap-1 text-darkBlue absolute top-2 right-1 transition duration-300 ease-in md:opacity-0 group-hover:opacity-100">
-				{/* todo make buttons add tooltips for this..... */}
+			<div className="grid gap-1 text-darkBlue absolute top-1 right-0 transition translate-x-6 duration-300 ease-in md:opacity-0 group-hover:opacity-100 group-hover:-translate-x-0">
+				{/* todo add tooltips for this..... */}
 				{/* if added, heart checkmark */}
-				<BiBookmarkHeart className="size-9 hover:bg-darkBlue hover:text-white " />
+				
+				<button  className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
+				<BiBookmarkHeart size={25} />
+
+				</button>
 
 				{/* if added, check sign */}
-				<BiPlusCircle className="size-9 hover:bg-darkBlue hover:text-white " />
+				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
+				<BiPlusCircle size={25} />
+
+
+				</button>
 			</div>
 
 			<CardContent>
