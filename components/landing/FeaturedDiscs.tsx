@@ -15,7 +15,7 @@ const FeaturedDiscs = async () => {
 					<ProductCard key={product.id} product={product} />
 				))}
 			</div>
-			<SearchInput />
+			{/* <SearchInput /> */}
 		</section>
 	);
 }
