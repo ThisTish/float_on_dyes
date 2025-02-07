@@ -78,7 +78,9 @@ export function ContactForm() {
 							<FormLabel>Message</FormLabel>
 							<FormControl>
 								<Textarea {...field} />
+								{/* screenshot in phone 2/5/2025 */}
 								{/* https://shadcnui-expansions.typeart.cc/docs/autosize-textarea */}
+
 							</FormControl>
 						
 							<FormMessage />

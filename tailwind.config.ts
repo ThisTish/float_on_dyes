@@ -150,10 +150,6 @@ export default {
 				'800' : '800ms',
 				'1200' : '1200ms',
 				'1300' : '1300ms',
-				'1400' : '1400ms',
-				'1600' : '1600ms',
-				'1700': '1700ms',
-				'2000': '2000ms',
 			},
 			fontFamily: {
 				'work-sans': ['var(--font-work-sans)'],
