@@ -2,16 +2,40 @@ import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight, MessageCircle } from "lucide-react"
 import Link from "next/link"
+import FloatingLetter from "../header/Title"
+
+const float = "Float ".split("");
+const on = "On ".split("");
+const dyes = "Dyes ".split("");
 
 const Hero = () => {
 	return (
 		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/heroLandscape.svg')] bg-cover bg-center bg-no-repeat  ">
 			<hgroup className="relative mx-auto my-auto w-20">
 
+
+
 				<h1 className="grid text-5xl text-darkBlue dark:text-lightBlue absolute -left-20 -top-40 tracking-tighter leading-9 md:text-6xl lg:text-7xl lg:-left-32">
-					<span className="-mb-3 ml-1"><b> F</b>loat</span>
+					<div className="flex gap-7">
+						{float.map((letter, index) => (
+							<span key={index} >
+								<FloatingLetter text={letter} />
+							</span>
+						))}
+					</div>
+					<span className="flex">
+						{on.map((letter, index) => (
+							<FloatingLetter key={index} text={letter} />
+						))}
+					</span>
+					<span className="flex">
+						{dyes.map((letter, index) => (
+							<FloatingLetter key={index} text={letter} />
+						))}
+					</span>
+					{/* <span className="-mb-3 ml-1"><b> F</b>loat</span>
 					<span><b>o</b>n</span>
-					<span><b>D</b>yes</span>
+					<span><b>D</b>yes</span> */}
 				</h1>
 
 				<h2 className="text-xl text-primary text-end w-52 p-2 backdrop-blur-sm leading-5 absolute top-11 -right-[4.5rem] text-pretty rounded-full md:w-72 md:-right-[9.5rem] md:top-20 lg:text-2xl lg:w-80 lg:-right-72">

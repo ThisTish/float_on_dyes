@@ -34,6 +34,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 					width={300}
 					height={300}
 					alt={`${product.name} image`}
+					
 					priority
 				/>
 			</CardContent>
