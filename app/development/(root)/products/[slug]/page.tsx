@@ -1,10 +1,11 @@
+import ProductDetailsImages from "@/components/shared/product/ProductDetailsImages"
 import ProductPrice from "@/components/shared/product/ProductPrice"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { getProductBySlug } from "@/lib/actions/product.actions"
 import { notFound } from "next/navigation"
-import { BiBookmarkHeart, BiPlus, BiPlusCircle, BiShoppingBag } from "react-icons/bi"
+import { BiBookmarkHeart, BiPlus} from "react-icons/bi"
 
 const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) => {
 
@@ -30,10 +31,10 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 				))}
 			</div>
 
-			<section className="grid grid-cols-1 gap-5 md:grid-cols-2">
+			<section className="grid grid-cols-1 gap-10 md:gap-5 md:grid-cols-2">
 				{/* images */}
-				<div className="w-full h-96">
-
+				<div className="w-full">
+					<ProductDetailsImages images={product.images} name={product.name} />
 				</div>
 				{/* details */}
 				<Card className="space-y-5 p-10 text-darkGreen">
@@ -52,25 +53,25 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 					<CardContent>
 						<p className="text-pretty">{product.description}</p>
 
-					<div className="grid grid-cols-4 grid-rows-2 pt-5 mx-auto max-w-80 text-center text-sm sm:text-xl sm:tracking-wide">
-						{/* flight numbers */}
-						<div className="aspect-square max-w-24 bg-brightBlue text-white content-evenly">
-							<h4 >Speed</h4>
-							<span className="font-bold tracking-widest">{product.speed}</span>
+						<div className="grid grid-cols-4 grid-rows-2 pt-5 mx-auto max-w-80 text-center text-sm sm:text-xl sm:tracking-wide">
+							{/* flight numbers */}
+							<div className="aspect-square max-w-24 bg-brightBlue text-white content-evenly">
+								<h4 >Speed</h4>
+								<span className="font-bold tracking-widest">{product.speed}</span>
+							</div>
+							<div className="aspect-square max-w-24 bg-darkGreen text-white content-evenly ">
+								<h4 >Glide</h4>
+								<span className="font-bold tracking-widest">{product.glide}</span>
+							</div>
+							<div className="aspect-square max-w-24 bg-darkBlue text-white content-evenly ">
+								<h4 >Turn</h4>
+								<span className="font-bold tracking-widest">{product.turn}</span>
+							</div>
+							<div className="aspect-square max-w-24 bg-lightGreen text-white content-evenly ">
+								<h4 >Fade</h4>
+								<span className="font-bold tracking-widest">{product.fade}</span>
+							</div>
 						</div>
-						<div className="aspect-square max-w-24 bg-darkGreen text-white content-evenly ">
-							<h4 >Glide</h4>
-							<span className="font-bold tracking-widest">{product.glide}</span>
-						</div>
-						<div className="aspect-square max-w-24 bg-darkBlue text-white content-evenly ">
-							<h4 >Turn</h4>
-							<span className="font-bold tracking-widest">{product.turn}</span>
-						</div>
-						<div className="aspect-square max-w-24 bg-lightGreen text-white content-evenly ">
-							<h4 >Fade</h4>
-							<span className="font-bold tracking-widest">{product.fade}</span>
-						</div>
-					</div>
 					</CardContent>
 
 					{/* buttons */}
