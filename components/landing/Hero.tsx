@@ -26,7 +26,7 @@ const Hero = () => {
 				>
 					<Link href="/contact">
 						Contact Us
-						<AnimatedDiv variant={'secondary'} animation={'scale'}>
+						<AnimatedDiv variant={'secondary'} animation={'scale'} >
 							<MessageCircle />
 						</AnimatedDiv>
 					</Link>
