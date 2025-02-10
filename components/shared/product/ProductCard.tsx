@@ -6,6 +6,7 @@ import { BiBookmarkHeart, BiDetail, BiPlusCircle } from "react-icons/bi"
 import ProductPrice from "./ProductPrice"
 import Link from "next/link"
 import { Product } from "@/types"
+import ProductImage from "./ProductImage"
 
 const ProductCard = ({ product }: { product: Product }) => {
 	return (
@@ -27,16 +28,10 @@ const ProductCard = ({ product }: { product: Product }) => {
 				</button>
 			</div>
 
-			<CardContent>
+			<CardContent >
 				{/* image */}
-				<Image
-					src={product.images[0]}
-					width={300}
-					height={300}
-					alt={`${product.name} image`}
-					
-					priority
-				/>
+				<ProductImage src={product.images[0]} width={300} height={300} alt={product.name} />
+			
 			</CardContent>
 
 			{/* title */}

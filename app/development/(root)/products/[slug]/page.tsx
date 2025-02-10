@@ -43,10 +43,10 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							<h3 className="text-xl font-bold">{product.brand}</h3>
 						</CardTitle>
 						<CardDescription>
-							<p className="flex flex-wrap gap-3 -mt-2 justify-between items-center">
+							<div className="flex flex-wrap gap-3 -mt-2 justify-between items-center">
 								<span className="text-lg font-semibold">{product.dyeType}</span>
 								<ProductPrice className="text-2xl" value={Number(product.price)} />
-							</p>
+							</div>
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
