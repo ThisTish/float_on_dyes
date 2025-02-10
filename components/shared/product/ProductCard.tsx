@@ -41,7 +41,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
 			{/* title */}
 			<CardTitle className="h-20">
-				<Link href={`/products/${product.slug}`}>
+				<Link href={`/development/products/${product.slug}`}>
 					<span className="text-lg font-bold">{product.name} </span>
 					<span className="text-lg font-light">- {product.dyeType}</span>
 				</Link>
@@ -58,7 +58,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 				</Button>
 			</CardDescription>
 			{/* tags */}
-			<CardFooter className="">
+			<CardFooter>
 				{product.tags.map((tag: string) => (
 					<Button variant={'chip'} size={'chip'} key={`${product.id}-${tag}`}>{tag}</Button>
 				))}

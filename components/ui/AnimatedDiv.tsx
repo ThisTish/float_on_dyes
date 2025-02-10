@@ -26,6 +26,7 @@ const divVariants = cva(
 			animation: {
 				default: "",
 				rotate: "group-hover:rotate-45",
+				rotateFull: "group-hover:rotate-180",
 				scale: " group-hover:scale-125 group-hover:transition-all group-hover:duration-700",
 				show: "absolute left-10 translate-x-full opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 group-hover:bg-transparent group-hover:text-black ",
 				pulse: "group-hover:animate-pulse group-hover:transition-all group-hover:duration-900 ",
