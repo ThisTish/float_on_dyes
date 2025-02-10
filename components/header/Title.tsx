@@ -1,48 +1,29 @@
-"use client";
+import FloatingLetter from "./FloatingLetter"
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+const float = "Float".split("")
+const on = "On  ".split("")
+const dyes = "Dyes".split("")
 
-const FloatingLetter = ({ text }: { text: string }) => {
-	const [positions, setPositions] = useState<{ x: number; y: number }[]>([]);
-
-	useEffect(() => {
-		const generatePositions = () =>
-			Array.from({ length: text.length }, () => ({
-				x: Math.random() * 20 - 10, // Random X offset
-				y: Math.random() * 50 - 25, // Random Y offset
-			}));
-
-		setPositions(generatePositions());
-	}, [text]);
-
+const Title = () => {
 	return (
-		<div className="relative h-32 w-full flex items-center justify-center">
-			{/* <div className="relative"> */}
-				{text.split("").map((char, index) => (
-					<motion.span
-						key={index}
-						initial={{ x: positions[index]?.x, y: positions[index]?.y }}
-						animate={{
-							x: [0, positions[index]?.x, positions[index]?.x +10],
-							y: [0, positions[index]?.y, positions[index]?.y +20],
-							opacity: 1,
-						}}
-						transition={{
-							duration: 10,
-							repeat: Infinity,
-							repeatType: "reverse",
-							ease: "easeInOut",
-						}}
-						className="absolute"
-						style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
-					>
-						{char}
-					</motion.span>
+		<h1 className="flex flex-col gap-5 w-1/2 text-5xl text-darkBlue dark:text-lightBlue md:text-6xl lg:text-7xl lg:gap-7">
+			<div className="flex h-10 relative tracking-tighter" >
+				{float.map((letter, index) => (
+					<FloatingLetter key={index} letter={letter} />
 				))}
-			{/* </div> */}
-		</div>
-	);
-};
+			</div>
+			<div className="flex gap-1 h-10 relative ">
+				{on.map((letter, index) => (
+					<FloatingLetter key={index} letter={letter} />
+				))}
+			</div>
+			<div className="flex gap-1 h-10 relative ">
+				{dyes.map((letter, index) => (
+					<FloatingLetter key={index} letter={letter} />
+				))}
+			</div>
+		</h1>
+	)
+}
 
-export default FloatingLetter;
+export default Title

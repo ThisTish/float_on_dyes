@@ -2,7 +2,7 @@ import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { Button } from "@/components/ui/button"
 import { ArrowUpRight, MessageCircle } from "lucide-react"
 import Link from "next/link"
-import FloatingLetter from "../header/Title"
+import Title from "../header/Title";
 
 const float = "Float ".split("");
 const on = "On ".split("");
@@ -10,42 +10,17 @@ const dyes = "Dyes ".split("");
 
 const Hero = () => {
 	return (
-		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/heroLandscape.svg')] bg-cover bg-center bg-no-repeat  ">
-			<hgroup className="relative mx-auto my-auto w-20">
-
-
-
-				<h1 className="grid text-5xl text-darkBlue dark:text-lightBlue absolute -left-20 -top-40 tracking-tighter leading-9 md:text-6xl lg:text-7xl lg:-left-32">
-					<div className="flex gap-7">
-						{float.map((letter, index) => (
-							<span key={index} >
-								<FloatingLetter text={letter} />
-							</span>
-						))}
-					</div>
-					<span className="flex">
-						{on.map((letter, index) => (
-							<FloatingLetter key={index} text={letter} />
-						))}
-					</span>
-					<span className="flex">
-						{dyes.map((letter, index) => (
-							<FloatingLetter key={index} text={letter} />
-						))}
-					</span>
-					{/* <span className="-mb-3 ml-1"><b> F</b>loat</span>
-					<span><b>o</b>n</span>
-					<span><b>D</b>yes</span> */}
-				</h1>
-
-				<h2 className="text-xl text-primary text-end w-52 p-2 backdrop-blur-sm leading-5 absolute top-11 -right-[4.5rem] text-pretty rounded-full md:w-72 md:-right-[9.5rem] md:top-20 lg:text-2xl lg:w-80 lg:-right-72">
+		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/heroLandscape.svg')] bg-cover bg-center bg-no-repeat items-center justify-center ">
+			<hgroup className="flex flex-col gap-10 w-64 h-full mt-32 md:w-72 lg:w-96 ">
+				<Title />
+				<h2 className="text-xl text-primary text-end w-52 p-2 self-end backdrop-blur-sm leading-5 text-balance rounded-full md:w-72 md:mt-5 lg:mt-7 lg:text-2xl lg:w-80 ">
 					<p>One of a kind dyes and custom designs for your favorite things...</p>
-					<span className="px-1 font-extrabold w-fit text-2xl">Discs</span>
+					<span className="px-1 font-extrabold w-fit text-2xl md:text-3xl lg:text-4xl">Discs</span>
 				</h2>
 			</hgroup>
 			<div className="flex gap-3 justify-end px-5 pb-5 -mt-14 md:pb-8 wrapper">
 				<Button
-					variant={"default"}
+					variant={"outline"}
 					className="h-8 px-2 tracking-widest text-xs gap-1 md:h-10 md:px-3 md:tracking-wider md:font-semibold md:gap-2"
 					asChild
 				>

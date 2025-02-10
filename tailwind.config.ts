@@ -152,8 +152,8 @@ export default {
 				'1300' : '1300ms',
 			},
 			fontFamily: {
-				'work-sans': ['var(--font-work-sans)'],
-				'comfortaa': ['var(--font-comfortaa)']
+				mono: ['var(--font-work-sans)'],
+				comfortaa: ['var(--font-comfortaa)']
 			}
 		},
 	},
