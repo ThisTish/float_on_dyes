@@ -1,11 +1,15 @@
 import ProductDetailsImages from "@/components/shared/product/ProductDetailsImages"
 import ProductPrice from "@/components/shared/product/ProductPrice"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
+import BackButton from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { getProductBySlug } from "@/lib/actions/product.actions"
 import { notFound } from "next/navigation"
-import { BiBookmarkHeart, BiPlus} from "react-icons/bi"
+import { BiBookmarkHeart, BiPlus } from "react-icons/bi"
+// todo Breadcrumb
+// todo Related Products
+// todo tags search
 
 const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) => {
 
@@ -24,25 +28,26 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 				</h1>
 				{/* Breadcrumb */}
 			</header>
-			{/* tags */}
-			<div className="flex space-x-2">
-				{product.tags.map((tag: string) => (
-					<Button variant={'chip'} size={'chip'} key={`${product.id}-${tag}`}>{tag}</Button>
-				))}
-			</div>
 
 			<section className="grid grid-cols-1 gap-10 md:gap-5 md:grid-cols-2">
 				{/* images */}
 				<div className="w-full">
 					<ProductDetailsImages images={product.images} name={product.name} />
 				</div>
+
 				{/* details */}
 				<Card className="space-y-5 p-10 text-darkGreen">
 					<CardHeader>
 						<CardTitle >
-							<h2 className="text-2xl font-extrabold tracking-tight">{product.name} </h2>
-							<h3 className="text-xl font-bold">{product.brand}</h3>
+							<h2>
+								<span className="text-2xl font-extrabold tracking-tight ">{product.name} </span>
+								<span className="text-xl font-bold ">{product.brand} </span>
+								<span className=" font-light block">{product.plastic}</span>
+
+							</h2>
 						</CardTitle>
+
+						{/* dye type and price */}
 						<CardDescription>
 							<div className="flex flex-wrap gap-3 -mt-2 justify-between items-center">
 								<span className="text-lg font-semibold">{product.dyeType}</span>
@@ -50,11 +55,13 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							</div>
 						</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-pretty">{product.description}</p>
 
-						<div className="grid grid-cols-4 grid-rows-2 pt-5 mx-auto max-w-80 text-center text-sm sm:text-xl sm:tracking-wide">
-							{/* flight numbers */}
+					<CardContent>
+						{/* description */}
+						<p className="text-pretty leading-snug">{product.description}</p>
+
+						{/* flight numbers */}
+						<div className="grid grid-cols-4 py-5 mx-auto max-w-60 text-center text-sm sm:text-base ">
 							<div className="aspect-square max-w-24 bg-brightBlue text-white content-evenly">
 								<h4 >Speed</h4>
 								<span className="font-bold tracking-widest">{product.speed}</span>
@@ -84,12 +91,25 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							Bag It
 							<AnimatedDiv variant={'cta'} animation={'rotateFull'} className="ml-2"><BiPlus /></AnimatedDiv>
 						</Button>
-
 					</CardFooter>
 				</Card>
 			</section>
+
+			{/* tags */}
+			<div className="flex justify-end space-x-2">
+				{product.tags.map((tag: string) => (
+					<Button variant={'chip'} size={'chip'} key={`${product.id}-${tag}`}>{tag}</Button>
+				))}
+			</div>
+
+			{/* nav buttons */}
+			<BackButton size="sm" />
+
+			{/* Related Products Section */}
 		</div>
 	)
 }
 
 export default ProductDetailsPage
+
+// >previous and next buttons?

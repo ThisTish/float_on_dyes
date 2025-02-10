@@ -63,7 +63,7 @@ const firstData = {
 			plastic: 'Total Eclipse Glow',
 			description: "Mesmerizingly straight, with flight numbers of 5/5/-1/1, the Hex will find a place in anyone’s bag as a versatile and reliably straight midrange. At the highest arm speeds, the Hex will produce slightly understable lines from flat, but the 1 fade keeps it from flipping over completely. For lower arm speeds, the Hex has enough turn to make shaping lines a breeze. If you are looking for control in the woods, or simply a versatile line shaper, the Hex is the midrange for you.",
 			category: 'dyed',
-			images: ['/images/AHex.jpg', 'images/AVortex.jpg', 'images/ABenny.jpg', 'images/ACloudBreaker.jpg'],
+			images: ['/images/AHex.jpg', '/images/AVortex.jpg', '/images/ABenny.jpg', '/images/ACloudBreaker.jpg'],
 			discType: [
 				'midrange', 'pro series', 'special edition', 'glow'
 			],

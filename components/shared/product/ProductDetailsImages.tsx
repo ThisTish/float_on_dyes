@@ -5,9 +5,8 @@ import ProductImage from "./ProductImage"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 
-const ProductDetailsImages = ({images, name}: {images: string[], name:string}) => {
+const ProductDetailsImages = ({ images, name }: { images: string[], name: string }) => {
 	const [currentImage, setCurrentImage] = useState(0)
-
 
 	return (
 		<div className="space-y-5">
@@ -16,7 +15,7 @@ const ProductDetailsImages = ({images, name}: {images: string[], name:string}) =
 				width={1000}
 				height={1000}
 				alt={`Image of ${name}`}
-				/>
+			/>
 			<div className="flex flex-wrap gap-5">
 				{images.map((image, index) => (
 					<Image
@@ -26,11 +25,10 @@ const ProductDetailsImages = ({images, name}: {images: string[], name:string}) =
 						height={100}
 						alt={`Image of ${name}`}
 						onClick={() => setCurrentImage(index)}
-						className={cn("cursor-pointer object-cover object-center size-24", currentImage === index && "border border-darkGreen")}
-						/>
+						className={cn("cursor-pointer object-cover object-center size-12 md:size-24", currentImage === index && "border border-darkGreen")}
+					/>
 				))}
 			</div>
-
 		</div>
 	)
 }

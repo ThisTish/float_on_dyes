@@ -1,8 +1,11 @@
 "use client"
 import Header from "@/components/header/Header"
+import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
+import BackButton from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/button"
+import SearchButton from "@/components/ui/SearchButton"
 import SearchInput from "@/components/ui/SearchInput"
-import Link from "next/link"
+import { RefreshCcw } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 // app/error.js
@@ -19,17 +22,14 @@ export default function Error({ error, reset }: any) {
 				<p className="mb-10 mt-3 md:text-lg lg:text-xl">{error.message}</p>
 
 			<div className="flex gap-3 justify-center px-5 wrapper">
-				<Button variant={'outline'} onClick={() => router.back()}>
-					Go Back
-				</Button>
+				<BackButton />
 				<Button variant={'default'} onClick={() => reset()}>
 					Try Again
+					<AnimatedDiv animation={'rotateFull'}><RefreshCcw /></AnimatedDiv>
 				</Button>
 				</div>
 				<p className="mt-10">or search for something else</p>
-				<div className="mt-10 min-w-64 max-w-96 w-full">
-					<SearchInput />
-				</div>
+				<SearchButton />
 			</div>
 		</div>
 	)
