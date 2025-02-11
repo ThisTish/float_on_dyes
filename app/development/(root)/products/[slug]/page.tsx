@@ -43,6 +43,7 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 								<span className="text-2xl font-extrabold tracking-tight ">{product.name} </span>
 								<span className="text-xl font-bold ">{product.brand} </span>
 								<span className=" font-light block">{product.plastic}</span>
+								<p className="text-sm font-extralight">{product.weight}g</p>
 
 							</h2>
 						</CardTitle>
