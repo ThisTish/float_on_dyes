@@ -14,7 +14,7 @@ export default function Error({ error, reset }: any) {
 	const router = useRouter()
 
 	return (
-		<div className="bg-[url('/notFoundLandscape.svg')] bg-cover bg-center bg-no-repeat h-screen flex items-center justify-center">
+		<div className="bg-[url('/images/notFoundLandscape.svg')] bg-cover bg-center bg-no-repeat h-screen flex items-center justify-center">
 			<Header />
 			<div className="wrapper flex flex-col items-center mt-20 text-black">
 				<h1 className="text-3xl font-semibold tracking-tighter md:text-5xl lg:text-6xl">WTF Richard?!?!?!</h1>

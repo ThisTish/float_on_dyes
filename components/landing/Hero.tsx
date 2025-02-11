@@ -4,13 +4,10 @@ import { ArrowUpRight, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import Title from "../header/Title";
 
-const float = "Float ".split("");
-const on = "On ".split("");
-const dyes = "Dyes ".split("");
 
 const Hero = () => {
 	return (
-		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/heroLandscape.svg')] bg-cover bg-center bg-no-repeat items-center justify-center ">
+		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/images/heroLandscape.svg')] bg-cover bg-center bg-no-repeat items-center justify-center ">
 			<hgroup className="flex flex-col gap-10 w-64 h-full mt-32 md:w-72 lg:w-96 ">
 				<Title />
 				<h2 className="text-xl text-primary text-end w-52 p-2 self-end backdrop-blur-sm leading-5 text-balance rounded-full md:w-72 md:mt-5 lg:mt-7 lg:text-2xl lg:w-80 ">
