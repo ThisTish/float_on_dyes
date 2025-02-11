@@ -1,4 +1,21 @@
+import { hashSync } from "bcrypt-ts-edge";
+
 const firstData = {
+	users: [
+		{
+			name: 'tosh',
+			email: 'tosh@gmail.com',
+			password: hashSync('123456', 10),
+			role: 'admin'
+		},
+		{
+			name: 'user',
+			email: 'user@gmail.com',
+			password: hashSync('123456', 10),
+			role: 'user'
+		}
+	],
+
 	products: [
 		{
 			name: 'Benny',
@@ -25,7 +42,7 @@ const firstData = {
 			fade: 2,
 			weight: 170,
 			isAvailable: false,
-			isFeatured: true, 
+			isFeatured: true,
 			isDiscounted: false,
 		},
 		{
@@ -53,7 +70,7 @@ const firstData = {
 			fade: 3,
 			weight: 172,
 			isAvailable: false,
-			isFeatured: true, 
+			isFeatured: true,
 			isDiscounted: false,
 		},
 		{
@@ -81,7 +98,7 @@ const firstData = {
 			fade: 1,
 			weight: 168.2,
 			isAvailable: true,
-			isFeatured: true, 
+			isFeatured: true,
 			isDiscounted: false,
 		}
 	]
