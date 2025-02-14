@@ -6,25 +6,18 @@ import { isRedirectError } from "next/dist/client/components/redirect-error"
 
 // sign in user with credentials
 export async function signInWithCredentials(prevState: unknown, formData: FormData){
-	console.group()
-	console.log('signin with credentials triggered')
 	try {
 		const user = signInFormSchema.parse({
 			email: formData.get('email'),
 			password: formData.get('password')
 		})
-		console.log('action', user)
-		const result = await signIn('credentials', {
-			...user,
-			redirect: false
-		})
-		console.log('action signin results', result)
-		console.groupEnd()
+		await signIn('credentials', user)
 		return { success: true, message: 'Signed in successfully' }
 	} catch (error) {
 		if(isRedirectError(error)){
 			throw error
 		}
+
 		return { success: false, message: 'Invalid email or password'}
 	}
 }
