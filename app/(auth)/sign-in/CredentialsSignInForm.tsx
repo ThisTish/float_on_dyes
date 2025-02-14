@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { useSearchParams } from "next/navigation"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { BiLogInCircle } from "react-icons/bi"
+import AuthCard from "@/components/auth/AuthCard"
 
 const CredentialsSignInForm = () => {
 	const [data, action] = useActionState(signInWithCredentials, {
@@ -47,6 +48,12 @@ const CredentialsSignInForm = () => {
 	}
 
 	return (
+		<AuthCard
+			cardTitle="Sign In"
+			cardDescription="Sign in to your account"
+			otherLinkSpan="Don't have an account? "
+			otherLinkLabel="Sign Up"
+			otherLinkHref="/sign-up">
 		<form action={action}>
 			<input type="hidden" name="callbackUrl" value={callbackUrl} />
 			<div className="space-y-6">
@@ -80,12 +87,10 @@ const CredentialsSignInForm = () => {
 						{data.message}
 					</div>
 				) : null}
-				<div className="text-sm text-center text-muted-foreground">
-					<span>Don&apos;t have an account? </span>
-					<Link href={'/sign-up'} target="_self" className="link">Sign Up</Link>
-				</div>
+				
 			</div>
 		</form>
+		</AuthCard>
 	)
 }
 

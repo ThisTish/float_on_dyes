@@ -23,7 +23,8 @@ const SignInPage = async (props: { searchParams: Promise<{ callbackUrl: string }
 
 	return (
 		<main className="w-full max-w-md mx-auto">
-			<Card className="p-5 bg-lightGreen dark:bg-card">
+			<CredentialsSignInForm />
+			{/* <Card className="p-5 bg-lightGreen dark:bg-card">
 				<CardHeader className="inline-flex flex-row px-10 gap-10">
 					<Link href={'/'} className="flex ">
 						<Image
@@ -47,7 +48,7 @@ const SignInPage = async (props: { searchParams: Promise<{ callbackUrl: string }
 				<CardContent>
 					<CredentialsSignInForm />
 				</CardContent>
-			</Card>
+			</Card> */}
 		</main>
 
 	)
