@@ -1,26 +1,37 @@
 "use server"
 
-import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { signInFormSchema } from "../validators"
 import { signIn, signOut } from "@/auth"
+import { isRedirectError } from "next/dist/client/components/redirect-error"
 
-export const signInWithCredentials = async (prevState: unknown, formData: FormData) => {
+// sign in user with credentials
+export async function signInWithCredentials(prevState: unknown, formData: FormData){
+	console.group()
+	console.log('signin with credentials triggered')
 	try {
 		const user = signInFormSchema.parse({
 			email: formData.get('email'),
 			password: formData.get('password')
 		})
-		await signIn('credentials', user)
-		return { success: true, message: 'Successfully signed in' }
-
+		console.log('action', user)
+		const result = await signIn('credentials', {
+			...user,
+			redirect: false
+		})
+		console.log('action signin results', result)
+		console.groupEnd()
+		return { success: true, message: 'Signed in successfully' }
 	} catch (error) {
-		if (isRedirectError(error)) {
+		if(isRedirectError(error)){
 			throw error
 		}
-		return { success: false, message: 'Invalid email or password' }
+		return { success: false, message: 'Invalid email or password'}
 	}
 }
 
-export async function signOutUser() {
+// sign out user
+export async function signOutUser(){
+	console.log('clicked')
 	await signOut()
+	console.log('signed out')
 }

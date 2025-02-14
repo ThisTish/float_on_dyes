@@ -11,11 +11,11 @@ export default function RootLayout({
 	return (
 		<>
 			<Header />
-			<div className="flex flex-col min-h-screen"> 
+			<div className="flex flex-col min-h-screen"> {/* Ensure full height */}
 				<main className="flex-1 wrapper">
 					{children}
 				</main>
-				<Footer />
+				<Footer /> {/* Move Footer inside the flex container */}
 			</div>
 		</>
 	)

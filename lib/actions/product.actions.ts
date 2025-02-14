@@ -1,11 +1,11 @@
+import { prisma } from "@/db/prisma"
 import { LATEST_PRODUCTS_LIMIT } from "../constants"
-import { db } from "../prisma"
 
 
 // get Latest Products
 export const getLatestProducts = async () => {
 	try {
-		const data = await db.product.findMany({
+		const data = await prisma.product.findMany({
 			take: LATEST_PRODUCTS_LIMIT,
 			orderBy: {
 				createdAt: 'desc'
@@ -21,7 +21,7 @@ export const getLatestProducts = async () => {
 // get Product By Slug
 export const getProductBySlug = async (slug: string) => {
 	try {
-		return await db.product.findFirst({
+		return await prisma.product.findFirst({
 			where: {
 				slug
 			}

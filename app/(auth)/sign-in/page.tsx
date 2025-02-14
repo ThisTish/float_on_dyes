@@ -1,17 +1,23 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { APP_NAME } from "@/lib/constants"
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import CredentialsSignIn from "./CredentialsSignIn"
+import CredentialsSignInForm from "./CredentialsSignInForm"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 
-const SignInPage = async (props: { searchParams: Promise<{ callbackUrl: string }> }) => {
+export const metadata: Metadata = {
+	title: 'Sign In'
+}
 
+const SignInPage = async (props: { searchParams: Promise<{ callbackUrl: string }> }) => {
 	const { callbackUrl } = await props.searchParams
+
 	const session = await auth()
 
 	if (session) {
+		console.log('session true')
 		return redirect(callbackUrl || '/')
 	}
 
@@ -26,6 +32,7 @@ const SignInPage = async (props: { searchParams: Promise<{ callbackUrl: string }
 							width={50}
 							height={50}
 							alt={`${APP_NAME} logo`}
+							priority
 						/>
 					</Link>
 					<div className="flex flex-col items-center">
@@ -38,7 +45,7 @@ const SignInPage = async (props: { searchParams: Promise<{ callbackUrl: string }
 					</div>
 				</CardHeader>
 				<CardContent>
-					<CredentialsSignIn />
+					<CredentialsSignInForm />
 				</CardContent>
 			</Card>
 		</main>
