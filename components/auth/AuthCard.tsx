@@ -4,6 +4,7 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { APP_NAME } from "@/lib/constants"
+import Providers from "./Providers"
 // import Socials from "./Socials"
 
 
@@ -45,9 +46,8 @@ const AuthCard = ({ cardTitle, cardDescription, children, showProviders, otherLi
 
 			{/* todo set up providers, and providers component(timeCatcher-Socials) */}
 			{/* {showProviders
-				? (<CardContent>
+				? (
 					<Providers />
-				</CardContent>
 				) : null
 			} */}
 			<CardFooter className="text-sm text-brightBlue">

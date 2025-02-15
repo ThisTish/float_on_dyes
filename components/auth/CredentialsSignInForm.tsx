@@ -30,7 +30,7 @@ const CredentialsSignInForm = () => {
 				<Button variant={'cta'} disabled={pending}>
 					{pending ? (
 						<>
-							<span>Signing in</span>
+							<span className="animate-pulse">Signing in</span>
 							<BiLogInCircle className="animate-pulse" />
 						</>
 					) : (
@@ -53,7 +53,9 @@ const CredentialsSignInForm = () => {
 			cardDescription="Sign in to your account"
 			otherLinkSpan="Don't have an account? "
 			otherLinkLabel="Sign Up"
-			otherLinkHref="/sign-up">
+			otherLinkHref="/sign-up"
+			// showProviders={true}
+			>
 		<form action={action}>
 			<input type="hidden" name="callbackUrl" value={callbackUrl} />
 			<div className="space-y-6">
