@@ -7,6 +7,7 @@ import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import ModeToggle from "./ModeToggle"
+import UserButton from "../auth/UserButton"
 
 const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ const Menu = () => {
 						</AnimatedDiv>
 					</Button>
 				))}
+				<UserButton />
 			</nav>
 
 			<nav className="md:hidden">
@@ -39,6 +41,7 @@ const Menu = () => {
 						{PAGE_LINKS.map((link) => (
 								<Links key={link.name} {...link} className="transition duration-300 hover:bg-darkBlue p-2 hover:text-white hover:font-semibold"   />
 						))}
+						<UserButton />
 					</SheetContent>
 				</Sheet>
 			</nav>

@@ -26,10 +26,6 @@ const PAGE_LINKS = [
 	{
 		name: 'Cart',
 		href: '/cart'
-	},
-	{
-		name: 'Login',
-		href: '/sign-in'
 	}
 ]
 
