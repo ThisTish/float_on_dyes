@@ -22,10 +22,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 				background: '#769F43',
 				padding: '20px',
 				boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-				maxWidth: '500px',
+				width: '450px',
 				margin: 'auto',
-
-				
 			}}
 		>
 			<div 
@@ -34,6 +32,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 					alignItems: 'center',
 					justifyContent: 'center',
 					gap: '10px',
+					margin:'20px 0 10px 0'
 				}}
 			>
 			<img 
@@ -41,8 +40,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 				alt="Float on dyes Logo" 
 				style={{
 					width: '50px',
-					height: '50px',
+					height: 'auto',
+					cursor: 'none',
+					zIndex: 1000,
+					margin: '10px 20px 0 0'
 				}}
+				
 			/>
 			<h1>{greeting}</h1>
 			</div>
@@ -66,7 +69,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 						width: '50%',
 						border: 'none',
 						borderTop: '2px solid #ccc',
-						padding: '5px'
+						padding: '5px',
+						margin: '20px auto'
 					}}
 				/>
 				<p 
@@ -87,6 +91,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 					fontSize: '16px',
 					fontWeight: 'bolder',
 					marginTop: '10px',
+					marginBottom: '20px',
 					border: '3px solid #ffffff'
 				}}
 			>
