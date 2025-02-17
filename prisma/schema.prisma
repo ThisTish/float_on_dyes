@@ -85,10 +85,20 @@ model Session {
 }
 
 model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
+  id      String
+  token   String
+  expires DateTime
+  email   String
 
-  @@id([identifier, token])
+  @@id([id, token])
   @@map("verification_tokens")
+}
+
+model resetPasswordToken {
+  id      String
+  token   String
+  expires DateTime
+  email   String
+
+  @@id([id, token])
 }
