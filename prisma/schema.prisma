@@ -85,7 +85,7 @@ model Session {
 }
 
 model VerificationToken {
-  id      String
+  id      String   @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   token   String
   expires DateTime
   email   String
@@ -94,8 +94,8 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-model resetPasswordToken {
-  id      String
+model ResetPasswordToken {
+  id      String   @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   token   String
   expires DateTime
   email   String
