@@ -26,7 +26,7 @@ const Footer = () => {
 					<div className="text-white space-y-12">
 						<div className="flex gap-3 items-center justify-end lg:grid ">
 							<Image
-						src='/images/logo.svg'
+						src='/images/logo.png'
 						alt={`${APP_NAME} logo`}
 						width={55}
 						height={55}

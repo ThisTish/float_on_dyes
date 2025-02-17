@@ -85,7 +85,7 @@ export async function sendVerificationEmail(email: string, name: string, token: 
 		to: 'tish.sirface@gmail.com',
 		subject: `Verify your email for ${APP_NAME}`,
 		// html: `<p><a href=${confirmLink}>Click Here</a> to verify ${email}</p>`,
-		react: await EmailTemplate({ greeting: `Welcome back, ${name.split(' ')[0]}`, verificationUrl: confirmLink, }),
+		react: await EmailTemplate({ greeting: `Welcome back, ${name.split(' ')[0]}`, verificationUrl: confirmLink, isFirst: false}),
 	})
 	if (error) return { error: error.message }
 	if (data) return { data }
