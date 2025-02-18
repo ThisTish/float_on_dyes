@@ -85,6 +85,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 	}
 }
 
+
 // get existing user
 export async function getExistingUser(email: string) {
 	const existingUser = await prisma.user.findFirst({
@@ -104,6 +105,7 @@ export async function getExistingUser(email: string) {
 		}, success: true, message: 'User found'
 	}
 }
+
 
 // sign out user
 export async function signOutUser() {

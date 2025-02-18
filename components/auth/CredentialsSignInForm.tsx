@@ -54,44 +54,46 @@ const CredentialsSignInForm = () => {
 			otherLinkSpan="Don't have an account? "
 			otherLinkLabel="Sign Up"
 			otherLinkHref="/sign-up"
-			// showProviders={true}
-			>
-		<form action={action}>
-			<input type="hidden" name="callbackUrl" value={callbackUrl} />
-			<div className="space-y-6">
-				<div>
-					<Label htmlFor="email">Email</Label>
-					<Input
-						id="email"
-						name="email"
-						type="email"
-						required
-						autoComplete="email"
-						defaultValue={SIGN_IN_DEFAULT_VALUES.email}
-					/>
-				</div>
-				<div>
-					<Label htmlFor="password">Password</Label>
-					<Input
-						id="password"
-						name="password"
-						type="password"
-						required
-						autoComplete="password"
-						defaultValue={SIGN_IN_DEFAULT_VALUES.password}
-					/>
-				</div>
-				<div>
-					<SignInButton />
-				</div>
-				{data  ? (
-					<div className="text-center text-destructive">
-						{data.message}
+		// showProviders={true}
+		>
+			<form action={action}>
+				<input type="hidden" name="callbackUrl" value={callbackUrl} />
+				<div className="space-y-6">
+					<div>
+						<Label htmlFor="email">Email</Label>
+						<Input
+							id="email"
+							name="email"
+							type="email"
+							required
+							autoComplete="email"
+							defaultValue={SIGN_IN_DEFAULT_VALUES.email}
+						/>
 					</div>
-				) : null}
-				
-			</div>
-		</form>
+					<div>
+						<Label htmlFor="password">Password</Label>
+						<Input
+							id="password"
+							name="password"
+							type="password"
+							required
+							autoComplete="password"
+							defaultValue={SIGN_IN_DEFAULT_VALUES.password}
+						/>
+					</div>
+					{data ? (
+						<div className="text-center text-destructive">
+							{data.message}
+						</div>
+					) : null}
+					<div>
+						<SignInButton />
+					</div>
+					<Link href={'/reset-password'} className="text-sm text-brightBlue ml-2">
+						Forgot Password?
+					</Link>
+				</div>
+			</form>
 		</AuthCard>
 	)
 }
