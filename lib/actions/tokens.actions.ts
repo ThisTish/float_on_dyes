@@ -1,8 +1,11 @@
+"use server"
+
 import { prisma } from "@/db/prisma"
 import { getBaseUrl } from '@/lib/utils'
 import { Resend } from 'resend'
 import { APP_NAME } from "../constants"
 import { EmailTemplate } from "@/components/emails/emailTemplate"
+import { redirect } from "next/navigation"
 
 const domain = getBaseUrl()
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -37,7 +40,6 @@ export async function generateVerificationToken(email: string) {
 		}
 	})
 	return newVerificationToken
-
 }
 
 
@@ -91,9 +93,15 @@ export async function sendVerificationEmail(email: string, greeting: string, tok
 	if (data) return { data }
 }
 
+
 // email verification
-export async function emailVerification(token: string){
+export async function emailVerification(
+	prevState: unknown, 
+	formData: FormData
+) {
+	const token = formData.get('token') as string
 	if(!token) return { success: false, message: 'No token provided' }
+
 	const verificationToken = await prisma.verificationToken.findFirst({
 		where: {
 			token
@@ -124,6 +132,6 @@ export async function emailVerification(token: string){
 			}
 		}
 	})
-
+	redirect('/sign-in')
 	return { success: true, message: 'Email verified successfully, you can now sign in.' }
 }

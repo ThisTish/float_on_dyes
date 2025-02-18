@@ -61,6 +61,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 		const unhashedPassword = user.password
 
 		user.password = hashSync(user.password, 10)
+		user.email = user.email.toLowerCase()
 
 		await prisma.user.create({
 			data: {
@@ -75,9 +76,6 @@ export async function signUp(prevState: unknown, formData: FormData) {
 		const verificationToken = await generateVerificationToken(user.email)
 		await sendVerificationEmail(user.email, greeting, verificationToken.token, true)
 		return { success: false, message: `Sign up almost complete. We need to verify your email. Verification email has been sent to ${user.email}. ` }
-
-
-
 
 	} catch (error) {
 		if (isRedirectError(error)) {

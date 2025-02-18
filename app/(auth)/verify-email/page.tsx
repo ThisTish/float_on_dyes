@@ -13,7 +13,6 @@ const VerifyEmailPage = async (props: { searchParams: Promise<{ token: string }>
 	const session = await auth()
 
 	if (session) {
-		console.log('session true')
 		return redirect('/')
 	}
 
