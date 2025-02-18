@@ -90,3 +90,40 @@ export async function sendVerificationEmail(email: string, greeting: string, tok
 	if (error) return { error: error.message }
 	if (data) return { data }
 }
+
+// email verification
+export async function emailVerification(token: string){
+	if(!token) return { success: false, message: 'No token provided' }
+	const verificationToken = await prisma.verificationToken.findFirst({
+		where: {
+			token
+		}
+	})
+	if(!verificationToken) return { success: false, message: 'Invalid token' }
+
+	if(verificationToken.expires < new Date()) {
+		const newVerificationToken = await generateVerificationToken(verificationToken.email)
+		await sendVerificationEmail(verificationToken.email, `Let's try that again,`, newVerificationToken.token, false)
+		return { success: false, message: `Verification token has expired. New email sent to ${verificationToken.email}.` }
+	}
+
+	const updatedUser = await prisma.user.update({
+		where: {
+			email: verificationToken.email
+		},
+		data: {
+			emailVerified: new Date()
+		}
+	})
+
+	await prisma.verificationToken.delete({
+		where: {
+			id_token: {
+				id: verificationToken.id,
+				token: verificationToken.token
+			}
+		}
+	})
+
+	return { success: true, message: 'Email verified successfully, you can now sign in.' }
+}

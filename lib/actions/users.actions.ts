@@ -48,7 +48,7 @@ export async function signInWithCredentials(
 }
 
 
-
+// sign up user
 export async function signUp(prevState: unknown, formData: FormData) {
 	try {
 		const user = signUpFormSchema.parse({
@@ -87,7 +87,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 	}
 }
 
-// 
+// get existing user
 export async function getExistingUser(email: string) {
 	const existingUser = await prisma.user.findFirst({
 		where: {
