@@ -1,3 +1,5 @@
+import { APP_NAME } from "@/lib/constants"
+
 interface EmailTemplateProps {
 	greeting: string
 	verificationUrl: string
@@ -56,9 +58,9 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 				>
 
 				{isFirst ? (
-					<p>It makes us happy you're registering for an account!</p>
+					<p>We're happy that want to sign up for an account with<br /> {APP_NAME}!</p>
 				) : (
-					<p>We're glad you're back to log in!</p>
+					<p>We're glad you're back to log in to <br /> {APP_NAME}!</p>
 				)
 				}
 				<p>

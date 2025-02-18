@@ -77,15 +77,15 @@ export async function generatePasswordResetToken(email: string) {
 }
 
 // send verification email
-export async function sendVerificationEmail(email: string, name: string, token: string) {
+export async function sendVerificationEmail(email: string, greeting: string, token: string, isFirst: boolean) {
 	const confirmLink = `${domain}/verify-email?token=${token}`
 
-	const { data, error } = await resend.emails.send({
+		const { data, error } = await resend.emails.send({
 		from: 'theCreator <onboarding@resend.dev>',
 		to: 'tish.sirface@gmail.com',
 		subject: `Verify your email for ${APP_NAME}`,
 		// html: `<p><a href=${confirmLink}>Click Here</a> to verify ${email}</p>`,
-		react: await EmailTemplate({ greeting: `Welcome back, ${name.split(' ')[0]}`, verificationUrl: confirmLink, isFirst: false}),
+		react: await EmailTemplate({ greeting: greeting,  verificationUrl: confirmLink, isFirst: isFirst}),
 	})
 	if (error) return { error: error.message }
 	if (data) return { data }
