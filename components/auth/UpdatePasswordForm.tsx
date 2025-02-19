@@ -73,8 +73,6 @@ const UpdatePasswordForm = ({ token }: { token: string }) => {
 							autoComplete="password"
 						/>
 					</div>
-					<div>
-						<UpdatePasswordButton />
 					{data && !data.success ? (
 						<div className="text-center text-destructive mb-5">
 							{data.message}
@@ -84,6 +82,8 @@ const UpdatePasswordForm = ({ token }: { token: string }) => {
 							{data.message} <Link href="/sign-in" className="text-brightBlue font-semibold text-lg ml-2">Sign In</Link>
 						</div>
 					)}
+					<div>
+						<UpdatePasswordButton />
 					</div>
 
 				</div>

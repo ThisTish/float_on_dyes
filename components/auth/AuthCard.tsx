@@ -50,9 +50,9 @@ const AuthCard = ({ cardTitle, cardDescription, children, showProviders, otherLi
 					<Providers />
 				) : null
 			} */}
-			<CardFooter className="text-sm text-brightBlue">
+			<CardFooter className="text-sm">
 					<span>{otherLinkSpan}</span>
-					<Link href={otherLinkHref} target="_self" className="link">{otherLinkLabel}</Link>
+					<Link href={otherLinkHref} target="_self" className="text-brightBlue font-semibold">{otherLinkLabel}</Link>
 			</CardFooter>
 
 

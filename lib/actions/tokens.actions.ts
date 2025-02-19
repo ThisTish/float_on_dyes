@@ -124,9 +124,7 @@ export async function resetPassword(prevState: unknown, formData: FormData) {
 	user.name = user.name.split(' ')[0].slice(0, 1).toUpperCase() + user.name.split(' ')[0].slice(1).toLowerCase()
 
 	const resetToken = await generatePasswordResetToken(email)
-	// if(!resetToken) return { success: false, message: 'Error generating reset token' }
-	// console.log('reset password', resetToken)
-	await sendResetPasswordEmail(email, `Let's reset your password, ${user.name}`, resetToken.token, false)
+	await sendResetPasswordEmail(email, `Forgot your password, ${user.name}?`, resetToken.token, false)
 
 	return { success: true, message: `Reset password email sent to ${email}` }
 }
@@ -145,7 +143,8 @@ export async function emailVerification(
 			token
 		}
 	})
-	if (!verificationToken) return { success: false, message: 'Invalid token' }
+
+	if (!verificationToken) return { success: false, message: 'Email already verified or you need a new token' }
 
 	if (verificationToken.expires < new Date()) {
 		const newVerificationToken = await generateVerificationToken(verificationToken.email)
@@ -171,7 +170,6 @@ export async function emailVerification(
 		}
 	})
 	redirect('/sign-in')
-	return { success: true, message: 'Email verified successfully, you can now sign in.' }
 }
 
 
@@ -193,7 +191,7 @@ export async function updatePassword(prevState: unknown, formData: FormData) {
 
 	if (resetPasswordToken.expires < new Date()) {
 		const newResetPasswordToken = await generatePasswordResetToken(resetPasswordToken.email)
-		await sendResetPasswordEmail(resetPasswordToken.email, `Let's try that again,`, newResetPasswordToken.token, false)
+		await sendResetPasswordEmail(resetPasswordToken.email, `Let's try that again`, newResetPasswordToken.token, false)
 		return { success: false, message: `Reset password token has expired. New email sent to ${resetPasswordToken.email}.` }
 	}
 

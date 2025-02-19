@@ -81,11 +81,15 @@ const CredentialsSignInForm = () => {
 							defaultValue={SIGN_IN_DEFAULT_VALUES.password}
 						/>
 					</div>
-					{data ? (
+					{data && !data.success ? (
 						<div className="text-center text-destructive">
 							{data.message}
 						</div>
-					) : null}
+						) : (
+						<div className="text-center text-white">
+							{data.message}
+						</div>
+						)}
 					<div>
 						<SignInButton />
 					</div>

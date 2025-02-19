@@ -10,6 +10,29 @@ import { resetPassword } from "@/lib/actions/tokens.actions"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 
+const ResetPasswordButton = () => {
+	const { pending } = useFormStatus()
+
+	return (
+		<Button variant={'cta'} disabled={pending} className="w-1/2">
+			{pending ? (
+				<>
+					<span className="animate-pulse">Sending...</span>
+					<BiLogInCircle className="animate-pulse" />
+				</>
+			) : (
+				<>
+					<span>Send Reset Code</span>
+					<AnimatedDiv variant={'cta'} animation={'scale'}>
+						<BiLogInCircle />
+					</AnimatedDiv>
+				</>
+			)
+			}
+		</Button>
+	)
+}
+
 const ResetPasswordForm = () => {
 
 	const [data, action] = useActionState(resetPassword, {
@@ -17,7 +40,6 @@ const ResetPasswordForm = () => {
 		message: ''
 	})
 
-	const { pending } = useFormStatus()
 
 	return (
 		<AuthCard
@@ -38,37 +60,20 @@ const ResetPasswordForm = () => {
 							type="email"
 							required
 							autoComplete="email"
-							disabled={pending}
 						/>
-					</div>
-					<div className="flex justify-center mb-5">
-						<Button variant={'cta'} disabled={pending} className="w-1/2">
-							{pending ? (
-								<>
-									<span className="animate-pulse">Sending...</span>
-									<BiLogInCircle className="animate-pulse" />
-								</>
-							) : (
-								<>
-									<span>Send Reset Code</span>
-									<AnimatedDiv variant={'cta'} animation={'scale'}>
-										<BiLogInCircle />
-									</AnimatedDiv>
-								</>
-							)
-							}
-						</Button>
 					</div>
 					{data && !data.success ? (
 						<div className="text-center text-destructive">
 							{data.message}
 						</div>
-						) : (
+					) : (
 						<div className="text-center text-white">
 							{data.message}
 						</div>
-
-						)}
+					)}
+					<div className="flex justify-center mb-5">
+						<ResetPasswordButton />
+					</div>	
 				</div>
 			</form>
 		</AuthCard >

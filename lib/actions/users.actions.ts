@@ -7,6 +7,7 @@ import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { formatSignUpError } from "../utils"
 import { hashSync } from "bcrypt-ts-edge"
 import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
+import { truncateSync } from "node:fs"
 
 // sign in user with credentials
 export async function signInWithCredentials(
@@ -24,7 +25,7 @@ export async function signInWithCredentials(
 
 		if (existingUser.user) {
 			const { id, name, email, emailVerified } = existingUser.user
-			const greeting = `Welcome back, ${name.split(' ')[0].slice(0, 1).toUpperCase() + name.split(' ')[0].slice(1).toLowerCase()},`
+			const greeting = `Welcome back, ${name.split(' ')[0].slice(0, 1).toUpperCase() + name.split(' ')[0].slice(1).toLowerCase()}`
 
 			if (!emailVerified) {
 				const verificationToken = await generateVerificationToken(email)
@@ -69,11 +70,11 @@ export async function signUp(prevState: unknown, formData: FormData) {
 			}
 		})
 
-		const greeting = `Hi ${user.name ? user.name.split(' ')[0].slice(0, 1).toUpperCase() + user.name.split(' ')[0].slice(1).toLowerCase() : 'User'},`
+		const greeting = `Hi ${user.name ? user.name.split(' ')[0].slice(0, 1).toUpperCase() + user.name.split(' ')[0].slice(1).toLowerCase() : 'User'}`
 
 		const verificationToken = await generateVerificationToken(user.email)
 		await sendVerificationEmail(user.email, greeting, verificationToken.token, true)
-		return { success: false, message: `Sign up almost complete. We need to verify your email. Verification email has been sent to ${user.email}. ` }
+		return { success: true, message: `Sign up almost complete. We need to verify your email. Verification email has been sent to ${user.email}. ` }
 
 	} catch (error) {
 		if (isRedirectError(error)) {

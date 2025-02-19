@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
+import { ArrowUpRight } from "lucide-react"
 
 const SignUpForm = () => {
 	const [checked, setChecked] = useState(false)
@@ -37,8 +38,8 @@ const SignUpForm = () => {
 					) : (
 						<>
 							<span>Sign Up</span>
-							<AnimatedDiv variant={'cta'} animation={'scale'}>
-								<BiLogInCircle />
+							<AnimatedDiv variant={'cta'} animation={'rotate'}>
+								<ArrowUpRight />
 							</AnimatedDiv>
 						</>
 					)
@@ -51,8 +52,8 @@ const SignUpForm = () => {
 	return (
 		<AuthCard
 			cardTitle="Sign Up"
-			cardDescription="Sign up to your account"
-			otherLinkSpan="Don't have an account? "
+			cardDescription="Sign up for your account"
+			otherLinkSpan="Already have an account? "
 			otherLinkLabel="Sign In"
 			otherLinkHref="/sign-in"
 		>
@@ -99,15 +100,18 @@ const SignUpForm = () => {
 							autoComplete="password"
 						/>
 					</div>
-					<div>
-						<SignUpButton />
-					</div>
-					{data ? (
+					{data && !data.success ? (
 						<div className="text-center text-destructive">
 							{data.message}
 						</div>
-					) : null}
-
+						) : (
+						<div className="text-center text-white">
+							{data.message}
+						</div>
+						)}
+					<div>
+						<SignUpButton />
+					</div>
 				</div>
 			</form>
 		</AuthCard>

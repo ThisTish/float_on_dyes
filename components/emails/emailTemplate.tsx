@@ -30,52 +30,51 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 				margin: 'auto',
 			}}
 		>
-			<div 
+			<div
 				style={{
 					display: 'inline-flex',
 					alignItems: 'center',
 					justifyContent: 'center',
 					gap: '10px',
-					margin:'20px 0 10px 0'
+					margin: '20px 0 10px 0'
 				}}
 			>
-			<img 
-				src="https://www.floatondyes.com/images/logo.png" 
-				alt="Float on dyes Logo" 
-				style={{
-					width: '50px',
-					height: 'auto',
-					cursor: 'none',
-					zIndex: 1000,
-					margin: '10px 20px 0 0'
-				}}
-				
-			/>
-			<h1>{greeting}</h1>
+				<img
+					src="https://www.floatondyes.com/images/logo.png"
+					alt="Float on dyes Logo"
+					style={{
+						width: '50px',
+						height: '70px',
+						margin: '10px 20px 0 0'
+					}}
+
+				/>
+				<h1>{greeting}</h1>
 			</div>
 			<div
 				style={{
 					fontSize: '16px',
 				}}
-				>
+			>
 
 				{isFirst ? (
 					<p>We're happy that want to sign up for an account with<br /> {APP_NAME}!</p>
+				) : isReset ? (
+					null
 				) : (
 					<p>We're glad you're back to log in to <br /> {APP_NAME}!</p>
-				)
-				}
+				)}
 				{isReset ? (
-				<p>
-					Let's get your password changed so you can continue to peruse & shop.
-				</p>
-					):(
-				<p>
-					Let's get you verified before you continue to peruse & shop.
-				</p>
+					<p>
+						Let's get your password changed so you can continue to peruse & shop.
+					</p>
+				) : (
+					<p>
+						Let's get you verified before you continue to peruse & shop.
+					</p>
 
 				)}
-				<hr 
+				<hr
 					style={{
 						width: '50%',
 						border: 'none',
@@ -84,7 +83,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 						margin: '20px auto'
 					}}
 				/>
-				<p 
+				<p
 					style={{
 						fontSize: '14px',
 						fontWeight: 'lighter'
@@ -92,10 +91,10 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 				>
 					{isReset ? (
 						'Click the button below to reset your password.'
-					):(
+					) : (
 						'Click button below to verify your account.'
 					)}
-					
+
 				</p>
 			</div>
 			<a
@@ -113,12 +112,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 					border: '3px solid #ffffff'
 				}}
 			>{
-				isReset ? (
-					'Reset Your Password'
-				):(
-					'Verify Your Account'
-				)
-			}
+					isReset ? (
+						'Reset Your Password'
+					) : (
+						'Verify Your Account'
+					)
+				}
 			</a>
 		</div>
 	</div>
