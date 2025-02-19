@@ -4,12 +4,14 @@ interface EmailTemplateProps {
 	greeting: string
 	verificationUrl: string
 	isFirst: boolean
+	isReset: boolean
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 	greeting,
 	verificationUrl,
-	isFirst
+	isFirst,
+	isReset
 }) => (
 	<div
 		style={{
@@ -63,9 +65,16 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 					<p>We're glad you're back to log in to <br /> {APP_NAME}!</p>
 				)
 				}
+				{isReset ? (
+				<p>
+					Let's get your password changed so you can continue to peruse & shop.
+				</p>
+					):(
 				<p>
 					Let's get you verified before you continue to peruse & shop.
 				</p>
+
+				)}
 				<hr 
 					style={{
 						width: '50%',
@@ -80,7 +89,14 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 						fontSize: '14px',
 						fontWeight: 'lighter'
 					}}
-				>Click button below to verify your account.</p>
+				>
+					{isReset ? (
+						'Click the button below to reset your password.'
+					):(
+						'Click button below to verify your account.'
+					)}
+					
+				</p>
 			</div>
 			<a
 				href={verificationUrl}
@@ -96,8 +112,13 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 					marginBottom: '20px',
 					border: '3px solid #ffffff'
 				}}
-			>
-				Verify Your Account
+			>{
+				isReset ? (
+					'Reset Your Password'
+				):(
+					'Verify Your Account'
+				)
+			}
 			</a>
 		</div>
 	</div>

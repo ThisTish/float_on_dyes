@@ -58,8 +58,6 @@ export async function signUp(prevState: unknown, formData: FormData) {
 			confirmPassword: formData.get('confirmPassword'),
 		})
 
-		const unhashedPassword = user.password
-
 		user.password = hashSync(user.password, 10)
 		user.email = user.email.toLowerCase()
 

@@ -101,4 +101,5 @@ model ResetPasswordToken {
   email   String
 
   @@id([id, token])
+  @@map("reset_password_tokens")
 }
