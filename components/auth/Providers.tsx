@@ -1,37 +1,42 @@
-import { BiLogoDiscord, BiLogoGoogle } from "react-icons/bi"
-import { Button } from "../ui/button"
-import { signIn } from "@/auth"
-import { useSearchParams } from "next/navigation"
+'use client'
 
+import { BiLogoDiscord, BiLogoGoogle } from 'react-icons/bi'
+import { Button } from '../ui/button'
+import { useTransition } from 'react'
+import { providerSignIn } from '@/lib/actions/users.actions'
+import { AnimatedDiv } from '../ui/AnimatedDiv'
 const Providers = () => {
-	
-	// const searchParams = useSearchParams()
+	const [isPending, startTransition] = useTransition()
 
-	// const callbackUrl = searchParams.get('callbackUrl') || '/'
+	const handleSignIn = (provider: 'google' | 'discord') => {
+		startTransition(async () => {
+			await providerSignIn(provider)
+		})
+	}
 
 	return (
-		<div className="flex gap-3">
+		<div className='space-y-3'>
 			<Button
-				variant={'outline'}
+				variant="outline"
 				className="w-full"
-				onClick={() => signIn('google', {
-					redirect: false,
-					callbackUrl: '/'
-				})}
+				onClick={() => handleSignIn('google')}
+				disabled={isPending}
 			>
-				Sign In with Google
-				<BiLogoGoogle />
+				{isPending ? 'Signing in...' : 'Sign In with Google'}
+				<AnimatedDiv variant={'outline'} animation={'scale'} >
+					<BiLogoGoogle />
+				</AnimatedDiv>
 			</Button>
 			<Button
-				variant={'outline'}
+				variant="outline"
 				className="w-full"
-				onClick={() => signIn('discord', {
-					redirect: false,
-					callbackUrl: '/'
-				})}
+				onClick={() => handleSignIn('discord')}
+				disabled={isPending}
 			>
-				Sign In with Discord
+				{isPending ? 'Signing in...' : 'Sign In with Discord'}
+				<AnimatedDiv variant={'outline'} animation={'scale'} >
 				<BiLogoDiscord />
+				</AnimatedDiv>
 			</Button>
 		</div>
 	)

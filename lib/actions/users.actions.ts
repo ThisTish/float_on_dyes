@@ -111,3 +111,11 @@ export async function signOutUser() {
 	await signOut({redirectTo: '/', redirect: true})
 	console.log('signed out')
 }
+
+
+// providers
+export async function providerSignIn(provider: 'google' | 'discord') {
+	await signIn(provider, {
+		redirectTo: '/' 
+	})
+}

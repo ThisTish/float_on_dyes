@@ -8,7 +8,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useSearchParams } from "next/navigation"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
@@ -19,15 +18,11 @@ const CredentialsSignInForm = () => {
 		message: ''
 	})
 
-	const searchParams = useSearchParams()
-
-	const callbackUrl = searchParams.get('callbackUrl') || '/'
-
 	const SignInButton = () => {
 		const { pending } = useFormStatus()
 		return (
-			<div className="flex justify-end">
-				<Button variant={'cta'} disabled={pending}>
+			<div>
+				<Button variant={'cta'} disabled={pending} className="w-full">
 					{pending ? (
 						<>
 							<span className="animate-pulse">Signing in</span>
@@ -54,11 +49,10 @@ const CredentialsSignInForm = () => {
 			otherLinkSpan="Don't have an account? "
 			otherLinkLabel="Sign Up"
 			otherLinkHref="/sign-up"
-		// showProviders={true}
+			showProviders={true}
 		>
 			<form action={action}>
-				<input type="hidden" name="callbackUrl" value={callbackUrl} />
-				<div className="space-y-6">
+				<div className="space-y-6 mb-6">
 					<div>
 						<Label htmlFor="email">Email</Label>
 						<Input
@@ -93,9 +87,6 @@ const CredentialsSignInForm = () => {
 					<div>
 						<SignInButton />
 					</div>
-					<Link href={'/reset-password'} className="text-sm text-brightBlue ml-2">
-						Forgot Password?
-					</Link>
 				</div>
 			</form>
 		</AuthCard>

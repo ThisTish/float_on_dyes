@@ -1,11 +1,9 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
-import { Button } from "../ui/button"
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { APP_NAME } from "@/lib/constants"
 import Providers from "./Providers"
-// import Socials from "./Socials"
 
 
 interface AuthCardProps {
@@ -45,14 +43,22 @@ const AuthCard = ({ cardTitle, cardDescription, children, showProviders, otherLi
 			</CardContent>
 
 			{/* todo set up providers, and providers component(timeCatcher-Socials) */}
-			{/* {showProviders
+			{showProviders
 				? (
 					<Providers />
 				) : null
-			} */}
-			<CardFooter className="text-sm">
-					<span>{otherLinkSpan}</span>
-					<Link href={otherLinkHref} target="_self" className="text-brightBlue font-semibold">{otherLinkLabel}</Link>
+			}
+			<CardFooter className="text-sm flex flex-col items-start mt-3">
+				{cardTitle === 'Sign In' && (
+					<Link href={'/reset-password'} className="font-semibold ">
+						Forgot Password?
+					</Link>
+				)}
+				<div>
+				<span>{otherLinkSpan}</span>
+				<Link href={otherLinkHref} target="_self" className="text-base font-semibold">{otherLinkLabel}</Link>
+
+				</div>
 			</CardFooter>
 
 

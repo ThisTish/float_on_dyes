@@ -28,8 +28,8 @@ const SignUpForm = () => {
 	const SignUpButton = () => {
 		const { pending } = useFormStatus()
 		return (
-			<div className="flex justify-end">
-				<Button variant={'cta'} disabled={pending}>
+			<div>
+				<Button variant={'cta'} disabled={pending} className="w-full">
 					{pending ? (
 						<>
 							<span className="animate-pulse">Signing Up</span>
@@ -56,10 +56,11 @@ const SignUpForm = () => {
 			otherLinkSpan="Already have an account? "
 			otherLinkLabel="Sign In"
 			otherLinkHref="/sign-in"
+			showProviders={true}
 		>
 			<form action={action}>
 				<input type="hidden" name="callbackUrl" value={callbackUrl} />
-				<div className="space-y-6">
+				<div className="space-y-6 mb-6">
 					<div>
 						<Label htmlFor="name">Name</Label>
 						<Input
