@@ -4,7 +4,7 @@ import { signInFormSchema, signUpFormSchema } from "../validators"
 import { signIn, signOut } from "@/auth"
 import { prisma } from "@/db/prisma"
 import { isRedirectError } from "next/dist/client/components/redirect-error"
-import { formatSignUpError } from "../utils"
+import { formatError } from "../utils"
 import { hashSync } from "bcrypt-ts-edge"
 import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
 import { truncateSync } from "node:fs"
@@ -80,7 +80,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 		if (isRedirectError(error)) {
 			throw error
 		}
-		return { success: false, message: formatSignUpError(error) }
+		return { success: false, message: formatError(error) }
 	}
 }
 

@@ -1,13 +1,14 @@
 "use server"
 
 import { prisma } from "@/db/prisma"
-import { getBaseUrl } from '@/lib/utils'
+import { formatError, getBaseUrl } from '@/lib/utils'
 import { Resend } from 'resend'
 import { APP_NAME } from "../constants"
 import { EmailTemplate } from "@/components/emails/emailTemplate"
 import { redirect } from "next/navigation"
-import { updatePasswordFormSchema } from "../validators"
+import { resetPasswordFormSchema, updatePasswordFormSchema } from "../validators"
 import { hashSync } from "bcrypt-ts-edge"
+import { isRedirectError } from "next/dist/client/components/redirect-error"
 
 const domain = getBaseUrl()
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -112,21 +113,23 @@ export async function sendResetPasswordEmail(email: string, greeting: string, to
 
 // generate and send reset email token
 export async function resetPassword(prevState: unknown, formData: FormData) {
-	const email = formData.get('email') as string
+	const data = resetPasswordFormSchema.parse({
+		email: formData.get('email')
+	})
 
 	const user = await prisma.user.findFirst({
 		where: {
-			email
+			email: data.email
 		}
 	})
 	console.log(user)
 	if (!user) return { success: false, message: 'User not found' }
 	user.name = user.name.split(' ')[0].slice(0, 1).toUpperCase() + user.name.split(' ')[0].slice(1).toLowerCase()
 
-	const resetToken = await generatePasswordResetToken(email)
-	await sendResetPasswordEmail(email, `Forgot your password, ${user.name}?`, resetToken.token, false)
+	const resetToken = await generatePasswordResetToken(user.email)
+	await sendResetPasswordEmail(user.email, `Forgot your password, ${user.name}?`, resetToken.token, false)
 
-	return { success: true, message: `Reset password email sent to ${email}` }
+	return { success: true, message: `Reset password email sent to ${user.email}` }
 }
 
 
@@ -175,45 +178,53 @@ export async function emailVerification(
 
 // update password
 export async function updatePassword(prevState: unknown, formData: FormData) {
-	const data = updatePasswordFormSchema.parse({
-		token: formData.get('token'),
-		password: formData.get('password'),
-		confirmPassword: formData.get('confirmPassword')
-	})
 
-	const resetPasswordToken = await prisma.resetPasswordToken.findFirst({
-		where: {
-			token: data.token
-		}
-	})
+	try {
+		const data = updatePasswordFormSchema.parse({
+			token: formData.get('token'),
+			password: formData.get('password'),
+			confirmPassword: formData.get('confirmPassword')
+		})
 
-	if (!resetPasswordToken) return { success: false, message: 'Invalid token, try resetting your password again.' }
-
-	if (resetPasswordToken.expires < new Date()) {
-		const newResetPasswordToken = await generatePasswordResetToken(resetPasswordToken.email)
-		await sendResetPasswordEmail(resetPasswordToken.email, `Let's try that again`, newResetPasswordToken.token, false)
-		return { success: false, message: `Reset password token has expired. New email sent to ${resetPasswordToken.email}.` }
-	}
-
-	data.password = hashSync(data.password, 10)
-
-	const updatedUser = await prisma.user.update({
-		where: {
-			email: resetPasswordToken.email
-		},
-		data: {
-			password: data.password
-		}
-	})
-
-	await prisma.resetPasswordToken.delete({
-		where: {
-			id_token: {
-				id: resetPasswordToken.id,
-				token: resetPasswordToken.token
+		const resetPasswordToken = await prisma.resetPasswordToken.findFirst({
+			where: {
+				token: data.token
 			}
-		}
-	})
+		})
 
-	return { success: true, message: 'Password updated successfully, you can now ' }
+		if (!resetPasswordToken) return { success: false, message: 'Invalid token, try resetting your password again.' }
+
+		if (resetPasswordToken.expires < new Date()) {
+			const newResetPasswordToken = await generatePasswordResetToken(resetPasswordToken.email)
+			await sendResetPasswordEmail(resetPasswordToken.email, `Let's try that again`, newResetPasswordToken.token, false)
+			return { success: false, message: `Reset password token has expired. New email sent to ${resetPasswordToken.email}.` }
+		}
+
+		data.password = hashSync(data.password, 10)
+
+		const updatedUser = await prisma.user.update({
+			where: {
+				email: resetPasswordToken.email
+			},
+			data: {
+				password: data.password
+			}
+		})
+
+		await prisma.resetPasswordToken.delete({
+			where: {
+				id_token: {
+					id: resetPasswordToken.id,
+					token: resetPasswordToken.token
+				}
+			}
+		})
+
+		return { success: true, message: 'Password updated successfully, you can now ' }
+	} catch (error) {
+		if (isRedirectError(error)) {
+			throw error
+		}
+		return { success: false, message: formatError(error) }
+	}
 }

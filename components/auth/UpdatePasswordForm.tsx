@@ -10,6 +10,7 @@ import { emailVerification, updatePassword } from "@/lib/actions/tokens.actions"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import Link from "next/link"
+import { TbLockPassword } from "react-icons/tb"
 
 const UpdatePasswordForm = ({ token }: { token: string }) => {
 
@@ -26,13 +27,13 @@ const UpdatePasswordForm = ({ token }: { token: string }) => {
 					{pending ? (
 						<>
 							<span className="animate-pulse">Updating...</span>
-							<BiLogInCircle className="animate-pulse" />
+							<TbLockPassword className="animate-pulse" />
 						</>
 					) : (
 						<>
 							<span>Update Password</span>
 							<AnimatedDiv variant={'cta'} animation={'scale'}>
-								<BiLogInCircle />
+								<TbLockPassword />
 							</AnimatedDiv>
 						</>
 					)

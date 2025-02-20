@@ -8,6 +8,7 @@ import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
 import { emailVerification } from "@/lib/actions/tokens.actions"
 import Link from "next/link"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 const VerifyEmailForm = ({ token }: { token: string }) => {
 	const [buttonClicked, setButtonClicked] = useState(false)
@@ -20,21 +21,21 @@ const VerifyEmailForm = ({ token }: { token: string }) => {
 		const { pending, action } = useFormStatus()
 		return (
 			<div className="flex justify-center mb-5 z-10">
-				<Button 
-				variant={'cta'} 
-				disabled={pending} 
-				className="w-1/2"
+				<Button
+					variant={'cta'}
+					disabled={pending}
+					className="w-1/2"
 				>
 					{pending ? (
 						<>
 							<span className="animate-pulse">Going to sign in</span>
-							<BiLogInCircle className="animate-pulse" />
+							<ArrowRight className="animate-pulse" />
 						</>
 					) : (
 						<>
 							<span>Go to sign in</span>
-							<AnimatedDiv variant={'cta'} animation={'scale'}>
-								<BiLogInCircle />
+							<AnimatedDiv variant={'cta'} animation={'rotate'}>
+								<ArrowUpRight />
 							</AnimatedDiv>
 						</>
 					)
@@ -59,11 +60,15 @@ const VerifyEmailForm = ({ token }: { token: string }) => {
 						<p>{data.message}</p>
 						<Link href={'/sign-in'} className="text-white bg-black font-bold p-3">Try signing in here instead</Link>
 					</div>
+				) : !data.success && data.message ? (
+					<div className="text-center text-destructive">
+						{data.message}
+					</div>
 				) : data.success ? (
 					<div className="text-center text-white">
 						{data.message}
 					</div>
-				): null}
+				) : null}
 				{data.message === '' && <TokenButton />}
 			</form>
 		</AuthCard >

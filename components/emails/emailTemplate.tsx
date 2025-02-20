@@ -120,5 +120,9 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 				}
 			</a>
 		</div>
+		<address>
+			<p>Float on Dyes support</p>
+			<a href="mailto: info@floatondyes.com">info@floatondyes.com</a>
+		</address>
 	</div>
 )

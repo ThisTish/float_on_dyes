@@ -11,7 +11,7 @@ export const formatNumberWithDecimal = (num: number): string => {
     return decimal ? `${whole}.${decimal.toString().padEnd(2, '0')}` : `${whole}.00`
 }
 
-export const formatSignUpError = (error: any) =>{
+export const formatError = (error: any) =>{
   if(error.name === 'ZodError'){
     const fieldErrors = Object.keys(error.errors).map((field) =>
       error.errors[field].message)

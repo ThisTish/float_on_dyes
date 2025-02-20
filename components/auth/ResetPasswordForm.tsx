@@ -4,7 +4,7 @@ import { useActionState, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
-import { BiLogInCircle } from "react-icons/bi"
+import { BiLogInCircle, BiMailSend } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
 import { resetPassword } from "@/lib/actions/tokens.actions"
 import { Label } from "../ui/label"
@@ -18,13 +18,13 @@ const ResetPasswordButton = () => {
 			{pending ? (
 				<>
 					<span className="animate-pulse">Sending...</span>
-					<BiLogInCircle className="animate-pulse" />
+					<BiMailSend className="animate-pulse" />
 				</>
 			) : (
 				<>
 					<span>Send Reset Code</span>
-					<AnimatedDiv variant={'cta'} animation={'scale'}>
-						<BiLogInCircle />
+					<AnimatedDiv variant={'cta'}  animation={'rotate'}>
+						<BiMailSend  className="-rotate-45"/>
 					</AnimatedDiv>
 				</>
 			)
