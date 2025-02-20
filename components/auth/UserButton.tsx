@@ -6,6 +6,9 @@ import { useSession } from "next-auth/react"
 import { BiUser, BiUserCircle } from "react-icons/bi"
 import { signOut } from "@/auth"
 import Tooltip from "../ui/Tooltip"
+import { Avatar, AvatarFallback } from "../ui/avatar"
+import Image from "next/image"
+import { signOutUser } from "@/lib/actions/users.actions"
 
 const UserButton = () => {
 
@@ -15,7 +18,7 @@ const UserButton = () => {
 		return (
 			<Link href={'/sign-in'}>
 				<Tooltip label="Sign In">
-				<BiUserCircle size={40} className=" hover:text-primary-foreground hover:bg-darkBlue rounded-full"/>
+					<BiUserCircle size={40} className="transition-all duration-300 ease-in hover:text-primary-foreground hover:bg-darkBlue rounded-full" />
 				</Tooltip>
 			</Link>
 		)
@@ -24,21 +27,38 @@ const UserButton = () => {
 	const userIcon = session.user.image || session?.user?.name?.charAt(0).toUpperCase() || <BiUser />
 
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-					{userIcon}
+		<DropdownMenu modal={false}>
+			<DropdownMenuTrigger className="rounded-full" >
+				<Tooltip label="User Menu">
+					<Avatar>
+						{session.user.image
+							? (
+								<Image
+									src={session.user.image}
+									alt="user avatar"
+									width={40}
+									height={40}
+								/>
+							) : (
+								<AvatarFallback className="bg-transparent text-primary border border-primary font-extrabold transition-all duration-300 ease-in hover:text-primary-foreground hover:border-primary-foreground hover:bg-darkBlue">
+									{session.user.name?.charAt(0).toUpperCase() || <BiUserCircle />}
+								</AvatarFallback>
+							)
+						}
+					</Avatar>
+				</Tooltip>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent forceMount>
+			<DropdownMenuContent >
 				<DropdownMenuLabel>
 					<p className="font-semibold">{session.user.name}</p>
-					<p className="text-muted">{session.user.email}</p>
+					<p className="text-muted-foreground">{session.user.email}</p>
 				</DropdownMenuLabel>
+				<form action={signOutUser}>
+					<Button variant={'link'} className="w-full text-start p-0 before:hover:bg-destructive">
+						Signout
+					</Button>
 
-				<DropdownMenuItem>
-						<Button type="submit" variant={'link'} className="w-full text-left">
-							Signout
-						</Button>
-				</DropdownMenuItem>
+				</form>
 			</DropdownMenuContent>
 
 		</DropdownMenu>

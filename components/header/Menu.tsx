@@ -23,7 +23,7 @@ const Menu = () => {
 			<nav className="hidden md:flex items-center text-sm space-x-1">
 				{PAGE_LINKS.map((link) => (
 					link.name === 'Cart' ? (
-						<Link href={link.href} className="p-2  border-transparent border hover:ring-inset hover:border-darkGreen hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkGreen hover:text-primary-foreground hover:scale-90">
+						<Link href={link.href} key={link.name} className="p-2 border-transparent border transition-all duration-300 ease-in  hover:ring-inset hover:border-darkGreen hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkGreen hover:text-primary-foreground hover:scale-90 active:translate-x-1 active:translate-y-1">
 							<Tooltip label="Cart" className="mb-3">
 								<ShoppingCart />
 							</Tooltip>
