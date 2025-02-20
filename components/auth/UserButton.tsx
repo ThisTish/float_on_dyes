@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
-import { BiUser } from "react-icons/bi"
+import { BiUser, BiUserCircle } from "react-icons/bi"
 import { signOut } from "@/auth"
 
 const UserButton = () => {
@@ -13,9 +13,7 @@ const UserButton = () => {
 	if (status !== 'authenticated') {
 		return (
 			<Link href={'/sign-in'}>
-				<Button>
-					Sign In
-				</Button>
+				<BiUserCircle size={40} className=" hover:text-primary-foreground hover:bg-darkBlue rounded-full"/>
 			</Link>
 		)
 	}
@@ -24,10 +22,8 @@ const UserButton = () => {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger >
-				<Button variant={'outline'} className="w-10 h-10 rounded-full">
+			<DropdownMenuTrigger asChild>
 					{userIcon}
-				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent forceMount>
 				<DropdownMenuLabel>
@@ -36,10 +32,9 @@ const UserButton = () => {
 				</DropdownMenuLabel>
 
 				<DropdownMenuItem>
-						{/* <Button type="submit" variant={'link'} className="w-full text-left" onClick={() => signOut()}> */}
+						<Button type="submit" variant={'link'} className="w-full text-left">
 							Signout
-						{/* </Button> */}
-					<p>Signout</p>
+						</Button>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 

@@ -7,7 +7,6 @@ import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { formatError } from "../utils"
 import { hashSync } from "bcrypt-ts-edge"
 import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
-import { truncateSync } from "node:fs"
 
 // sign in user with credentials
 export async function signInWithCredentials(
@@ -109,6 +108,6 @@ export async function getExistingUser(email: string) {
 // sign out user
 export async function signOutUser() {
 	console.log('clicked')
-	await signOut()
+	await signOut({redirectTo: '/', redirect: true})
 	console.log('signed out')
 }

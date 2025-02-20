@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import ModeToggle from "./ModeToggle"
 import Menu from "./Menu"
+import Tooltip from "../ui/Tooltip"
 
 
 const Header = () => {
@@ -22,12 +23,14 @@ const Header = () => {
 					</Link>
 				</div>
 				<div className="flex">
+					<div className="hidden md:block mr-3">
+						{/* light/dark mode */}
+						<Tooltip>
+							<ModeToggle />
+						</Tooltip>
+					</div>
 					{/* page links */}
 					<Menu />
-					<div className="hidden md:block">
-						{/* light/dark mode */}
-						<ModeToggle />
-					</div>
 				</div>
 
 			</div>
