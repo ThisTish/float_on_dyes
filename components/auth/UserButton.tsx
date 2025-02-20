@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { BiUser, BiUserCircle } from "react-icons/bi"
 import { signOut } from "@/auth"
+import Tooltip from "../ui/Tooltip"
 
 const UserButton = () => {
 
@@ -13,7 +14,9 @@ const UserButton = () => {
 	if (status !== 'authenticated') {
 		return (
 			<Link href={'/sign-in'}>
+				<Tooltip label="Sign In">
 				<BiUserCircle size={40} className=" hover:text-primary-foreground hover:bg-darkBlue rounded-full"/>
+				</Tooltip>
 			</Link>
 		)
 	}

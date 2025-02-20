@@ -25,16 +25,16 @@ const Header = () => {
 				<div className="flex">
 					<div className="hidden md:block mr-3">
 						{/* light/dark mode */}
-						<Tooltip>
-							<ModeToggle />
-						</Tooltip>
-					</div>
-					{/* page links */}
-					<Menu />
+						<Tooltip label="Light/Dark">
+						<ModeToggle />
+					</Tooltip>
 				</div>
-
+				{/* page links */}
+				<Menu />
 			</div>
-		</header>
+
+		</div>
+		</header >
 	)
 }
 

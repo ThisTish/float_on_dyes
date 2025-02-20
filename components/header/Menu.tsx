@@ -10,6 +10,9 @@ import ModeToggle from "./ModeToggle"
 import UserButton from "../auth/UserButton"
 import Link from "next/link"
 import ShoppingCart from "../ui/shoppingcart"
+import SearchButton from "../ui/SearchButton"
+import Tooltip from "../ui/Tooltip"
+// todo search button icon-> '/shop' & auto focus or style search button different....
 
 const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -20,10 +23,12 @@ const Menu = () => {
 			<nav className="hidden md:flex items-center text-sm space-x-1">
 				{PAGE_LINKS.map((link) => (
 					link.name === 'Cart' ? (
-						<Link href={link.href} className="p-2 rounded-full hover:bg-darkGreen hover:text-primary-foreground">
-							<ShoppingCart />
+						<Link href={link.href} className="p-2  border-transparent border hover:ring-inset hover:border-darkGreen hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkGreen hover:text-primary-foreground hover:scale-90">
+							<Tooltip label="Cart" className="mb-3">
+								<ShoppingCart />
+							</Tooltip>
 						</Link>
-						
+
 					) : (
 						<Button variant={'link'} key={link.name} asChild className="font-extrabold">
 							<AnimatedDiv variant={'link'}>
@@ -50,9 +55,20 @@ const Menu = () => {
 
 						</SheetHeader>
 						{PAGE_LINKS.map((link) => (
-							<Links key={link.name} {...link} className="transition duration-300 hover:bg-darkBlue p-2 hover:text-white hover:font-semibold" />
+							link.name === 'Cart' ? (
+								null
+							) : (
+								<Links key={link.name} {...link} className="transition duration-300 hover:bg-darkBlue p-2 hover:text-white hover:font-semibold" />
+							)
 						))}
-						<UserButton />
+						<div className="flex gap-2">
+							<UserButton />
+							<Link href={'/cart'} className="p-2 rounded-full hover:bg-darkGreen hover:text-primary-foreground">
+								<ShoppingCart />
+							</Link>
+							{/* style different, so it's like other icons */}
+							<SearchButton />
+						</div>
 					</SheetContent>
 				</Sheet>
 			</nav>
