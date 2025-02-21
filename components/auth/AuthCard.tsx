@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { APP_NAME } from "@/lib/constants"
 import Providers from "./Providers"
+import { useTheme } from "next-themes"
 
 
 interface AuthCardProps {
@@ -17,12 +18,14 @@ interface AuthCardProps {
 }
 
 const AuthCard = ({ cardTitle, cardDescription, children, showProviders, otherLinkSpan, otherLinkLabel, otherLinkHref }: AuthCardProps) => {
+	const theme = useTheme()
+
 	return (
 		<Card className="p-5 bg-lightGreen dark:bg-card">
 			<CardHeader className="inline-flex flex-row px-10 gap-10">
 				<Link href={'/'} className="flex ">
 					<Image
-						src={'/images/logo.svg'}
+						src={theme.theme === 'dark' ? '/images/logo-dark.svg' : '/images/logo.svg'}
 						width={50}
 						height={50}
 						alt={`${APP_NAME} logo`}

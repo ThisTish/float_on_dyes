@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: {
     template: `%s | ${APP_NAME}`,
     default: APP_NAME,},
-  description: APP_DESCRIPTION,
+  description: APP_DESCRIPTION      
 }
 
 export default function RootLayout({
