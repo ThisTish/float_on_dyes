@@ -4,6 +4,7 @@ import { Outfit } from 'next/font/google'
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SessionProvider } from "next-auth/react"
+import { Toaster } from "@/components/ui/toaster"
 
 
 const outfit = Outfit({
@@ -35,6 +36,7 @@ export default function RootLayout({
         enableSystem
         >
         {children}
+        <Toaster />
         </ThemeProvider>
         </SessionProvider>
       </body>

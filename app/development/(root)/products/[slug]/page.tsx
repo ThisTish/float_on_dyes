@@ -1,5 +1,6 @@
-import ProductDetailsImages from "@/components/shared/product/ProductDetailsImages"
-import ProductPrice from "@/components/shared/product/ProductPrice"
+import AddToCart from "@/components/product/AddToCart"
+import ProductDetailsImages from "@/components/product/ProductDetailsImages"
+import ProductPrice from "@/components/product/ProductPrice"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import BackButton from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/button"
@@ -88,10 +89,20 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							Wish Bag
 							<AnimatedDiv variant={'default'} animation={'pulse'} className="ml-2"><BiBookmarkHeart /></AnimatedDiv>
 						</Button>
-						<Button variant={'cta'} size={'lg'} className="w-full ">
+
+						<AddToCart item={{
+							productId: product.id,
+							name: product.name,
+							slug: product.slug,
+							price: product.price,
+							image: product.images[0],
+							qty: 1
+						}} />
+
+						{/* <Button variant={'cta'} size={'lg'} className="w-full ">
 							Bag It
 							<AnimatedDiv variant={'cta'} animation={'rotateFull'} className="ml-2"><BiPlus /></AnimatedDiv>
-						</Button>
+						</Button> */}
 					</CardFooter>
 				</Card>
 			</section>

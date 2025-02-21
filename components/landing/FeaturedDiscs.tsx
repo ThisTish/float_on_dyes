@@ -1,5 +1,5 @@
 import { getLatestProducts } from "@/lib/actions/product.actions";
-import ProductCard from "../shared/product/ProductCard";
+import ProductCard from "../product/ProductCard";
 import SearchButton from "../ui/SearchButton";
 
 const FeaturedDiscs = async () => {
