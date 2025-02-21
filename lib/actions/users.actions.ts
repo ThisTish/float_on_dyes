@@ -56,8 +56,8 @@ export async function signUp(prevState: unknown, formData: FormData) {
 			email: formData.get('email'),
 			password: formData.get('password'),
 			confirmPassword: formData.get('confirmPassword'),
+			isSubscribed: formData.get('isSubscribed') === 'on' ? true : false
 		})
-
 		user.password = hashSync(user.password, 10)
 		user.email = user.email.toLowerCase()
 
@@ -66,6 +66,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 				name: user.name,
 				email: user.email,
 				password: user.password,
+				isSubscribed: user.isSubscribed
 			}
 		})
 
@@ -108,7 +109,7 @@ export async function getExistingUser(email: string) {
 // sign out user
 export async function signOutUser() {
 	console.log('clicked')
-	await signOut({redirectTo: '/', redirect: true})
+	await signOut({ redirectTo: '/', redirect: true })
 	console.log('signed out')
 }
 
@@ -116,6 +117,6 @@ export async function signOutUser() {
 // providers
 export async function providerSignIn(provider: 'google' | 'discord') {
 	await signIn(provider, {
-		redirectTo: '/' 
+		redirectTo: '/'
 	})
 }

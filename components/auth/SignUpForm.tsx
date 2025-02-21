@@ -1,7 +1,7 @@
 "use client"
 
 import { signUp } from "@/lib/actions/users.actions"
-import { useActionState, useState } from "react"
+import { ChangeEvent, useActionState, useRef, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,9 +11,11 @@ import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
 import { ArrowUpRight } from "lucide-react"
+import Checkbox from "../ui/Checkbox"
 
 const SignUpForm = () => {
 	const [checked, setChecked] = useState(false)
+	const checkBoxRef = useRef<HTMLInputElement>(null)
 
 	const [data, action] = useActionState(signUp, {
 		success: false,
@@ -24,6 +26,9 @@ const SignUpForm = () => {
 
 	const callbackUrl = searchParams.get('callbackUrl') || '/'
 
+	const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setChecked(e.target.checked)
+	}
 
 	const SignUpButton = () => {
 		const { pending } = useFormStatus()
@@ -105,12 +110,21 @@ const SignUpForm = () => {
 						<div className="text-center text-destructive">
 							{data.message}
 						</div>
-						) : (
+					) : (
 						<div className="text-center text-white">
 							{data.message}
 						</div>
-						)}
+					)}
 					<div>
+						<div className="flex items-center gap-3 mb-6">
+							<Checkbox 
+							id="isSubscribed" 
+							label="Subscribe to Newsletter?" 
+							checked={checked} 
+							ref={checkBoxRef} 
+							onChange={handleCheckBoxChange} />
+							<Label htmlFor="subscribe">Subscribe to Newsletter?</Label>
+						</div>
 						<SignUpButton />
 					</div>
 				</div>
