@@ -15,10 +15,10 @@ const Hero = () => {
 					<span className="px-1 font-extrabold w-fit text-2xl md:text-3xl lg:text-4xl">Discs</span>
 				</h2>
 			</hgroup>
-			<div className="flex gap-3 justify-end px-5 pb-5 -mt-14 md:pb-8 wrapper">
+			<div className="flex gap-3 justify-end px-5 pb-5 -mt-14 md:pb-8 wrapper tracking-widest text-xs md:tracking-wider md:text-base md:font-semibold lg:tracking-wide lg:text-lg lg:font-bold">
 				<Button
 					variant={"outline"}
-					className="h-8 px-2 tracking-widest text-xs gap-1 md:h-10 md:px-3 md:tracking-wider md:font-semibold md:gap-2"
+					className="h-8 px-2 gap-1 md:h-10 md:px-3 md:gap-2 lg:px-4 lg:gap-3 lg:h-12"
 					asChild
 				>
 					<Link href="/contact">
@@ -31,7 +31,7 @@ const Hero = () => {
 
 				<Button
 					variant={"cta"}
-					className="h-8 px-2 tracking-widest text-xs gap-1 md:h-10 md:px-3 md:tracking-wider md:font-semibold md:gap-2"
+					className="h-8 px-2 gap-1 md:h-10 md:px-3 md:gap-2 lg:px-4 lg:gap-3 lg:h-12"
 					asChild
 				>
 					<Link href="/shop">
