@@ -6,20 +6,30 @@ import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { toast } from "@/hooks/use-toast"
 import { addItemToWishList } from "@/lib/actions/cart.actions"
+import { ToastAction } from "@radix-ui/react-toast"
+import { useRouter } from "next/navigation"
+import { getBaseUrl } from "@/lib/utils"
 
 // todo add tooltips for this.....
 //todo if added, heart checkmark
 
 const AddToWishList = ({ item, size }: { item: WishListItem, size: string }) => {
 
-	
+	const router = useRouter()
+	const domain = getBaseUrl()
+
 	const handleAddToWishList = async () => {
 		const res = await addItemToWishList(item)
 
 		if (!res.success) {
+			const previousPage = window.location.pathname
+
 			toast({
 				variant: 'destructive',
 				description: res.message,
+				action: res.message === 'Please sign in to save items to wishlist'
+					? <ToastAction altText="Sign in to save item" onClick={() => router.push(`/sign-in?callbackUrl=${domain}${previousPage}`)}>Go to Sign In</ToastAction>
+					: undefined
 			})
 		}
 

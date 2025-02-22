@@ -36,6 +36,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				session.user.name = session.user.name
 				session.user.image = session.user.image
 				session.user.role = session.user.role
+				session.user.wishListId = session.user.wishList[0].id
 			}
 
 			if (trigger == 'update') {

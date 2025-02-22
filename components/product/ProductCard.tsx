@@ -21,7 +21,8 @@ const ProductCard = ({ product }: { product: Product }) => {
 					productId: product.id,
 					name: product.name,
 					slug: product.slug,
-					image: product.images[0]
+					image: product.images[0],
+					isAvailable: product.isAvailable
 				}} size="icon" />
 				{/* <button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
 					<BiBookmarkHeart size={25} />

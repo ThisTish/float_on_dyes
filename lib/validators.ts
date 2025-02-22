@@ -80,6 +80,7 @@ export const wishListItemSchema = z.object({
 	name: z.string().min(1, 'Name is required'),
 	slug: z.string().min(1, 'Slug is required'),
 	image: z.string().min(1, 'Image is required'),
+	isAvailable: z.boolean()
 })
 
 export const insertWishListItemSchema = z.object({
