@@ -73,3 +73,16 @@ export const insertCartSchema = z.object({
 	sessionCartId: z.string().min(1, 'Session cart id is required'),
 	userId: z.string().optional().nullable()
 })
+
+
+export const wishListItemSchema = z.object({
+	productId: z.string().min(1, 'Product is required'),
+	name: z.string().min(1, 'Name is required'),
+	slug: z.string().min(1, 'Slug is required'),
+	image: z.string().min(1, 'Image is required'),
+})
+
+export const insertWishListItemSchema = z.object({
+	items: z.array(wishListItemSchema),
+	userId: z.string().optional().nullable()
+})

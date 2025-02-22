@@ -1,4 +1,5 @@
 import AddToCart from "@/components/product/AddToCart"
+import AddToWishList from "@/components/product/AddToWishList"
 import ProductDetailsImages from "@/components/product/ProductDetailsImages"
 import ProductPrice from "@/components/product/ProductPrice"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
@@ -83,12 +84,14 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 						</div>
 					</CardContent>
 
-					{/* buttons */}
+					{/* cart buttons */}
 					<CardFooter className="flex flex-col-reverse sm:flex-row justify-center items-center w-full gap-3">
-						<Button variant={'default'} size={'lg'} className="w-full ">
-							Wish Bag
-							<AnimatedDiv variant={'default'} animation={'pulse'} className="ml-2"><BiBookmarkHeart /></AnimatedDiv>
-						</Button>
+						<AddToWishList item={{
+							productId: product.id,
+							name: product.name,
+							slug: product.slug,
+							image: product.images[0]
+						}} size={'button'} />
 
 						<AddToCart item={{
 							productId: product.id,
@@ -100,11 +103,6 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 						}}
 						size={'button'} 
 						/>
-
-						{/* <Button variant={'cta'} size={'lg'} className="w-full ">
-							Bag It
-							<AnimatedDiv variant={'cta'} animation={'rotateFull'} className="ml-2"><BiPlus /></AnimatedDiv>
-						</Button> */}
 					</CardFooter>
 				</Card>
 			</section>

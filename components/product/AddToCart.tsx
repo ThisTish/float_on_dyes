@@ -8,7 +8,7 @@ import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
 import { addItemToCart } from "@/lib/actions/cart.actions"
 
-
+// todo if added, check sign
 
 const AddToCart = ({ item, size }: { item: CartItem, size: string }) => {
 	const { toast } = useToast()
@@ -22,8 +22,6 @@ const AddToCart = ({ item, size }: { item: CartItem, size: string }) => {
 			toast({
 				variant: 'destructive',
 				description: res.message,
-				action: <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
-
 			})
 			return
 		}
@@ -34,7 +32,6 @@ const AddToCart = ({ item, size }: { item: CartItem, size: string }) => {
 				action: <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
 			})
 		}
-
 	}
 
 	return (

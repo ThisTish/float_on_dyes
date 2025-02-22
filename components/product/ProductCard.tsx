@@ -7,6 +7,7 @@ import Link from "next/link"
 import { Product } from "@/types"
 import ProductImage from "./ProductImage"
 import AddToCart from "./AddToCart"
+import AddToWishList from "./AddToWishList"
 // todo make action to search by tags
 // todo add tooltips to wishlist and add to cart
 // todo add logic to wishlist and add to cart if added- icon changes to checkmark
@@ -15,24 +16,26 @@ const ProductCard = ({ product }: { product: Product }) => {
 	return (
 		<Card key={product.id} className="relative group w-64 max-w-72 border-2 border-darkBlue">
 			<div className="grid gap-1 text-darkBlue absolute top-1 right-0 transition md:translate-x-6 duration-300 ease-in md:opacity-0 md:group-hover:opacity-100 md:group-hover:-translate-x-0 z-30">
-				{/* todo add tooltips for this..... */}
-				{/* if added, heart checkmark */}
-				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
-					<BiBookmarkHeart size={25} />
-				</button>
-				{/* if added, check sign */}
-				<AddToCart item={{
-							productId: product.id,
-							name: product.name,
-							slug: product.slug,
-							price: product.price,
-							image: product.images[0],
-							qty: 1
-						}} 
-						size={'icon'} />
+
+				<AddToWishList item={{
+					productId: product.id,
+					name: product.name,
+					slug: product.slug,
+					image: product.images[0]
+				}} size="icon" />
 				{/* <button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
-					<BiPlusCircle size={25} />
+					<BiBookmarkHeart size={25} />
 				</button> */}
+
+				<AddToCart item={{
+					productId: product.id,
+					name: product.name,
+					slug: product.slug,
+					price: product.price,
+					image: product.images[0],
+					qty: 1
+				}}
+					size={'icon'} />
 			</div>
 
 			<CardContent >
