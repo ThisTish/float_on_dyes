@@ -108,9 +108,7 @@ export async function getExistingUser(email: string) {
 
 // sign out user
 export async function signOutUser() {
-	console.log('clicked')
 	await signOut({ redirectTo: '/', redirect: true })
-	console.log('signed out')
 }
 
 

@@ -1,13 +1,10 @@
-import NextAuth, { NextAuthConfig } from 'next-auth'
-import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth from 'next-auth'
 import { prisma } from '@/db/prisma'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { compare } from 'bcrypt-ts-edge'
 import Google from 'next-auth/providers/google'
 import Discord from "next-auth/providers/discord"
 import { signInFormSchema } from './lib/validators'
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
 import { authConfig } from './auth.config'
 
 
@@ -25,24 +22,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 	callbacks: {
 		...authConfig.callbacks,
 		async session({ session, token, user, trigger }: any) {
-			if (session && token.sub) {
+			if (session.user && token.sub) {
 				session.user.id = token.sub
 				session.user.name = token.name
 				session.user.image = token.image
 				session.user.role = token.role
-			}
-			if (session.user) {
-				session.user.id = session.user.id
-				session.user.name = session.user.name
-				session.user.image = session.user.image
-				session.user.role = session.user.role
-				session.user.wishListId = session.user.wishList[0].id
-			}
+			}			
 
 			if (trigger == 'update') {
 				session.user.name = user.name
 			}
-
 			return session
 		},
 		async jwt({ token, user, trigger, session }: any) {
