@@ -97,7 +97,9 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							price: product.price,
 							image: product.images[0],
 							qty: 1
-						}} />
+						}}
+						size={'button'} 
+						/>
 
 						{/* <Button variant={'cta'} size={'lg'} className="w-full ">
 							Bag It

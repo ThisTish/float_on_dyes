@@ -8,7 +8,7 @@ const BackButton = ({ size }: { size?: "default" | "icon" | "sm" | "lg" }) => {
 	return (
 		<Button variant={'destructive'} size={size} onClick={() => window.history.back()}>
 			<AnimatedDiv size={size} variant={'destructive'} animation={'rotate'}><ArrowDownLeft /></AnimatedDiv>
-			Back
+			Go Back
 		</Button>
 	)
 }

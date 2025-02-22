@@ -21,8 +21,10 @@
   </defs>
 
    <style>
+      @media(prefers-color-scheme: light){
       path {
          fill: #000000;
+      }
       }
       @media(prefers-color-scheme: dark){
          path {

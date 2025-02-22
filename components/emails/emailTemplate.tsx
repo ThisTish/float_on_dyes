@@ -18,7 +18,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 			fontFamily: 'Arial, sans-serif',
 			textAlign: 'center',
 			padding: '50px 20px',
-			backgroundColor: '#CEDBE3',
+			backgroundColor: '#e1eecc',
 		}}
 	>
 		<div

@@ -6,6 +6,7 @@ import ProductPrice from "./ProductPrice"
 import Link from "next/link"
 import { Product } from "@/types"
 import ProductImage from "./ProductImage"
+import AddToCart from "./AddToCart"
 // todo make action to search by tags
 // todo add tooltips to wishlist and add to cart
 // todo add logic to wishlist and add to cart if added- icon changes to checkmark
@@ -20,9 +21,18 @@ const ProductCard = ({ product }: { product: Product }) => {
 					<BiBookmarkHeart size={25} />
 				</button>
 				{/* if added, check sign */}
-				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
+				<AddToCart item={{
+							productId: product.id,
+							name: product.name,
+							slug: product.slug,
+							price: product.price,
+							image: product.images[0],
+							qty: 1
+						}} 
+						size={'icon'} />
+				{/* <button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" >
 					<BiPlusCircle size={25} />
-				</button>
+				</button> */}
 			</div>
 
 			<CardContent >

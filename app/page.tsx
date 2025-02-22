@@ -4,9 +4,9 @@ const ComingSoonPage = () => {
 	return (
 		<main
 			className="max-w-8xl lg:mx-auto p-2 md:p-5 md:px-10 w-full h-dvh relative bg-[url(/images/dyebed.jpg)] bg-center -z-10"
-			style={{ maskImage: "url(/images/paint.gif)", maskSize: "cover", maskPosition: "center" }}
+			style={{ maskImage: "url(/images/paint.gif)", maskSize: "cover", maskPosition: "center"}}
 		>
-			<div className="bg-emerald-500/55 backdrop-blur-sm  w-fit h-auto p-10 flex flex-col items-center justify-center">
+			<div className="bg-emerald-500/55 backdrop-blur-sm text-black w-fit h-auto p-10 flex flex-col items-center justify-center">
 			<div className="w-1/3  max-w-36">
 				<Image
 				src={'/images/logo.svg'}
