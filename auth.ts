@@ -6,6 +6,8 @@ import { compare } from 'bcrypt-ts-edge'
 import Google from 'next-auth/providers/google'
 import Discord from "next-auth/providers/discord"
 import { signInFormSchema } from './lib/validators'
+import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -74,6 +76,30 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			token.role = existingUser.role
 
 			return token
+		},
+		authorized({request, auth}):any {
+			// check for cookie
+			if(!request.cookies.get('sessionCartId')){
+				// generate new session cart id cookie
+				const sessionCartId = crypto.randomUUID()
+
+				// clone the request headers
+				const newRequestHeaders = new Headers(request.headers)
+
+				// create new response and add new headers
+				const response = NextResponse.next({
+					request: {
+						headers: newRequestHeaders
+					}
+				})
+				// set new cookie sessioncartid
+				response.cookies.set('sessionCartId', sessionCartId)
+
+				return response
+				
+			}else{
+				return true
+			}
 		}
 	},
 	providers: [
