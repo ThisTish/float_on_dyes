@@ -8,10 +8,10 @@ import Discord from "next-auth/providers/discord"
 import { signInFormSchema } from './lib/validators'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+import { authConfig } from './auth.config'
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-	adapter: PrismaAdapter(prisma),
 	secret: process.env.NEXTAUTH_SECRET,
 	trustHost: true,
 	session: {
@@ -23,6 +23,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		error: '/sign-in'
 	},
 	callbacks: {
+		...authConfig.callbacks,
 		async session({ session, token, user, trigger }: any) {
 			if (session && token.sub) {
 				session.user.id = token.sub
@@ -76,30 +77,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			token.role = existingUser.role
 
 			return token
-		},
-		authorized({request, auth}):any {
-			// check for cookie
-			if(!request.cookies.get('sessionCartId')){
-				// generate new session cart id cookie
-				const sessionCartId = crypto.randomUUID()
-
-				// clone the request headers
-				const newRequestHeaders = new Headers(request.headers)
-
-				// create new response and add new headers
-				const response = NextResponse.next({
-					request: {
-						headers: newRequestHeaders
-					}
-				})
-				// set new cookie sessioncartid
-				response.cookies.set('sessionCartId', sessionCartId)
-
-				return response
-				
-			}else{
-				return true
-			}
 		}
 	},
 	providers: [
