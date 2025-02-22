@@ -28,10 +28,7 @@ const Header = () => {
 				</div>
 				<div className="flex">
 					<div className="hidden md:block mr-3">
-						{/* light/dark mode */}
-						<Tooltip label="Light/Dark">
-						<ModeToggle />
-					</Tooltip>
+						
 				</div>
 				{/* page links */}
 				<Menu />

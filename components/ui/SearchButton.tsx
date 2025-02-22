@@ -23,7 +23,7 @@ const SearchButton = () => {
 
 	return (
 		<div
-			className={`relative bg-primary-foreground size-10 shadow-md rounded-full flex items-center duration-500 ${isActive ? "w-64 rounded-none" : "group hover:w-64 hover:rounded-none"
+			className={`relative ml-2.5 bg-primary-foreground size-10 shadow-md rounded-full flex items-center duration-500 ${isActive ? "w-64 rounded-none" : "group hover:w-64 hover:rounded-none"
 				}`}
 		>
 			<Label className="sr-only" htmlFor="search">Search</Label>
@@ -47,7 +47,7 @@ const SearchButton = () => {
 				onFocus={() => setIsActive(true)}
 				onBlur={handleBlur}
 				type="submit"
-				className={`absolute top-0 size-10  content-center bg-darkBlue text-white transition-all
+				className={`absolute top-0 size-10 content-center bg-darkBlue text-white transition-all
 				${isActive ? "left-64 duration-700" :  'duration-500 left-0 rounded-full group-hover:left-64 group-hover:rounded-none' }`}
 			>
 				<Search />

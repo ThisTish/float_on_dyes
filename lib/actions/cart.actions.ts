@@ -13,7 +13,7 @@ export async function addItemToCart(data: CartItem) {
 
 // add to wishlist
 export async function addItemToWishList(data: WishListItem) {
-	if (data.isAvailable === false) return { success: false, message: `${data.name} has already been snagged by someone else.` }
+	if (data.isAvailable === false) return { success: false, message: `${data.name} has already been snagged.` }
 
 	const session = await auth()
 	if (!session?.user) {
@@ -21,7 +21,6 @@ export async function addItemToWishList(data: WishListItem) {
 	}
 
 	try {
-
 		const updatedWishList = await prisma.wishList.upsert({
 			where: {
 				userId: session.user.id

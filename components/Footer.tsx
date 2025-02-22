@@ -78,6 +78,9 @@ const Footer = () => {
 									</li>
 								)
 								)}
+								<li className="text-sm">
+									<Links href={'/cart'} name={'Cart'} />
+								</li>
 							</ul>
 						</div>
 
@@ -104,10 +107,10 @@ const Footer = () => {
 				</div>
 
 
-				{/* Payments */}
 
 				{/* footer of footer */}
 			</div>
+				{/* Payments */}
 			<div className="space-y-1 justify-end text-end wrapper">
 				<p className="footer-header">We accept</p>
 				<ul className="flex space-x-1 items-center justify-end text-primary-foreground text-3xl">

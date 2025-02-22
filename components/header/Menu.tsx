@@ -20,24 +20,34 @@ const Menu = () => {
 	return (
 		<>
 			{/* md: and up */}
-			<nav className="hidden md:flex items-center text-sm space-x-1">
-				{PAGE_LINKS.map((link) => (
-					link.name === 'Cart' ? (
-						<Link href={link.href} key={link.name} className="p-2 border-transparent border transition-all duration-300 ease-in  hover:ring-inset hover:border-darkGreen hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkGreen hover:text-primary-foreground hover:scale-90 active:translate-x-1 active:translate-y-1">
-							<Tooltip label="Cart" className="mb-3">
-								<ShoppingCart />
-							</Tooltip>
-						</Link>
-
-					) : (
+			<nav className="hidden md:flex md:flex-col items-center text-sm space-x-1">
+				<div>
+					{PAGE_LINKS.map((link) => (
 						<Button variant={'link'} key={link.name} asChild className="font-extrabold">
 							<AnimatedDiv variant={'link'}>
 								<Links {...link} />
 							</AnimatedDiv>
 						</Button>
-					)
-				))}
-				<UserButton />
+
+					))}
+
+				</div>
+				<div className="w-full flex items-center justify-between">
+					{/* light/dark mode */}
+					<SearchButton/>
+
+					<div className="flex gap-3 items-center">
+					<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkGreen hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkGreen hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
+						<Tooltip label="Cart" className="mb-3">
+							<ShoppingCart />
+						</Tooltip>
+					</Link>
+					<UserButton />
+					<Tooltip label="Light/Dark">
+						<ModeToggle />
+					</Tooltip>
+					</div>
+				</div>
 			</nav>
 
 			{/* mobile */}
@@ -67,6 +77,9 @@ const Menu = () => {
 								<ShoppingCart />
 							</Link>
 							{/* style different, so it's like other icons */}
+						</div>
+						<div className="-ml-3 w-full">
+
 							<SearchButton />
 						</div>
 					</SheetContent>

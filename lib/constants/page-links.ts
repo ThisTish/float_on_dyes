@@ -22,10 +22,6 @@ const PAGE_LINKS = [
 	{
 		name: 'Contact',
 		href: '/contact'
-	},
-	{
-		name: 'Cart',
-		href: '/cart'
 	}
 ]
 
