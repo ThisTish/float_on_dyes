@@ -28,7 +28,7 @@ const AddToCart = ({ item, size }: { item: CartItem, size: string }) => {
 
 		if (res.success) {
 			toast({
-				description: `Added ${item.name} to cart`,
+				description: res.message,
 				action: <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
 			})
 		}

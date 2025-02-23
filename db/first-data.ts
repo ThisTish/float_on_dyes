@@ -1,3 +1,4 @@
+import { emailVerification } from "@/lib/actions/tokens.actions";
 import { hashSync } from "bcrypt-ts-edge";
 
 const firstData = {
@@ -6,13 +7,17 @@ const firstData = {
 			name: 'tosh',
 			email: 'tosh@gmail.com',
 			password: hashSync('123456', 10),
-			role: 'admin'
+			role: 'admin',
+			emailVerified: new Date()
+			
 		},
 		{
 			name: 'user',
 			email: 'user@gmail.com',
 			password: hashSync('123456', 10),
-			role: 'user'
+			role: 'user',
+			emailVerified: new Date()
+
 		}
 	],
 
@@ -41,7 +46,8 @@ const firstData = {
 			turn: 0,
 			fade: 2,
 			weight: 170,
-			isAvailable: false,
+			stock: 3,
+			isAvailable: true,
 			isFeatured: true,
 			isDiscounted: false,
 		},
@@ -69,7 +75,8 @@ const firstData = {
 			turn: -1,
 			fade: 3,
 			weight: 172,
-			isAvailable: false,
+			stock: 2,
+			isAvailable: true,
 			isFeatured: true,
 			isDiscounted: false,
 		},
@@ -97,6 +104,7 @@ const firstData = {
 			turn: -1,
 			fade: 1,
 			weight: 168.2,
+			stock: 1,
 			isAvailable: true,
 			isFeatured: true,
 			isDiscounted: false,

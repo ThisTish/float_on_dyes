@@ -14,7 +14,8 @@ export const formatNumberWithDecimal = (num: number): string => {
 export const formatError = (error: any) =>{
   if(error.name === 'ZodError'){
     const fieldErrors = Object.keys(error.errors).map((field) =>
-      error.errors[field].message)
+      error.errors[field])
+    console.dir(fieldErrors)
     return fieldErrors.join('.')
   }else if(error.name === 'PrismaClientKnownRequestError' &&  error.code === 'P2002'){
       const field = error.meta?.target ? error.meta.target[0] : 'Field'
@@ -31,4 +32,15 @@ export const getBaseUrl = () =>{
   if(process.env.VERCEL_URL) return `https://${process.env.DOMAIN_URL}`
   
   return 'http://localhost:3000'
+}
+
+// round number to 2 decimal places
+export function round2(value: number | string): number {
+  if(typeof value === 'number'){
+    return Math.round((value + Number.EPSILON) * 100 / 100)
+  }else if(typeof value === 'string'){
+    return Math.round((Number(value) + Number.EPSILON) * 100 / 100)
+
+  }
+  throw new Error('Invalid value for round2')
 }

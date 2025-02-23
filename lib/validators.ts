@@ -23,6 +23,7 @@ export const insertProductSchema = z.object({
 	turn: z.number(),
 	fade: z.number(),
 	weight: z.number(),
+	stock: z.number(),
 	isAvailable: z.boolean(),
 	isFeatured: z.boolean(),
 	isDiscounted: z.boolean(),
