@@ -1,47 +1,44 @@
-import { NextAuthConfig } from "next-auth"
-import Head from "next/head"
-import { NextResponse } from "next/server"
+import type { NextAuthConfig } from 'next-auth'
+import { NextResponse } from 'next/server'
 
 export const authConfig = {
-	providers: [],
+  providers: [],
 	callbacks: {
-		authorized({ request, auth}: any){
-			const protectedPaths=[
+		authorized({ request, auth }: any) {
+			// Array of regex patterns of paths we want to protect
+			const protectedPaths = [
 				/\/shipping-address/,
 				/\/payment-method/,
 				/\/place-order/,
 				/\/profile/,
-				/\/profile/,
 				/\/user\/(.*)/,
 				/\/order\/(.*)/,
-				/\/admin/
+				/\/admin/,
 			]
-			// get pathname from the req url object
+
+			// Get pathname from the req URL object
 			const { pathname } = request.nextUrl
+			// Check if user is not authenticated and accessing a protected path
+			if (!auth && protectedPaths.some((p) => p.test(pathname))) return false
 
-			// check if user is not authorized and accessing a protected path
-			if(!auth && protectedPaths.some((p)=> p.test(pathname))) return false
-
-			// check for session cart id cookie
-			if(!request.cookies.get("sessionCartId")){
-				const sessionCartId = crypto.randomUUID.toString()
-
-				// create new response and add the new header
+			// Check for session cart cookie
+			if (!request.cookies.get('sessionCartId')) {
+				// Generate new session cart id cookie
+				const sessionCartId = crypto.randomUUID()
+				// Create new response and add the new headers
 				const response = NextResponse.next({
 					request: {
-						headers: new Headers(request.headers)
-					}
+						headers: new Headers(request.headers),
+					},
 				})
-				
-				//set newly generate session cart id
-				response.cookies.set("sessionCartId", sessionCartId)
-				
+
+				// Set newly generated sessionCartId in the response cookies
+				response.cookies.set('sessionCartId', sessionCartId)
 				return response
 			}
-
 			return true
-		}
-	}
+		},
+	},
 } satisfies NextAuthConfig
 
 

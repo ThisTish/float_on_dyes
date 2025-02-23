@@ -1,13 +1,66 @@
 'use server'
 
-import { auth } from "@/auth";
-import { prisma } from "@/db/prisma";
-import { CartItem, WishListItem } from "@/types";
-import { redirect } from "next/navigation";
+import { auth } from "@/auth"
+import { prisma } from "@/db/prisma"
+import { CartItem, WishListItem } from "@/types"
+import { redirect } from "next/navigation"
+import { formatError } from "../utils"
+import { cookies } from "next/headers"
+import { cartItemSchema } from "../validators"
 
 // add to cart
 export async function addItemToCart(data: CartItem) {
-	return { success: true, message: 'Item added to cart' }
+	try {
+		const ids = await sessionUserId()
+		const {userId, sessionCartId} = ids
+
+		const cart = await getMyCart()
+
+		const item = cartItemSchema.parse(data)
+
+		const product = await prisma.product.findFirst({
+			where: {
+				id: item.productId
+			}
+		})
+
+		console.log(product)
+		
+		return { success: true, message: 'Item added to cart' }
+	} catch (error) {
+		return { success: false, message: formatError(error) }
+	}
+}
+
+// get userId from session, or return undefined if not signed in
+export async function sessionUserId() {
+	const sessionCartId = (await cookies()).get('sessionCartId')?.value
+		if(!sessionCartId) throw new Error('Cart session not found')
+
+		const session = await auth()
+		const userId = session?.user?.id ? (session.user.id) : undefined
+
+		return {userId, sessionCartId}
+}
+
+// find cart by userId or sessionCartId
+export async function getMyCart() {
+	const ids = await sessionUserId()
+	const {userId, sessionCartId} = ids
+
+		const cart = await prisma.cart.findFirst({
+			where: userId ? { userId} : {sessionCartId},
+		})
+		if(!cart) return undefined
+
+		return convertToPlainObject({
+			...cart,
+			items: cart.items as CartItem[],
+			itemsPrice: cart.itemsPrice.toString(),
+			totalPrice: cart.totalPrice.toString(),
+			shippingPrice: cart.shippingPrice.toString(),
+			taxPrice: cart.taxPrice.toString(),
+		})
 }
 
 
@@ -55,6 +108,10 @@ export async function addItemToWishList(data: WishListItem) {
 		return { success: true, message: 'Item added to wishlist' }
 
 	} catch (error) {
-		return { success: false, message: `An error occurred, ${error}` }
+		return { success: false, message: formatError(error) }
 	}
 }
+function convertToPlainObject(arg0: { items: CartItem[]; itemsPrice: string; totalPrice: string; shippingPrice: string; taxPrice: string; id: string; createdAt: Date; userId: string | null; sessionCartId: string; updatedAt: Date }) {
+	throw new Error("Function not implemented.")
+}
+
