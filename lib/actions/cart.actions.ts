@@ -31,17 +31,13 @@ const calcPrice = (items: CartItem[]) => {
 // add to cart
 export async function addItemToCart(data: CartItem) {
 	try {
-		// get user/session id
-		let ids;
-		try {
-			ids = await sessionUserId()
-		} catch (error) {
-			return { success: false, message: formatError(error) }
-		}
+		// get user/session ids
+		const ids = await sessionUserId()
+		if (!ids) throw new Error('Cart not found')
 		const { userId, sessionCartId } = ids
 
 		// get cart
-		const cart = await getMyCart()
+		const cart = await getCart()
 
 		// validate cart item
 		const item = cartItemSchema.parse(data)
@@ -80,17 +76,17 @@ export async function addItemToCart(data: CartItem) {
 			// if item is in cart and there is more than 1 available add to cart
 			if (existItem) {
 				if (product.stock === 1) {
-					return { success: false, message: `${product.name} is one of a kind, and you've already snagged it!` }
+					throw new Error(`${product.name} is one of a kind, and you've already snagged it!`)
 				}
 				if (product.stock < existItem.qty + 1) {
-					return { success: false, message: `Not enough in stock.` }
+					throw new Error(`Not enough in stock.`)
 				}
 				existItem.qty = existItem.qty + 1
-			}else{
+			} else {
 				// if item is not in cart, add to cart
 				cart.items.push(item)
 			}
-			const updatedCart = await prisma.cart.update({
+			await prisma.cart.update({
 				where: {
 					id: cart.id
 				},
@@ -103,9 +99,50 @@ export async function addItemToCart(data: CartItem) {
 
 			return {
 				success: true,
-				message: `${product.name} ${existItem ? 'updated in cart' : 'added to cart'}`
+				message: `${product.name} ${existItem ? 'updated in ' : 'added to '}cart!`
 			}
 		}
+	} catch (error) {
+		return { success: false, message: formatError(error) }
+	}
+}
+
+// delete item from cart
+export async function deleteItemFromCart(productId: string) {
+	try {
+		const cart = await getCart()
+		if (!cart) throw new Error('Cart not found')
+
+		const product = await prisma.product.findFirst({
+			where: {
+				id: productId
+			}
+		})
+		if (!product) throw new Error('Product not found')
+
+		const existingItem = (cart.items as CartItem[]).find((x) => x.productId === productId)
+		if (!existingItem || existingItem.qty === 0) throw new Error('Item not found in cart')
+
+		if (existingItem.qty === 1) {
+			cart.items = (cart.items as CartItem[]).filter((x) => x.productId !== productId)
+		} else {
+			existingItem.qty = existingItem.qty - 1
+		}
+
+		await prisma.cart.update({
+			where: {
+				id: cart.id
+			},
+			data: {
+				items: cart.items as Prisma.CartUpdateitemsInput[],
+				...calcPrice(cart.items as CartItem[])
+			}
+		})
+
+		revalidatePath(`/products/${product.slug}`)
+
+		return { success: true, message: `${product.name}${existingItem.qty > 0 ? "'s quantity updated" : " removed"}` }
+
 	} catch (error) {
 		return { success: false, message: formatError(error) }
 	}
@@ -123,7 +160,7 @@ export async function sessionUserId() {
 }
 
 // find cart by userId or sessionCartId
-export async function getMyCart() {
+export async function getCart() {
 	const ids = await sessionUserId()
 	const { userId, sessionCartId } = ids
 

@@ -1,12 +1,12 @@
 "use client"
 import { useToast } from "@/hooks/use-toast"
+import { addItemToCart } from "@/lib/actions/cart.actions"
 import { CartItem } from "@/types"
 import { ToastAction } from "../ui/toast"
 import { BiPlus, BiPlusCircle } from "react-icons/bi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
-import { addItemToCart } from "@/lib/actions/cart.actions"
 
 // todo if added, check sign
 
