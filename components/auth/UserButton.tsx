@@ -14,7 +14,8 @@ const UserButton = () => {
 
 	const { data: session, status } = useSession()
 
-	if (status !== 'authenticated') {
+	if (status !== 'authenticated') 
+		{
 		return (
 			<Link href={'/sign-in'}>
 				<Tooltip label="Sign In">

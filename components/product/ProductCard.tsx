@@ -46,7 +46,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
 			{/* title */}
 			<CardTitle className="h-20">
-				<Link href={`/development/products/${product.slug}`}>
+				<Link href={`/products/${product.slug}`}>
 					<span className="text-lg font-bold">{product.name} </span>
 					<span className="text-lg font-light">- {product.dyeType}</span>
 				</Link>
@@ -57,7 +57,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 				<ProductPrice value={Number(product.price)} />
 				{/* details button */}
 				<Button variant={'cta'} asChild>
-					<Link href={`/development/products/${product.slug}`}>
+					<Link href={`/products/${product.slug}`}>
 						See Details
 						<AnimatedDiv variant={'cta'} animation={'scale'}>
 							<BiDetail />
