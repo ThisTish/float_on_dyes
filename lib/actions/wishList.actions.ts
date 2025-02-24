@@ -2,14 +2,14 @@
 
 import { auth } from "@/auth"
 import { prisma } from "@/db/prisma"
-import { WishListItem } from "@/types"
+import { CartItem, WishListItem } from "@/types"
 import { formatError } from "../utils"
 import { wishListItemSchema } from "../validators"
 
 // todo later, 'move to wish bag for now'
 
 // add to wishlist
-export async function addItemToWishList(data: WishListItem) {
+export async function addItemToWishList(data: WishListItem | CartItem) {
 	try {
 		const session = await auth()
 		if (!session?.user) {

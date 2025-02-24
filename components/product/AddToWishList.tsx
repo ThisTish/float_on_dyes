@@ -43,17 +43,29 @@ const AddToWishList = ({ item, size }: { item: WishListItem, size: string }) => 
 
 	return (
 		<>
-			{size === 'icon' ? (
-				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={handleAddToWishList}>
-					<BiBookmarkHeart size={25} />
-				</button>
+			{size === 'icon'
+				? (
+					<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={handleAddToWishList}>
+						<BiBookmarkHeart size={25} />
+					</button>
 
-			) : (
-				<Button variant={'default'} size={'lg'} className="w-full" onClick={handleAddToWishList}>
-					Wish Bag
-					<AnimatedDiv variant={'default'} animation={'pulse'} className="ml-2"><BiBookmarkHeart /></AnimatedDiv>
-				</Button>
-			)}
+				) : size === 'button'
+					? (
+						<Button variant={'default'} size={'lg'} className="w-full" onClick={handleAddToWishList}>
+							Wish Bag
+							<AnimatedDiv variant={'default'} animation={'pulse'} className="ml-2"><BiBookmarkHeart /></AnimatedDiv>
+						</Button>
+					) :
+					size === 'action'
+						? (
+							<button 
+							onClick={handleAddToWishList} 
+							className="inline-flex h-8 shrink-0 items-center justify-center px-3 text-sm font-medium transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive relative overflow-hidden z-10 border border-darkBlue shadow-xl text-darkBlue group-[.destructive]:before:bg-white before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1" 
+							aria-label="Add to wishlist">
+								Add to Wish List
+							</button>
+						) : null
+			}
 
 		</>
 	)

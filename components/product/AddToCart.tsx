@@ -7,6 +7,8 @@ import { BiPlus, BiPlusCircle } from "react-icons/bi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
+import { addItemToWishList } from "@/lib/actions/wishList.actions"
+import AddToWishList from "./AddToWishList"
 
 // todo if added, check sign
 
@@ -15,13 +17,28 @@ const AddToCart = ({ item, size }: { item: CartItem, size: string }) => {
 
 	const router = useRouter()
 
+	const handleAddToWishList = async () =>{
+		const res = await addItemToWishList(item)
+	}
+
 	const handleAddToCart = async () => {
 		const res = await addItemToCart(item)
 
 		if (!res.success) {
 			toast({
 				variant: 'destructive',
+				title: 
+					res.message === "And you've already snagged it!" 
+						? `${item.name} is one of a kind!` 
+					: res.message === 'Add to wish bag and check back in 30 min.' ? `${item.name} is reserved in someone's cart.`
+						: undefined,
 				description: res.message,
+				action: 
+					res.message === `Not enough in stock.` || res.message === `And you've already snagged it!`
+						? <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
+					: res.message === `Add to wish bag and check back in 30 min.`
+						? <AddToWishList item={item} size="action" />
+						: undefined
 			})
 			router.refresh()
 			return

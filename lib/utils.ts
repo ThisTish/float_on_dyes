@@ -15,7 +15,6 @@ export const formatError = (error: any) =>{
   if(error.name === 'ZodError'){
     const fieldErrors = Object.keys(error.errors).map((field) =>
       error.errors[field])
-    console.dir(fieldErrors)
     return fieldErrors.join('.')
   }else if(error.name === 'PrismaClientKnownRequestError' &&  error.code === 'P2002'){
       const field = error.meta?.target ? error.meta.target[0] : 'Field'

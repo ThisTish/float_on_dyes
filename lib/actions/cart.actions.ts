@@ -10,23 +10,6 @@ import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "../constants"
 import { revalidatePath } from "next/cache"
 import { Prisma } from "@prisma/client"
 
-// calculate cart prices
-const calcPrice = (items: CartItem[]) => {
-	const itemsPrice = round2(
-		items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
-	),
-		// if cart total is greater than 100, shipping is free
-		shippingPrice = round2(itemsPrice >= FREE_SHIPPING_PRICE ? 0 : SHIPPING_PRICE),
-		taxPrice = round2(0.15 * itemsPrice),
-		totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
-
-	return {
-		itemsPrice: itemsPrice.toFixed(2),
-		shippingPrice: shippingPrice.toFixed(2),
-		taxPrice: taxPrice.toFixed(2),
-		totalPrice: totalPrice.toFixed(2),
-	}
-}
 
 // add to cart
 export async function addItemToCart(data: CartItem) {
@@ -50,7 +33,7 @@ export async function addItemToCart(data: CartItem) {
 		})
 		// checking if in stock or available
 		if (!product || product.stock < 1) return { success: false, message: `${data.name} has already been snagged.` }
-		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `${data.name} is currently reserved in someone's cart, check back in 30 min.` }
+		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish bag and check back in 30 min.` }
 
 		// if no cart, make one and add item
 		if (!cart) {
@@ -75,7 +58,7 @@ export async function addItemToCart(data: CartItem) {
 			// if item is in cart and there is more than 1 available add to cart
 			if (existItem) {
 				if (product.stock === 1) {
-					throw new Error(`${product.name} is one of a kind, and you've already snagged it!`)
+					throw new Error(`And you've already snagged it!`)
 				}
 				if (product.stock < existItem.qty + 1) {
 					throw new Error(`Not enough in stock.`)
@@ -177,6 +160,24 @@ export async function getCart() {
 	})
 
 	return cartPlain
+}
+
+// calculate cart prices
+const calcPrice = (items: CartItem[]) => {
+	const itemsPrice = round2(
+		items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
+	),
+		// if cart total is greater than 100, shipping is free
+		shippingPrice = round2(itemsPrice >= FREE_SHIPPING_PRICE ? 0 : SHIPPING_PRICE),
+		taxPrice = round2(0.15 * itemsPrice),
+		totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
+
+	return {
+		itemsPrice: itemsPrice.toFixed(2),
+		shippingPrice: shippingPrice.toFixed(2),
+		taxPrice: taxPrice.toFixed(2),
+		totalPrice: totalPrice.toFixed(2),
+	}
 }
 
 
