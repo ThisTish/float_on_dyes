@@ -11,6 +11,8 @@ import { notFound } from "next/navigation"
 // todo Breadcrumb
 // todo Related Products
 // todo tags search
+// todo when more products available, change qty to product.stock
+
 
 const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) => {
 
@@ -86,7 +88,14 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 					</CardContent>
 
 					{/* cart buttons */}
-					<CardFooter className="flex flex-col-reverse sm:flex-row justify-center items-center w-full gap-3">
+					<CardFooter className="flex flex-col sm:flex-row justify-center items-center w-full gap-3">
+						<AddToWishList item={{
+							productId: product.id,
+							name: product.name,
+							slug: product.slug,
+							image: product.images[0],
+						}} size={'button'} />
+
 						<AddToCart item={{
 							productId: product.id,
 							name: product.name,
@@ -98,13 +107,6 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							cart={cart}
 							size={'button'}
 						/>
-						<AddToWishList item={{
-							productId: product.id,
-							name: product.name,
-							slug: product.slug,
-							image: product.images[0],
-						}} size={'button'} />
-
 					</CardFooter>
 				</Card>
 			</section>

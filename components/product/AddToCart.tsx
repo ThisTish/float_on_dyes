@@ -35,8 +35,6 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 						? <AddToWishList item={item} size="action" />
 						: undefined
 			})
-			router.refresh()
-			return
 		}
 
 		if (res.success) {
@@ -44,26 +42,31 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 				description: res.message,
 				action: <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
 			})
+			router.refresh()
+
 		}
 	}
 
 	const handleRemoveItem = async () => {
 		const res = await removeItemFromCart(item.productId)
 		if(!res.success){
+			console.log('false')
 			toast({
+
 				variant: 'destructive',
 				description: res.message,
 			})
 		}
 
 		if(res.success){
+			console.log('success')
 			toast({
 				description: res.message
 			})
 		}
 		router.refresh()
 	}
-	console.log(cart)
+	
 	const existItem = cart && cart?.items.find(i => i.productId === item.productId)
 
 	return (

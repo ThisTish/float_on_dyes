@@ -12,6 +12,7 @@ import { getCart } from "@/lib/actions/cart.actions"
 // todo make action to search by tags
 // todo add tooltips to wishlist and add to cart
 // todo add logic to wishlist and add to cart if added- icon changes to checkmark
+// todo when more products available, change qty to product.stock
 
 const ProductCard = async ({ product }: { product: Product }) => {
 
@@ -34,7 +35,7 @@ const ProductCard = async ({ product }: { product: Product }) => {
 					slug: product.slug,
 					price: product.price,
 					image: product.images[0],
-					qty: product.stock
+					qty: 1
 				}}
 					cart={cart}
 					size={'icon'} />
