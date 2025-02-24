@@ -9,7 +9,8 @@ import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
 import AddToWishList from "./AddToWishList"
 import { useTransition } from "react"
-import { PiSpinnerBallDuotone } from "react-icons/pi";
+import { PiSpinnerBallDuotone, PiTrashSimpleBold } from "react-icons/pi";
+import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
 
 // todo if more than one item available, change button to be plus and minus with qty in middle
 
@@ -82,7 +83,7 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 
 	const existItem = cart && cart?.items.find(i => i.productId === item.productId)
 
-	const itemStatusButtonIcon = existItem ? <BiMinusCircle size={25} /> : <BiPlusCircle size={25} />
+	const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <LucideCirclePlus size={25} />
 
 
 	return (
@@ -91,14 +92,23 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : handleAddToCart}>
 					{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 				</button>
-			) : (
+			) : size === 'button' ? (
 				<Button variant={'cta'} size={'lg'} className="w-full" onClick={existItem ? handleRemoveItem : handleAddToCart}>
 					{existItem ? 'Remove From Cart' : 'Bag It'}
 					<AnimatedDiv variant={'cta'} animation={'rotateFull'} className="ml-2">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 					</AnimatedDiv>
 				</Button>
-			)}
+			) : size === 'trash'
+				? (
+					<button
+						onClick={handleRemoveItem}
+						className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive shadow-xl text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+						aria-label="Add to wishlist">
+						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Remove From Cart"}
+					</button>
+				) : null
+			}
 		</>
 	)
 }
