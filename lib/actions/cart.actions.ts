@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth"
 import { prisma } from "@/db/prisma"
-import { CartItem, WishListItem } from "@/types"
+import { CartItem } from "@/types"
 import { formatError, round2 } from "../utils"
 import { cookies } from "next/headers"
 import { cartItemSchema, insertCartSchema } from "../validators"
@@ -65,7 +65,6 @@ export async function addItemToCart(data: CartItem) {
 				data: newCart
 			})
 
-			revalidatePath(`/products/${product.slug}`)
 
 			return { success: true, message: `${product.name} added to cart!` }
 
@@ -95,7 +94,6 @@ export async function addItemToCart(data: CartItem) {
 					...calcPrice(cart.items as CartItem[])
 				}
 			})
-			revalidatePath(`/products/${product.slug}`)
 
 			return {
 				success: true,
@@ -107,8 +105,8 @@ export async function addItemToCart(data: CartItem) {
 	}
 }
 
-// delete item from cart
-export async function deleteItemFromCart(productId: string) {
+// remove item from cart
+export async function removeItemFromCart(productId: string) {
 	try {
 		const cart = await getCart()
 		if (!cart) throw new Error('Cart not found')
@@ -179,55 +177,6 @@ export async function getCart() {
 	})
 
 	return cartPlain
-}
-
-
-// add to wishlist
-export async function addItemToWishList(data: WishListItem) {
-	if (data.isAvailable === false) return { success: false, message: `${data.name} has already been snagged.` }
-
-	const session = await auth()
-	if (!session?.user) {
-		return { success: false, message: 'Please sign in to save items to wishlist' }
-	}
-
-	try {
-		const updatedWishList = await prisma.wishList.upsert({
-			where: {
-				userId: session.user.id
-			},
-			update: {
-				items: {
-					push: {
-						name: data.name,
-						slug: data.slug,
-						image: data.image,
-						productId: data.productId,
-						isAvailable: true
-					}
-				}
-			},
-			create: {
-				userId: session.user.id,
-				items: [
-					{
-						name: data.name,
-						slug: data.slug,
-						image: data.image,
-						productId: data.productId,
-						isAvailable: true
-					}
-				]
-			}
-		})
-
-		if (!updatedWishList) return { success: false, message: 'An error occurred, please try again later' }
-
-		return { success: true, message: 'Item added to wishlist' }
-
-	} catch (error) {
-		return { success: false, message: formatError(error) }
-	}
 }
 
 

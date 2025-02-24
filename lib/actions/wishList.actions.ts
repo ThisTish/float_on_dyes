@@ -1,9 +1,10 @@
+"use server"
+
 import { auth } from "@/auth"
 import { prisma } from "@/db/prisma"
 import { WishListItem } from "@/types"
 import { formatError } from "../utils"
 import { wishListItemSchema } from "../validators"
-import { revalidatePath } from "next/cache"
 
 // todo later, 'move to wish bag for now'
 
@@ -24,14 +25,6 @@ export async function addItemToWishList(data: WishListItem) {
 		})
 
 		if (!product || product.stock < 1) throw new Error('Item is out of stock')
-
-		const otherWishListsWithItem = await prisma.wishList.findMany({
-			where: {
-				items: {
-					hasSome: [item.name]
-				}
-			}
-		})
 
 		await prisma.wishList.upsert({
 			where: {
@@ -54,11 +47,8 @@ export async function addItemToWishList(data: WishListItem) {
 			}
 		})
 
-		revalidatePath(`/products/${product.slug}`)
-
 		return {
-			success: true, message: `${product.name} has been added to your dream bag!
-		${otherWishListsWithItem.length > 0 ? '' : `It's also saved in ${otherWishListsWithItem.length} other dream bags.`}`
+			success: true, message: `${product.name} has been added to your dream bag!}`
 		}
 
 	} catch (error) {
@@ -91,7 +81,7 @@ export async function removeItemFromWishList(productId: string) {
 			}
 		})
 		return { success: true, message: 'Item removed from dream bag' }
-	}catch(error){
-		return { success: false, message: formatError(error)}
+	} catch (error) {
+		return { success: false, message: formatError(error) }
 	}
 }

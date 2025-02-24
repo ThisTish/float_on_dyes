@@ -23,6 +23,7 @@ const AddToCart = ({ item, size }: { item: CartItem, size: string }) => {
 				variant: 'destructive',
 				description: res.message,
 			})
+			router.refresh()
 			return
 		}
 

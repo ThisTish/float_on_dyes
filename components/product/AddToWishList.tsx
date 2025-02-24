@@ -37,6 +37,7 @@ const AddToWishList = ({ item, size }: { item: WishListItem, size: string }) => 
 			toast({
 				description: `Added ${item.name} to Wish List`,
 			})
+			router.refresh()
 		}
 	}
 
