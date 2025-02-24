@@ -6,8 +6,6 @@ import { CartItem, WishListItem } from "@/types"
 import { formatError } from "../utils"
 import { wishListItemSchema } from "../validators"
 
-// todo later, 'move to wish bag for now'
-
 // add to wishlist
 export async function addItemToWishList(data: WishListItem | CartItem) {
 	try {

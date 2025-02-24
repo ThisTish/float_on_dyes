@@ -2,13 +2,12 @@ import AddToCart from "@/components/product/AddToCart"
 import AddToWishList from "@/components/product/AddToWishList"
 import ProductDetailsImages from "@/components/product/ProductDetailsImages"
 import ProductPrice from "@/components/product/ProductPrice"
-import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import BackButton from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { getCart } from "@/lib/actions/cart.actions"
 import { getProductBySlug } from "@/lib/actions/product.actions"
 import { notFound } from "next/navigation"
-import { BiBookmarkHeart, BiPlus } from "react-icons/bi"
 // todo Breadcrumb
 // todo Related Products
 // todo tags search
@@ -18,8 +17,10 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 	const { slug } = await props.params
 
 	const product = await getProductBySlug(slug)
-
 	if (!product) notFound()
+
+	const cart = await getCart()
+
 
 	return (
 		<div className="space-y-10">
@@ -86,14 +87,6 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 
 					{/* cart buttons */}
 					<CardFooter className="flex flex-col-reverse sm:flex-row justify-center items-center w-full gap-3">
-						<AddToWishList item={{
-							productId: product.id,
-							name: product.name,
-							slug: product.slug,
-							image: product.images[0],
-							isAvailable: product.isAvailable
-						}} size={'button'} />
-
 						<AddToCart item={{
 							productId: product.id,
 							name: product.name,
@@ -102,8 +95,16 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							image: product.images[0],
 							qty: 1
 						}}
-						size={'button'} 
+							cart={cart}
+							size={'button'}
 						/>
+						<AddToWishList item={{
+							productId: product.id,
+							name: product.name,
+							slug: product.slug,
+							image: product.images[0],
+						}} size={'button'} />
+
 					</CardFooter>
 				</Card>
 			</section>

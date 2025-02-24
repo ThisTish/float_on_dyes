@@ -7,7 +7,6 @@ import { formatError, round2 } from "../utils"
 import { cookies } from "next/headers"
 import { cartItemSchema, insertCartSchema } from "../validators"
 import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "../constants"
-import { revalidatePath } from "next/cache"
 import { Prisma } from "@prisma/client"
 
 
@@ -33,7 +32,8 @@ export async function addItemToCart(data: CartItem) {
 		})
 		// checking if in stock or available
 		if (!product || product.stock < 1) return { success: false, message: `${data.name} has already been snagged.` }
-		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish bag and check back in 30 min.` }
+		//> this will not work if there are more than one in stock to begin with, and they try to add more to their cart. when adding to their cart, the stock does not get updated. Not a problem until we add stickers/shirts/etc.
+		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish bag to check back later.` }
 
 		// if no cart, make one and add item
 		if (!cart) {
@@ -120,9 +120,7 @@ export async function removeItemFromCart(productId: string) {
 			}
 		})
 
-		revalidatePath(`/products/${product.slug}`)
-
-		return { success: true, message: `${product.name}${existingItem.qty > 0 ? "'s quantity updated" : " removed"}` }
+		return { success: true, message: `${product.name}${existingItem.qty > 1 ? "'s quantity updated" : " removed"}` }
 
 	} catch (error) {
 		return { success: false, message: formatError(error) }
