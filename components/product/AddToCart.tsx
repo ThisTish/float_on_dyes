@@ -103,9 +103,17 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 				? (
 					<button
 						onClick={handleRemoveItem}
-						className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive shadow-xl text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-						aria-label="Add to wishlist">
-						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Remove From Cart"}
+						className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive  z-10 text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+						aria-label="Remove from cart">
+						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
+					</button>
+			) : size === 'dropdown'
+				? (
+					<button
+						onClick={handleRemoveItem}
+						className="text-sm font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive   active:translate-x-1 active:translate-y-1"
+						aria-label="Remove from cart">
+						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
 					</button>
 				) : null
 			}

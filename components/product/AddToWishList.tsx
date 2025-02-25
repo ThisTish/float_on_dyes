@@ -79,10 +79,18 @@ const AddToWishList = ({ item, size }: { item: WishListItem, size: string }) => 
 							? (
 								<button
 									onClick={handleAddToWishList}
-									className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-darkBlue shadow-xl text-darkBlue  before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+									className="relative overflow-hidden w-full h-6 shrink-0 items-center justify-center px-2 text-xs font-light z-10 transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-darkBlue shadow-xl text-darkBlue  before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
 									aria-label="Add to wishlist">
 									{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Move to Wish List"}
 								</button>
+								) : size === 'dropdown'
+								? (
+									<button
+										onClick={handleAddToWishList}
+										className="text-sm font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-darkBlue active:translate-x-1 active:translate-y-1"
+										aria-label="Add to wishlist">
+										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move to wish list"}
+									</button>
 							) : null
 			}
 
