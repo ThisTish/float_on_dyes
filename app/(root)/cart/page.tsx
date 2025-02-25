@@ -1,5 +1,7 @@
 import CartTable from "@/components/cart/CartTable"
+import SubTotalCard from "@/components/cart/SutbTotalCard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useToast } from "@/hooks/use-toast"
 import { getCart } from "@/lib/actions/cart.actions"
 import { Metadata } from "next"
 
@@ -9,8 +11,9 @@ export const metadata: Metadata = {
 
 
 const CartPage = async () => {
-	const cart = await getCart()
 
+
+	const cart = await getCart()
 	return (
 		<div className="mt-40 grid lg:grid-cols-4 lg:gap-5">
 			<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
@@ -26,7 +29,11 @@ const CartPage = async () => {
 					<CartTable cart={cart} />
 				</CardContent>
 			</Card>
-
+			{cart ? 
+			<SubTotalCard cart={cart} />
+			: null
+			
+		}
 		</div>
 	)
 }

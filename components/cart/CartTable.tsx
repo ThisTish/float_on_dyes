@@ -82,26 +82,26 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 
 									{/* item options */}
 									<div className="">
-									<TableCell className="flex justify-end ">
-										<DropdownMenu>
-											<DropdownMenuTrigger className="sm:hidden py-10">
-												<PiDotsThreeOutlineVertical size={25} />
-											</DropdownMenuTrigger>
-											<DropdownMenuContent>
-												<DropdownMenuItem>
-													<AddToCart item={item} size="dropdown" />
-												</DropdownMenuItem>
-												<DropdownMenuItem>
-													<AddToWishList item={item} size="dropdown" />
-												</DropdownMenuItem>
-											</DropdownMenuContent>
-										</DropdownMenu>
+										<TableCell className="flex justify-end ">
+											<DropdownMenu>
+												<DropdownMenuTrigger className="sm:hidden py-10">
+													<PiDotsThreeOutlineVertical size={25} />
+												</DropdownMenuTrigger>
+												<DropdownMenuContent>
+													<DropdownMenuItem>
+														<AddToCart item={item} size="dropdown" />
+													</DropdownMenuItem>
+													<DropdownMenuItem>
+														<AddToWishList item={item} size="dropdown" />
+													</DropdownMenuItem>
+												</DropdownMenuContent>
+											</DropdownMenu>
 
-										<div className="hidden sm:flex flex-col gap-3 items-center max-w-40">
-											<AddToCart item={item} size="trash" />
-											<AddToWishList item={item} size="move" />
-										</div>
-									</TableCell>
+											<div className="hidden sm:flex flex-col gap-3 items-center max-w-40">
+												<AddToCart item={item} size="trash" />
+												<AddToWishList item={item} size="move" />
+											</div>
+										</TableCell>
 
 									</div>
 								</TableRow>

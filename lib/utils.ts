@@ -43,3 +43,19 @@ export function round2(value: number | string): number {
   }
   throw new Error('Invalid value for round2')
 }
+
+const CURRENCY_FORMATTER = new Intl.NumberFormat('en-us', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+})
+
+export const formatCurrency = (amount : number | string | null) => {
+  if(typeof amount === 'number'){
+    return CURRENCY_FORMATTER.format(amount)
+  }else if(typeof amount === 'string'){
+    return CURRENCY_FORMATTER.format(Number(amount))
+  }else{
+    return NaN
+  }
+}
