@@ -4,19 +4,25 @@ import { SIGN_IN_DEFAULT_VALUES } from "@/lib/constants"
 import { signInWithCredentials } from "@/lib/actions/users.actions"
 import { useActionState } from "react"
 import { useFormStatus } from "react-dom"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
+import { useRouter } from "next/navigation"
 
 const CredentialsSignInForm = () => {
 	const [data, action] = useActionState(signInWithCredentials, {
 		success: false,
 		message: ''
 	})
+
+	const router = useRouter()
+
+	if(data.success){
+		router.refresh()
+	}
 
 	const SignInButton = () => {
 		const { pending } = useFormStatus()

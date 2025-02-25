@@ -15,7 +15,7 @@ import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
 // todo if more than one item available, change button to be plus and minus with qty in middle
 
 
-const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: Cart }) => {
+const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?: Cart }) => {
 	const [pending, startTransition] = useTransition()
 
 	const { toast } = useToast()
@@ -103,7 +103,7 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 				? (
 					<button
 						onClick={handleRemoveItem}
-						className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive  z-10 text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+						className="relative bg-white overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive  z-10 text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
 						aria-label="Remove from cart">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
 					</button>

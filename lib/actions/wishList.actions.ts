@@ -2,19 +2,19 @@
 
 import { auth } from "@/auth"
 import { prisma } from "@/db/prisma"
-import { CartItem, WishListItem } from "@/types"
+import { CartItem } from "@/types"
 import { formatError } from "../utils"
-import { wishListItemSchema } from "../validators"
+import { cartItemSchema } from "../validators"
 
 // add to wishlist
-export async function addItemToWishList(data: WishListItem | CartItem) {
+export async function addItemToWishList(data: CartItem) {
 	try {
 		const session = await auth()
 		if (!session?.user) {
 			throw new Error('Please sign in to save items to wishlist.')
 		}
 
-		const item = wishListItemSchema.parse(data)
+		const item = cartItemSchema.parse(data)
 
 		const product = await prisma.product.findFirst({
 			where: {
@@ -68,7 +68,7 @@ export async function removeItemFromWishList(productId: string) {
 		})
 		if (!wishList) throw new Error("Your dream bag couldn't be found.")
 
-		const updatedWishList = (wishList.items as WishListItem[]).filter((x) => x.productId !== productId)
+		const updatedWishList = (wishList.items as CartItem[]).filter((x) => x.productId !== productId)
 
 		await prisma.wishList.update({
 			where: {
@@ -82,4 +82,22 @@ export async function removeItemFromWishList(productId: string) {
 	} catch (error) {
 		return { success: false, message: formatError(error) }
 	}
+}
+
+// get wishlist
+export async function getWishList(userId: string | undefined) {
+	if(!userId || userId === undefined) return
+
+		const wishList = await prisma.wishList.findFirst({
+			where: {
+				userId
+			}
+		})
+
+		if(!wishList) return
+		
+		return ({
+			...wishList,
+			items: wishList.items as CartItem[]
+		})
 }

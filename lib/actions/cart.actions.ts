@@ -139,10 +139,15 @@ export async function sessionUserId() {
 }
 
 // find cart by userId or sessionCartId
-export async function getCart() {
-	const ids = await sessionUserId()
-	const { userId, sessionCartId } = ids
+export async function getCart(passedUserId?: string) {
+	let userId
 
+	if(passedUserId) userId = passedUserId
+
+		const ids = await sessionUserId()
+		if(ids.userId) userId = ids.userId
+		const sessionCartId = ids.sessionCartId
+	
 	const cart = await prisma.cart.findFirst({
 		where: userId ? { userId } : { sessionCartId },
 	})
