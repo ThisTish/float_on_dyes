@@ -137,7 +137,7 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 				? (
 					<button
 						onClick={handleRemoveItem}
-						className="text-sm font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive   active:translate-x-1 active:translate-y-1"
+						className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive   active:translate-x-1 active:translate-y-1"
 						aria-label="Remove from cart">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
 					</button>

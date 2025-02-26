@@ -138,7 +138,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 								? (
 									<button
 										onClick={handleAddToWishList}
-										className="text-sm font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-darkBlue active:translate-x-1 active:translate-y-1"
+										className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-darkBlue dark:text-lightBlue active:translate-x-1 active:translate-y-1"
 										aria-label="Add to wishlist">
 										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move to wish list"}
 									</button>

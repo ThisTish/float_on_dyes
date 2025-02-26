@@ -12,7 +12,7 @@ import { WishList } from "@/types"
 const WishListSection
  = ({ wishList }: { wishList: WishList }) => {
 	return (
-		<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
+		<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3 mt-5">
 			<CardHeader>
 				<CardTitle>
 					<h2 className="h3-bold">

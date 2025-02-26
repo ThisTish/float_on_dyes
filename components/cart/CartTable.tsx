@@ -85,18 +85,17 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 										</TableCell>
 
 										{/* item options */}
-										<div className="">
 											<TableCell className="flex justify-end ">
 												<DropdownMenu>
 													<DropdownMenuTrigger className="sm:hidden py-10">
 														<PiDotsThreeOutlineVertical size={25} />
 													</DropdownMenuTrigger>
-													<DropdownMenuContent>
-														<DropdownMenuItem>
-															<AddToCart item={item} size="dropdown" />
-														</DropdownMenuItem>
+													<DropdownMenuContent className="bg-secondary dark:bg-primary">
 														<DropdownMenuItem>
 															<AddToWishList item={item} size="dropdown" />
+														</DropdownMenuItem>
+														<DropdownMenuItem>
+															<AddToCart item={item} size="dropdown" />
 														</DropdownMenuItem>
 													</DropdownMenuContent>
 												</DropdownMenu>
@@ -107,7 +106,6 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 												</div>
 											</TableCell>
 
-										</div>
 									</TableRow>
 								))}
 							</TableBody>
