@@ -8,9 +8,9 @@ const divVariants = cva(
 		variants: {
 			variant: {
 				default: "group-hover:text-primary-foreground group-hover:bg-primary",
-				destructive: "group-hover:text-primary-foreground group-hover:bg-lightCta",
+				destructive: "group-hover:text-white group-hover:bg-lightCta",
 				outline: "group-hover:text-accent group-hover:bg-primary-foreground",
-				secondary: "group-hover:text-brightBlue group-hover:bg-primary-foreground",
+				secondary: "group-hover:text-darkBlue dark:group-hover:text-lightBlue",
 				ghost: " group-hover:bg-transparent",
 				link: " group-hover:bg-transparent",
 				cta: "group-hover:text-white group-hover:bg-lightCta",
@@ -25,8 +25,8 @@ const divVariants = cva(
 			},
 			animation: {
 				default: "",
-				rotate: "group-hover:rotate-45",
-				rotateFull: "group-hover:rotate-180",
+				rotate: "group-hover:rotate-45 transition duration-300 ease-out",
+				rotateFull: "group-hover:rotate-180 transition duration-700",
 				scale: " group-hover:scale-125 group-hover:transition-all group-hover:duration-700",
 				show: "absolute left-10 translate-x-full opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 group-hover:bg-transparent group-hover:text-black ",
 				pulse: "group-hover:animate-pulse group-hover:transition-all group-hover:duration-900 ",

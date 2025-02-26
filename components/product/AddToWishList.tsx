@@ -50,7 +50,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 		})
 	}
 
-	const handleRemoveItem = async () =>{
+	const handleRemoveItem = async () => {
 		startTransition(async () => {
 
 			const res = await removeItemFromWishList(item.productId)
@@ -110,9 +110,9 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
 				) : size === 'button'
 					? (
-						<Button variant={'default'} size={'lg'} className="w-full" onClick={handleAddToWishList}>
+						<Button variant={'outline'} size={'lg'} className="w-full border-none" onClick={handleAddToWishList}>
 							Wish Bag
-							<AnimatedDiv variant={'default'} animation={'pulse'} className="ml-2">
+							<AnimatedDiv variant={'outline'} animation={'pulse'} className="ml-2">
 								{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
 							</AnimatedDiv>
 						</Button>
@@ -128,12 +128,9 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 						) :
 						size === 'cart'
 							? (
-								<button
-									onClick={handleMoveToWishList}
-									className="relative overflow-hidden w-full h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold z-10 transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-darkBlue border border-darkBlue text-white  before:bg-white hover:text-darkBlue before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-									aria-label="Add to wishlist">
-									{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Move to Wish List"}
-								</button>
+								<Button variant={'outline'} size={'chip'} className="w-full border-none" onClick={handleMoveToWishList}>
+									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={25} /> : "Move to Wish List"}
+								</Button>
 							) : size === 'dropdown'
 								? (
 									<button
@@ -142,15 +139,12 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 										aria-label="Add to wishlist">
 										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move to wish list"}
 									</button>
-								): size === 'wishList'
+								) : size === 'wishList'
 									? (
-										<button
-											onClick={handleRemoveItem}
-											className="relative bg-white overflow-hidden w-full h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold z-10 transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-											aria-label="Add to wishlist">
-											{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Remove"}
-										</button>
-								) : null
+										<Button variant={'destructive'} size={'chip'} className="w-full" onClick={handleRemoveItem}>
+											{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove"}
+										</Button>
+									) : null
 			}
 
 		</>

@@ -55,6 +55,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 							<TableHeader>
 								<TableRow>
 									<TableHead>Item</TableHead>
+									<TableHead className="text-center">Quantity</TableHead>
 									<TableHead className="text-center">Price</TableHead>
 									<TableHead className="text-end">Options</TableHead>
 								</TableRow>
@@ -79,6 +80,10 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 											</Link>
 										</TableCell>
 
+										<TableCell className="text-center">
+											{item.qty}
+										</TableCell>
+
 										{/* item price */}
 										<TableCell className="text-center">
 											${item.price}
@@ -100,9 +105,9 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 													</DropdownMenuContent>
 												</DropdownMenu>
 
-												<div className="hidden sm:flex flex-col gap-3 items-center max-w-40">
-													<AddToCart item={item} size="cart" />
+												<div className="hidden sm:flex flex-col gap-3 pt-5 items-center max-w-40">
 													<AddToWishList item={item} size="cart" />
+													<AddToCart item={item} size="cart" />
 												</div>
 											</TableCell>
 

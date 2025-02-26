@@ -5,6 +5,13 @@ import { Input } from "./input"
 import { useState, useRef } from "react"
 import { Button } from "./button"
 
+
+// todo make look like cart icon, 
+// todo on hover bg-darkBlue onClick/isActive, 
+// todo move to the right & rounded-none, 
+// todo onHover-search shouldn't show yet, 
+// todo change size for mobile view
+
 const SearchButton = () => {
 	const [isActive, setIsActive] = useState(false)
 	const [searchValue, setSearchValue] = useState("")
@@ -48,7 +55,7 @@ const SearchButton = () => {
 				onBlur={handleBlur}
 				type="submit"
 				className={`absolute top-0 size-10 content-center bg-darkBlue text-white transition-all
-				${isActive ? "left-64 duration-700" :  'duration-500 left-0 rounded-full group-hover:left-64 group-hover:rounded-none' }`}
+				${isActive ? "left-64 duration-700" : 'duration-500 left-0 rounded-full group-hover: group-hover:rounded-none'}`}
 			>
 				<Search />
 			</Button>

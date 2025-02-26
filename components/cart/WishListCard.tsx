@@ -8,7 +8,7 @@ import AddToWishList from "../product/AddToWishList"
 const WishListCard = ({ item }: { item: CartItem }) => {
 
 	return (
-		<Card className="w-32 max-w-40 border border-darkBlue flex flex-col items-center">
+		<Card className="w-32 max-w-40 border transition border-darkBlue flex flex-col items-center">
 				<Link href={`/products/${item.slug}`}>
 				<CardHeader>
 					<Image

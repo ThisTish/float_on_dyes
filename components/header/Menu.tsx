@@ -37,7 +37,7 @@ const Menu = () => {
 					<SearchButton/>
 
 					<div className="flex gap-3 items-center">
-					<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkGreen hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkGreen hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
+					<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkBlue hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkBlue hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
 						<Tooltip label="Cart" className="mb-3">
 							<ShoppingCart />
 						</Tooltip>
@@ -73,7 +73,7 @@ const Menu = () => {
 						))}
 						<div className="flex gap-2">
 							<UserButton />
-							<Link href={'/cart'} className="p-2 rounded-full hover:bg-darkGreen hover:text-primary-foreground">
+							<Link href={'/cart'} className="p-2 rounded-full hover:bg-darkBlue hover:text-primary-foreground">
 								<ShoppingCart />
 							</Link>
 							{/* style different, so it's like other icons */}

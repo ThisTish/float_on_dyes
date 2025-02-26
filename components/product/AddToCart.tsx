@@ -17,7 +17,7 @@ import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishLis
 // todo if more than one item available, change button to be plus and minus with qty in middle
 
 
-const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?: Cart }) => {
+const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: Cart }) => {
 	const [pending, startTransition] = useTransition()
 
 	const { toast } = useToast()
@@ -79,10 +79,10 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 			router.refresh()
 		})
 	}
-	const handleMoveToCart = async() =>{
-		startTransition(async () =>{
+	const handleMoveToCart = async () => {
+		startTransition(async () => {
 			const res = await addItemToCart(item)
-			if(!res.success){
+			if (!res.success) {
 				toast({
 					variant: 'destructive',
 					description: res.message,
@@ -90,9 +90,9 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 				return
 			}
 
-			if(res.success){
+			if (res.success) {
 				const res = await removeItemFromWishList(item.productId)
-				if(!res.success){
+				if (!res.success) {
 					toast({
 						variant: 'destructive',
 						description: res.message,
@@ -127,29 +127,24 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 				</Button>
 			) : size === 'cart'
 				? (
-					<button
-						onClick={handleRemoveItem}
-						className="relative bg-white overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive  z-10 text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-						aria-label="Remove from cart">
+					<Button variant={'destructive'} size={'chip'} className="w-full" onClick={handleRemoveItem}>
 						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
-					</button>
-			) : size === 'dropdown'
-				? (
-					<button
-						onClick={handleRemoveItem}
-						className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive   active:translate-x-1 active:translate-y-1"
-						aria-label="Remove from cart">
-						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
-					</button>
-			) : size === 'wishList'
-				? (
-					<button
-						onClick={handleMoveToCart}
-						className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-darkBlue border border-darkBlue text-white z-10  before:bg-white hover:text-darkBlue before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-						aria-label="Move to cart from wishlist">
-						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
-					</button>
-				) : null
+					</Button>
+				) : size === 'dropdown'
+					? (
+						<button
+							onClick={handleRemoveItem}
+							className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive  active:translate-x-1 active:translate-y-1"
+							aria-label="Remove from cart">
+							{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
+						</button>
+					) : size === 'wishList'
+						? (
+							<Button variant={'outline'} size={'chip'} className="w-full border-none" onClick={handleMoveToCart}>
+
+								{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
+							</Button>
+						) : null
 			}
 		</>
 	)
