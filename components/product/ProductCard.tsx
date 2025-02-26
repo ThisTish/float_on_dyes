@@ -26,7 +26,9 @@ const ProductCard = async ({ product }: { product: Product }) => {
 					productId: product.id,
 					name: product.name,
 					slug: product.slug,
+					price: product.price,
 					image: product.images[0],
+					qty: 1
 				}} size="icon" />
 
 				<AddToCart item={{

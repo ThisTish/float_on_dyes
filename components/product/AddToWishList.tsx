@@ -1,6 +1,5 @@
 "use client"
 
-import { WishListItem } from "@/types"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { toast } from "@/hooks/use-toast"
@@ -11,13 +10,14 @@ import { getBaseUrl } from "@/lib/utils"
 import { useTransition } from "react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { LucideBookmarkPlus } from "lucide-react"
+import { CartItem } from "@/types"
 
 
 // todo handle move to wishlist
 // todo add tooltips for this.....
 // todo check if in wishlist lucide bookmark check
 
-const AddToWishList = ({ item, size }: { item: WishListItem, size: string }) => {
+const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
 	const [pending, startTransition] = useTransition()
 

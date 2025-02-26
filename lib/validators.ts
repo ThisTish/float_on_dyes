@@ -80,7 +80,9 @@ export const insertCartSchema = z.object({
 // 	productId: z.string().min(1, 'Product is required'),
 // 	name: z.string().min(1, 'Name is required'),
 // 	slug: z.string().min(1, 'Slug is required'),
-// 	image: z.string().min(1, 'Image is required')
+// 	image: z.string().min(1, 'Image is required'),
+// 	qty: z.number().int().nonnegative('Quantity must be a positive integer').optional().nullable(),
+// 	price: currency.optional().nullable()
 // })
 
 export const insertWishListItemSchema = z.object({

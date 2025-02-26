@@ -8,8 +8,8 @@ import AddToWishList from "../product/AddToWishList"
 const WishListCard = ({ item }: { item: CartItem }) => {
 
 	return (
-		<Link href={`/products/${item.slug}`}>
-			<Card className="w-32 max-w-40 border border-darkBlue flex flex-col items-center">
+		<Card className="w-32 max-w-40 border border-darkBlue flex flex-col items-center">
+				<Link href={`/products/${item.slug}`}>
 				<CardHeader>
 					<Image
 						src={item.image}
@@ -21,12 +21,12 @@ const WishListCard = ({ item }: { item: CartItem }) => {
 				<CardContent>
 					<p>{item.name}</p>
 				</CardContent>
+		</Link>
 				<CardFooter className="grid">
 					<AddToCart item={item} size='trash' />
 					<AddToWishList item={item} size="move" />
 				</CardFooter>
 			</Card>
-		</Link>
 	)
 }
 

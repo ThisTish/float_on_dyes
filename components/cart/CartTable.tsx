@@ -1,10 +1,7 @@
 "use client"
 
-import { useToast } from "@/hooks/use-toast"
 import { Cart } from "@/types"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useTransition } from "react"
 import SearchButton from "../ui/SearchButton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 import Image from "next/image"
@@ -18,10 +15,6 @@ import { PiDotsThreeOutlineVertical } from "react-icons/pi"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
-	const router = useRouter()
-	const toast = useToast()
-	const [pending, startTransition] = useTransition()
-
 	return (
 		<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
 			<CardHeader>

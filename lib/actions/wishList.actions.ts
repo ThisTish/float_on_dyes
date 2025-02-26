@@ -13,8 +13,10 @@ export async function addItemToWishList(data: CartItem) {
 		if (!session?.user) {
 			throw new Error('Please sign in to save items to wishlist.')
 		}
-
+		console.log('session')
+		console.log('data', data)
 		const item = cartItemSchema.parse(data)
+		console.log('item', item)
 
 		const product = await prisma.product.findFirst({
 			where: {
@@ -44,12 +46,13 @@ export async function addItemToWishList(data: CartItem) {
 				]
 			}
 		})
-
+		console.log('upserted')
 		return {
 			success: true, message: `${product.name} has been added to your dream bag!}`
 		}
 
 	} catch (error) {
+		console.error(error)
 		return { success: false, message: formatError(error) }
 	}
 }

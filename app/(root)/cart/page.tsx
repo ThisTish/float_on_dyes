@@ -1,9 +1,7 @@
 import { auth } from "@/auth"
 import CartTable from "@/components/cart/CartTable"
 import SubTotalCard from "@/components/cart/SutbTotalCard"
-import WishListTable from "@/components/cart/WishListTable"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useToast } from "@/hooks/use-toast"
+import WishListSection from "@/components/cart/WishListSection"
 import { getCart } from "@/lib/actions/cart.actions"
 import { getWishList } from "@/lib/actions/wishList.actions"
 import { Metadata } from "next"
@@ -29,7 +27,7 @@ const CartPage = async () => {
 				: null
 			}
 			{wishList ? (
-				<WishListTable wishList={wishList} />
+				<WishListSection wishList={wishList} />
 			): null}
 		</div>
 	)

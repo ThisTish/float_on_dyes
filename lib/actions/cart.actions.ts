@@ -33,7 +33,7 @@ export async function addItemToCart(data: CartItem) {
 		// checking if in stock or available
 		if (!product || product.stock < 1) return { success: false, message: `${data.name} has already been snagged.` }
 		//> this will not work if there are more than one in stock to begin with, and they try to add more to their cart. when adding to their cart, the stock does not get updated. Not a problem until we add stickers/shirts/etc.
-		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish bag to check back later.` }
+		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish list to check back later.` }
 
 		// if no cart, make one and add item
 		if (!cart) {
