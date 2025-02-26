@@ -3,7 +3,7 @@
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { toast } from "@/hooks/use-toast"
-import { addItemToWishList } from "@/lib/actions/wishList.actions"
+import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
 import { ToastAction } from "@radix-ui/react-toast"
 import { useRouter } from "next/navigation"
 import { getBaseUrl } from "@/lib/utils"
@@ -11,6 +11,7 @@ import { useTransition } from "react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { LucideBookmarkPlus } from "lucide-react"
 import { CartItem } from "@/types"
+import { removeItemFromCart } from "@/lib/actions/cart.actions"
 
 
 // todo handle move to wishlist
@@ -49,6 +50,56 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 		})
 	}
 
+	const handleRemoveItem = async () =>{
+		startTransition(async () => {
+
+			const res = await removeItemFromWishList(item.productId)
+			if (!res.success) {
+				toast({
+					variant: 'destructive',
+					description: res.message,
+				})
+			}
+
+			if (res.success) {
+				toast({
+					description: res.message
+				})
+			}
+			router.refresh()
+		})
+	}
+
+	const handleMoveToWishList = async () => {
+		startTransition(async () => {
+			const res = await addItemToWishList(item)
+			if (!res.success) {
+				toast({
+					variant: 'destructive',
+					description: res.message,
+				})
+				return
+			}
+
+			if (res.success) {
+				const res = await removeItemFromCart(item.productId)
+				if (!res.success) {
+					toast({
+						variant: 'destructive',
+						description: res.message,
+					})
+					return
+				}
+				toast({
+					description: `Moved ${item.name} to wish list!`
+				})
+			}
+			router.refresh()
+		})
+	}
+
+
+
 	return (
 		<>
 			{size === 'icon'
@@ -75,15 +126,15 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 								{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Add to Wish List"}
 							</button>
 						) :
-						size === 'move'
+						size === 'cart'
 							? (
 								<button
-									onClick={handleAddToWishList}
-									className="relative overflow-hidden w-full h-6 shrink-0 items-center justify-center px-2 text-xs font-light z-10 transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-darkBlue text-darkBlue  before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+									onClick={handleMoveToWishList}
+									className="relative overflow-hidden w-full h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold z-10 transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-darkBlue border border-darkBlue text-white  before:bg-white hover:text-darkBlue before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
 									aria-label="Add to wishlist">
 									{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Move to Wish List"}
 								</button>
-								) : size === 'dropdown'
+							) : size === 'dropdown'
 								? (
 									<button
 										onClick={handleAddToWishList}
@@ -91,7 +142,15 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 										aria-label="Add to wishlist">
 										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move to wish list"}
 									</button>
-							) : null
+								): size === 'wishList'
+									? (
+										<button
+											onClick={handleRemoveItem}
+											className="relative bg-white overflow-hidden w-full h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold z-10 transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+											aria-label="Add to wishlist">
+											{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Remove"}
+										</button>
+								) : null
 			}
 
 		</>

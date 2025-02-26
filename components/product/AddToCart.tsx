@@ -11,6 +11,8 @@ import AddToWishList from "./AddToWishList"
 import { useTransition } from "react"
 import { PiSpinnerBallDuotone, PiTrashSimpleBold } from "react-icons/pi";
 import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
+import { start } from "repl"
+import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
 
 // todo if more than one item available, change button to be plus and minus with qty in middle
 
@@ -63,18 +65,42 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 
 			const res = await removeItemFromCart(item.productId)
 			if (!res.success) {
-				console.log('false')
 				toast({
-
 					variant: 'destructive',
 					description: res.message,
 				})
 			}
 
 			if (res.success) {
-				console.log('success')
 				toast({
 					description: res.message
+				})
+			}
+			router.refresh()
+		})
+	}
+	const handleMoveToCart = async() =>{
+		startTransition(async () =>{
+			const res = await addItemToCart(item)
+			if(!res.success){
+				toast({
+					variant: 'destructive',
+					description: res.message,
+				})
+				return
+			}
+
+			if(res.success){
+				const res = await removeItemFromWishList(item.productId)
+				if(!res.success){
+					toast({
+						variant: 'destructive',
+						description: res.message,
+					})
+					return
+				}
+				toast({
+					description: `Moved ${item.name} to wish list!`
 				})
 			}
 			router.refresh()
@@ -99,11 +125,11 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 					</AnimatedDiv>
 				</Button>
-			) : size === 'trash'
+			) : size === 'cart'
 				? (
 					<button
 						onClick={handleRemoveItem}
-						className="relative bg-white overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive  z-10 text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+						className="relative bg-white overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-destructive  z-10 text-destructive  before:bg-destructive hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
 						aria-label="Remove from cart">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
 					</button>
@@ -114,6 +140,14 @@ const AddToCart = ({ item, size, cart }: { item: CartItem , size: string, cart?:
 						className="text-sm font-light transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive   active:translate-x-1 active:translate-y-1"
 						aria-label="Remove from cart">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
+					</button>
+			) : size === 'wishList'
+				? (
+					<button
+						onClick={handleMoveToCart}
+						className="relative overflow-hidden h-6 shrink-0 items-center justify-center px-2 text-xs font-semibold transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-darkBlue border border-darkBlue text-white z-10  before:bg-white hover:text-darkBlue before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+						aria-label="Move to cart from wishlist">
+						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
 					</button>
 				) : null
 			}

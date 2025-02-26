@@ -26,6 +26,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 			</CardHeader>
 
 			<CardContent>
+				{/* if empty */}
 				{!cart || cart.items.length === 0
 					? (
 						<div className="space-y-5 text-center">
@@ -49,6 +50,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 							</div>
 						</div>
 					) : (
+						// displaying cart items
 						<Table>
 							<TableHeader>
 								<TableRow>
@@ -100,8 +102,8 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 												</DropdownMenu>
 
 												<div className="hidden sm:flex flex-col gap-3 items-center max-w-40">
-													<AddToCart item={item} size="trash" />
-													<AddToWishList item={item} size="move" />
+													<AddToCart item={item} size="cart" />
+													<AddToWishList item={item} size="cart" />
 												</div>
 											</TableCell>
 

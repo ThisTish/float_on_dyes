@@ -23,8 +23,8 @@ const WishListCard = ({ item }: { item: CartItem }) => {
 				</CardContent>
 		</Link>
 				<CardFooter className="grid">
-					<AddToCart item={item} size='trash' />
-					<AddToWishList item={item} size="move" />
+					<AddToCart item={item} size='wishList' />
+					<AddToWishList item={item} size="wishList" />
 				</CardFooter>
 			</Card>
 	)
