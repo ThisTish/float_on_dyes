@@ -3,17 +3,17 @@ import { useToast } from "@/hooks/use-toast"
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions"
 import { Cart, CartItem } from "@/types"
 import { ToastAction } from "../ui/toast"
-import { BiMinusCircle, BiPlusCircle } from "react-icons/bi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
 import AddToWishList from "./AddToWishList"
 import { useTransition } from "react"
-import { PiSpinnerBallDuotone, PiTrashSimpleBold } from "react-icons/pi";
+import { PiSpinnerBallDuotone } from "react-icons/pi";
 import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
-import { start } from "repl"
 import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
 
+
+// todo wishlist button is not returning the full toast, only the description. might change back to where it was, the handleMoveTo cart, and if there is a problem, and the message back is "add to wish list to check back later have it read, Item is reserved in someones cart."
 // todo if more than one item available, change button to be plus and minus with qty in middle
 
 
@@ -24,11 +24,8 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 
 	const router = useRouter()
 
-
-
-	const handleAddToCart = async () => {
+	const handleAddToCart = async (moveFromWishList = false) => {
 		startTransition(async () => {
-
 			const res = await addItemToCart(item)
 
 			if (!res.success) {
@@ -44,22 +41,36 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 					action:
 						res.message === 'but you can request a different custom disc!'
 							? <ToastAction altText="Go to custom order page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction>
-							: res.message === `And you've already snagged it!` || "You've snagged all we have in stock."
+							: res.message === `And you've already snagged it!` || res.message === "You've snagged all we have in stock."
 								? <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
 								: res.message === `Add to wish list to check back later.`
 									? <AddToWishList item={item} size="action" />
 									: undefined
 				})
+				return
 			}
 
-			if (res.success) {
+			if(res.success && moveFromWishList){
+				const removeRes = await removeItemFromWishList(item.productId)
+				if (!removeRes.success) {
+					toast({
+						variant: 'destructive',
+						description: res.message,
+					})
+					return
+				}
+				toast({
+					description: `Moved ${item.name} to cart`
+				})
+			} else {
 				toast({
 					description: res.message,
 					action: <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
 				})
-				router.refresh()
 
+				router.refresh()
 			}
+			router.refresh()
 		})
 	}
 
@@ -82,33 +93,6 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 			router.refresh()
 		})
 	}
-	const handleMoveToCart = async () => {
-		startTransition(async () => {
-			const res = await addItemToCart(item)
-			if (!res.success) {
-				toast({
-					variant: 'destructive',
-					description: res.message,
-				})
-				return
-			}
-
-			if (res.success) {
-				const res = await removeItemFromWishList(item.productId)
-				if (!res.success) {
-					toast({
-						variant: 'destructive',
-						description: res.message,
-					})
-					return
-				}
-				toast({
-					description: `Moved ${item.name} to wish list!`
-				})
-			}
-			router.refresh()
-		})
-	}
 
 	const existItem = cart && cart?.items.find(i => i.productId === item.productId)
 
@@ -118,36 +102,46 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 	return (
 		<>
 			{size === 'icon' ? (
-				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : handleAddToCart}>
+				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
 					{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 				</button>
 			) : size === 'button' ? (
-				<Button variant={'cta'} size={'lg'} className="w-full" onClick={existItem ? handleRemoveItem : handleAddToCart}>
+				<Button variant={'cta'} size={'lg'} className="w-full" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
 					{existItem ? 'Remove From Cart' : 'Bag It'}
 					<AnimatedDiv variant={'cta'} animation={'rotateFull'} className="ml-2">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 					</AnimatedDiv>
 				</Button>
-			) : size === 'cart'
-				? (
-					<Button variant={'destructive'} size={'chip'} className="w-full" onClick={handleRemoveItem}>
-						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
-					</Button>
-				) : size === 'dropdown'
+			) :
+				size === 'action'
 					? (
 						<button
-							onClick={handleRemoveItem}
-							className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive  active:translate-x-1 active:translate-y-1"
-							aria-label="Remove from cart">
-							{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
+							onClick={() => handleAddToCart()}
+							className="inline-flex h-8 shrink-0 items-center justify-center px-3 text-sm font-medium transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive relative overflow-hidden z-10 border border-darkBlue shadow-xl text-darkBlue group-[.destructive]:before:bg-white before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+							aria-label="Add to wishlist">
+							{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Add to Cart"}
 						</button>
-					) : size === 'wishList'
-						? (
-							<Button variant={'outline'} size={'chip'} className="w-full border-none" onClick={handleMoveToCart}>
 
-								{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
+					) : size === 'cart'
+						? (
+							<Button variant={'destructive'} size={'chip'} className="w-full" onClick={handleRemoveItem}>
+								{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
 							</Button>
-						) : null
+						) : size === 'dropdown'
+							? (
+								<button
+									onClick={handleRemoveItem}
+									className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive  active:translate-x-1 active:translate-y-1"
+									aria-label="Remove from cart">
+									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
+								</button>
+							) : size === 'wishList'
+								? (
+									<Button variant={'outline'} size={'chip'} className="w-full border-none" onClick={() => handleAddToCart(true)}>
+
+										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
+									</Button>
+								) : null
 			}
 		</>
 	)

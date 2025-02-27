@@ -55,7 +55,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 							<TableHeader>
 								<TableRow>
 									<TableHead>Item</TableHead>
-									<TableHead className="text-center">Quantity</TableHead>
+									{/* <TableHead className="text-center">Quantity</TableHead> */}
 									<TableHead className="text-center">Price</TableHead>
 									<TableHead className="text-end">Options</TableHead>
 								</TableRow>
@@ -80,9 +80,10 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 											</Link>
 										</TableCell>
 
-										<TableCell className="text-center">
+										{/* qty */}
+										{/* <TableCell className="text-center">
 											{item.qty}
-										</TableCell>
+										</TableCell> */}
 
 										{/* item price */}
 										<TableCell className="text-center">

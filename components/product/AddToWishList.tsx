@@ -12,11 +12,12 @@ import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { LucideBookmarkPlus } from "lucide-react"
 import { CartItem } from "@/types"
 import { removeItemFromCart } from "@/lib/actions/cart.actions"
+import AddToCart from "./AddToCart"
 
 
-// todo handle move to wishlist
 // todo add tooltips for this.....
 // todo check if in wishlist lucide bookmark check
+// todo, if item isn't available, update to stay out of stock or something.
 
 const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
@@ -34,13 +35,17 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
 				toast({
 					variant: 'destructive',
-					title: res.message === 'but you can request a different custom disc!' ? `${item.name} has been snagged,` : undefined,
+					title: res.message === 'but you can request a different custom disc!' ? `${item.name} has been snagged,`
+						: res.message === "Would you like to add it to your cart instead?" ? `${item.name} is already in your wish list,`
+							: undefined,
 					description: res.message,
-					action: res.message === 'Please sign in to save items to wishlist.'
+					action: res.message === 'Please sign in to save items to wishlist.' || res.message === "You've gotta be signed in to edit your wish list."
 						? <ToastAction altText="Sign in to save item" onClick={() => router.push(`/sign-in?callbackUrl=${domain}${previousPage}`)}>Go to Sign In</ToastAction>
 						: res.message === 'but you can request a different custom disc!'
 							? <ToastAction altText="Go to custom dye page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction>
-							: undefined
+							: res.message === "Would you like to add it to your cart instead?"
+								? <AddToCart item={item} size="action" />
+								: undefined
 				})
 			}
 
@@ -79,7 +84,8 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 			if (!res.success) {
 				toast({
 					variant: 'destructive',
-					description: res.message,
+					description: res.message === "Would you like to add it to your cart instead?"
+					? "This item is already in your wish list." : res.message,
 				})
 				return
 			}

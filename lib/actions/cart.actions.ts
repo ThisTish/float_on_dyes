@@ -12,6 +12,7 @@ import { Prisma } from "@prisma/client"
 
 // add to cart
 export async function addItemToCart(data: CartItem) {
+
 	try {
 		// get user/session ids
 		const ids = await sessionUserId()
@@ -120,7 +121,7 @@ export async function removeItemFromCart(productId: string) {
 			}
 		})
 
-		return { success: true, message: `${product.name}${existingItem.qty > 1 ? "'s quantity updated" : " removed"}` }
+		return { success: true, message: `${product.name}${existingItem.qty > 1 ? "'s quantity updated in" : " removed from"} cart.` }
 
 	} catch (error) {
 		return { success: false, message: formatError(error) }
@@ -187,4 +188,3 @@ const calcPrice = (items: CartItem[]) => {
 function convertToPlainObject(arg0: { items: CartItem[]; itemsPrice: string; totalPrice: string; shippingPrice: string; taxPrice: string; id: string; createdAt: Date; userId: string | null; sessionCartId: string; updatedAt: Date }) {
 	throw new Error("Function not implemented.")
 }
-

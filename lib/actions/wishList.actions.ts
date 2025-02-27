@@ -23,29 +23,50 @@ export async function addItemToWishList(data: CartItem) {
 
 		if (!product || product.stock < 1) throw new Error('but you can request a different custom disc!')
 
-		await prisma.wishList.upsert({
+
+		const existingWishList = await prisma.wishList.findFirst({
 			where: {
 				userId: session.user.id
-			},
-			update: {
-				items: {
-					push: {
-						...data,
-					}
-				}
-			},
-			create: {
-				userId: session.user.id,
-				items: [
-					{
-						...data
-					}
-				]
 			}
 		})
-		console.log('upserted')
+
+		if (!existingWishList) {
+			await prisma.wishList.create({
+				data: {
+					userId: session.user.id,
+					items: [
+						{
+							...data
+						}
+					]
+				}
+			})
+		}
+
+		const existingItem = (existingWishList?.items as CartItem[]).find((x) => x.productId === item.productId)
+
+		if (existingItem) {
+			return {
+				success: false, message: "Would you like to add it to your cart instead?"
+			}
+		}
+
+		await prisma.wishList.update({
+			where: {
+				id: existingWishList?.id
+			},
+			data: {
+				items: {
+					push: {
+						...data
+					}
+				}
+			}
+		})
+
+
 		return {
-			success: true, message: `${product.name} has been added to your dream bag!}`
+			success: true, message: `${product.name} has been added to your wish list!`
 		}
 
 	} catch (error) {
@@ -58,7 +79,7 @@ export async function addItemToWishList(data: CartItem) {
 export async function removeItemFromWishList(productId: string) {
 	try {
 		const session = await auth()
-		if (!session?.user) throw new Error("You've gotta be signed in to edit your dream bag.")
+		if (!session?.user) throw new Error("You've gotta be signed in to edit your wish list.")
 
 		const userId = session.user.id
 		const wishList = await prisma.wishList.findFirst({
@@ -66,7 +87,7 @@ export async function removeItemFromWishList(productId: string) {
 				userId
 			}
 		})
-		if (!wishList) throw new Error("Your dream bag couldn't be found.")
+		if (!wishList) throw new Error("Your wish list couldn't be found.")
 
 		const updatedWishList = (wishList.items as CartItem[]).filter((x) => x.productId !== productId)
 
@@ -78,7 +99,7 @@ export async function removeItemFromWishList(productId: string) {
 				items: updatedWishList
 			}
 		})
-		return { success: true, message: 'Item removed from dream bag' }
+		return { success: true, message: 'Item removed from wish list' }
 	} catch (error) {
 		return { success: false, message: formatError(error) }
 	}
