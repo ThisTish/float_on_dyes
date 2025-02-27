@@ -2,6 +2,7 @@ import { auth } from "@/auth"
 import CartTable from "@/components/cart/CartTable"
 import SubTotalCard from "@/components/cart/SutbTotalCard"
 import WishListSection from "@/components/cart/WishListSection"
+import BackButton from "@/components/ui/BackButton"
 import { getCart } from "@/lib/actions/cart.actions"
 import { getWishList } from "@/lib/actions/wishList.actions"
 import { Metadata } from "next"
@@ -17,10 +18,14 @@ const CartPage = async () => {
 
 	const cart = await getCart(userId)
 
-	const wishList = await getWishList(userId ?? undefined )
+	const wishList = await getWishList(userId ?? undefined)
 
 	return (
-		<div className="mt-40 grid lg:grid-cols-4 lg:gap-5">
+		<div className="relative mt-48 grid lg:grid-cols-4 lg:gap-5">
+			<div className="absolute -top-14 left-0 w-40">
+				<BackButton size={'sm'} />
+
+			</div>
 			<CartTable cart={cart} />
 			{cart ?
 				<SubTotalCard cart={cart} />
@@ -28,7 +33,7 @@ const CartPage = async () => {
 			}
 			{wishList ? (
 				<WishListSection wishList={wishList} />
-			): null}
+			) : null}
 		</div>
 	)
 }

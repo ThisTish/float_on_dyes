@@ -31,7 +31,7 @@ export async function addItemToCart(data: CartItem) {
 			}
 		})
 		// checking if in stock or available
-		if (!product || product.stock < 1) return { success: false, message: `${data.name} has already been snagged.` }
+		if (!product || product.stock < 1) return { success: false, message: 'but you can request a different custom disc!' }
 		//> this will not work if there are more than one in stock to begin with, and they try to add more to their cart. when adding to their cart, the stock does not get updated. Not a problem until we add stickers/shirts/etc.
 		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish list to check back later.` }
 
@@ -61,7 +61,7 @@ export async function addItemToCart(data: CartItem) {
 					throw new Error(`And you've already snagged it!`)
 				}
 				if (product.stock < existItem.qty + 1) {
-					throw new Error(`Not enough in stock.`)
+					throw new Error("You've snagged all we have in stock.")
 				}
 				existItem.qty = existItem.qty + 1
 			} else {
@@ -142,12 +142,12 @@ export async function sessionUserId() {
 export async function getCart(passedUserId?: string) {
 	let userId
 
-	if(passedUserId) userId = passedUserId
+	if (passedUserId) userId = passedUserId
 
-		const ids = await sessionUserId()
-		if(ids.userId) userId = ids.userId
-		const sessionCartId = ids.sessionCartId
-	
+	const ids = await sessionUserId()
+	if (ids.userId) userId = ids.userId
+	const sessionCartId = ids.sessionCartId
+
 	const cart = await prisma.cart.findFirst({
 		where: userId ? { userId } : { sessionCartId },
 	})

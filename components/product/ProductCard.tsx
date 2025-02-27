@@ -37,7 +37,7 @@ const ProductCard = async ({ product }: { product: Product }) => {
 					slug: product.slug,
 					price: product.price,
 					image: product.images[0],
-					qty: 1
+					qty: product.stock
 				}}
 					cart={cart}
 					size={'icon'} />

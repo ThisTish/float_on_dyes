@@ -11,6 +11,7 @@ import { Button } from "./button"
 // todo move to the right & rounded-none, 
 // todo onHover-search shouldn't show yet, 
 // todo change size for mobile view
+// todo add className? or fix the margin(weird in mobile view empty cart)
 
 const SearchButton = () => {
 	const [isActive, setIsActive] = useState(false)

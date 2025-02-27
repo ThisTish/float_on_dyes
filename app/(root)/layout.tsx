@@ -13,8 +13,8 @@ export default async function RootLayout({
 }>) {
 
 	
-	const session = await auth()
-	if(!session?.user) redirect('/coming-soon')
+	// const session = await auth()
+	// if(!session?.user) redirect('/coming-soon')
 
 	return (
 		<>

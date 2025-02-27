@@ -90,26 +90,26 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 										</TableCell>
 
 										{/* item options */}
-											<TableCell className="flex justify-end ">
-												<DropdownMenu>
-													<DropdownMenuTrigger className="sm:hidden py-10">
-														<PiDotsThreeOutlineVertical size={25} />
-													</DropdownMenuTrigger>
-													<DropdownMenuContent className="bg-secondary dark:bg-primary">
-														<DropdownMenuItem>
-															<AddToWishList item={item} size="dropdown" />
-														</DropdownMenuItem>
-														<DropdownMenuItem>
-															<AddToCart item={item} size="dropdown" />
-														</DropdownMenuItem>
-													</DropdownMenuContent>
-												</DropdownMenu>
+										<TableCell className="flex justify-end ">
+											<DropdownMenu>
+												<DropdownMenuTrigger className="sm:hidden py-10">
+													<PiDotsThreeOutlineVertical size={25} />
+												</DropdownMenuTrigger>
+												<DropdownMenuContent className="bg-secondary dark:bg-primary">
+													<DropdownMenuItem>
+														<AddToWishList item={item} size="dropdown" />
+													</DropdownMenuItem>
+													<DropdownMenuItem>
+														<AddToCart item={item} size="dropdown" />
+													</DropdownMenuItem>
+												</DropdownMenuContent>
+											</DropdownMenu>
 
-												<div className="hidden sm:flex flex-col gap-3 pt-5 items-center max-w-40">
-													<AddToWishList item={item} size="cart" />
-													<AddToCart item={item} size="cart" />
-												</div>
-											</TableCell>
+											<div className="hidden sm:flex flex-col gap-3 pt-5 items-center max-w-40">
+												<AddToWishList item={item} size="cart" />
+												<AddToCart item={item} size="cart" />
+											</div>
+										</TableCell>
 
 									</TableRow>
 								))}

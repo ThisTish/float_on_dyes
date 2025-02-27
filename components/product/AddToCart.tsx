@@ -37,15 +37,18 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 					title:
 						res.message === "And you've already snagged it!"
 							? `${item.name} is one of a kind!`
-							: res.message === 'Add to wish bag to check back later.' ? `${item.name} is reserved in someone's cart.`
-								: undefined,
+							: res.message === 'but you can request a different custom disc!' ? `${item.name} has been snagged,`
+								: res.message === 'Add to wish list to check back later.' ? `${item.name} is reserved in someone's cart.`
+									: undefined,
 					description: res.message,
 					action:
-						res.message === `Not enough in stock.` || res.message === `And you've already snagged it!`
-							? <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
-							: res.message === `Add to wish bag to check back later.`
-								? <AddToWishList item={item} size="action" />
-								: undefined
+						res.message === 'but you can request a different custom disc!'
+							? <ToastAction altText="Go to custom order page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction>
+							: res.message === `And you've already snagged it!` || "You've snagged all we have in stock."
+								? <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
+								: res.message === `Add to wish list to check back later.`
+									? <AddToWishList item={item} size="action" />
+									: undefined
 				})
 			}
 

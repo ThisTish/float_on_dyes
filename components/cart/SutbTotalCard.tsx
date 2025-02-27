@@ -1,14 +1,14 @@
 "use client"
-import { formatCurrency } from "@/lib/utils";
-import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
-import { PiSpinnerBallDuotone } from "react-icons/pi";
-import { AnimatedDiv } from "../ui/AnimatedDiv";
-import { ArrowUpRight } from "lucide-react";
-import { Cart } from "@/types";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/use-toast";
-import { useTransition } from "react";
+import { formatCurrency } from "@/lib/utils"
+import { Button } from "../ui/button"
+import { Card, CardContent } from "../ui/card"
+import { PiSpinnerBallDuotone } from "react-icons/pi"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
+import { ArrowUpRight } from "lucide-react"
+import { Cart } from "@/types"
+import { useRouter } from "next/navigation"
+import { useToast } from "@/hooks/use-toast"
+import { useTransition } from "react"
 
 const SubTotalCard = ({ cart }: { cart: Cart }) => {
 	const router = useRouter()
@@ -39,7 +39,7 @@ const SubTotalCard = ({ cart }: { cart: Cart }) => {
 				</Button>
 			</CardContent>
 		</Card>
-	);
+	)
 }
 
-export default SubTotalCard;
+export default SubTotalCard

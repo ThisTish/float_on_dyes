@@ -13,10 +13,7 @@ export async function addItemToWishList(data: CartItem) {
 		if (!session?.user) {
 			throw new Error('Please sign in to save items to wishlist.')
 		}
-		console.log('session')
-		console.log('data', data)
 		const item = cartItemSchema.parse(data)
-		console.log('item', item)
 
 		const product = await prisma.product.findFirst({
 			where: {
@@ -24,7 +21,7 @@ export async function addItemToWishList(data: CartItem) {
 			}
 		})
 
-		if (!product || product.stock < 1) throw new Error('Item is out of stock')
+		if (!product || product.stock < 1) throw new Error('but you can request a different custom disc!')
 
 		await prisma.wishList.upsert({
 			where: {
@@ -89,18 +86,18 @@ export async function removeItemFromWishList(productId: string) {
 
 // get wishlist
 export async function getWishList(userId: string | undefined) {
-	if(!userId || userId === undefined) return
+	if (!userId || userId === undefined) return
 
-		const wishList = await prisma.wishList.findFirst({
-			where: {
-				userId
-			}
-		})
+	const wishList = await prisma.wishList.findFirst({
+		where: {
+			userId
+		}
+	})
 
-		if(!wishList) return
-		
-		return ({
-			...wishList,
-			items: wishList.items as CartItem[]
-		})
+	if (!wishList) return
+
+	return ({
+		...wishList,
+		items: wishList.items as CartItem[]
+	})
 }

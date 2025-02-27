@@ -4,7 +4,7 @@ import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { toast } from "@/hooks/use-toast"
 import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
-import { ToastAction } from "@radix-ui/react-toast"
+import { ToastAction } from "../ui/toast"
 import { useRouter } from "next/navigation"
 import { getBaseUrl } from "@/lib/utils"
 import { useTransition } from "react"
@@ -34,10 +34,13 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
 				toast({
 					variant: 'destructive',
+					title: res.message === 'but you can request a different custom disc!' ? `${item.name} has been snagged,` : undefined,
 					description: res.message,
-					action: res.message === 'Please sign in to save items to wishlist'
+					action: res.message === 'Please sign in to save items to wishlist.'
 						? <ToastAction altText="Sign in to save item" onClick={() => router.push(`/sign-in?callbackUrl=${domain}${previousPage}`)}>Go to Sign In</ToastAction>
-						: undefined
+						: res.message === 'but you can request a different custom disc!'
+							? <ToastAction altText="Go to custom dye page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction>
+							: undefined
 				})
 			}
 
