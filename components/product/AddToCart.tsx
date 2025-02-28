@@ -11,6 +11,7 @@ import { useTransition } from "react"
 import { PiSpinnerBallDuotone } from "react-icons/pi";
 import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
 import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
+import Tooltip from "../ui/Tooltip"
 
 
 // todo wishlist button is not returning the full toast, only the description. might change back to where it was, the handleMoveTo cart, and if there is a problem, and the message back is "add to wish list to check back later have it read, Item is reserved in someones cart."
@@ -50,7 +51,7 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 				return
 			}
 
-			if(res.success && moveFromWishList){
+			if (res.success && moveFromWishList) {
 				const removeRes = await removeItemFromWishList(item.productId)
 				if (!removeRes.success) {
 					toast({
@@ -96,15 +97,18 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 
 	const existItem = cart && cart?.items.find(i => i.productId === item.productId)
 
-	const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <LucideCirclePlus size={25} />
+const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <LucideCirclePlus size={25} />
 
 
 	return (
 		<>
 			{size === 'icon' ? (
-				<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
-					{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
-				</button>
+				<button className="group relative size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
+						<Tooltip label={existItem ? 'Remove From Cart' : 'Add To Cart'} position={"bottom"} className="mt-2">
+						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
+				</Tooltip>
+					</button>
+
 			) : size === 'button' ? (
 				<Button variant={'cta'} size={'lg'} className="w-full" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
 					{existItem ? 'Remove From Cart' : 'Bag It'}

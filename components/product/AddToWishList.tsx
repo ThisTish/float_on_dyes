@@ -13,6 +13,7 @@ import { LucideBookmarkPlus } from "lucide-react"
 import { CartItem } from "@/types"
 import { removeItemFromCart } from "@/lib/actions/cart.actions"
 import AddToCart from "./AddToCart"
+import Tooltip from "../ui/Tooltip"
 
 
 // todo add tooltips for this.....
@@ -114,7 +115,10 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 			{size === 'icon'
 				? (
 					<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={handleAddToWishList}>
+						<Tooltip label={'Add to Wish List'} position={"top"} className="mb-2">
+
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
+						</Tooltip>
 					</button>
 
 				) : size === 'button'
