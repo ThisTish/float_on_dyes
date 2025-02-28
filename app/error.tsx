@@ -22,7 +22,7 @@ export default function Error({ error, reset }: any) {
 				<p className="mb-10 mt-3 md:text-lg lg:text-xl">{error.message}</p>
 
 			<div className="flex gap-3 justify-center px-5 wrapper">
-				<BackButton />
+				<BackButton size="default"/>
 				<Button variant={'default'} onClick={() => reset()}>
 					Try Again
 					<AnimatedDiv animation={'rotateFull'}><RefreshCcw /></AnimatedDiv>
