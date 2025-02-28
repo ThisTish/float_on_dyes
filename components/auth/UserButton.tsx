@@ -18,7 +18,7 @@ const UserButton = () => {
 		{
 		return (
 			<Link href={'/sign-in'}>
-				<Tooltip label="Sign In">
+				<Tooltip label="Sign In" position="bottom" className="mt-2">
 					<BiUserCircle size={40} className="transition-all duration-300 ease-in hover:text-primary-foreground hover:bg-darkBlue rounded-full" />
 				</Tooltip>
 			</Link>
@@ -30,7 +30,7 @@ const UserButton = () => {
 	return (
 		<DropdownMenu modal={false}>
 			<DropdownMenuTrigger className="rounded-full" >
-				<Tooltip label="User Menu">
+				<Tooltip label="User Menu" position="bottom" className="mt-2">
 					<Avatar>
 						{session.user.image
 							? (

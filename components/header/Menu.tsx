@@ -37,15 +37,15 @@ const Menu = () => {
 					<SearchButton/>
 
 					<div className="flex gap-3 items-center">
+					<Tooltip label="Light/Dark" position="bottom" >
+						<ModeToggle />
+					</Tooltip>
 					<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkBlue hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkBlue hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
-						<Tooltip label="Cart" className="mb-3">
+						<Tooltip label="Cart" className="mt-4" position="bottom">
 							<ShoppingCart />
 						</Tooltip>
 					</Link>
 					<UserButton />
-					<Tooltip label="Light/Dark">
-						<ModeToggle />
-					</Tooltip>
 					</div>
 				</div>
 			</nav>
