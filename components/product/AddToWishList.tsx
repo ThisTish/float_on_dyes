@@ -141,7 +141,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 						) :
 						size === 'cart'
 							? (
-								<Button variant={'outline'} size={'chip'} className="w-full border-none" onClick={handleMoveToWishList}>
+								<Button variant={'outline'} size={'chip'} className="w-full border-none hover:font-bold" onClick={handleMoveToWishList}>
 									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={25} /> : "Move to Wish List"}
 								</Button>
 							) : size === 'dropdown'

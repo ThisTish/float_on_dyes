@@ -1,9 +1,9 @@
 "use client"
-import { Search } from "lucide-react"
 import { Label } from "./label"
 import { Input } from "./input"
 import { useState, useRef } from "react"
 import { Button } from "./button"
+import SearchIcon from "./searchIcon"
 
 
 // todo make look like cart icon, 
@@ -31,7 +31,7 @@ const SearchButton = () => {
 
 	return (
 		<div
-			className={`relative ml-2.5 bg-primary-foreground size-10 shadow-md rounded-full flex items-center duration-500 ${isActive ? "w-64 rounded-none" : "group hover:w-64 hover:rounded-none"
+			className={`relative ml-2.5 bg-transparent size-10 rounded-full flex duration-500  ${isActive ? "w-64 rounded-none bg-white border-darkBlue border" : "group-hover:w-64"
 				}`}
 		>
 			<Label className="sr-only" htmlFor="search">Search</Label>
@@ -46,20 +46,18 @@ const SearchButton = () => {
 				onChange={(e) => setSearchValue(e.target.value)}
 				onFocus={() => setIsActive(true)}
 				onBlur={handleBlur}
-				className="p-3 mt-[1px] text-lg w-full text-primary bg-transparent"
+				className={`p-3 text-lg w-full text-primary bg-transparent ${isActive ? "focus-visible:ring-0": ""}`}
 			/>
 
-			<Button
-				variant="secondary"
-				size="icon"
+			<button
 				onFocus={() => setIsActive(true)}
 				onBlur={handleBlur}
 				type="submit"
-				className={`absolute top-0 size-10 content-center bg-darkBlue text-white transition-all
-				${isActive ? "left-64 duration-700" : 'duration-500 left-0 rounded-full group-hover: group-hover:rounded-none'}`}
+				className={` grid absolute -top-1 size-10 transition-all  items-center justify-center border border-primary p-1 hover:bg-darkBlue hover:text-white hover:border-white
+				${isActive ? "left-[15rem] duration-500 bg-darkBlue text-white border-none" : 'bg-transparent duration-500 left-0 rounded-full'}`}
 			>
-				<Search />
-			</Button>
+				<SearchIcon />
+			</button>
 		</div>
 	)
 }

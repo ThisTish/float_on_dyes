@@ -140,7 +140,7 @@ const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <Luci
 								</button>
 							) : size === 'wishList'
 								? (
-									<Button variant={'outline'} size={'chip'} className="w-full border-none" onClick={() => handleAddToCart(true)}>
+									<Button variant={'outline'} size={'chip'} className="w-full border-none hover:font-bold" onClick={() => handleAddToCart(true)}>
 
 										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
 									</Button>
