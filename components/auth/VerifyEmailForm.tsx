@@ -46,7 +46,7 @@ const VerifyEmailForm = ({ token }: { token: string }) => {
 	}
 	return (
 		<AuthCard
-			cardTitle="Email Verified!"
+			cardTitle="Verify Email"
 			otherLinkSpan="Having trouble? "
 			otherLinkLabel="Contact Us"
 			otherLinkHref="/contact"

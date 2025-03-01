@@ -17,6 +17,7 @@ const CartPage = async () => {
 	const userId = session?.user.id
 
 	const cart = await getCart(userId)
+	console.log(cart?.totalPrice)
 
 	const wishList = await getWishList(userId ?? undefined)
 

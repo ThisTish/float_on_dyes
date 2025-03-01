@@ -25,7 +25,7 @@ const SubTotalCard = ({ cart }: { cart: Cart }) => {
 					<span className="font-bold">{formatCurrency(cart?.totalPrice ?? 0)} </span>
 				</p>
 				<Button
-					className="w-full "
+					className="w-full"
 					variant="cta"
 					disabled={pending}
 					onClick={() => startTransition(() => router.push('/shipping-address'))}>
