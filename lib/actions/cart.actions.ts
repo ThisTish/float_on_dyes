@@ -10,9 +10,26 @@ import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "../constants"
 import { Prisma } from "@prisma/client"
 
 
+// calculate cart prices
+const calcPrice = (items: CartItem[]) => {
+	const itemsPrice = round2(
+		items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
+	),
+		// if cart total is greater than 100, shipping is free
+		shippingPrice = round2(itemsPrice >= FREE_SHIPPING_PRICE || itemsPrice === 0 ? 0 : SHIPPING_PRICE),
+		taxPrice = round2(0.15 * itemsPrice),
+		totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
+
+	return {
+		itemsPrice: itemsPrice.toFixed(2),
+		shippingPrice: shippingPrice.toFixed(2),
+		taxPrice: taxPrice.toFixed(2),
+		totalPrice: totalPrice.toFixed(2)
+	}
+}
+
 // add to cart
 export async function addItemToCart(data: CartItem) {
-
 	try {
 		// get user/session ids
 		const ids = await sessionUserId()
@@ -92,6 +109,9 @@ export async function addItemToCart(data: CartItem) {
 // remove item from cart
 export async function removeItemFromCart(productId: string) {
 	try {
+		const sessionCartId = (await cookies()).get('sessionCartId')?.value;
+		if (!sessionCartId) throw new Error('Cart session not found');
+		
 		const cart = await getCart()
 		if (!cart) throw new Error('Cart not found')
 
@@ -118,6 +138,7 @@ export async function removeItemFromCart(productId: string) {
 			data: {
 				items: cart.items as Prisma.CartUpdateitemsInput[],
 				...calcPrice(cart.items as CartItem[])
+
 			}
 		})
 
@@ -166,23 +187,7 @@ export async function getCart(passedUserId?: string) {
 	return cartPlain
 }
 
-// calculate cart prices
-const calcPrice = (items: CartItem[]) => {
-	const itemsPrice = round2(
-		items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
-	),
-		// if cart total is greater than 100, shipping is free
-		shippingPrice = round2(itemsPrice >= FREE_SHIPPING_PRICE ? 0 : SHIPPING_PRICE),
-		taxPrice = round2(0.15 * itemsPrice),
-		totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
 
-	return {
-		itemsPrice: itemsPrice.toFixed(2),
-		shippingPrice: shippingPrice.toFixed(2),
-		taxPrice: taxPrice.toFixed(2),
-		totalPrice: totalPrice.toFixed(2),
-	}
-}
 
 
 function convertToPlainObject(arg0: { items: CartItem[]; itemsPrice: string; totalPrice: string; shippingPrice: string; taxPrice: string; id: string; createdAt: Date; userId: string | null; sessionCartId: string; updatedAt: Date }) {

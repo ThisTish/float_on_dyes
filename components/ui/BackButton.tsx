@@ -9,7 +9,7 @@ const BackButton = ({ size }: { size: "default" | "icon" | "sm" | "lg"}) => {
 
 
 	return (
-		<Button variant={'destructive'} size={size} onClick={() => window.history.back()}>
+		<Button variant={'destructive'} size={size} onClick={() => window.history.back()} className="px-3 gap-3">
 			<AnimatedDiv size={size} variant={'destructive'} animation={'rotate'}><TbArrowBack /></AnimatedDiv>
 			Go Back
 		</Button>
