@@ -88,7 +88,7 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 					</CardContent>
 
 					{/* cart buttons */}
-					<CardFooter className="flex flex-col sm:flex-row justify-center items-center w-full gap-3">
+					<CardFooter className="flex flex-col lg:flex-row justify-center items-center w-full gap-3">
 						<AddToWishList item={{
 							productId: product.id,
 							name: product.name,

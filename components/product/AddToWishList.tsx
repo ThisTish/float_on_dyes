@@ -124,7 +124,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 				) : size === 'button'
 					? (
 						<Button variant={'outline'} size={'lg'} className="w-full border-none" onClick={handleAddToWishList}>
-							Wish Bag
+							Wish List
 							<AnimatedDiv variant={'outline'} animation={'pulse'} className="ml-2">
 								{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
 							</AnimatedDiv>

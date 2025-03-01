@@ -14,7 +14,6 @@ import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishLis
 import Tooltip from "../ui/Tooltip"
 
 
-// todo wishlist button is not returning the full toast, only the description. might change back to where it was, the handleMoveTo cart, and if there is a problem, and the message back is "add to wish list to check back later have it read, Item is reserved in someones cart."
 // todo if more than one item available, change button to be plus and minus with qty in middle
 
 
@@ -111,7 +110,7 @@ const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <Luci
 
 			) : size === 'button' ? (
 				<Button variant={'cta'} size={'lg'} className="w-full" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
-					{existItem ? 'Remove From Cart' : 'Bag It'}
+					{existItem ? 'Remove from Cart' : 'Add to Cart'}
 					<AnimatedDiv variant={'cta'} animation={'rotateFull'} className="ml-2">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 					</AnimatedDiv>
@@ -122,7 +121,7 @@ const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <Luci
 						<button
 							onClick={() => handleAddToCart()}
 							className="inline-flex h-8 shrink-0 items-center justify-center px-3 text-sm font-medium transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive relative overflow-hidden z-10 border border-darkBlue shadow-xl text-darkBlue group-[.destructive]:before:bg-white before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-							aria-label="Add to wishlist">
+							aria-label="Add to Cart">
 							{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Add to Cart"}
 						</button>
 
