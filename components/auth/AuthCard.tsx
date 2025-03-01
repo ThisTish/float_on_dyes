@@ -25,7 +25,7 @@ const AuthCard = ({ cardTitle, cardDescription, children, showProviders, otherLi
 			<CardHeader className="inline-flex flex-row px-10 gap-10">
 				<Link href={'/'} className="flex ">
 					<Image
-						src={theme.theme === 'dark' ? '/images/logo-dark.svg' : '/images/logo.svg'}
+						src={'/images/logo.svg'}
 						width={50}
 						height={50}
 						alt={`${APP_NAME} logo`}
