@@ -6,6 +6,7 @@ import Google from 'next-auth/providers/google'
 import Discord from "next-auth/providers/discord"
 import { signInFormSchema } from './lib/validators'
 import { authConfig } from './auth.config'
+import { cookies } from 'next/headers'
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -38,6 +39,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			if (!token.sub) return token
 
 			if (user) {
+				token.id = user.id
 				token.role = user.role
 
 				if (user.email && user.name === 'NO_NAME') {
@@ -52,6 +54,36 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 						name: token.name || 'NO_NAME',
 					}
 				})
+
+				if(trigger  === 'signIn' || 'signUp'){
+					const cookiesObject = await cookies()
+					const sessionCartId = cookiesObject.get('sessionCartId')?.value
+
+					if(sessionCartId){
+						const sessionCart = await prisma.cart.findFirst({
+							where: {
+								sessionCartId
+							}
+						})
+
+						if(sessionCart){
+							await prisma.cart.deleteMany({
+								where: {
+									userId: user.id
+								}
+							})
+
+							await prisma.cart.update({
+								where: {
+									id: sessionCart.id
+								},
+								data: {
+									userId: user.id
+								}
+							})
+						}
+					}
+				}
 			}
 
 			const existingUser = await prisma.user.findFirst({
