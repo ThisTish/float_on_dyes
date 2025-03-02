@@ -10,3 +10,11 @@ export const SIGN_IN_DEFAULT_VALUES = {
 	email: '',
 	password: ''
 }
+
+export const shippingAddressDefaultValues = {
+	fullName: 'Tish Tosh',
+	streetAddress: '123 Main st.',
+	city: 'Anytown',
+	zipCode: '12345',
+	country: 'USA'
+}
