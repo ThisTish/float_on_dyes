@@ -16,6 +16,7 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { updateUserAddress } from "@/lib/actions/users.actions"
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 
 const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 	const router = useRouter()
@@ -45,22 +46,25 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 
 	return (
 		<>
-			<div className="max-w-md mx-auto space-y-5 border">
-				<h1 className="h2-bold mt-4">
+			<Card className="p-5 max-w-md mx-auto">
+				<CardHeader>
+					<CardTitle className="text-2xl px-0">
 					Shipping Address
-				</h1>
-				<p className="text-sm text-muted-foreground">
+					</CardTitle>
+					<CardDescription className="-mt-2 px-0">
 					Please enter your shipping address
-				</p>
+
+					</CardDescription>
+				</CardHeader>
 
 				<Form {...form}>
 					<form
 						method='post'
-						className="space-y-3"
+						className="space-y-5 mb-5"
 						onSubmit={form.handleSubmit(onSubmit)}
 					>
 						{/* name */}
-						<div className="flex flex-col md:flex-row">
+						<div>
 							<FormField
 								control={form.control}
 								name="fullName"
@@ -68,7 +72,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 									<FormItem>
 										<FormLabel>Full Name</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full" />
+											<Input {...field} className="w-full border" />
 										</FormControl>
 									</FormItem>
 								)}
@@ -77,7 +81,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 						</div>
 
 						{/* street address */}
-						<div className="flex flex-col md:flex-row">
+						<div>
 							<FormField
 								control={form.control}
 								name="streetAddress"
@@ -85,7 +89,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 									<FormItem>
 										<FormLabel>Street Address</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full" />
+											<Input {...field} className="w-full border" />
 										</FormControl>
 									</FormItem>
 								)}
@@ -94,7 +98,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 						</div>
 
 						{/* city */}
-						<div className="flex flex-col md:flex-row">
+						<div>
 							<FormField
 								control={form.control}
 								name="city"
@@ -102,7 +106,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 									<FormItem>
 										<FormLabel>City</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full" />
+											<Input {...field} className="w-full border" />
 										</FormControl>
 									</FormItem>
 								)}
@@ -111,7 +115,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 						</div>
 
 						{/* zip code */}
-						<div className="flex flex-col md:flex-row">
+						<div>
 							<FormField
 								control={form.control}
 								name="zipCode"
@@ -119,7 +123,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 									<FormItem>
 										<FormLabel>Zip Code</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full" />
+											<Input {...field} className="w-full border" />
 										</FormControl>
 									</FormItem>
 								)}
@@ -128,7 +132,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 						</div>
 
 						{/* country */}
-						<div className="flex flex-col md:flex-row">
+						<div>
 							<FormField
 								control={form.control}
 								name="country"
@@ -136,7 +140,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 									<FormItem>
 										<FormLabel>Country</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full" />
+											<Input {...field} className="w-full border mb-3" />
 										</FormControl>
 									</FormItem>
 								)}
@@ -164,7 +168,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 					</form>
 
 				</Form>
-			</div>
+			</Card>
 		</>
 	)
 }

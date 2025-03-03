@@ -57,8 +57,8 @@ const CredentialsSignInForm = () => {
 			otherLinkHref="/sign-up"
 			showProviders={true}
 		>
-			<form action={action}>
-				<div className="space-y-6 mb-6">
+			<form action={action} className="space-y-5 mb-5">
+				{/* <div className="space-y-6 mb-6"> */}
 					<div>
 						<Label htmlFor="email">Email</Label>
 						<Input
@@ -93,7 +93,7 @@ const CredentialsSignInForm = () => {
 					<div>
 						<SignInButton />
 					</div>
-				</div>
+				{/* </div> */}
 			</form>
 		</AuthCard>
 	)
