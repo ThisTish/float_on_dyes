@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { formatNumberWithDecimal } from './utils'
+import { PAYMENT_METHODS } from './constants'
 
 const currency = z
 .string()
@@ -44,6 +45,9 @@ export const signUpFormSchema = z.object({
 	message: 'Passwords do not match',
 })
 
+
+
+
 export const resetPasswordFormSchema = z.object({
 	email: z.string().email('Invalid email address')
 })
@@ -76,15 +80,6 @@ export const insertCartSchema = z.object({
 })
 
 
-// export const wishListItemSchema = z.object({
-// 	productId: z.string().min(1, 'Product is required'),
-// 	name: z.string().min(1, 'Name is required'),
-// 	slug: z.string().min(1, 'Slug is required'),
-// 	image: z.string().min(1, 'Image is required'),
-// 	qty: z.number().int().nonnegative('Quantity must be a positive integer').optional().nullable(),
-// 	price: currency.optional().nullable()
-// })
-
 export const insertWishListItemSchema = z.object({
 	items: z.array(cartItemSchema),
 	userId: z.string().optional().nullable(),
@@ -99,4 +94,20 @@ export const shippingAddressSchema = z.object({
 	country: z.string().min(3, 'Country must be at least 3 characters long'),
 	lat: z.number().optional(),
 	lng: z.number().optional()
+})
+
+
+export const paymentMethodSchema = z.object({
+	type: z.string().min(1, 'Payment method is required')
+}).refine((data) => PAYMENT_METHODS.includes(data.type), {
+	path: ['type'],
+	message: 'Invalid payment method'
+})
+
+export const checkOutUserSchema = z.object({
+	name: z.string().min(3, 'Name must be at least 3 characters long').optional(),
+	email: z.string().email('Invalid email address'),
+	isSubscribed: z.boolean(),
+	paymentMethod: paymentMethodSchema,
+	address: shippingAddressSchema
 })

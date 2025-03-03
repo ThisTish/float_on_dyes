@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
@@ -74,6 +74,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 										<FormControl>
 											<Input {...field} className="w-full border" />
 										</FormControl>
+										<FormMessage />
 									</FormItem>
 								)}
 							>
@@ -91,6 +92,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 										<FormControl>
 											<Input {...field} className="w-full border" />
 										</FormControl>
+										<FormMessage />
 									</FormItem>
 								)}
 							>
@@ -108,6 +110,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 										<FormControl>
 											<Input {...field} className="w-full border" />
 										</FormControl>
+										<FormMessage />
 									</FormItem>
 								)}
 							>
@@ -125,6 +128,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 										<FormControl>
 											<Input {...field} className="w-full border" />
 										</FormControl>
+										<FormMessage />
 									</FormItem>
 								)}
 							>
@@ -142,6 +146,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 										<FormControl>
 											<Input {...field} className="w-full border mb-3" />
 										</FormControl>
+										<FormMessage />
 									</FormItem>
 								)}
 							>
@@ -164,10 +169,9 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 							)
 							}
 						</Button>
-
 					</form>
-
 				</Form>
+
 			</Card>
 		</>
 	)
