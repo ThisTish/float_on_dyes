@@ -19,7 +19,7 @@ interface LensProps {
 
 export const Lens: React.FC<LensProps> = ({
 	children,
-	zoomFactor = 1.5,
+	zoomFactor = 2.5,
 	lensSize = 170,
 	isStatic = false,
 	position = { x: 200, y: 150 },
