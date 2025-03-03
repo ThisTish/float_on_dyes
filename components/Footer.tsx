@@ -55,11 +55,11 @@ const Footer = () => {
 									<a href='mailto: info@floatondyes.com' aria-valuetext="info@floatondyes.com">
 										<Mail />
 									</a>
+								</li>
+							</ul>
 									<a className="text-xs md:text-sm" href='mailto: info@floatondyes.com'>
 										info@floatondyes.com
 									</a>
-								</li>
-							</ul>
 						</div>
 
 					</div>

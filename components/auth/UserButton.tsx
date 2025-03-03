@@ -4,7 +4,6 @@ import { Button } from "../ui/button"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { BiUser, BiUserCircle } from "react-icons/bi"
-import { signOut } from "@/auth"
 import Tooltip from "../ui/Tooltip"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import Image from "next/image"
@@ -18,7 +17,7 @@ const UserButton = () => {
 		{
 		return (
 			<Link href={'/sign-in'}>
-				<Tooltip label="Sign In" position="bottom" className="mt-2">
+				<Tooltip label="Sign In" position="bottom" className="mt-1">
 					<BiUserCircle size={40} className="transition-all duration-300 ease-in hover:text-primary-foreground hover:bg-darkBlue rounded-full" />
 				</Tooltip>
 			</Link>
@@ -58,7 +57,6 @@ const UserButton = () => {
 					<Button variant={'link'} className="w-full text-start p-0 before:hover:bg-destructive">
 						Signout
 					</Button>
-
 				</form>
 			</DropdownMenuContent>
 

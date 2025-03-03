@@ -33,19 +33,17 @@ const Menu = () => {
 
 				</div>
 				<div className="w-full flex items-center justify-between">
-					{/* light/dark mode */}
-					<SearchButton/>
-
+					<SearchButton />
 					<div className="flex gap-3 items-center">
-					<Tooltip label="Light/Dark" position="bottom" >
-						<ModeToggle />
-					</Tooltip>
-					<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkBlue hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkBlue hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
-						<Tooltip label="Cart" className="mt-4" position="bottom">
-							<ShoppingCart />
+						<Tooltip label="Light/Dark" position="bottom" >
+							<ModeToggle />
 						</Tooltip>
-					</Link>
-					<UserButton />
+						<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkBlue hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkBlue hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
+							<Tooltip label="Cart" className="mt-4" position="bottom">
+								<ShoppingCart />
+							</Tooltip>
+						</Link>
+						<UserButton />
 					</div>
 				</div>
 			</nav>
@@ -76,7 +74,6 @@ const Menu = () => {
 							<Link href={'/cart'} className="p-2 rounded-full hover:bg-darkBlue hover:text-primary-foreground">
 								<ShoppingCart />
 							</Link>
-							{/* style different, so it's like other icons */}
 						</div>
 						<div className="-ml-3 w-full">
 
