@@ -69,12 +69,10 @@ const Menu = () => {
 								<Links key={link.name} {...link} className="transition duration-300 hover:bg-darkBlue p-2 hover:text-white hover:font-semibold" />
 							)
 						))}
-						<div className="flex gap-2">
-							<UserButton />
-							<Link href={'/cart'} className="p-2 rounded-full hover:bg-darkBlue hover:text-primary-foreground">
+							<Link href={'/cart'} className="p-2 rounded-full w-fit hover:bg-darkBlue hover:text-primary-foreground">
 								<ShoppingCart />
 							</Link>
-						</div>
+							<UserButton />
 						<div className="-ml-3 w-full">
 
 							<SearchButton />

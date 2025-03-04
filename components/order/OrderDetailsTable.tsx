@@ -5,7 +5,6 @@ import { Badge } from "../ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
 import Link from "next/link"
 import Image from "next/image"
-import { PiTrashDuotone } from "react-icons/pi"
 
 const OrderDetailsTable = ({ order }: { order: Order }) => {
 
@@ -23,7 +22,7 @@ const OrderDetailsTable = ({ order }: { order: Order }) => {
 							<p>{paymentMethod}</p>
 							{isPaid ? (
 								<Badge variant={'secondary'}>
-									Paid at {formatDateTime(paidAt!).dateTime}
+									Paid on {formatDateTime(paidAt!).dateTime}
 								</Badge>
 							) : (
 								<Badge variant={'destructive'}>
@@ -40,7 +39,7 @@ const OrderDetailsTable = ({ order }: { order: Order }) => {
 							<p>{shippingAddress.city}, {shippingAddress.zipCode} {shippingAddress.country}</p>
 							{isDelivered ? (
 								<Badge variant={'secondary'}>
-									Paid at {formatDateTime(deliveredAt!).dateTime}
+									Delivered {formatDateTime(deliveredAt!).dateTime}
 								</Badge>
 							) : (
 								<Badge variant={'destructive'}>

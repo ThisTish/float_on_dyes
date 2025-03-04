@@ -13,15 +13,15 @@ import { ArrowUpRight } from "lucide-react"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "../ui/dropdown-menu"
 import { PiDotsThreeOutlineVertical } from "react-icons/pi"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
+import ProductPrice from "../product/ProductPrice"
+import Heading from "../shared/Heading"
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
 	return (
 		<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
 			<CardHeader>
 				<CardTitle>
-					<h1 className="h2-bold">
-						Shopping Cart
-					</h1>
+					<Heading first="Shopping " second="Cart" />
 				</CardTitle>
 			</CardHeader>
 
@@ -74,7 +74,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 													width={150}
 													height={150}
 												/>
-												<span>
+												<span className="text-lg font-semibold">
 													{item.name}
 												</span>
 											</Link>
@@ -87,7 +87,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
 
 										{/* item price */}
 										<TableCell className="text-center">
-											${item.price}
+											<ProductPrice value={Number(item.price)} className="font-normal" />
 										</TableCell>
 
 										{/* item options */}

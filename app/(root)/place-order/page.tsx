@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PiTrashDuotone } from "react-icons/pi"
+import PriceBreakdown from "@/components/shared/PriceBreakdown"
+import Heading from "@/components/shared/Heading"
 
 // todo add remove from order/move to wishlist-line90
 
@@ -40,7 +42,7 @@ const PlaceOrderPage = async () => {
 	return (
 		<div className="mt-40">
 			<CheckoutSteps current={3} />
-			<h1 className="py-4 text-2xl">Place Order</h1>
+			<Heading first="Place " second="Order" />
 			<div className="grid md:grid-cols-3 md:gap-5">
 				<div className="md:col-span-2 overflow-x-auto space-y-3">
 					<Card>
@@ -100,28 +102,16 @@ const PlaceOrderPage = async () => {
 				</div>
 			</div>
 
-			<Card>
-				<CardContent>
-					<div className="flex justify-between">
-						<span>Items</span>
-						<span>{formatCurrency(cart.itemsPrice)}</span>
-					</div>
-					<div className="flex justify-between">
-						<span>Tax</span>
-						<span>{formatCurrency(cart.taxPrice)}</span>
-					</div>
-					<div className="flex justify-between">
-						<span>Shipping</span>
-						<span>{formatCurrency(cart.shippingPrice)}</span>
-					</div>
-					<div className="flex justify-between">
-						<span>Total</span>
-						<span>{formatCurrency(cart.totalPrice)}</span>
-					</div>
-				</CardContent>
-			</Card>
+			<div>
+				<PriceBreakdown className="mt-5"
+					itemsPrice={Number(cart.itemsPrice)}
+					taxPrice={Number(cart.taxPrice)}
+					shippingPrice={Number(cart.shippingPrice)}
+					totalPrice={Number(cart.totalPrice)}
+				/>
+				<PlaceOrderForm />
 
-			<PlaceOrderForm />
+			</div>
 
 		</div>
 	)

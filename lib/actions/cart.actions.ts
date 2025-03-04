@@ -3,7 +3,7 @@
 import { auth } from "@/auth"
 import { prisma } from "@/db/prisma"
 import { CartItem } from "@/types"
-import { formatError, round2 } from "../utils"
+import { convertToPlainObject, formatError, round2 } from "../utils"
 import { cookies } from "next/headers"
 import { cartItemSchema, insertCartSchema } from "../validators"
 import { FREE_SHIPPING_PRICE, SHIPPING_PRICE } from "../constants"
@@ -175,14 +175,14 @@ export async function getCart(passedUserId?: string) {
 	})
 	if (!cart) return
 
-	const cartPlain = ({
+	const cartPlain = (convertToPlainObject({
 		...cart,
 		items: cart.items as CartItem[],
 		itemsPrice: cart.itemsPrice.toString(),
 		totalPrice: cart.totalPrice.toString(),
 		shippingPrice: cart.shippingPrice.toString(),
 		taxPrice: cart.taxPrice.toString(),
-	})
+	}))
 
 	return cartPlain
 }
