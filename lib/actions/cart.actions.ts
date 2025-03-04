@@ -190,6 +190,6 @@ export async function getCart(passedUserId?: string) {
 // 
 
 
-function convertToPlainObject(arg0: { items: CartItem[]; itemsPrice: string; totalPrice: string; shippingPrice: string; taxPrice: string; id: string; createdAt: Date; userId: string | null; sessionCartId: string; updatedAt: Date }) {
-	throw new Error("Function not implemented.")
-}
+// export function convertToPlainObject(arg0: { items: CartItem[]; itemsPrice: string; totalPrice: string; shippingPrice: string; taxPrice: string; id: string; createdAt: Date; userId: string | null; sessionCartId: string; updatedAt: Date }) {
+// 	throw new Error("Function not implemented.")
+// }

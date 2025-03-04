@@ -1,5 +1,6 @@
 import { auth } from "@/auth"
 import CheckoutSteps from "@/components/cart/CheckoutSteps"
+import PlaceOrderForm from "@/components/cart/PlaceOrderForm"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -119,6 +120,8 @@ const PlaceOrderPage = async () => {
 					</div>
 				</CardContent>
 			</Card>
+
+			<PlaceOrderForm />
 
 		</div>
 	)

@@ -40,7 +40,7 @@ const UserButton = () => {
 									height={40}
 								/>
 							) : (
-								<AvatarFallback className="bg-transparent text-primary border border-primary font-extrabold transition-all duration-300 ease-in hover:text-primary-foreground hover:border-primary-foreground hover:bg-darkBlue">
+								<AvatarFallback className="bg-transparent text-primary border border-primary font-extrabold transition-all duration-300 ease-in hover:text-white hover:border-white hover:bg-darkBlue">
 									{session.user.name?.charAt(0).toUpperCase() || <BiUserCircle />}
 								</AvatarFallback>
 							)
