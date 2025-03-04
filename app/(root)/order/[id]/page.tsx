@@ -1,4 +1,6 @@
+import OrderDetailsTable from "@/components/order/OrderDetailsTable"
 import { getOrderById } from "@/lib/actions/order.actions"
+import { ShippingAddress } from "@/types"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
@@ -14,10 +16,7 @@ const OrderPage = async (props: {params: Promise<{id: string}>}) => {
 
 	return (
 		<div className="mt-40">
-			{order.orderItems.map((item) => (
-				<span key={id}>{item.name}</span>
-			))}
-		<p>{order.totalPrice.toString()}</p>
+			<OrderDetailsTable order={{...order, shippingAddress: order.shippingAddress as ShippingAddress}} />
 		</div>
 	)
 }

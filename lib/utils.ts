@@ -70,7 +70,7 @@ export function formatId(id: string) {
 }
 
 // format date & time
-export function formatDate(dateString: Date) {
+export function formatDateTime(dateString: Date) {
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
     month: 'short',
     year: 'numeric',
