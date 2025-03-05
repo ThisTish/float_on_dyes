@@ -51,7 +51,7 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 					<CardTitle className="text-2xl px-0">
 					Shipping Address
 					</CardTitle>
-					<CardDescription className="-mt-2 px-0">
+					<CardDescription className="-mt-2 px-0 text-pretty">
 					Please enter your shipping address
 
 					</CardDescription>

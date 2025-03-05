@@ -2,7 +2,9 @@ import { auth } from "@/auth"
 import CartTable from "@/components/cart/CartTable"
 import SubTotalCard from "@/components/cart/SutbTotalCard"
 import WishListSection from "@/components/cart/WishListSection"
+import Heading from "@/components/shared/Heading"
 import BackButton from "@/components/ui/BackButton"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getCart } from "@/lib/actions/cart.actions"
 import { getWishList } from "@/lib/actions/wishList.actions"
 import { Metadata } from "next"
@@ -24,9 +26,22 @@ const CartPage = async () => {
 		<div className="relative mt-48 grid lg:grid-cols-4 lg:gap-5">
 			<div className="absolute -top-14 left-0 w-40">
 				<BackButton size={'sm'} />
-
 			</div>
-			<CartTable cart={cart} />
+
+			{/* cart items table */}
+			<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
+				<CardHeader>
+					<CardTitle>
+					<h2 className="h3-bold">Shopping Cart</h2>
+
+					</CardTitle>
+				</CardHeader>
+
+				<CardContent>
+					<CartTable cart={cart} showOptions={true} />
+				</CardContent>
+			</Card>
+
 			{cart ?
 				<SubTotalCard cart={cart} />
 				: null

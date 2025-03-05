@@ -45,6 +45,7 @@ const PlaceOrderPage = async () => {
 			<Heading first="Place " second="Order" />
 			<div className="grid md:grid-cols-3 md:gap-5">
 				<div className="md:col-span-2 overflow-x-auto space-y-3">
+					{/* shipping address */}
 					<Card>
 						<CardContent className="p-3 gap-3">
 							<h2 className="text-xl pb-4">Shipping Address</h2>
@@ -57,6 +58,7 @@ const PlaceOrderPage = async () => {
 							</Link>
 						</CardContent>
 					</Card>
+					{/* payment method */}
 					<Card>
 						<CardContent className="p-3 gap-3">
 							<h2 className="text-xl pb-4">Payment Method</h2>
@@ -66,6 +68,7 @@ const PlaceOrderPage = async () => {
 							</Link>
 						</CardContent>
 					</Card>
+					{/* order items make reusable component */}
 					<Card>
 						<CardContent className="p-3 gap-3">
 							<h2 className="text-xl pb-4">Order Items</h2>
@@ -108,6 +111,7 @@ const PlaceOrderPage = async () => {
 					taxPrice={Number(cart.taxPrice)}
 					shippingPrice={Number(cart.shippingPrice)}
 					totalPrice={Number(cart.totalPrice)}
+					qty={cart.items.reduce((a, c) => a + c.qty, 0)}
 				/>
 				<PlaceOrderForm />
 

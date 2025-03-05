@@ -51,7 +51,7 @@ const PaymentMethodForm = ({ preferredPaymentMethod }: { preferredPaymentMethod:
 					<CardTitle className="text-2xl px-0">
 						Payment Method
 					</CardTitle>
-					<CardDescription className="-mt-2 px-0">
+					<CardDescription className="-mt-2 px-0 text-pretty">
 						Please choose your preferred payment method
 					</CardDescription>
 				</CardHeader>

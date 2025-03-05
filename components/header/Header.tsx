@@ -19,12 +19,12 @@ const Header = ({ layout }: { layout: string }) => {
 							width={55}
 							height={55}
 						/>
+						{layout === 'main'
+							? <h1 className="text-2xl font-bold ">{APP_NAME}</h1> : null}
 					</Link>
-					{layout === 'main' 
-					? <h1 className="text-2xl font-bold text-darkBlue">{APP_NAME}</h1> 
-					: layout === 'user'
-					? <MainNav className="mx-6" />
-					: null
+					{layout === 'user'
+						? <MainNav className="mx-6" />
+						: null
 					}
 				</div>
 				<div className="flex">

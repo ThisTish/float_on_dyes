@@ -1,7 +1,7 @@
 "use client"
 import { formatCurrency } from "@/lib/utils"
 import { Button } from "../ui/button"
-import { Card, CardContent } from "../ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
@@ -9,6 +9,7 @@ import { Cart } from "@/types"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import { useTransition } from "react"
+import PriceBreakdown from "../shared/PriceBreakdown"
 
 const SubTotalCard = ({ cart }: { cart: Cart }) => {
 	const router = useRouter()
@@ -17,13 +18,20 @@ const SubTotalCard = ({ cart }: { cart: Cart }) => {
 
 
 	return (
-		<Card>
-			<CardContent className="p-10 space-y-5 place-self-end">
-				<p className="text-xl space-x-2">
-					<span>Subtotal</span>
-					<span>({cart?.items.reduce((a, c) => a + c.qty, 0)}):</span>
-					<span className="font-bold">{formatCurrency(cart?.totalPrice ?? 0)} </span>
-				</p>
+		<Card className="p-10">
+			<CardHeader>
+				<CardTitle>
+					<h2 className="text-xl space-x-2">Cart Totals</h2>
+				</CardTitle>
+			</CardHeader>
+			<CardContent className="space-y-5 place-self-end w-full">
+				<PriceBreakdown
+					itemsPrice={Number(cart?.itemsPrice ?? 0)}
+					taxPrice={Number(cart?.taxPrice ?? 0)}
+					shippingPrice={Number(cart?.shippingPrice ?? 0)}
+					totalPrice={Number(cart?.totalPrice ?? 0)}
+					qty={cart.items.reduce((a, c) => a + c.qty, 0)}
+				/>
 				<Button
 					className="w-full"
 					variant="cta"

@@ -6,15 +6,18 @@ type Prices = {
 	taxPrice: number,
 	shippingPrice: number,
 	totalPrice: number,
+	qty: number,
 	className?: string
 }
 
-const PriceBreakdown = ({ itemsPrice, taxPrice, shippingPrice, totalPrice, className }: Prices) => {
+const PriceBreakdown = ({ itemsPrice, taxPrice, shippingPrice, totalPrice, qty, className }: Prices) => {
 	return (
-		<Card className={className}>
-			<CardContent>
+		<>		
 				<div className="flex justify-between">
+					<p>
 					<span>Items</span>
+					<span>({qty})</span>
+					</p>
 					<span>{formatCurrency(itemsPrice)}</span>
 				</div>
 				<div className="flex justify-between">
@@ -29,8 +32,7 @@ const PriceBreakdown = ({ itemsPrice, taxPrice, shippingPrice, totalPrice, class
 					<span>Total</span>
 					<span>{formatCurrency(totalPrice)}</span>
 				</div>
-			</CardContent>
-		</Card>
+		</>
 
 	)
 }
