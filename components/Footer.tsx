@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { TbBrandBluesky } from 'react-icons/tb'
 import Links from "./shared/lists/Links"
-import PAGE_LINKS from "@/lib/constants/page-links"
+import {PAGE_LINKS} from "@/lib/constants/page-links"
 import { Button } from "./ui/button"
 import ContactForm from "./shared/contactForm/Form"
 import payments from "@/lib/constants/payments"

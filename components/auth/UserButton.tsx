@@ -13,8 +13,7 @@ const UserButton = () => {
 
 	const { data: session, status } = useSession()
 
-	if (status !== 'authenticated') 
-		{
+	if (status !== 'authenticated') {
 		return (
 			<Link href={'/sign-in'}>
 				<Tooltip label="Sign In" position="bottom" className="mt-1">
@@ -53,8 +52,22 @@ const UserButton = () => {
 					<p className="font-semibold">{session.user.name}</p>
 					<p className="text-muted-foreground">{session.user.email}</p>
 				</DropdownMenuLabel>
+				<DropdownMenuItem>
+					<Link href="/user/profile">
+						<Button variant={'link'} className="w-full text-start p-0 rounded-full">
+							Profile
+						</Button>
+					</Link>
+				</DropdownMenuItem>
+				<DropdownMenuItem>
+					<Link href="/user/orders">
+						<Button variant={'link'} className="w-full text-start p-0 rounded-full">
+							Orders
+						</Button>
+					</Link>
+				</DropdownMenuItem>
 				<form action={signOutUser}>
-					<Button variant={'link'} className="w-full text-start p-0 before:hover:bg-destructive">
+					<Button variant={'link'} className="relative justify-start ml-2 flex w-fit cursor-default select-none items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors focus:bg-blue-50/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 text-start p-0 before:hover:bg-destructive rounded-full" >
 						Signout
 					</Button>
 				</form>

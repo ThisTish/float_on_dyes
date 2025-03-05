@@ -18,7 +18,7 @@ const buttonVariants = cva(
         secondary:
           "bg-darkBlue text-primary-foreground shadow-sm before:bg-brightBlue hover:text-accent-foreground",
         ghost: "before:bg-lightGreen hover:text-popover-foreground",
-        link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before: before:bottom-0",
+        link: " text-primary hover:text-primary-darkBlue before:hover:bg-darkBlue before:absolute before:h-2 before:w-3/4 before:bottom-0",
         cta: " bg-lightCta text-white before:bg-white hover:text-black shadow-md ",
         icon: "justify-center w-10 bg-lightCta text-primary-foreground aspect-square transition-all duration-300 ease-out before:bg-white hover:justify-start hover:text-black hover:w-[125px] ",
         chip: "bg-card text-darkBlue border-darkBlue border-[2px] hover:border-t hover:border-b hover:border-primary-foreground focus-visible:border-t focus-visible:border-b focus-visible:border-primary-foreground focus-visible:ring-0",

@@ -1,4 +1,4 @@
-const PAGE_LINKS = [
+export const PAGE_LINKS = [
 	{
 		name: 'Home',
 		href: '/'
@@ -9,7 +9,7 @@ const PAGE_LINKS = [
 	},
 	{
 		name: 'Custom Orders',
-		href: '/custom '
+		href: '/custom'
 	},
 	{
 		name: 'Gallery',
@@ -25,4 +25,17 @@ const PAGE_LINKS = [
 	}
 ]
 
-export default PAGE_LINKS
+export const USER_PAGE_LINKS = [
+	{
+		name: 'Profile',
+		href: '/user/profile'
+	},
+	{
+		name: 'Orders',
+		href: '/user/orders'
+	},
+	{
+		name: 'Wishlist',
+		href: '/user/wishlist'
+	}
+]

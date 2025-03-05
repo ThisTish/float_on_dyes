@@ -7,16 +7,16 @@ import { getUserById } from "@/lib/actions/users.actions"
 import ShippingAddressForm from "@/components/cart/ShippingAddressForm"
 import CheckoutSteps from "@/components/cart/CheckoutSteps"
 
-export const metadata: Metadata ={
+export const metadata: Metadata = {
 	title: 'Shipping Address'
 }
 const ShippingAddressPage = async () => {
 	const cart = await getCart()
-	if(!cart || cart.items.length === 0) redirect('/cart')
+	if (!cart || cart.items.length === 0) redirect('/cart')
 
 	const session = await auth()
 	const userId = session?.user.id
-	if(!userId) throw new Error ('No user id')
+	if (!userId) throw new Error('No user id')
 
 	const user = await getUserById(userId)
 
@@ -24,8 +24,8 @@ const ShippingAddressPage = async () => {
 	return (
 
 		<div className="mt-40">
-		<CheckoutSteps current={1} />
-		<ShippingAddressForm address={user.address as ShippingAddress} />
+			<CheckoutSteps current={1} />
+			<ShippingAddressForm address={user.address as ShippingAddress} />
 		</div>
 	)
 }

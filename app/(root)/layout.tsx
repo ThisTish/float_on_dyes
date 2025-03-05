@@ -18,7 +18,7 @@ export default async function RootLayout({
 
 	return (
 		<>
-			<Header />
+			<Header layout="main"/>
 			<div className="flex flex-col min-h-screen">
 				<main className="flex-1 wrapper">
 					{children}

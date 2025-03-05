@@ -1,10 +1,9 @@
 "use client"
 import { useState } from "react"
-import PAGE_LINKS from "@/lib/constants/page-links"
+import {PAGE_LINKS} from "@/lib/constants/page-links"
 import Links from "../shared/lists/Links"
 import Hamburger from "./Hamburger"
 import { Button } from "../ui/button"
-import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import ModeToggle from "./ModeToggle"
 import UserButton from "../auth/UserButton"
@@ -12,10 +11,14 @@ import Link from "next/link"
 import ShoppingCart from "../ui/shoppingcart"
 import SearchButton from "../ui/SearchButton"
 import Tooltip from "../ui/Tooltip"
-// todo search button icon-> '/shop' & auto focus or style search button different....
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+
 
 const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false)
+	const pathname = usePathname()
+	console.log(pathname)
 
 	return (
 		<>
@@ -23,15 +26,12 @@ const Menu = () => {
 			<nav className="hidden md:flex md:flex-col items-center text-sm space-x-1">
 				<div>
 					{PAGE_LINKS.map((link) => (
-						<Button variant={'link'} key={link.name} asChild className="font-extrabold">
-							<AnimatedDiv variant={'link'}>
+						<Button variant={'link'} key={link.name} asChild className={cn(' font-extrabold rounded-full', pathname === link.href ? 'before:left-0 before:scale-150 before:bg-darkBlue before:absolute before:h-2 before:w-full before:bottom-0' : '')}>
 								<Links {...link} />
-							</AnimatedDiv>
 						</Button>
-
 					))}
-
 				</div>
+
 				<div className="w-full flex items-center justify-between">
 					<SearchButton />
 					<div className="flex gap-3 items-center">
