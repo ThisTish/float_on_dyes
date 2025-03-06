@@ -7,8 +7,6 @@ import AddressCard from "@/components/cart/AddressCard"
 import PaymentCard from "@/components/cart/PaymentCard"
 import ItemsTable from "@/components/shared/ItemsTable"
 
-// todo add remove from order/move to wishlist-line90
-
 export const metadata: Metadata = {
 	title: "Place Order"
 }

@@ -4,28 +4,48 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { Card, CardContent } from "../ui/card"
 import { useCheckout } from "@/context/CheckoutContext"
+import { Order, ShippingAddress } from "@/types"
+import { useEffect, useState } from "react"
+import { Badge } from "../ui/badge"
+import { formatDateTime } from "@/lib/utils"
 
-const AddressCard = () => {
+const AddressCard = ({ address, isDelivered, deliveredAt }: { address?: ShippingAddress, isDelivered?: boolean, deliveredAt?: Date }) => {
+	const [shippingAddress, setShippingAddress] = useState({ ...address } as ShippingAddress)
 	const { user } = useCheckout()
-	const userAddress = user.address
+
+	useEffect(() => {
+		if (!address) {
+			setShippingAddress(user.address)
+		}
+	}, [])
 
 	return (
 		<Card>
 			<CardContent className="p-3 gap-3">
 				<h2 className="text-xl pb-4">Shipping Address</h2>
-				{!userAddress ? (
+				{!shippingAddress ? (
 					<p>No shipping address</p>
 				) : (
 					<>
-						<p>{userAddress.fullName}</p>
-						<p>{userAddress.streetAddress}</p>
-						<p>{userAddress.city}, {userAddress.zipCode}</p>
-						<p>{userAddress.country}</p>
+						<p>{shippingAddress.fullName}</p>
+						<p>{shippingAddress.streetAddress}</p>
+						<p>{shippingAddress.city}, {shippingAddress.zipCode}</p>
+						<p>{shippingAddress.country}</p>
 					</>
 				)}
-				<Link href='/shipping-address'>
-					<Button variant={'outline'}>Edit</Button>
-				</Link>
+				{!address ? (
+					<Link href='/shipping-address'>
+						<Button variant={'outline'}>Edit</Button>
+					</Link>
+				): address && isDelivered ? (
+					<Badge variant={'secondary'}>
+					Delivered {formatDateTime(deliveredAt!).dateTime}
+				</Badge>
+			) : (
+				<Badge variant={'destructive'}>
+					Not delivered
+				</Badge>
+				)}
 			</CardContent>
 		</Card>
 	)

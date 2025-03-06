@@ -58,7 +58,7 @@ export const CHECKOUT_PAGE_LINKS = [
 		href: '/place-order'
 	},
 	{
-		name: 'Review Order',
+		name: 'Order Details',
 		href: null
 	},
 ]

@@ -66,7 +66,7 @@ export function convertToPlainObject<T>(value: T): T {
 
 // shorten uuid(for orders)
 export function formatId(id: string) {
-  return `..${id.substring(id.length - 6)}`
+  return `...${id.substring(id.length - 6)}`
 }
 
 // format date & time
