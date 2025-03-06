@@ -18,7 +18,6 @@ import { cn } from "@/lib/utils"
 const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const pathname = usePathname()
-	console.log(pathname)
 
 	return (
 		<>

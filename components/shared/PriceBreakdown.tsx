@@ -1,37 +1,38 @@
+"use client"
+import { useCheckout } from "@/context/CheckoutContext"
 import { formatCurrency } from "@/lib/utils"
-import { Card, CardContent } from "../ui/card"
+import { Cart } from "@/types"
 
-type Prices = {
-	itemsPrice: number,
-	taxPrice: number,
-	shippingPrice: number,
-	totalPrice: number,
-	qty: number,
-	className?: string
-}
+const PriceBreakdown = ({ cart, className }: { cart?: Cart, className?: string }) => {
+	if (!cart) cart = useCheckout().cart as unknown as Cart
+	const { items, itemsPrice, taxPrice, shippingPrice, totalPrice } = cart
 
-const PriceBreakdown = ({ itemsPrice, taxPrice, shippingPrice, totalPrice, qty, className }: Prices) => {
+
 	return (
-		<>		
-				<div className="flex justify-between">
-					<p>
-					<span>Items</span>
-					<span>({qty})</span>
-					</p>
-					<span>{formatCurrency(itemsPrice)}</span>
-				</div>
-				<div className="flex justify-between">
-					<span>Tax</span>
-					<span>{formatCurrency(taxPrice)}</span>
-				</div>
-				<div className="flex justify-between">
-					<span>Shipping</span>
-					<span>{formatCurrency(shippingPrice)}</span>
-				</div>
-				<div className="flex justify-between font-semibold text-lg">
-					<span>Total</span>
-					<span>{formatCurrency(totalPrice)}</span>
-				</div>
+		<>
+			{items.length === 0 ? <p>Your shopping cart is empty</p> : (
+				<>
+					<div className="flex justify-between">
+						<p>
+							<span>Items</span>
+							<span>({items.length})</span>
+						</p>
+						<span>{formatCurrency(itemsPrice.toString())}</span>
+					</div>
+					<div className="flex justify-between">
+						<span>Tax</span>
+						<span>{formatCurrency(taxPrice.toString())}</span>
+					</div>
+					<div className="flex justify-between">
+						<span>Shipping</span>
+						<span>{formatCurrency(shippingPrice.toString())}</span>
+					</div>
+					<div className="flex justify-between font-semibold text-lg">
+						<span>Total</span>
+						<span>{formatCurrency(totalPrice.toString())}</span>
+					</div>
+				</>
+			)}
 		</>
 
 	)

@@ -1,46 +1,53 @@
-// import "@/app/globals.css"
-// import { auth } from "@/auth"
-// import CheckoutSteps from "@/components/cart/CheckoutSteps"
-// import { getCart } from "@/lib/actions/cart.actions"
-// import { getUserById } from "@/lib/actions/users.actions"
-// import { redirect } from "next/navigation"
+import "@/app/globals.css"
+import { auth } from "@/auth"
+import CheckoutSteps from "@/components/cart/CheckoutSteps"
+import { getCart } from "@/lib/actions/cart.actions"
+import { getUserById } from "@/lib/actions/users.actions"
+import React from "react"
+import { CheckoutProvider } from "@/context/CheckoutContext"
+import { redirect } from "next/navigation"
+import { ShippingAddress } from "@/types"
+import { DEFAULT_PAYMENT_METHOD } from "@/lib/constants"
 
-// // todo left off with trying to figure out how to pass user to children.
 
-// export default async function RootLayout({
-// 	children,
-// }: Readonly<{
-// 	children: React.ReactNode
-// }>) {
+export default async function CheckoutLayout({
+	children,
+}: Readonly<{
+	children: React.ReactNode
+}>) {
+	const cart = await getCart() || {
+		items: [],
+		itemsPrice: '',
+		totalPrice: '',
+		shippingPrice: '',
+		taxPrice: '',
+		sessionCartId: '',
+		userId: null
+	}
 
-// 	const cart = await getCart()
-// 	if (!cart || cart.items.length === 0) redirect('/cart')
 
-// 	const session = await auth()
-// 	const userId = session?.user.id
-// 	if (!userId) throw new Error('No user id')
+	const session = await auth()
+	const userId = session?.user.id
+	if (!userId) throw new Error('No user id')
 
-// 	const user = await getUserById(userId)
+	const fetchedUser = await getUserById(userId)
+	if (!fetchedUser) redirect('/sign-in')
+		
+	const user = {
+		paymentMethod: {type: fetchedUser.paymentMethod ?? DEFAULT_PAYMENT_METHOD},
+		email: fetchedUser.email,
+		address: fetchedUser.address as ShippingAddress,
+		isSubscribed: fetchedUser.isSubscribed,
+		name: fetchedUser.name
+	}
 
-// 	const { pathname } = window.location
 
-// 	let currentStep = 1
-// 	switch (pathname) {
-
-// 		case '/checkout/payment-method':
-// 			currentStep = 2
-// 			break
-// 		case '/checkout/review':
-// 			currentStep = 3
-// 			break
-// 		default:
-// 			currentStep = 1
-// 	}
-
-// 	return (
-// 		<div className="mt-40">
-// 			<CheckoutSteps current={currentStep} />
-// 			{children}
-// 		</div>
-// 	)
-// }
+	return (
+		<CheckoutProvider user={user} cart={cart ?? {}}>
+			<div className="mt-40">
+				<CheckoutSteps />
+				{children}
+			</div>
+		</CheckoutProvider>
+	)
+}

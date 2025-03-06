@@ -9,7 +9,7 @@ import ProductPrice from "../product/ProductPrice"
 const WishListCard = ({ item }: { item: CartItem }) => {
 
 	return (
-		<Card className="w-32 max-w-40 border transition border-darkBlue flex flex-col items-center">
+		<Card className="w-32 max-w-40 h-64 border transition border-darkBlue flex flex-col items-center">
 				<Link href={`/products/${item.slug}`}>
 				<CardHeader className="p-0">
 					<Image

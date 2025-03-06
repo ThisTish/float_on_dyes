@@ -3,7 +3,6 @@
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
-import CheckoutSteps from "./CheckoutSteps"
 import { ControllerRenderProps, useForm } from "react-hook-form"
 import { z } from "zod"
 import { paymentMethodSchema } from "@/lib/validators"
@@ -17,23 +16,25 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 import { updateUserPaymentMethod } from "@/lib/actions/users.actions"
+import { useCheckout } from "@/context/CheckoutContext"
 
-const PaymentMethodForm = ({ preferredPaymentMethod }: { preferredPaymentMethod: string | null }) => {
+const PaymentMethodForm = () => {
 	const router = useRouter()
 	const { toast } = useToast()
 	const [pending, startTransition] = useTransition()
+	const { user } = useCheckout()
 
 	const form = useForm<z.infer<typeof paymentMethodSchema>>({
 		resolver: zodResolver(paymentMethodSchema),
 		defaultValues: {
-			type: preferredPaymentMethod ?? DEFAULT_PAYMENT_METHOD
+			type: user.paymentMethod.type ?? DEFAULT_PAYMENT_METHOD
 		}
 	})
 
 	const onSubmit = async (values: z.infer<typeof paymentMethodSchema>) => {
-		startTransition(async () =>{
+		startTransition(async () => {
 			const res = await updateUserPaymentMethod(values)
-			if(!res.success){
+			if (!res.success) {
 				toast({
 					variant: 'destructive',
 					description: res.message

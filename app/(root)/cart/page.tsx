@@ -1,5 +1,5 @@
 import { auth } from "@/auth"
-import CartTable from "@/components/cart/CartTable"
+import CartItemsSection from "@/components/cart/CartItemsSection"
 import SubTotalCard from "@/components/cart/SutbTotalCard"
 import WishListSection from "@/components/cart/WishListSection"
 import Heading from "@/components/shared/Heading"
@@ -38,7 +38,7 @@ const CartPage = async () => {
 				</CardHeader>
 
 				<CardContent>
-					<CartTable cart={cart} showOptions={true} />
+					<CartItemsSection cart={cart} />
 				</CardContent>
 			</Card>
 

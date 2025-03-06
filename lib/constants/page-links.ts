@@ -39,3 +39,26 @@ export const USER_PAGE_LINKS = [
 		href: '/user/wishlist'
 	}
 ]
+
+export const CHECKOUT_PAGE_LINKS = [
+	{
+		name: 'User Login',
+		href: '/sign-in'
+	},
+	{
+		name: 'Shipping Address',
+		href: '/shipping-address'
+	},
+	{
+		name: 'Payment Method',
+		href: '/payment-method'
+	},
+	{
+		name: 'Place Order',
+		href: '/place-order'
+	},
+	{
+		name: 'Review Order',
+		href: null
+	},
+]

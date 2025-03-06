@@ -3,7 +3,6 @@
 import { useToast } from "@/hooks/use-toast"
 import { shippingAddressDefaultValues } from "@/lib/constants"
 import { shippingAddressSchema } from "@/lib/validators"
-import { ShippingAddress } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
@@ -17,15 +16,19 @@ import { ArrowUpRight } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { updateUserAddress } from "@/lib/actions/users.actions"
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
+import { useCheckout } from "@/context/CheckoutContext"
 
-const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
+const ShippingAddressForm = () => {
 	const router = useRouter()
 	const { toast } = useToast()
 	const [pending, startTransition] = useTransition()
 
+	const { user } = useCheckout()
+	if (!user) router.push('/sign-in')
+
 	const form = useForm<z.infer<typeof shippingAddressSchema>>({
 		resolver: zodResolver(shippingAddressSchema),
-		defaultValues: address || shippingAddressDefaultValues
+		defaultValues: user.address || shippingAddressDefaultValues
 	})
 
 	const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (values) => {
@@ -38,7 +41,6 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 				})
 				return
 			}
-
 			router.push('/payment-method')
 		})
 	}
@@ -49,10 +51,10 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
 			<Card className="p-5 max-w-md mx-auto">
 				<CardHeader>
 					<CardTitle className="text-2xl px-0">
-					Shipping Address
+						Shipping Address
 					</CardTitle>
 					<CardDescription className="-mt-2 px-0 text-pretty">
-					Please enter your shipping address
+						Please enter your shipping address
 
 					</CardDescription>
 				</CardHeader>
