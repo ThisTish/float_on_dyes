@@ -158,7 +158,7 @@ const ShippingAddressForm = () => {
 						<Button variant={'cta'} disabled={pending} className="w-full">
 							{pending ? (
 								<>
-									<span className="animate-pulse">Submitting</span>
+									<span className="animate-pulse">Saving</span>
 									<PiSpinnerBallDuotone className="animate-spin" />
 								</>
 							) : (

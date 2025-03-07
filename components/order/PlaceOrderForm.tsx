@@ -13,7 +13,7 @@ import { ArrowUpRight } from "lucide-react"
 const PlaceOrderForm = () => {
 	const { cart, user } = useCheckout()
 	const router = useRouter()
-	
+
 	useEffect(() => {
 		if (!user.address) {
 			router.push('/shipping-address');
@@ -39,25 +39,25 @@ const PlaceOrderForm = () => {
 	}
 
 	return (
-	<>
-		{!cart || cart.items.length === 0 ? (
-			<Button
-				variant={"cta"}
-				asChild
-			>
-				<Link href="/shop">
-					Go to Shop
-					<AnimatedDiv variant={'cta'} animation={'rotate'}>
-						<ArrowUpRight />
-					</AnimatedDiv>
-				</Link>
-			</Button>
-		) : (
-			<form onSubmit={handleSubmit} className="w-full text-end">
-				<PlaceOrderButton />
-			</form>
-		)}
-	</>
+		<>
+			{!cart || cart.items.length === 0 ? (
+				<Button
+					variant={"cta"}
+					asChild
+				>
+					<Link href="/shop">
+						Go to Shop
+						<AnimatedDiv variant={'cta'} animation={'rotate'}>
+							<ArrowUpRight />
+						</AnimatedDiv>
+					</Link>
+				</Button>
+			) : (
+				<form onSubmit={handleSubmit} className="w-full text-end">
+					<PlaceOrderButton />
+				</form>
+			)}
+		</>
 
 	)
 }

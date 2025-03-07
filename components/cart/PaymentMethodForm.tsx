@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { ChangeEvent, useRef, useState, useTransition } from "react"
+import { useRef, useTransition } from "react"
 import { ControllerRenderProps, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -18,10 +18,8 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
 import { RadioGroup } from "../ui/radio-group"
 import Checkbox from "../ui/Checkbox"
-import payments from "@/lib/constants/payments"
-import { FaPaypal } from "react-icons/fa"
+import PaymentMethodLabels from "../shared/PaymentMethodLabels"
 
-const creditCards = payments.splice(0, 4)
 
 const PaymentMethodForm = () => {
 	const checkBoxRef = useRef<HTMLInputElement>(null)
@@ -97,31 +95,8 @@ const PaymentMethodForm = () => {
 
 														</FormControl>
 														<FormLabel htmlFor="type" className="flex items-center justify-between w-full">
-															{method === 'Credit Card'
-																? (
-																	<>
-																		<span>{method}</span>
-																		<div className="flex space-x-1">
-																			{creditCards.map((card) => (
-																				<span key={card.name}>
-																					<card.icon className="text-darkBlue" size={25} />
-																				</span>
-																			))}
+															<PaymentMethodLabels method={method} />
 
-																		</div>
-																	</>
-																) : method === 'PayPal'
-																	? (
-																		<>
-																			<span>{method}</span>
-																			<FaPaypal size={25} className="text-darkBlue" />
-																		</>
-																	) : (
-																		<>
-																			<span>{method}</span>
-																			<span className="text-darkBlue text-xs text-balance text-end">Available to those in Salt Lake Valley, UT</span>
-																		</>
-																	)}
 														</FormLabel>
 													</FormItem>
 												))}
@@ -138,7 +113,7 @@ const PaymentMethodForm = () => {
 						<Button variant={'cta'} disabled={pending} className="w-full">
 							{pending ? (
 								<>
-									<span className="animate-pulse">Submitting</span>
+									<span className="animate-pulse">Saving</span>
 									<PiSpinnerBallDuotone className="animate-spin" />
 								</>
 							) : (

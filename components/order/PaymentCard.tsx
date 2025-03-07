@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { Button } from "../ui/button"
-import { Card, CardContent } from "../ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { useCheckout } from "@/context/CheckoutContext"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Badge } from "../ui/badge"
 import { formatDateTime } from "@/lib/utils"
+import PaymentMethodLabels from "../shared/PaymentMethodLabels"
 
 const PaymentCard = ({ payment, isPaid, paidAt }: { payment?: string, isPaid?: boolean, paidAt?: Date }) => {
 	const [shippingPayment, setShippingPayment] = useState(payment)
@@ -24,10 +25,16 @@ const PaymentCard = ({ payment, isPaid, paidAt }: { payment?: string, isPaid?: b
 	if (!user.paymentMethod.type && !payment) router.push('/payment-method')
 
 	return (
-		<Card>
-			<CardContent className="p-3 gap-3">
-				<h2 className="text-xl pb-4">Payment Method</h2>
-				<p>{shippingPayment}</p>
+		<Card className="p-5">
+			<CardHeader>
+				<CardTitle className="text-xl font-semibold px-0">
+					<h2>Payment Method</h2>
+				</CardTitle>
+			</CardHeader>
+			<CardContent className="space-y-5">
+				<p className="flex justify-between pb-5">
+					<PaymentMethodLabels method={shippingPayment || 'PayPal'} />
+				</p>
 
 				{!payment ? (
 					<Link href='/payment-method'>

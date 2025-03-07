@@ -34,7 +34,7 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 
 						{/* item image and name */}
 						<TableCell>
-							<Link href={`/products/${item.slug}`} className="flex flex-col sm:flex-row gap-3 items-center w-fit md:text-lg">
+							<Link href={`/products/${item.slug}`} className="flex flex-col py-3 sm:flex-row gap-3 items-center w-fit md:text-lg">
 								<Image
 									src={item.image}
 									alt={item.name}

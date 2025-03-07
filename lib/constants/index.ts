@@ -19,5 +19,5 @@ export const shippingAddressDefaultValues = {
 	country: 'USA'
 }
 
-export const PAYMENT_METHODS = process.env.PAYMENT_METHODS ? process.env.PAYMENT_METHODS.split(', ') : ['Credit Card', 'PayPal', 'CashOnDelivery']
+export const PAYMENT_METHODS = process.env.PAYMENT_METHODS ? process.env.PAYMENT_METHODS.split(', ') : ['Credit Card', 'PayPal', 'Cash on Delivery']
 export const DEFAULT_PAYMENT_METHOD = process.env.DEFAULT_PAYMENT_METHOD || 'Credit Card'

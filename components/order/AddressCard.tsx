@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { Button } from "../ui/button"
-import { Card, CardContent } from "../ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { useCheckout } from "@/context/CheckoutContext"
-import { Order, ShippingAddress } from "@/types"
+import { ShippingAddress } from "@/types"
 import { useEffect, useState } from "react"
 import { Badge } from "../ui/badge"
 import { formatDateTime } from "@/lib/utils"
@@ -20,31 +20,35 @@ const AddressCard = ({ address, isDelivered, deliveredAt }: { address?: Shipping
 	}, [])
 
 	return (
-		<Card>
-			<CardContent className="p-3 gap-3">
-				<h2 className="text-xl pb-4">Shipping Address</h2>
+		<Card className="p-5">
+			<CardHeader>
+				<CardTitle className="text-xl font-semibold px-0">
+					<h2 >Shipping Address</h2>
+				</CardTitle>
+			</CardHeader>
+			<CardContent className="space-y-5">
 				{!shippingAddress ? (
 					<p>No shipping address</p>
 				) : (
-					<>
-						<p>{shippingAddress.fullName}</p>
+					<div className="space-y-0 pb-5">
+						<p className="text-lg pb-1">{shippingAddress.fullName}</p>
 						<p>{shippingAddress.streetAddress}</p>
 						<p>{shippingAddress.city}, {shippingAddress.zipCode}</p>
 						<p>{shippingAddress.country}</p>
-					</>
+					</div>
 				)}
 				{!address ? (
 					<Link href='/shipping-address'>
 						<Button variant={'outline'}>Edit</Button>
 					</Link>
-				): address && isDelivered ? (
+				) : address && isDelivered ? (
 					<Badge variant={'outline'}>
-					Delivered {formatDateTime(deliveredAt!).dateTime}
-				</Badge>
-			) : (
-				<Badge variant={'destructive'}>
-					Not delivered
-				</Badge>
+						Delivered {formatDateTime(deliveredAt!).dateTime}
+					</Badge>
+				) : (
+					<Badge variant={'destructive'}>
+						Not delivered
+					</Badge>
 				)}
 			</CardContent>
 		</Card>

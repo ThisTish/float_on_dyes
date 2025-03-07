@@ -11,7 +11,7 @@ const PriceBreakdown = ({ cart, className }: { cart?: Cart, className?: string }
 	return (
 		<>
 			{items.length === 0 ? <p>Your shopping cart is empty</p> : (
-				<>
+				<div className="space-y-3">
 					<div className="flex justify-between">
 						<p>
 							<span>Items </span>
@@ -27,11 +27,11 @@ const PriceBreakdown = ({ cart, className }: { cart?: Cart, className?: string }
 						<span>Shipping</span>
 						<span>{formatCurrency(shippingPrice.toString())}</span>
 					</div>
-					<div className="flex justify-between font-semibold text-lg">
+					<div className="flex justify-between font-semibold text-lg pt-2">
 						<span>Total</span>
 						<span>{formatCurrency(totalPrice.toString())}</span>
 					</div>
-				</>
+				</div>
 			)}
 		</>
 

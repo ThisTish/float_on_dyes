@@ -1,7 +1,6 @@
-import AddressCard from "@/components/cart/AddressCard"
-import PaymentCard from "@/components/cart/PaymentCard"
-import Heading from "@/components/shared/Heading"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import AddressCard from "@/components/order/AddressCard"
+import PaymentCard from "@/components/order/PaymentCard"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { getOrderById } from "@/lib/actions/order.actions"
 import { formatCurrency, formatId } from "@/lib/utils"
@@ -26,6 +25,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 				<span className="text-4xl font-bold md:text-5xl lg:text-6xl">Order</span>
 				<span className="text-2xl font-light md:text-3xl lg:text-4xl">{formatId(order.id)}</span>
 			</h1>
+
 			<div className="grid md:grid-cols-3 md:gap-5">
 				<div className="md:col-span-1 space-y-5">
 					{/* shipping address */}
@@ -35,12 +35,15 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 					<PaymentCard payment={order.paymentMethod} isPaid={order.isPaid} paidAt={order.paidAt as Date} />
 				</div>
 
+				{/* order items */}
 				<div className="mt-5 md:mt-0 md:col-span-2 overflow-x-auto space-y-5">
-
-					{/* order items */}
-					<Card>
-						<CardContent className="p-5 space-y-5">
-							<h2 className="text-xl pb-4">Order Items</h2>
+					<Card className="p-5">
+						<CardHeader>
+							<CardTitle className="text-xl font-semibold">
+								<h2 >Order Items</h2>
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
 							<Table className="text-lg">
 								<TableHeader>
 									<TableRow>
@@ -51,7 +54,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 								<TableBody>
 									{order.orderItems.map((item) => (
 										<TableRow key={item.slug}>
-											<TableCell className="flex flex-col md:flex-row md:items-center gap-3">
+											<TableCell className="flex flex-col py-3 md:flex-row md:items-center gap-3">
 												<Image
 													src={item.image}
 													alt={item.name}
