@@ -2,21 +2,22 @@ import { ChangeEvent, forwardRef } from "react"
 
 type CheckBoxProps = {
 	id: string
-	label: string
-	checked: boolean 
+	name?: string
+	type?: "checkbox" | "radio"
+	checked: boolean
 	onChange: (e:ChangeEvent<HTMLInputElement>) => void
 
 }
 
-const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(({ id, label, checked = false, onChange }, ref) => {
+const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(({ id, name, type = "checkbox", checked = false, onChange }, ref) => {
 	return (
 		<div className="relative">
 			<label htmlFor={id} className="relative flex size-8 items-center justify-center overflow-hidden rounded-full bg-darkGreen p-1 duration-100 hover:p-2">
 				<input 
-				type="checkbox" 
+				type={type} 
 				className="group peer hidden"
 				id={id} 
-				name={id}
+				name={name}
 				checked={checked}
 				onChange={onChange}
 				ref={ref}

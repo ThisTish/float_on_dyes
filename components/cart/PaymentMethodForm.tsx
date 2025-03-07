@@ -1,13 +1,15 @@
 "use client"
 
-import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
-import { useTransition } from "react"
+import { ChangeEvent, useRef, useState, useTransition } from "react"
 import { ControllerRenderProps, useForm } from "react-hook-form"
 import { z } from "zod"
-import { paymentMethodSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { updateUserPaymentMethod } from "@/lib/actions/users.actions"
+import { paymentMethodSchema } from "@/lib/validators"
+import { useCheckout } from "@/context/CheckoutContext"
 import { DEFAULT_PAYMENT_METHOD, PAYMENT_METHODS } from "@/lib/constants"
+import { useToast } from "@/hooks/use-toast"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { Button } from "../ui/button"
@@ -15,13 +17,14 @@ import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { updateUserPaymentMethod } from "@/lib/actions/users.actions"
-import { useCheckout } from "@/context/CheckoutContext"
+import Checkbox from "../ui/Checkbox"
 
 const PaymentMethodForm = () => {
+	const [checked, setChecked] = useState(false)
+	const checkBoxRef = useRef<HTMLInputElement>(null)
+	const [pending, startTransition] = useTransition()
 	const router = useRouter()
 	const { toast } = useToast()
-	const [pending, startTransition] = useTransition()
 	const { user } = useCheckout()
 
 	const form = useForm<z.infer<typeof paymentMethodSchema>>({
@@ -43,6 +46,10 @@ const PaymentMethodForm = () => {
 			}
 			router.push('/place-order')
 		})
+	}
+
+	const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setChecked(e.target.checked)
 	}
 
 	return (
@@ -71,11 +78,25 @@ const PaymentMethodForm = () => {
 								render={({ field }: { field: ControllerRenderProps<z.infer<typeof paymentMethodSchema>> }) => (
 									<FormItem className="space-y-3 mb-2">
 										<FormControl>
-											<RadioGroup name="type" onValueChange={field.onChange} className="flex flex-col space-y-2">
+											<RadioGroup 
+											name="type" 
+											onValueChange={field.onChange} 
+											className="flex flex-col space-y-2"
+											value={field.value}
+											>
 												{PAYMENT_METHODS.map((method) => (
 													<FormItem key={method} className="flex items-center space-x-3 space-y-0">
 														<FormControl>
-															<RadioGroupItem value={method} checked={field.value === method} />
+															<Checkbox
+																id={method}
+																name='type'
+																checked={field.value === method}
+																onChange={() => field.onChange(method)}
+																ref={checkBoxRef}
+																type="radio"
+															/>
+
+															{/* <RadioGroupItem value={method} checked={field.value === method} /> */}
 														</FormControl>
 														<FormLabel htmlFor="type">{method}</FormLabel>
 													</FormItem>

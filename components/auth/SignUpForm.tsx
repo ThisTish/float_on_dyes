@@ -118,11 +118,13 @@ const SignUpForm = () => {
 					<div>
 						<div className="flex items-center gap-3 mb-6">
 							<Checkbox 
-							id="isSubscribed" 
-							label="Subscribe to Newsletter?" 
+							id="isSubscribed"
+							name="isSubscribed" 
 							checked={checked} 
 							ref={checkBoxRef} 
-							onChange={handleCheckBoxChange} />
+							onChange={handleCheckBoxChange} 
+							type="checkbox"
+							/>
 							<Label htmlFor="subscribe">Subscribe to Newsletter?</Label>
 						</div>
 						<SignUpButton />
