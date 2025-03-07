@@ -16,7 +16,7 @@ export const shippingAddressDefaultValues = {
 	streetAddress: '123 Main st.',
 	city: 'Anytown',
 	zipCode: '12345',
-	country: 'USA'
+	state: 'Utah'
 }
 
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS ? process.env.PAYMENT_METHODS.split(', ') : ['Credit Card', 'PayPal', 'Cash on Delivery']

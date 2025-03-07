@@ -2,6 +2,8 @@ import { getLatestProducts } from "@/lib/actions/product.actions";
 import ProductCard from "../product/ProductCard";
 import SearchButton from "../ui/SearchButton";
 import Heading from "../ui/Heading";
+import SelectInput from "../ui/SelectInput";
+import { Card, CardContent } from "../ui/card";
 
 const FeaturedDiscs = async () => {
 	const products = await getLatestProducts()

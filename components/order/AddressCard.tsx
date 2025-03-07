@@ -33,8 +33,7 @@ const AddressCard = ({ address, isDelivered, deliveredAt }: { address?: Shipping
 					<div className="space-y-0 pb-5">
 						<p className="text-lg pb-1">{shippingAddress.fullName}</p>
 						<p>{shippingAddress.streetAddress}</p>
-						<p>{shippingAddress.city}, {shippingAddress.zipCode}</p>
-						<p>{shippingAddress.country}</p>
+						<p>{shippingAddress.city}, {shippingAddress.state} {shippingAddress.zipCode}</p>
 					</div>
 				)}
 				{!address ? (

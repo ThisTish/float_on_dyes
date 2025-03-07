@@ -12,11 +12,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { updateUserAddress } from "@/lib/actions/users.actions"
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { useCheckout } from "@/context/CheckoutContext"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { STATES } from "@/lib/constants/places"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
+import { cn } from "@/lib/utils"
 
 const ShippingAddressForm = () => {
 	const router = useRouter()
@@ -141,13 +145,62 @@ const ShippingAddressForm = () => {
 						<div>
 							<FormField
 								control={form.control}
-								name="country"
+								name="state"
 								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Country</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border mb-3" />
-										</FormControl>
+									<FormItem className="grid">
+										<FormLabel>State</FormLabel>
+										<Popover>
+											{/* button/input */}
+											<PopoverTrigger asChild>
+												<FormControl>
+													<button
+														role="combobox"
+														className="group inline-flex justify-between border text-black h-9 w-full bg-input px-3 py-1 text-base shadow-sm"
+													>
+														{field.value
+															? STATES.find(
+																(state) => state.value === field.value
+															)?.label
+															: ""
+														}
+														<ArrowDownRight size={18} className={`ml-auto group-hover:rotate-45 duration-300 text-muted group-hover:text-primary`} />
+													</button>
+												</FormControl>
+											</PopoverTrigger>
+
+											{/* content */}
+											<PopoverContent>
+												<Command>
+													<CommandInput
+														placeholder="Search State..."
+													/>
+														<CommandList>
+															<CommandEmpty>State Not Found</CommandEmpty>
+															<CommandGroup>
+																{STATES.map((state) => (
+																	<CommandItem
+																		value={state.value}
+																		key={state.value}
+																		onSelect={() => {
+																			form.setValue("state", state.value)
+																		}}
+																	>
+																		{state.label}
+																		<Check
+																			className={cn(
+																				"ml-auto",
+																				state.value === field.value
+																					? "opacity-100"
+																					: "opacity-0"
+																			)}
+																		/>
+																	</CommandItem>
+																))}
+															</CommandGroup>
+														</CommandList>
+												</Command>
+											</PopoverContent>
+										</Popover>
 										<FormMessage />
 									</FormItem>
 								)}
