@@ -38,7 +38,7 @@ const AddressCard = ({ address, isDelivered, deliveredAt }: { address?: Shipping
 						<Button variant={'outline'}>Edit</Button>
 					</Link>
 				): address && isDelivered ? (
-					<Badge variant={'secondary'}>
+					<Badge variant={'outline'}>
 					Delivered {formatDateTime(deliveredAt!).dateTime}
 				</Badge>
 			) : (

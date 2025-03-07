@@ -34,7 +34,7 @@ const PaymentCard = ({ payment, isPaid, paidAt }: { payment?: string, isPaid?: b
 						<Button variant={'outline'}>Edit</Button>
 					</Link>
 				) : payment && isPaid ? (
-					<Badge variant={'secondary'}>
+					<Badge variant={'outline'}>
 						Paid on {formatDateTime(paidAt!).dateTime}
 					</Badge>
 				) : (
