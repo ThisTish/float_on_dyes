@@ -23,8 +23,8 @@ const CartPage = async () => {
 	const wishList = await getWishList(userId ?? undefined)
 
 	return (
-		<div className="relative mt-48 grid lg:grid-cols-4 lg:gap-5">
-			<div className="absolute -top-14 left-0 w-40">
+		<div className="grid lg:grid-cols-4 lg:gap-5">
+			<div className="mb-5 lg:mb-0 lg:col-span-4">
 				<BackButton size={'sm'} />
 			</div>
 
@@ -32,8 +32,7 @@ const CartPage = async () => {
 			<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
 				<CardHeader>
 					<CardTitle>
-					<h2 className="h3-bold">Shopping Cart</h2>
-
+						<h2 className="h3-bold">Shopping Cart</h2>
 					</CardTitle>
 				</CardHeader>
 

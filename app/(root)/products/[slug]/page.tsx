@@ -26,7 +26,7 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 
 	return (
 		<div className="space-y-10">
-			<header className="relative w-full h-28 mt-28 bg-[url('/images/cellHeader.jpg')] dark:bg-[url('/images/cellHeader-dark.jpg')] bg-cover bg-center bg-no-repeat md:h-32 lg:h-40">
+			<header className="relative w-full h-28 bg-[url('/images/cellHeader.jpg')] dark:bg-[url('/images/cellHeader-dark.jpg')] bg-cover bg-center bg-no-repeat md:h-32 lg:h-40">
 				<h1 className="text-white backdrop-blur-sm size-fit absolute left-5 top-5">
 					<span className="text-4xl font-bold md:text-5xl lg:text-6xl">{product.name} </span>
 					<span className="text-2xl font-light md:text-3xl lg:text-4xl">{product.dyeType}</span>

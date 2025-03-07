@@ -34,17 +34,19 @@ const CheckoutSteps = () => {
 		<div className="flex-between flex-col gap-2 mb-10 md:flex-row">
 			{CHECKOUT_PAGE_LINKS.map((step, index) => (
 				<React.Fragment key={step.name}>
-					<div className={`p-2 w-56 text-center text-sm ${index === current && current === 4 ? 'bg-darkGreen text-white border-none cursor-none' : index === current ? 'bg-secondary font-bold text-darkGreen border border-darkGreen' : ''}`}>
-						{step.href ? (
+					<div className={`p-2 w-56 text-center text-sm ${index === current && current === 4 ? 'bg-darkGreen text-white border-none cursor-cursor' : index === current ? 'bg-secondary font-bold text-darkGreen border border-darkGreen' : ''}`}>
+						{current === 4 ? (
+							<span className={step.name === 'Order Details' ? 'text-white' : 'text-muted'}>{step.name}</span>
+						) : step.href ? (
 							<Link href={step.href}>
 								{step.name}
 							</Link>
 						) : (
 							<span className={current !== 4 ? 'text-muted' : ''}>{step.name}</span>
-
 						)}
+
 					</div>
-					{step.name !== 'Review Order' ?
+					{step.name !== 'Order Details' ?
 						<hr className="w-16 border-t mx-2 border-lightGreen" />
 						: null
 					}

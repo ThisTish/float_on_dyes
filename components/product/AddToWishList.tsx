@@ -86,7 +86,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 				toast({
 					variant: 'destructive',
 					description: res.message === "Would you like to add it to your cart instead?"
-					? "This item is already in your wish list." : res.message,
+						? "This item is already in your wish list." : res.message,
 				})
 				return
 			}
@@ -117,7 +117,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 					<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={handleAddToWishList}>
 						<Tooltip label={'Add to Wish List'} position={"top"} className="mb-2">
 
-						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
+							{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
 						</Tooltip>
 					</button>
 
@@ -141,7 +141,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 						) :
 						size === 'cart'
 							? (
-								<Button variant={'outline'} size={'chip'} className="w-full border-none hover:font-bold" onClick={handleMoveToWishList}>
+								<Button variant={'outline'} size={'chip'} className="w-full border-darkBlue dark:border-lightBlue hover:font-bold" onClick={handleMoveToWishList}>
 									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={25} /> : "Move to Wish List"}
 								</Button>
 							) : size === 'dropdown'

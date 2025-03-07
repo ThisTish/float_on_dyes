@@ -96,17 +96,17 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 
 	const existItem = cart && cart?.items.find(i => i.productId === item.productId)
 
-const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <LucideCirclePlus size={25} />
+	const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <LucideCirclePlus size={25} />
 
 
 	return (
 		<>
 			{size === 'icon' ? (
 				<button className="group relative size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
-						<Tooltip label={existItem ? 'Remove From Cart' : 'Add To Cart'} position={"bottom"} className="mt-2">
+					<Tooltip label={existItem ? 'Remove From Cart' : 'Add To Cart'} position={"bottom"} className="mt-2">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
-				</Tooltip>
-					</button>
+					</Tooltip>
+				</button>
 
 			) : size === 'button' ? (
 				<Button variant={'cta'} size={'lg'} className="w-full" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
@@ -134,13 +134,13 @@ const itemStatusButtonIcon = existItem ? <LucideCircleMinus size={25} /> : <Luci
 							? (
 								<button
 									onClick={handleRemoveItem}
-									className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive  active:translate-x-1 active:translate-y-1"
+									className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive active:translate-x-1 active:translate-y-1"
 									aria-label="Remove from cart">
 									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
 								</button>
 							) : size === 'wishList'
 								? (
-									<Button variant={'outline'} size={'chip'} className="w-full border-none hover:font-bold" onClick={() => handleAddToCart(true)}>
+									<Button variant={'outline'} size={'chip'} className="w-full border-darkBlue dark:border-lightBlue hover:font-bold" onClick={() => handleAddToCart(true)}>
 
 										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
 									</Button>

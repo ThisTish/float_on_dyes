@@ -32,9 +32,9 @@ export default async function CheckoutLayout({
 
 	const fetchedUser = await getUserById(userId)
 	if (!fetchedUser) redirect('/sign-in')
-		
+
 	const user = {
-		paymentMethod: {type: fetchedUser.paymentMethod ?? DEFAULT_PAYMENT_METHOD},
+		paymentMethod: { type: fetchedUser.paymentMethod ?? DEFAULT_PAYMENT_METHOD },
 		email: fetchedUser.email,
 		address: fetchedUser.address as ShippingAddress,
 		isSubscribed: fetchedUser.isSubscribed,
@@ -44,7 +44,7 @@ export default async function CheckoutLayout({
 
 	return (
 		<CheckoutProvider user={user} cart={cart ?? {}}>
-			<div className="mt-40">
+			<div>
 				<CheckoutSteps />
 				{children}
 			</div>

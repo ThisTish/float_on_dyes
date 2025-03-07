@@ -22,7 +22,10 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 
 	return (
 		<div>
-			<Heading className="flex flex-col-reverse mb-10" first={`${formatId(order.id)}`} second="Order:" />
+			<h1 className="text-darkBlue text-center mb-10">
+				<span className="text-4xl font-bold md:text-5xl lg:text-6xl">Order</span>
+				<span className="text-2xl font-light md:text-3xl lg:text-4xl">{formatId(order.id)}</span>
+			</h1>
 			<div className="grid md:grid-cols-3 md:gap-5">
 				<div className="md:col-span-1 space-y-5">
 					{/* shipping address */}
@@ -31,7 +34,9 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 					{/* payment method */}
 					<PaymentCard payment={order.paymentMethod} isPaid={order.isPaid} paidAt={order.paidAt as Date} />
 				</div>
-				<div className="md:col-span-2 overflow-x-auto space-y-5">
+
+				<div className="mt-5 md:mt-0 md:col-span-2 overflow-x-auto space-y-5">
+
 					{/* order items */}
 					<Card>
 						<CardContent className="p-5 space-y-5">
@@ -46,7 +51,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 								<TableBody>
 									{order.orderItems.map((item) => (
 										<TableRow key={item.slug}>
-											<TableCell className="flex items-center gap-3">
+											<TableCell className="flex flex-col md:flex-row md:items-center gap-3">
 												<Image
 													src={item.image}
 													alt={item.name}
@@ -63,7 +68,9 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 								</TableBody>
 							</Table>
 						</CardContent>
-						<CardFooter className="grid grid-cols-1 gap-1 px-10 text-base pb-5 border-t w-1/2 ml-auto mr-5">
+
+						{/* order totals */}
+						<CardFooter className="grid grid-cols-1 gap-1 md:px-10 text-sm md:text-base pb-5 border-t w-1/2 ml-auto mr-5">
 							<div className="flex justify-between">
 								<span>Items ({order.orderItems.length})</span>
 								<span>{formatCurrency(order.itemsPrice)}</span>
@@ -84,7 +91,6 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 					</Card>
 				</div>
 			</div>
-			{/* <OrderDetailsTable order={{...order, shippingAddress: order.shippingAddress as ShippingAddress}} /> */}
 		</div>
 	)
 }

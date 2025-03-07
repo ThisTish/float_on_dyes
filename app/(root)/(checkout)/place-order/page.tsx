@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 const PlaceOrderPage = async () => {
 
 	return (
-		<div className="mt-40">
-			<Heading first="Place " second="Order" />
+		<div>
+			<Heading first="Place " second="Order" className="mb-10" />
 			<div className="grid md:grid-cols-3 md:gap-5">
 				<div className="md:col-span-2 overflow-x-auto space-y-5">
 					{/* order items make reusable component */}

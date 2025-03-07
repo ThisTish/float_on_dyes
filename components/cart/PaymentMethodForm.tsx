@@ -69,7 +69,7 @@ const PaymentMethodForm = () => {
 								control={form.control}
 								name="type"
 								render={({ field }: { field: ControllerRenderProps<z.infer<typeof paymentMethodSchema>> }) => (
-									<FormItem className="space-y-3">
+									<FormItem className="space-y-3 mb-2">
 										<FormControl>
 											<RadioGroup name="type" onValueChange={field.onChange} className="flex flex-col space-y-2">
 												{PAYMENT_METHODS.map((method) => (
