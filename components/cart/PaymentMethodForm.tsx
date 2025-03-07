@@ -16,11 +16,14 @@ import { Button } from "../ui/button"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
+import { RadioGroup } from "../ui/radio-group"
 import Checkbox from "../ui/Checkbox"
+import payments from "@/lib/constants/payments"
+import { FaPaypal } from "react-icons/fa"
+
+const creditCards = payments.splice(0, 4)
 
 const PaymentMethodForm = () => {
-	const [checked, setChecked] = useState(false)
 	const checkBoxRef = useRef<HTMLInputElement>(null)
 	const [pending, startTransition] = useTransition()
 	const router = useRouter()
@@ -46,10 +49,6 @@ const PaymentMethodForm = () => {
 			}
 			router.push('/place-order')
 		})
-	}
-
-	const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setChecked(e.target.checked)
 	}
 
 	return (
@@ -78,11 +77,11 @@ const PaymentMethodForm = () => {
 								render={({ field }: { field: ControllerRenderProps<z.infer<typeof paymentMethodSchema>> }) => (
 									<FormItem className="space-y-3 mb-2">
 										<FormControl>
-											<RadioGroup 
-											name="type" 
-											onValueChange={field.onChange} 
-											className="flex flex-col space-y-2"
-											value={field.value}
+											<RadioGroup
+												name="type"
+												onValueChange={field.onChange}
+												className="flex flex-col space-y-2"
+												value={field.value}
 											>
 												{PAYMENT_METHODS.map((method) => (
 													<FormItem key={method} className="flex items-center space-x-3 space-y-0">
@@ -96,9 +95,34 @@ const PaymentMethodForm = () => {
 																type="radio"
 															/>
 
-															{/* <RadioGroupItem value={method} checked={field.value === method} /> */}
 														</FormControl>
-														<FormLabel htmlFor="type">{method}</FormLabel>
+														<FormLabel htmlFor="type" className="flex items-center justify-between w-full">
+															{method === 'Credit Card'
+																? (
+																	<>
+																		<span>{method}</span>
+																		<div className="flex space-x-1">
+																			{creditCards.map((card) => (
+																				<span key={card.name}>
+																					<card.icon className="text-darkBlue" size={25} />
+																				</span>
+																			))}
+
+																		</div>
+																	</>
+																) : method === 'PayPal'
+																	? (
+																		<>
+																			<span>{method}</span>
+																			<FaPaypal size={25} className="text-darkBlue" />
+																		</>
+																	) : (
+																		<>
+																			<span>{method}</span>
+																			<span className="text-darkBlue text-xs text-balance text-end">Available to those in Salt Lake Valley, UT</span>
+																		</>
+																	)}
+														</FormLabel>
 													</FormItem>
 												))}
 											</RadioGroup>
