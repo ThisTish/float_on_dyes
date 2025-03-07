@@ -23,7 +23,7 @@ const PlaceOrderForm = () => {
 	const PlaceOrderButton = () => {
 		const { pending } = useFormStatus()
 		return (
-			<Button variant={'cta'} type={'submit'} disabled={pending}>
+			<Button variant={'cta'} type={'submit'} disabled={pending} >
 				{pending ? 'Placing Order ...' : 'Place Order'}
 			</Button>
 		)
@@ -53,7 +53,7 @@ const PlaceOrderForm = () => {
 				</Link>
 			</Button>
 		) : (
-			<form onSubmit={handleSubmit} className="w-full">
+			<form onSubmit={handleSubmit} className="w-full text-end">
 				<PlaceOrderButton />
 			</form>
 		)}

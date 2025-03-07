@@ -14,7 +14,7 @@ const PriceBreakdown = ({ cart, className }: { cart?: Cart, className?: string }
 				<>
 					<div className="flex justify-between">
 						<p>
-							<span>Items</span>
+							<span>Items </span>
 							<span>({items.length})</span>
 						</p>
 						<span>{formatCurrency(itemsPrice.toString())}</span>

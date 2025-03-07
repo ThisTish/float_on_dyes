@@ -16,24 +16,24 @@ const PlaceOrderPage = async () => {
 	return (
 		<div>
 			<Heading first="Place " second="Order" className="mb-10" />
-			<div className="grid md:grid-cols-3 md:gap-5">
-				<div className="md:col-span-2 overflow-x-auto space-y-5">
-					{/* order items make reusable component */}
-					<Card>
+			<div className="grid grid-rows-4 md:grid-rows-2 md:grid-cols-3 md:gap-5 space-y-5 md:space-y-0">
+					{/* items table */}
+					<Card className="md:col-span-2 overflow-x-auto space-y-5">
 						<CardContent className="p-5 space-y-5">
 							<h2 className="text-xl pb-4">Order Items</h2>
 							<ItemsTable showOptions={false} />
 						</CardContent>
 					</Card>
-					<Card >
+
+					{/* price breakdown */}
+					<Card className="row-start-2 md:col-span-1 md:col-start-1">
 						<CardContent className="p-5 space-y-5">
 							<PriceBreakdown />
 							<PlaceOrderForm />
 						</CardContent>
 					</Card>
-				</div>
 
-				<div className="md:col-span-1 space-y-5">
+				<div className="row-start-2 md:row-start-1 md:col-span-1 space-y-5">
 					{/* shipping address */}
 					<AddressCard />
 
