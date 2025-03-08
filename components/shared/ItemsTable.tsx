@@ -75,7 +75,7 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 							</TableCell>
 						) : (
 							<TableCell >
-								<PiTrashDuotone />
+								<AddToCart size="place-order" item={item} />
 							</TableCell>
 						)}
 					</TableRow>

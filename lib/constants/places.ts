@@ -43,14 +43,12 @@ export const SALT_LAKE_VALLEY = [
 
 export const STATES = [
 	{ value: 'AK', label: 'Alaska'},
-	{ value: 'TX', label: 'Texas'},
 	{ value: 'AL', label: 'Alabama'},
 	{ value: 'AR', label: 'Arkansas'},
 	{ value: 'AZ', label: 'Arizona'},
 	{ value: 'CA', label: 'California'},
 	{ value: 'CO', label: 'Colorado'},
 	{ value: 'CT', label: 'Connecticut'},
-	{ value: 'DC', label: 'Washington DC'},
 	{ value: 'DE', label: 'Delaware'},
 	{ value: 'FL', label: 'Florida'},
 	{ value: 'GA', label: 'Georgia'},
@@ -73,7 +71,7 @@ export const STATES = [
 	{ value: 'NC', label: 'North Carolina'},
 	{ value: 'ND', label: 'North Dakota'},
 	{ value: 'NE', label: 'Nebraska'},
-	{ value: 'NH', label: 'NewHampshire'},
+	{ value: 'NH', label: 'New Hampshire'},
 	{ value: 'NJ', label: 'New Jersey'},
 	{ value: 'NM', label: 'New Mexico'},
 	{ value: 'NV', label: 'Nevada'},
@@ -91,7 +89,8 @@ export const STATES = [
 	{ value: 'VA', label: 'Virginia'},
 	{ value: 'VT', label: 'Vermont'},
 	{ value: 'WA', label: 'Washington'},
+	{ value: 'DC', label: 'Washington, DC'},
 	{ value: 'WI', label: 'Wisconsin'},
 	{ value: 'WV', label: 'West Virginia'},
 	{ value: 'WY', label: 'Wyoming'}
-	];
+];

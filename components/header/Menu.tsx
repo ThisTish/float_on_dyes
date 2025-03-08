@@ -1,6 +1,7 @@
 "use client"
+
 import { useState } from "react"
-import {PAGE_LINKS} from "@/lib/constants/page-links"
+import { PAGE_LINKS } from "@/lib/constants/page-links"
 import Links from "../shared/lists/Links"
 import Hamburger from "./Hamburger"
 import { Button } from "../ui/button"
@@ -26,7 +27,7 @@ const Menu = () => {
 				<div>
 					{PAGE_LINKS.map((link) => (
 						<Button variant={'link'} key={link.name} asChild className={cn(' font-extrabold rounded-full', pathname === link.href ? 'before:left-0 before:scale-150 before:bg-darkBlue before:absolute before:h-2 before:w-full before:bottom-0' : '')}>
-								<Links {...link} />
+							<Links {...link} />
 						</Button>
 					))}
 				</div>
@@ -37,11 +38,13 @@ const Menu = () => {
 						<Tooltip label="Light/Dark" position="bottom" >
 							<ModeToggle />
 						</Tooltip>
+
 						<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkBlue hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkBlue hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
 							<Tooltip label="Cart" className="mt-4" position="bottom">
 								<ShoppingCart />
 							</Tooltip>
 						</Link>
+
 						<UserButton />
 					</div>
 				</div>
@@ -68,10 +71,11 @@ const Menu = () => {
 								<Links key={link.name} {...link} className="transition duration-300 hover:bg-darkBlue p-2 hover:text-white hover:font-semibold" />
 							)
 						))}
-							<Link href={'/cart'} className="p-2 rounded-full w-fit hover:bg-darkBlue hover:text-primary-foreground">
-								<ShoppingCart />
-							</Link>
-							<UserButton />
+						<Link href={'/cart'} className="p-2 rounded-full w-fit hover:bg-darkBlue hover:text-primary-foreground">
+							<ShoppingCart />
+						</Link>
+
+						<UserButton />
 						<div className="-ml-3 w-full">
 
 							<SearchButton />

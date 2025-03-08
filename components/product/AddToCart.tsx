@@ -8,7 +8,7 @@ import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
 import AddToWishList from "./AddToWishList"
 import { useTransition } from "react"
-import { PiSpinnerBallDuotone } from "react-icons/pi";
+import { PiSpinnerBallDuotone, PiTrashDuotone } from "react-icons/pi";
 import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
 import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
 import Tooltip from "../ui/Tooltip"
@@ -144,7 +144,16 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 
 										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
 									</Button>
-								) : null
+								) : size === 'place-order' ? (
+									<Tooltip label="Remove" position="top" className="-ml-6 bg-destructive tracking-wide" >
+										<button className=""
+											onClick={handleRemoveItem}
+											aria-label="Remove From Cart">
+											{pending ? <PiSpinnerBallDuotone className="animate-spin  mx-auto" size={23} /> : <PiTrashDuotone size={25} className="hover:text-destructive" />}
+										</button>
+									</Tooltip>
+								)
+									: null
 			}
 		</>
 	)

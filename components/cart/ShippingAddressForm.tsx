@@ -169,35 +169,35 @@ const ShippingAddressForm = () => {
 											</PopoverTrigger>
 
 											{/* content */}
-											<PopoverContent>
+											<PopoverContent className="w-[var(--radix-popover-trigger-width)]">
 												<Command>
 													<CommandInput
 														placeholder="Search State..."
 													/>
-														<CommandList>
-															<CommandEmpty>State Not Found</CommandEmpty>
-															<CommandGroup>
-																{STATES.map((state) => (
-																	<CommandItem
-																		value={state.value}
-																		key={state.value}
-																		onSelect={() => {
-																			form.setValue("state", state.value)
-																		}}
-																	>
-																		{state.label}
-																		<Check
-																			className={cn(
-																				"ml-auto",
-																				state.value === field.value
-																					? "opacity-100"
-																					: "opacity-0"
-																			)}
-																		/>
-																	</CommandItem>
-																))}
-															</CommandGroup>
-														</CommandList>
+													<CommandList>
+														<CommandEmpty>State Not Found</CommandEmpty>
+														<CommandGroup>
+															{STATES.map((state) => (
+																<CommandItem
+																	value={state.value}
+																	key={state.value}
+																	onSelect={() => {
+																		form.setValue("state", state.value)
+																	}}
+																>
+																	{state.label}
+																	<Check
+																		className={cn(
+																			"ml-auto",
+																			state.value === field.value
+																				? "opacity-100"
+																				: "opacity-0"
+																		)}
+																	/>
+																</CommandItem>
+															))}
+														</CommandGroup>
+													</CommandList>
 												</Command>
 											</PopoverContent>
 										</Popover>

@@ -27,6 +27,8 @@ const PaymentMethodForm = () => {
 	const router = useRouter()
 	const { toast } = useToast()
 	const { user } = useCheckout()
+	if (!user) router.push('/sign-in')
+
 
 	const form = useForm<z.infer<typeof paymentMethodSchema>>({
 		resolver: zodResolver(paymentMethodSchema),
