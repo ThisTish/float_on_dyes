@@ -8,23 +8,24 @@ import { getUserById } from "./users.actions"
 import { insertOrderSchema } from "../validators"
 import { prisma } from "@/db/prisma"
 import { CartItem } from "@/types"
+import { ITEMS_ON_PAGE } from "../constants"
 
-export async function createOrder(){
+export async function createOrder() {
 	try {
 		const session = await auth()
-		if(!session) throw new Error("Unauthorized")
-		
-			const userId = session.user.id
-		if(!userId) throw new Error("User not found")
-		
-			const user = await getUserById(userId)
-		if(!user) throw new Error("User not found")
-		
+		if (!session) throw new Error("Unauthorized")
+
+		const userId = session.user.id
+		if (!userId) throw new Error("User not found")
+
+		const user = await getUserById(userId)
+		if (!user) throw new Error("User not found")
+
 		const cart = await getCart()
-		if(!cart || cart.items.length === 0) return { success: false, message: 'Cart is empty', redirectTo: '/cart'}
-		
-		if(!user.address) return { success: false, message: 'Cart is empty', redirectTo: '/shipping-address'}
-		if(!user.paymentMethod) return { success: false, message: 'Cart is empty', redirectTo: '/payment-method'}
+		if (!cart || cart.items.length === 0) return { success: false, message: 'Cart is empty', redirectTo: '/cart' }
+
+		if (!user.address) return { success: false, message: 'Cart is empty', redirectTo: '/shipping-address' }
+		if (!user.paymentMethod) return { success: false, message: 'Cart is empty', redirectTo: '/payment-method' }
 
 		const order = insertOrderSchema.parse({
 			userId,
@@ -36,12 +37,12 @@ export async function createOrder(){
 			totalPrice: cart.totalPrice,
 		})
 
-		const createdOrderId = await prisma.$transaction(async(tx) =>{
+		const createdOrderId = await prisma.$transaction(async (tx) => {
 			const createdOrder = await tx.order.create({
 				data: order
 			})
 
-			for(const item of cart.items as CartItem[]){
+			for (const item of cart.items as CartItem[]) {
 				await tx.orderItem.create({
 					data: {
 						...item,
@@ -68,17 +69,17 @@ export async function createOrder(){
 
 		})
 
-		if(!createdOrderId) throw new Error("Order failed")
+		if (!createdOrderId) throw new Error("Order failed")
 
-		return { success: true, message: 'Order created', redirectTo: `/order/${createdOrderId}`}
+		return { success: true, message: 'Order created', redirectTo: `/order/${createdOrderId}` }
 
 	} catch (error) {
-	if(isRedirectError(error)) throw error		
-	return { success: false, error: formatError(error)}
+		if (isRedirectError(error)) throw error
+		return { success: false, error: formatError(error) }
 	}
 }
 
-export async function getOrderById(orderId: string){
+export async function getOrderById(orderId: string) {
 	try {
 		const data = await prisma.order.findFirst({
 			where: {
@@ -86,7 +87,7 @@ export async function getOrderById(orderId: string){
 			},
 			include: {
 				orderItems: true,
-				user: { 
+				user: {
 					select: {
 						name: true,
 						email: true
@@ -94,11 +95,38 @@ export async function getOrderById(orderId: string){
 				}
 			}
 		})
-		
-		if(!data) throw new Error("Order not found")
+
+		if (!data) throw new Error("Order not found")
 		return convertToPlainObject(data)
 
 	} catch (error) {
-		throw new Error(formatError(error))		
+		throw new Error(formatError(error))
+	}
+}
+
+export async function getUserOrders({ limit = ITEMS_ON_PAGE, page }: { limit?: number, page: number }) {
+	const session = await auth()
+	if (!session) throw new Error("User is not authorized")
+
+	const data = await prisma.order.findMany({
+		where: {
+			userId: session.user.id
+		},
+		orderBy: {
+			createdAt: 'desc'
+		},
+		take: limit,
+		skip: (page - 1) * limit,
+	})
+
+	const dataCount = await prisma.order.count({
+		where: {
+			userId: session.user.id
+		}
+	})
+
+	return {
+		data,
+		totalPages: Math.ceil(dataCount / limit)
 	}
 }
