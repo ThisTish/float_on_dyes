@@ -35,39 +35,33 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 			</header>
 
 			<section className="grid grid-cols-1 gap-10 md:gap-5 md:grid-cols-2">
+
 				{/* images */}
 				<div className="w-full">
 					<ProductDetailsImages images={product.images} name={product.name} />
 				</div>
 
 				{/* details */}
-				<Card className="space-y-5 p-10 text-darkGreen">
-					<CardHeader>
+				<Card className="p-10 text-darkGreen">
+					<CardHeader >
 						<CardTitle >
-							<h2>
-								<span className="text-2xl font-extrabold tracking-tight ">{product.name} </span>
-								<span className="text-xl font-bold ">{product.brand} </span>
-								<span className=" font-light block">{product.plastic}</span>
-								<p className="text-sm font-extralight">{product.weight}g</p>
-
-							</h2>
+							<span className="text-xl md:text-2xl font-extrabold tracking-tight ">{product.name} </span>
+							<span className="text-lg md:text-xl font-bold">{product.brand} </span>
+							<p className="flex-between md:text-lg font-semibold">
+								<span>{product.dyeType}</span>
+								<ProductPrice className="text-xl md:text-2xl" value={Number(product.price)} />
+							</p>
+							<p className="text-sm font-light block">{product.plastic}</p>
+							<p className="text-xs md:text-sm font-extralight">{product.weight}g</p>
 						</CardTitle>
-
-						{/* dye type and price */}
-						<CardDescription>
-							<div className="flex flex-wrap gap-3 -mt-2 justify-between items-center">
-								<span className="text-lg font-semibold">{product.dyeType}</span>
-								<ProductPrice className="text-2xl" value={Number(product.price)} />
-							</div>
-						</CardDescription>
 					</CardHeader>
 
-					<CardContent>
+					<CardContent className="space-y-3">
 						{/* description */}
 						<p className="text-pretty leading-snug">{product.description}</p>
 
 						{/* flight numbers */}
-						<div className="grid grid-cols-4 py-5 mx-auto max-w-60 text-center text-sm sm:text-base ">
+						<div className="grid grid-cols-4 py-5 gap-1 mx-auto max-w-60 text-center text-sm sm:text-base ">
 							<div className="aspect-square max-w-24 bg-brightBlue text-white content-evenly">
 								<h4 >Speed</h4>
 								<span className="font-bold tracking-widest">{product.speed}</span>
@@ -88,7 +82,7 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 					</CardContent>
 
 					{/* cart buttons */}
-					<CardFooter className="flex flex-col lg:flex-row justify-center items-center w-full gap-3">
+					<CardFooter className="flex flex-col lg:flex-row justify-center items-center w-full gap-3 mt-3">
 						<AddToWishList item={{
 							productId: product.id,
 							name: product.name,

@@ -1,3 +1,4 @@
+import { auth } from "@/auth"
 import AddressCard from "@/components/order/AddressCard"
 import PaymentCard from "@/components/order/PaymentCard"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,17 +8,18 @@ import { formatCurrency, formatId } from "@/lib/utils"
 import { ShippingAddress } from "@/types"
 import { Metadata } from "next"
 import Image from "next/image"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 
 export const metadata: Metadata = {
 	title: "Order Details"
 }
 
 const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
+	const session = await auth()
 	const { id } = await props.params
 
 	const order = await getOrderById(id)
-	if (!order) notFound()
+	if(order.userId !== session?.user.id && session?.user.role !== 'admin') return redirect('/unauthorized') 
 
 	return (
 		<div>
@@ -43,6 +45,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 								<h2 >Order Items</h2>
 							</CardTitle>
 						</CardHeader>
+
 						<CardContent>
 							<Table className="text-lg">
 								<TableHeader>
@@ -51,6 +54,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 										<TableHead>Price</TableHead>
 									</TableRow>
 								</TableHeader>
+
 								<TableBody>
 									{order.orderItems.map((item) => (
 										<TableRow key={item.slug}>
