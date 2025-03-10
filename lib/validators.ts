@@ -3,8 +3,8 @@ import { formatNumberWithDecimal } from './utils'
 import { PAYMENT_METHODS } from './constants'
 
 const currency = z
-.string()
-.refine((val: string) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(val))))
+	.string()
+	.refine((val: string) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(val))))
 
 export const insertProductSchema = z.object({
 	name: z.string().min(3, 'Name must be at least 3 characters long'),
@@ -128,8 +128,13 @@ export const insertOrderSchema = z.object({
 export const insertOrderItemSchema = z.object({
 	productId: z.string(),
 	name: z.string(),
-	slug: z.string(),	
-	image: z.string(),	
+	slug: z.string(),
+	image: z.string(),
 	price: currency,
 	qty: z.number()
+})
+
+export const updatingUserProfileSchema = z.object({
+	name: z.string().min(3, 'Name must be at least 3 characters long'),
+	email: z.string().email('Invalid email address').min(3, 'Email must be at least 3 characters long'),
 })

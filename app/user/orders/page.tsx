@@ -19,7 +19,7 @@ const UserOrdersPage = async (props: {
 	const orders = await getUserOrders({ page: Number(page) || 1 })
 
 	return (
-		<div className="space-y-2 mt-20">
+		<div className="space-y-2">
 			<h2 className="h2-bold">Orders</h2>
 			<div className="overflow-x-auto">
 				<Table>
@@ -54,7 +54,7 @@ const UserOrdersPage = async (props: {
 						))}
 					</TableBody>
 				</Table>
-				{orders.totalPages >= 1 ? (
+				{orders.totalPages > 1 ? (
 					<Pagination page={Number(page) || '1'} totalPages={orders.totalPages} urlParamName="page" />
 				) : null}
 			</div>

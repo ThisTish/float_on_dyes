@@ -28,7 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				session.user.name = token.name
 				session.user.image = token.image
 				session.user.role = token.role
-			}			
+			}
 
 			if (trigger == 'update') {
 				session.user.name = user.name
@@ -55,18 +55,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					}
 				})
 
-				if(trigger  === 'signIn' || 'signUp'){
+				if (trigger === 'signIn' || 'signUp') {
 					const cookiesObject = await cookies()
 					const sessionCartId = cookiesObject.get('sessionCartId')?.value
 
-					if(sessionCartId){
+					if (sessionCartId) {
 						const sessionCart = await prisma.cart.findFirst({
 							where: {
 								sessionCartId
 							}
 						})
 
-						if(sessionCart){
+						if (sessionCart) {
 							await prisma.cart.deleteMany({
 								where: {
 									userId: user.id
@@ -84,6 +84,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 						}
 					}
 				}
+			}
+
+			if (session?.user.name && trigger === 'update') {
+				token.name = session.user.name
 			}
 
 			const existingUser = await prisma.user.findFirst({

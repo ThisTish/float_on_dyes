@@ -33,7 +33,7 @@ export default async function UserLayout({
 				</div>
 
 			</header>
-			<div className="flex flex-col min-h-screen">
+			<div className="flex flex-col min-h-screen mt-40">
 				<main className="flex-1 wrapper">
 					<div className="flex-1 space-y-4 p-8 pt-6 container mx-auto">
 						{children}

@@ -49,7 +49,6 @@ export async function signInWithCredentials(
 	}
 }
 
-
 // sign up user
 export async function signUp(prevState: unknown, formData: FormData) {
 	try {
@@ -86,7 +85,6 @@ export async function signUp(prevState: unknown, formData: FormData) {
 	}
 }
 
-
 // get existing user
 export async function getExistingUser(email: string) {
 	const existingUser = await prisma.user.findFirst({
@@ -107,12 +105,10 @@ export async function getExistingUser(email: string) {
 	}
 }
 
-
 // sign out user
 export async function signOutUser() {
 	await signOut({ redirectTo: '/', redirect: true })
 }
-
 
 // providers
 export async function providerSignIn(provider: 'google' | 'discord') {
@@ -120,7 +116,6 @@ export async function providerSignIn(provider: 'google' | 'discord') {
 		redirectTo: '/'
 	})
 }
-
 
 // get user by id
 export async function getUserById(userId: string) {
@@ -163,23 +158,44 @@ export async function updateUserAddress(data: ShippingAddress) {
 // update user payment method
 export async function updateUserPaymentMethod(data: z.infer<typeof paymentMethodSchema>) {
 	try {
-			const session = await auth()
-			if (!session) throw new Error('User not found')
-			const user = await getUserById(session?.user.id)
-			if(!user) throw new Error('User not found')
+		const session = await auth()
+		if (!session) throw new Error('User not found')
+		const user = await getUserById(session?.user.id)
+		if (!user) throw new Error('User not found')
 
-			const paymentMethod = paymentMethodSchema.parse(data)
+		const paymentMethod = paymentMethodSchema.parse(data)
 
-			await prisma.user.update({
-				where: {
-					id: user.id
-				},
-				data:{
-					paymentMethod: paymentMethod.type
-				}
-			})
+		await prisma.user.update({
+			where: {
+				id: user.id
+			},
+			data: {
+				paymentMethod: paymentMethod.type
+			}
+		})
 
-			return { success: true, message: 'Payment method updated successfully' }
+		return { success: true, message: 'Payment method updated successfully' }
+
+	} catch (error) {
+		return { success: false, message: formatError(error) }
+	}
+}
+
+// update user profile
+export async function updateUserProfile(user: { name: string, email: string }) {
+	try {
+		const session = await auth()
+		if (!session) throw new Error('User not found')
+		const currentUser = await getUserById(session?.user.id)
+		await prisma.user.update({
+			where: {
+				id: currentUser.id
+			},
+			data: {
+				name: user.name,
+			}
+		})
+		return { success: true, message: 'Profile updated successfully' }
 
 	} catch (error) {
 		return { success: false, message: formatError(error) }

@@ -5,7 +5,7 @@ export const FREE_SHIPPING_PRICE = Number(process.env.FREE_SHIPPING_PRICE) || 10
 export const SHIPPING_PRICE = Number(process.env.SHIPPING_PRICE) || 10
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS ? process.env.PAYMENT_METHODS.split(', ') : ['Credit Card', 'PayPal', 'Cash on Delivery']
 export const DEFAULT_PAYMENT_METHOD = process.env.DEFAULT_PAYMENT_METHOD || 'Credit Card'
-export const ITEMS_ON_PAGE = Number(process.env.ITEMS_ON_PAGE) || 3
+export const ITEMS_ON_PAGE = Number(process.env.ITEMS_ON_PAGE) || 12
 
 export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
