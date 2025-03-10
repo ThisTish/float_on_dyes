@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import qs from 'query-string'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -7,29 +8,29 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export const formatNumberWithDecimal = (num: number): string => {
-    const [whole, decimal] = num.toString().split('.')
-    return decimal ? `${whole}.${decimal.toString().padEnd(2, '0')}` : `${whole}.00`
+  const [whole, decimal] = num.toString().split('.')
+  return decimal ? `${whole}.${decimal.toString().padEnd(2, '0')}` : `${whole}.00`
 }
 
-export const formatError = (error: any) =>{
-  if(error.name === 'ZodError'){
+export const formatError = (error: any) => {
+  if (error.name === 'ZodError') {
     const fieldErrors = Object.keys(error.errors).map((field) =>
       error.errors[field])
     return fieldErrors.join('.')
-  }else if(error.name === 'PrismaClientKnownRequestError' &&  error.code === 'P2002'){
-      const field = error.meta?.target ? error.meta.target[0] : 'Field'
+  } else if (error.name === 'PrismaClientKnownRequestError' && error.code === 'P2002') {
+    const field = error.meta?.target ? error.meta.target[0] : 'Field'
     return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists`
-  }else{
+  } else {
     return typeof error.message === 'string' ? error.message : JSON.stringify(error.message)
 
   }
 }
 
-export const getBaseUrl = () =>{
-  if(typeof window !== 'undefined') return ''
+export const getBaseUrl = () => {
+  if (typeof window !== 'undefined') return ''
 
-  if(process.env.VERCEL_URL) return `https://${process.env.DOMAIN_URL}`
-  
+  if (process.env.VERCEL_URL) return `https://${process.env.DOMAIN_URL}`
+
   return 'http://localhost:3000'
 }
 
@@ -50,12 +51,12 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat('en-us', {
   minimumFractionDigits: 2,
 })
 
-export const formatCurrency = (amount : number | string | null) => {
-  if(typeof amount === 'number'){
+export const formatCurrency = (amount: number | string | null) => {
+  if (typeof amount === 'number') {
     return CURRENCY_FORMATTER.format(amount)
-  }else if(typeof amount === 'string'){
+  } else if (typeof amount === 'string') {
     return CURRENCY_FORMATTER.format(Number(amount))
-  }else{
+  } else {
     return NaN
   }
 }
@@ -104,9 +105,23 @@ export function formatDateTime(dateString: Date) {
     timeOptions
   )
 
-  return{
+  return {
     dateTime: formattedDateTime,
     dateOnly: formattedDate,
     timeOnly: formattedTime
   }
+}
+
+// format pagination links
+export function formUrlQuery({ params, key, value, }: { params: string, key: string, value: string | null }) {
+  // takes string and make an object
+  const query = qs.parse(params)
+  query[key] = value
+
+  return qs.stringifyUrl({
+    url: window.location.pathname,
+    query,
+  }, {
+    skipNull: true
+  })
 }

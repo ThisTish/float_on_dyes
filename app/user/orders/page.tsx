@@ -1,3 +1,4 @@
+import Pagination from "@/components/shared/lists/Pagination"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { getUserOrders } from "@/lib/actions/order.actions"
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils"
@@ -10,11 +11,12 @@ export const metadata: Metadata = {
 
 const UserOrdersPage = async (props: {
 	searchParams: Promise<{
-		page: string}>
-	}) => {
+		page: string
+	}>
+}) => {
 
 	const { page } = await props.searchParams
-	const orders = await getUserOrders({page: Number(page) || 1 })
+	const orders = await getUserOrders({ page: Number(page) || 1 })
 
 	return (
 		<div className="space-y-2 mt-20">
@@ -32,17 +34,17 @@ const UserOrdersPage = async (props: {
 						</TableRow>
 					</TableHeader>
 					<TableBody>
-						{orders.data.map((order) =>(
+						{orders.data.map((order) => (
 							<TableRow key={order.id}>
 								<TableCell>{formatId(order.id)}</TableCell>
 								<TableCell>{formatDateTime(order.createdAt).dateTime}</TableCell>
 								<TableCell>{formatCurrency(order.totalPrice)}</TableCell>
 								<TableCell>
 									{order.isPaid && order.paidAt ? formatDateTime(order.paidAt).dateOnly : 'Not Paid'}
-									</TableCell>
+								</TableCell>
 								<TableCell>
 									{order.isDelivered && order.deliveredAt ? formatDateTime(order.deliveredAt).dateOnly : 'Not Delivered'}
-									</TableCell>
+								</TableCell>
 								<TableCell>
 									<Link href={`/order/${order.id}`}>
 										<span className="px-2">Details</span>
@@ -52,6 +54,9 @@ const UserOrdersPage = async (props: {
 						))}
 					</TableBody>
 				</Table>
+				{orders.totalPages >= 1 ? (
+					<Pagination page={Number(page) || '1'} totalPages={orders.totalPages} urlParamName="page" />
+				) : null}
 			</div>
 		</div>
 	)
