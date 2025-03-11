@@ -6,6 +6,7 @@ import Title from "../header/Title";
 
 
 const Hero = () => {
+
 	return (
 		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/images/heroLandscape.svg')] bg-cover bg-center bg-no-repeat items-center justify-center ">
 			<hgroup className="flex flex-col gap-16 w-64 h-full mt-32 md:w-72 lg:w-96 ">
