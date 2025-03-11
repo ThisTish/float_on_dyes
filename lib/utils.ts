@@ -61,6 +61,12 @@ export const formatCurrency = (amount: number | string | null) => {
   }
 }
 
+export const NUMBER_FORMATTER = new Intl.NumberFormat('en-US')
+
+export function formatNumber(number: number) {
+  return NUMBER_FORMATTER.format(number)
+}
+
 export function convertToPlainObject<T>(value: T): T {
   return JSON.parse(JSON.stringify(value));
 }
