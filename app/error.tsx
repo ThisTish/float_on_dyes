@@ -4,14 +4,12 @@ import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
 import BackButton from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/button"
 import SearchButton from "@/components/ui/SearchButton"
-import SearchInput from "@/components/ui/SearchInput"
 import { RefreshCcw } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 // app/error.js
 export default function Error({ error, reset }: any) {
 
-	const router = useRouter()
 
 	return (
 		<div className="bg-[url('/images/notFoundLandscape.svg')] bg-cover bg-center bg-no-repeat h-screen flex items-center justify-center">

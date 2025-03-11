@@ -119,6 +119,9 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 					)
 				}
 			</a>
+			<p style={{ fontSize: '12px' }}>
+				Link will expire in 24 hours
+			</p>
 		</div>
 		<address>
 			<p>Float on Dyes support</p>
