@@ -1,6 +1,9 @@
 'use client'
 
-import { BiLogoDiscord, BiLogoGoogle } from 'react-icons/bi'
+import { BiLogoDiscord } from 'react-icons/bi'
+import { FcGoogle } from "react-icons/fc"
+import { BsDiscord } from "react-icons/bs";
+
 import { Button } from '../ui/button'
 import { useTransition } from 'react'
 import { providerSignIn } from '@/lib/actions/users.actions'
@@ -24,7 +27,7 @@ const Providers = () => {
 			>
 				{isPending ? 'Signing in...' : 'Sign In with Google'}
 				<AnimatedDiv variant={'outline'} animation={'scale'} >
-					<BiLogoGoogle />
+					<FcGoogle />
 				</AnimatedDiv>
 			</Button>
 			<Button
@@ -35,7 +38,7 @@ const Providers = () => {
 			>
 				{isPending ? 'Signing in...' : 'Sign In with Discord'}
 				<AnimatedDiv variant={'outline'} animation={'scale'} >
-				<BiLogoDiscord />
+				<BsDiscord />
 				</AnimatedDiv>
 			</Button>
 		</div>
