@@ -62,3 +62,22 @@ export const CHECKOUT_PAGE_LINKS = [
 		href: null
 	},
 ]
+
+export const ADMIN_PAGE_LINK = [
+	{
+		name: 'Overview',
+		href: '/admin/overview'
+	},
+	{
+		name: 'Products',
+		href: '/admin/products'
+	},
+	{
+		name: 'Orders',
+		href: '/admin/orders'
+	},
+	{
+		name: 'Users',
+		href: '/admin/users'
+	},
+]

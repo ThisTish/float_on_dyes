@@ -65,6 +65,18 @@ const UserButton = () => {
 						</Button>
 					</Link>
 				</DropdownMenuItem>
+
+				{session.user.role === 'admin' ? (
+					<DropdownMenuItem>
+						<Link href="/admin/overview">
+							<Button variant={'link'} className="w-full text-start p-0 rounded-full">
+								Admin
+							</Button>
+						</Link>
+					</DropdownMenuItem>
+				) : null
+				}
+
 				<form action={signOutUser}>
 					<Button variant={'link'} className="relative justify-start ml-2 flex w-fit cursor-default select-none items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors focus:bg-blue-50/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 text-start p-0 before:hover:bg-destructive rounded-full" >
 						Signout
