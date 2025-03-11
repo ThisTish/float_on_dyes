@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "../ui/button"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
-import { BiUser, BiUserCircle } from "react-icons/bi"
+import { BiUserCircle } from "react-icons/bi"
 import Tooltip from "../ui/Tooltip"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import Image from "next/image"
@@ -23,7 +23,6 @@ const UserButton = () => {
 		)
 	}
 
-	const userIcon = session.user.image || session?.user?.name?.charAt(0).toUpperCase() || <BiUser />
 
 	return (
 		<DropdownMenu modal={false}>
