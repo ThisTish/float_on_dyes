@@ -7,13 +7,6 @@ import SearchIcon from "./searchIcon"
 import Tooltip from "./Tooltip"
 
 
-// todo make look like cart icon, 
-// todo on hover bg-darkBlue onClick/isActive, 
-// todo move to the right & rounded-none, 
-// todo onHover-search shouldn't show yet, 
-// todo change size for mobile view
-// todo add className? or fix the margin(weird in mobile view empty cart)
-
 const SearchButton = () => {
 	const [isActive, setIsActive] = useState(false)
 	const [searchValue, setSearchValue] = useState("")
@@ -32,7 +25,7 @@ const SearchButton = () => {
 
 	return (
 		<div
-			className={`relative ml-2.5 bg-transparent size-10 rounded-full flex duration-500 ${isActive ? "w-48 md:w-64 rounded-none bg-white border-darkBlue border" :""
+			className={`relative ml-2.5 bg-transparent size-10 rounded-full flex duration-500 ${isActive ? "w-48 md:w-64 rounded-none bg-white border-darkBlue border" : ""
 				}`}
 		>
 			<Label className="sr-only" htmlFor="search">Search</Label>

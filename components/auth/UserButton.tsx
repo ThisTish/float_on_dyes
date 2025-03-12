@@ -82,7 +82,7 @@ const UserButton = () => {
 				}
 
 				<form action={() => startTransition(() => signOutUser())}>
-					<Button variant={'link'} className="relative justify-start ml-2 flex w-fit cursor-default select-none items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors focus:bg-blue-50/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 text-start p-0 before:hover:bg-destructive rounded-full" >
+					<Button variant={'link'} className={`relative justify-start ml-2 flex w-fit cursor-default select-none items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 text-start p-0 before:hover:bg-destructive rounded-full ${pending ? 'focus:bg-transparent' : "focus:bg-blue-50/50}"}`}>
 						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" /> : "Signout"}
 					</Button>
 				</form>
