@@ -7,7 +7,7 @@ import { getCart } from "./cart.actions"
 import { getUserById } from "./users.actions"
 import { insertOrderSchema } from "../validators"
 import { prisma } from "@/db/prisma"
-import { CartItem } from "@/types"
+import { CartItem, SalesDataType } from "@/types"
 import { ITEMS_ON_PAGE } from "../constants"
 import { Prisma } from "@prisma/client"
 
@@ -132,10 +132,7 @@ export async function getUserOrders({ limit = ITEMS_ON_PAGE, page }: { limit?: n
 	}
 }
 
-type SalesDataType = {
-	month: string
-	totalSales: number
-}[]
+
 
 // get sales data
 export async function getOrderSummary() {

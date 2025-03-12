@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 	title: "Dashboard"
 }
 
-const OverviewPage = async () => {
+const DashboardPage = async () => {
 	const summary = await getOrderSummary()
 	// console.log(summary)
 
@@ -122,4 +122,4 @@ const OverviewPage = async () => {
 	)
 }
 
-export default OverviewPage
+export default DashboardPage

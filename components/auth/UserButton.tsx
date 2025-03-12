@@ -8,8 +8,12 @@ import Tooltip from "../ui/Tooltip"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import Image from "next/image"
 import { signOutUser } from "@/lib/actions/users.actions"
+import { useTransition } from "react"
+import { PiSpinnerBallDuotone } from "react-icons/pi"
 
 const UserButton = () => {
+	const [pending, startTransition] = useTransition()
+
 
 	const { data: session, status } = useSession()
 
@@ -68,18 +72,18 @@ const UserButton = () => {
 
 				{session.user.role === 'admin' ? (
 					<DropdownMenuItem>
-						<Link href="/admin/overview">
+						<Link href="/admin/dashboard">
 							<Button variant={'link'} className="w-full text-start p-0 rounded-full">
-								Admin
+								Dashboard
 							</Button>
 						</Link>
 					</DropdownMenuItem>
 				) : null
 				}
 
-				<form action={signOutUser}>
+				<form action={() => startTransition(() => signOutUser())}>
 					<Button variant={'link'} className="relative justify-start ml-2 flex w-fit cursor-default select-none items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors focus:bg-blue-50/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 text-start p-0 before:hover:bg-destructive rounded-full" >
-						Signout
+						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" /> : "Signout"}
 					</Button>
 				</form>
 			</DropdownMenuContent>

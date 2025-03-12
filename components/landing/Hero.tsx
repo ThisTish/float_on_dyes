@@ -12,7 +12,7 @@ const Hero = () => {
 			<hgroup className="flex flex-col gap-16 w-64 h-full mt-32 md:w-72 lg:w-96 ">
 				<Title />
 				<div className="text-end w-52 p-2 self-end backdrop-blur-sm text-balance rounded-full md:w-72 md:mt-5 lg:mt-8  lg:w-80 ">
-					<h2 className="text-2xl md:text-3xl lg:text-4xl text-white mb-5 dark:text-darkGreen font-semibold tracking-wide">"Fly, My Pretty!"</h2>
+					<h2 className="text-2xl md:text-3xl lg:text-4xl mb-5 font-semibold tracking-wide">"Fly, My Pretty!"</h2>
 					<p className="text-lg leading-5 lg:text-xl">One of a kind dyes and custom designs for your favorite things...</p>
 					<span className="px-1 font-bold w-fit text-xl md:text-2xl lg:text-3xl">Discs</span>
 				</div>

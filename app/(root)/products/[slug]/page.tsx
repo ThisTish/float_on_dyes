@@ -42,15 +42,15 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 				</div>
 
 				{/* details */}
-				<Card className="p-10 text-darkGreen">
+				<Card className="p-10">
 					<CardHeader >
 						<CardTitle >
-							<span className="text-xl md:text-2xl font-extrabold tracking-tight ">{product.name} </span>
+							<span className="text-xl md:text-2xl font-extrabold">{product.name} </span>
 							<span className="text-lg md:text-xl font-bold">{product.brand} </span>
-							<p className="flex-between md:text-lg font-semibold">
+							<div className="flex-between md:text-lg font-semibold">
 								<span>{product.dyeType}</span>
 								<ProductPrice className="text-xl md:text-2xl" value={Number(product.price)} />
-							</p>
+							</div>
 							<p className="text-sm font-light block">{product.plastic}</p>
 							<p className="text-xs md:text-sm font-extralight">{product.weight}g</p>
 						</CardTitle>
