@@ -1,6 +1,7 @@
 import "@/app/globals.css"
 import AdminMainNav from "@/components/admin/AdminMainNav"
 import Menu from "@/components/header/Menu"
+import { requireAdmin } from "@/lib/auth-guard"
 import { APP_NAME } from "@/lib/constants"
 import Image from "next/image"
 import Link from "next/link"
@@ -12,7 +13,7 @@ export default async function AdminLayout({
 	children: React.ReactNode
 }>) {
 
-
+	await requireAdmin()
 
 	return (
 		<>
