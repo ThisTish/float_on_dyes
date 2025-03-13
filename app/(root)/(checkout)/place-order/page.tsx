@@ -5,7 +5,7 @@ import PriceBreakdown from "@/components/shared/PriceBreakdown"
 import Heading from "@/components/ui/Heading"
 import AddressCard from "@/components/order/AddressCard"
 import PaymentCard from "@/components/order/PaymentCard"
-import ItemsTable from "@/components/shared/ItemsTable"
+import ItemsTable from "@/components/shared/tables/ItemsTable"
 
 export const metadata: Metadata = {
 	title: "Place Order"

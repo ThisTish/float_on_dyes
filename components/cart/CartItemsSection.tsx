@@ -6,7 +6,7 @@ import SearchButton from "../ui/SearchButton"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
-import ItemsTable from "../shared/ItemsTable"
+import ItemsTable from "../shared/tables/ItemsTable"
 
 const CartItemsSection = ({ cart }: { cart?: Cart }) => {
 	return (

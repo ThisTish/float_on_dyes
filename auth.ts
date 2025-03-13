@@ -28,6 +28,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				session.user.name = token.name
 				session.user.image = token.image
 				session.user.role = token.role
+				session.user.isOAuth = token.isOAuth as boolean
+
 			}
 
 			if (trigger == 'update') {
@@ -88,6 +90,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
 			if (session?.user.name && trigger === 'update') {
 				token.name = session.user.name
+				token.image = session.user.image
+				token.email = session.user.email
 			}
 
 			const existingUser = await prisma.user.findFirst({
@@ -101,6 +105,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			token.email = existingUser.email
 			token.image = existingUser.image
 			token.role = existingUser.role
+			token.isOAuth = !existingUser.password
 
 			return token
 		}
