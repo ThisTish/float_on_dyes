@@ -87,7 +87,6 @@ export function formatDateTime(dateString: Date) {
     hour12: true
   }
   const dateOptions: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
     month: 'short',
     year: 'numeric',
     day: 'numeric'

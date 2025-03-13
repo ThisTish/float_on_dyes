@@ -4,7 +4,7 @@ import PaymentCard from "@/components/order/PaymentCard"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { getOrderById } from "@/lib/actions/order.actions"
-import { formatCurrency, formatId } from "@/lib/utils"
+import { formatCurrency, formatDateTime, formatId } from "@/lib/utils"
 import { ShippingAddress } from "@/types"
 import { Metadata } from "next"
 import Image from "next/image"
@@ -19,7 +19,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 	const { id } = await props.params
 
 	const order = await getOrderById(id)
-	if(order.userId !== session?.user.id && session?.user.role !== 'admin') return redirect('/unauthorized') 
+	if (order.userId !== session?.user.id && session?.user.role !== 'admin') return redirect('/unauthorized')
 
 	return (
 		<div>
@@ -43,6 +43,7 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 						<CardHeader>
 							<CardTitle className="text-xl font-semibold">
 								<h2 >Order Items</h2>
+								<span className="text-muted text-base font-medium">Placed: {formatDateTime(order.createdAt).dateTime}</span>
 							</CardTitle>
 						</CardHeader>
 

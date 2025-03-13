@@ -116,6 +116,20 @@ export async function getUserOrders({ limit = ITEMS_ON_PAGE, page }: { limit?: n
 		orderBy: {
 			createdAt: 'desc'
 		},
+		select: {
+			id: true,
+			createdAt: true,
+			isPaid: true,
+			paidAt: true,
+			isDelivered: true,
+			deliveredAt: true,
+			totalPrice: true,
+			user: {
+				select: {
+					name: true
+				}
+			}
+		},
 		take: limit,
 		skip: (page - 1) * limit,
 	})
@@ -177,5 +191,36 @@ export async function getOrderSummary() {
 		totalSales,
 		salesData,
 		latestOrders
+	}
+}
+
+export async function getAllOrders({ limit = ITEMS_ON_PAGE, page, }: { limit?: number, page: number }) {
+	const data = await prisma.order.findMany({
+		orderBy: {
+			createdAt: 'desc'
+		},
+		take: limit,
+		skip: (page - 1) * limit,
+		select: {
+			id: true,
+			createdAt: true,
+			isPaid: true,
+			paidAt: true,
+			isDelivered: true,
+			deliveredAt: true,
+			totalPrice: true,
+			user: {
+				select: {
+					name: true
+				}
+			}
+		}
+	})
+
+	const dataCount = await prisma.order.count()
+
+	return {
+		data,
+		totalPages: Math.ceil(dataCount / limit)
 	}
 }
