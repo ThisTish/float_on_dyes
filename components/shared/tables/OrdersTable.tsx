@@ -1,12 +1,14 @@
-import page from "@/app/(root)/page"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { formatId, formatDateTime, formatCurrency } from "@/lib/utils"
-import Pagination from "../lists/Pagination"
 import { Order } from "@/types"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+import DeleteDialog from "../dialogs/DeleteDialog"
+import { deleteOrder } from "@/lib/actions/order.actions"
 
-const OrdersTable = ({ orders, totalPages }: { orders: Order[], totalPages: number }) => {
+const OrdersTable = ({ orders, role }: { orders: Order[], role: 'admin' | 'user' }) => {
+
+
 	return (
 		<div className="overflow-x-auto">
 			<Table>
@@ -33,20 +35,23 @@ const OrdersTable = ({ orders, totalPages }: { orders: Order[], totalPages: numb
 							</TableCell>
 							<TableCell>
 								{order.isDelivered && order.deliveredAt ? formatDateTime(order.deliveredAt).dateOnly : (
-									<Badge variant={'destructive'}>Not Delivered</Badge>
+									<Badge variant={'destructive'} >Not Delivered</Badge>
 
 								)}
 							</TableCell>
-							<TableCell>
+							<TableCell className="flex flex-col md:flex-row gap-1">
 								<Link href={`/order/${order.id}`} className="border text-xs">
 									<span className="px-2">Details</span>
 								</Link>
+								{role === 'admin' ? (
+									<DeleteDialog id={order.id} action={deleteOrder} />
+								) : null}
 							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
-		
+
 		</div>
 	)
 }

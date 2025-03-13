@@ -10,6 +10,7 @@ import { prisma } from "@/db/prisma"
 import { CartItem, SalesDataType } from "@/types"
 import { ITEMS_ON_PAGE } from "../constants"
 import { Prisma } from "@prisma/client"
+import { revalidatePath } from "next/cache"
 
 export async function createOrder() {
 	try {
@@ -222,5 +223,20 @@ export async function getAllOrders({ limit = ITEMS_ON_PAGE, page, }: { limit?: n
 	return {
 		data,
 		totalPages: Math.ceil(dataCount / limit)
+	}
+}
+
+export async function deleteOrder(id: string) {
+	try {
+		await prisma.order.delete({
+			where: {
+				id
+			}
+		})
+		revalidatePath('/admin/orders')
+		return { success: true, message: 'Order deleted' }
+
+	} catch (error) {
+		return { success: false, message: formatError(error) }
 	}
 }

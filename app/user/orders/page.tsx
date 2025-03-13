@@ -47,7 +47,7 @@ const UserOrdersPage = async (props: {
 					</div>
 				</div>
 			) :
-				<OrdersTable orders={orders.data as Order[]} totalPages={orders.totalPages} />
+				<OrdersTable orders={orders.data as Order[]} role={'user'} />
 			}
 			{orders.totalPages > 1 ? (
 				<Pagination page={Number(page) || '1'} totalPages={orders.totalPages} urlParamName="page" />

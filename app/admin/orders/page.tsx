@@ -20,7 +20,7 @@ const AdminOrdersPage = async (props: { searchParams: Promise<{ page: string }> 
 		<div className="space-y-5">
 			<Heading first="All " second="Orders" />
 
-			<OrdersTable orders={orders.data as Order[]} totalPages={orders.totalPages} />
+			<OrdersTable orders={orders.data as Order[]} role={'admin'} />
 
 			{orders.totalPages > 1 ? (
 				<Pagination page={Number(page) || '1'} totalPages={orders.totalPages} urlParamName="page" />
