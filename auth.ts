@@ -48,16 +48,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					token.name = user.email.split('@')[0]
 				}
 
-				await prisma.user.update({
+				await prisma.user.upsert({
 					where: {
 						id: user.id
 					},
-					data: {
-						name: token.name || 'NO_NAME',
+					update: {
+						name: user.name,
+						image: user.image,
+						email: user.email
+					},
+					create: {
+						id: user.id,
+						name: user.name,
+						image: user.image,
+						email: user.email
 					}
 				})
 
-				if (trigger === 'signIn' || 'signUp') {
+				if (trigger === 'signIn' || trigger === 'signUp') {
 					const cookiesObject = await cookies()
 					const sessionCartId = cookiesObject.get('sessionCartId')?.value
 

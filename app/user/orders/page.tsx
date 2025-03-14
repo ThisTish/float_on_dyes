@@ -24,7 +24,7 @@ const UserOrdersPage = async (props: {
 	const orders = await getUserOrders({ page: Number(page) || 1 })
 
 	return (
-		<div className="space-y-5">
+		<div className="space-y-10">
 			<Heading first="Your" second="Orders" />
 
 			{orders.data.length === 0 ? (

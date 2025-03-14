@@ -33,10 +33,6 @@ export const USER_PAGE_LINKS = [
 	{
 		name: 'Orders',
 		href: '/user/orders'
-	},
-	{
-		name: 'Wishlist',
-		href: '/user/wishlist'
 	}
 ]
 
