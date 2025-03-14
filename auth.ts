@@ -48,17 +48,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					token.name = user.email.split('@')[0]
 				}
 
-				await prisma.user.upsert({
+				const existingUser = await prisma.user.findFirst({
 					where: {
-						id: user.id
-					},
+						email: user.email
+					}
+				})
+
+				await prisma.user.upsert({
+					where: { id: existingUser?.id ?? user.id }, // Use existing ID if found
 					update: {
 						name: user.name,
-						image: user.image,
-						email: user.email
+						image: user.image
 					},
 					create: {
-						id: user.id,
+						id: user.id, 
 						name: user.name,
 						image: user.image,
 						email: user.email
