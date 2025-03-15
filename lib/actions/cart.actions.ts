@@ -32,29 +32,34 @@ const calcPrice = (items: CartItem[]) => {
 export async function addItemToCart(data: CartItem) {
 	console.log('data', data.name)
 	try {
-		// get user/session ids
 		const ids = await sessionUserId()
 		if (!ids) throw new Error('Cart not found')
 		const { userId, sessionCartId } = ids
 		console.dir(ids)
-		// get cart
+
 		const cart = await getCart()
 		console.log('cart retrieved', cart?.id)
-		// validate cart item
+
+		if (cart && !cart.userId && userId) {
+			console.log('this')
+			// await prisma.cart.update({
+			// 	where: { id: cart.id },
+			// 	data: { userId }
+			// });
+		}
+
 		const item = cartItemSchema.parse(data)
 
-		// get product
 		const product = await prisma.product.findFirst({
 			where: {
 				id: item.productId
 			}
 		})
-		// checking if in stock or available
+
 		if (!product || product.stock < 1) return { success: false, message: 'but you can request a different custom disc!' }
 		//> this will not work if there are more than one in stock to begin with, and they try to add more to their cart. when adding to their cart, the stock does not get updated. Not a problem until we add stickers/shirts/etc.
 		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish list to check back later.` }
 
-		// if no cart, make one and add item
 		if (!cart) {
 			const newCart = insertCartSchema.parse({
 				userId,
@@ -62,7 +67,7 @@ export async function addItemToCart(data: CartItem) {
 				items: [item],
 				...calcPrice([item])
 			})
-			console.log(newCart.userId)
+			console.log(newCart)
 			await prisma.cart.create({
 				data: newCart
 			})
@@ -71,10 +76,8 @@ export async function addItemToCart(data: CartItem) {
 			return { success: true, message: `${product.name} added to cart!` }
 
 		} else {
-			// if cart exists, check if item is already in cart
 			const existItem = (cart.items as CartItem[]).find((x) => x.productId === item.productId)
 
-			// if item is in cart and there is more than 1 available add to cart
 			if (existItem) {
 				if (product.stock === 1) {
 					throw new Error(`And you've already snagged it!`)
@@ -84,7 +87,6 @@ export async function addItemToCart(data: CartItem) {
 				}
 				existItem.qty = existItem.qty + 1
 			} else {
-				// if item is not in cart, add to cart
 				cart.items.push(item)
 			}
 			await prisma.cart.update({
@@ -112,7 +114,7 @@ export async function removeItemFromCart(productId: string) {
 	try {
 		const sessionCartId = (await cookies()).get('sessionCartId')?.value;
 		if (!sessionCartId) throw new Error('Cart session not found');
-		
+
 		const cart = await getCart()
 		if (!cart) throw new Error('Cart not found')
 

@@ -25,7 +25,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		...authConfig.callbacks,
 		async session({ session, token, user, trigger }: any) {
 			if (session.user && token.sub) {
-				session.user.id = token.sub
+				session.user.id = token.id
 				session.user.name = token.name
 				session.user.image = token.image
 				session.user.role = token.role
@@ -46,37 +46,36 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			let existingUser = null
 
 			if (user) {
-				token.id = user.id
-				token.role = user.role
-
-				if (user.email && user.name === 'NO_NAME') {
-					token.name = user.email.split('@')[0]
-				}
-
 				existingUser = await prisma.user.findFirst({
 					where: {
 						email: user.email
 					}
 				})
 
-				await prisma.user.upsert({
-					where: { id: existingUser?.id ?? user.id },
-					update: {
-						name: user.name,
-						image: user.image
-					},
-					create: {
-						id: user.id,
-						name: user.name,
-						image: user.image,
-						email: user.email
-					}
-				})
+				if (!existingUser) {
+					existingUser = await prisma.user.create({
+						data: {
+							email: user.email,
+							name: user.name,
+							image: user.image,
+							role: user.role
+						}
+					})
+				}
+
+				if (user.email && user.name === 'NO_NAME') {
+					token.name = user.email.split('@')[0]
+				}
+
+				token.id = existingUser.id
+				token.role = existingUser.role
+
 
 				if (trigger === 'signIn' || trigger === 'signUp') {
 					const cookiesObject = await cookies()
 					const sessionCartId = cookiesObject.get('sessionCartId')?.value
-
+					if (!sessionCartId) return console.log('NONE')
+					console.log(existingUser)
 					if (sessionCartId) {
 						const sessionCart = await prisma.cart.findFirst({
 							where: {
@@ -89,13 +88,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 							}
 						})
 						if (sessionCart) {
+							console.log('session cart in auth', sessionCart)
 							if (!userCart) {
 								await prisma.cart.update({
 									where: {
 										id: sessionCart.id
 									},
 									data: {
-										userId: user.id,
+										userId: existingUser.id,
 									}
 								})
 							} else if (sessionCart.id !== userCart.id) {
@@ -148,6 +148,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			return token
 		}
 	},
+	debug: true,
 	providers: [
 		Google({
 			clientId: process.env.GOOGLE_CLIENT_ID,

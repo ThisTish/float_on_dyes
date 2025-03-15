@@ -24,7 +24,7 @@ const WishListCard = ({ item }: { item: CartItem }) => {
 					<ProductPrice value={Number(item.price)} className="font-extralight" size={'sm'} />
 				</CardContent>
 		</Link>
-				<CardFooter className="grid w-full">
+				<CardFooter className="grid w-full self-end">
 					<AddToCart item={item} size='wishList' />
 					<AddToWishList item={item} size="wishList" />
 				</CardFooter>

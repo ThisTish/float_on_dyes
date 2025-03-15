@@ -17,12 +17,13 @@ export const metadata: Metadata = {
 const CartPage = async () => {
 	const session = await auth()
 	const userId = session?.user.id
-
+	console.log('page', userId)
 	const cart = await getCart(userId)
-
+	
 	const wishList = await getWishList(userId ?? undefined)
-
+	console.log('page', cart)
 	return (
+
 		<div className="grid lg:grid-cols-4 lg:gap-5">
 			<div className="mb-5 lg:mb-0 lg:col-span-4">
 				<BackButton size={'sm'} />
