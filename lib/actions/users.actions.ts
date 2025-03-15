@@ -9,6 +9,7 @@ import { compare, hashSync } from "bcrypt-ts-edge"
 import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
 import { ShippingAddress } from "@/types"
 import { z } from "zod"
+import { cookies } from "next/headers"
 
 // sign in user with credentials
 export async function signInWithCredentials(
@@ -107,6 +108,8 @@ export async function getExistingUser(email: string) {
 
 // sign out user
 export async function signOutUser() {
+	const cookiesObject = cookies()
+	;(await cookiesObject).delete('sessionCartId')
 	await signOut({ redirectTo: '/', redirect: true })
 }
 

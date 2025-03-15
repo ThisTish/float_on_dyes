@@ -30,15 +30,16 @@ const calcPrice = (items: CartItem[]) => {
 
 // add to cart
 export async function addItemToCart(data: CartItem) {
+	console.log('data', data.name)
 	try {
 		// get user/session ids
 		const ids = await sessionUserId()
 		if (!ids) throw new Error('Cart not found')
 		const { userId, sessionCartId } = ids
-
+		console.dir(ids)
 		// get cart
 		const cart = await getCart()
-
+		console.log('cart retrieved', cart?.id)
 		// validate cart item
 		const item = cartItemSchema.parse(data)
 
@@ -61,7 +62,7 @@ export async function addItemToCart(data: CartItem) {
 				items: [item],
 				...calcPrice([item])
 			})
-
+			console.log(newCart.userId)
 			await prisma.cart.create({
 				data: newCart
 			})
