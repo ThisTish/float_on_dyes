@@ -7,7 +7,8 @@ import Discord from "next-auth/providers/discord"
 import { signInFormSchema } from './lib/validators'
 import { authConfig } from './auth.config'
 import { cookies } from 'next/headers'
-import { getCart } from './lib/actions/cart.actions'
+import { getCart, mergeCarts } from './lib/actions/cart.actions'
+import { CartItem } from './types'
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -56,24 +57,52 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					}
 				})
 
-				if (trigger === 'signIn' || 'signUp') {
+				if (trigger === 'signIn' || trigger === 'signUp') {
 					const cookiesObject = await cookies()
 					const sessionCartId = cookiesObject.get('sessionCartId')?.value
 
 					if (sessionCartId) {
 						const sessionCart = await getCart(undefined, sessionCartId)
-					
-						if (sessionCart && !sessionCart?.userId) {
+						console.log("sessionCart", sessionCart)
+
+						const userCart = await getCart(user.id)
+
+						if (userCart && sessionCart) {
+							if (userCart.id !== sessionCart?.id && userCart.items.length > 0 && sessionCart.items.length > 0) {
+								const newItems = [...sessionCart.items, ...userCart.items]
+								
+								await mergeCarts(newItems, sessionCart.id, user.id)
+
+								await prisma.cart.delete({
+									where: {
+										id: userCart.id
+									}
+								})
+							}
+
+
+							if (userCart.items.length === 0 || !sessionCart.userId) {
+								await prisma.cart.update({
+									where: {
+										id: sessionCart.id
+									},
+									data: {
+										userId: user.id
+									}
+								})
+							}
+						}
+
+						if (!userCart) {
 							await prisma.cart.update({
 								where: {
-									id: sessionCart.id
+									id: sessionCart?.id
 								},
 								data: {
 									userId: user.id
 								}
 							})
 						}
-
 					}
 				}
 			}
