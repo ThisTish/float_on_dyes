@@ -7,6 +7,7 @@ import Discord from "next-auth/providers/discord"
 import { signInFormSchema } from './lib/validators'
 import { authConfig } from './auth.config'
 import { cookies } from 'next/headers'
+import { getCart } from './lib/actions/cart.actions'
 
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -60,19 +61,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					const sessionCartId = cookiesObject.get('sessionCartId')?.value
 
 					if (sessionCartId) {
-						const sessionCart = await prisma.cart.findFirst({
-							where: {
-								sessionCartId
-							}
-						})
-
-						if (sessionCart) {
-							await prisma.cart.deleteMany({
-								where: {
-									userId: user.id
-								}
-							})
-
+						const sessionCart = await getCart(undefined, sessionCartId)
+					
+						if (sessionCart && !sessionCart?.userId) {
 							await prisma.cart.update({
 								where: {
 									id: sessionCart.id
@@ -82,6 +73,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 								}
 							})
 						}
+
 					}
 				}
 			}
