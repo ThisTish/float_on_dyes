@@ -178,8 +178,8 @@ const UserProfileForm = () => {
 									<FormLabel>Confirm New Password</FormLabel>
 									<FormControl>
 										<Input {...field} type="password" disabled={isDisabled} className="w-full border" value={field.value || ''} placeholder='*******' />
-
 									</FormControl>
+									<FormMessage />
 								</FormItem>
 							)}
 						/>

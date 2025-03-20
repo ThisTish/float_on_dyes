@@ -142,13 +142,13 @@ export const updatingUserProfileSchema = z.object({
 	newPassword: z.string().min(6, 'New password must be at least 6 characters long').optional(),
 	confirmNewPassword: z.string().min(6, 'Confirm new password must be at least 6 characters long').optional()
 }).refine((data) => {
-	if (data.password && !data.newPassword && !data.confirmNewPassword) {
+	if (!data.password && data.newPassword && data.confirmNewPassword) {
 		return false
 	}
 	return true
 }, {
 	message: 'New password is required when changing password',
-	path: ['newPassword']
+	path: ['password']
 }).refine((data) => {
 	return !data.newPassword || data.newPassword === data.confirmNewPassword
 }, {
