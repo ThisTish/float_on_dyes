@@ -181,7 +181,7 @@ export async function getCart(passedUserId?: string, passedSessionCartId?: strin
 	const cart = await prisma.cart.findFirst({
 		where: userId ? { userId } : { sessionCartId },
 	})
-	if (!cart) return console.log('blah')
+	if (!cart) return
 
 	const cartPlain = (convertToPlainObject({
 		...cart,

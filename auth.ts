@@ -30,10 +30,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				session.user.name = token.name
 				session.user.image = token.image
 				session.user.role = token.role
+				session.user.isOauth = token.isOauth as boolean
 			}
 
 			if (trigger == 'update') {
 				session.user.name = user.name
+				session.user.image = user.image
+				session.user.email = user.email
 			}
 			return session
 		},
@@ -70,7 +73,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 						if (userCart && sessionCart) {
 							if (userCart.id !== sessionCart?.id && userCart.items.length > 0 && sessionCart.items.length > 0) {
 								const newItems = [...sessionCart.items, ...userCart.items]
-								
+
 								await mergeCarts(newItems, sessionCart.id, user.id)
 
 								await prisma.cart.delete({
@@ -122,6 +125,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			token.email = existingUser.email
 			token.image = existingUser.image
 			token.role = existingUser.role
+			token.isOauth = !existingUser.password
 
 			return token
 		}

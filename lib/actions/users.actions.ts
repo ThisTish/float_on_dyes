@@ -5,7 +5,7 @@ import { auth, signIn, signOut } from "@/auth"
 import { prisma } from "@/db/prisma"
 import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { formatError } from "../utils"
-import { hashSync } from "bcrypt-ts-edge"
+import { compare, hashSync } from "bcrypt-ts-edge"
 import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
 import { ShippingAddress } from "@/types"
 import { z } from "zod"
@@ -184,17 +184,35 @@ export async function updateUserPaymentMethod(data: z.infer<typeof paymentMethod
 }
 
 // update user profile
-export async function updateUserProfile(user: { name: string, email: string }) {
+export async function updateUserProfile(user: {
+	name: string,
+	email: string,
+	image?: string,
+	password?: string,
+	newPassword?: string,
+	confirmNewPassword?: string
+}) {
 	try {
 		const session = await auth()
 		if (!session) throw new Error('User not found')
 		const currentUser = await getUserById(session?.user.id)
+
+		if (currentUser.password && user.password && user.newPassword && user.confirmNewPassword) {
+			const isMatch = await compare(user.password, currentUser.password)
+			if (!isMatch) return { success: false, message: 'Invalid original password.' }
+
+			if (user.newPassword !== user.confirmNewPassword) return { success: false, message: 'Passwords do not match.' }
+		}
+
 		await prisma.user.update({
 			where: {
 				id: currentUser.id
 			},
 			data: {
 				name: user.name,
+				email: user.email,
+				image: user.image,
+				...(user.newPassword && { password: hashSync(user.newPassword, 10) })
 			}
 		})
 		return { success: true, message: 'Profile updated successfully' }

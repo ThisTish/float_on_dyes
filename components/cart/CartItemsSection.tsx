@@ -6,7 +6,7 @@ import SearchButton from "../ui/SearchButton"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
-import ItemsTable from "../shared/ItemsTable"
+import ItemsTable from "../shared/tables/ItemsTable"
 
 const CartItemsSection = ({ cart }: { cart?: Cart }) => {
 	return (
@@ -18,7 +18,7 @@ const CartItemsSection = ({ cart }: { cart?: Cart }) => {
 						<h2 className="h3-bold">Your shopping cart is empty</h2>
 						<span>Head to the shop or search for something special.</span>
 
-						<div className="flex flex-col-reverse gap-3 items-start sm:flex-row sm:justify-between sm:items-center ">
+						<div className="flex flex-col-reverse items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
 							<SearchButton />
 							<Button
 								variant={"cta"}

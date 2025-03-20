@@ -5,7 +5,7 @@ import PriceBreakdown from "@/components/shared/PriceBreakdown"
 import Heading from "@/components/ui/Heading"
 import AddressCard from "@/components/order/AddressCard"
 import PaymentCard from "@/components/order/PaymentCard"
-import ItemsTable from "@/components/shared/ItemsTable"
+import ItemsTable from "@/components/shared/tables/ItemsTable"
 
 export const metadata: Metadata = {
 	title: "Place Order"
@@ -16,9 +16,9 @@ const PlaceOrderPage = async () => {
 	return (
 		<div>
 			<Heading first="Place " second="Order" className="mb-10" />
-			<div className="grid grid-rows-4 md:grid-rows-2 md:grid-cols-3 md:gap-5 space-y-5 md:space-y-0">
+			<div className="grid grid-rows-4 space-y-5 md:grid-cols-3 md:grid-rows-2 md:gap-5 md:space-y-0">
 				{/* items table */}
-				<Card className="p-5 md:col-span-2 overflow-x-auto">
+				<Card className="overflow-x-auto p-5 md:col-span-2">
 					<CardHeader>
 						<CardTitle className="text-xl font-semibold">
 							<h2 >Order Items</h2>
@@ -31,9 +31,9 @@ const PlaceOrderPage = async () => {
 				</Card>
 
 				{/* price breakdown */}
-				<Card className="p-5 md:col-span-1 md:col-start-1 h-fit">
+				<Card className="h-fit p-5 md:col-span-1 md:col-start-1">
 					<CardHeader>
-						<CardTitle className="text-xl font-semibold px-0">
+						<CardTitle className="px-0 text-xl font-semibold">
 							<h2>Order Total</h2>
 						</CardTitle>
 					</CardHeader>
@@ -43,7 +43,7 @@ const PlaceOrderPage = async () => {
 					</CardContent>
 				</Card>
 
-				<div className="row-start-2 md:row-start-1 md:col-span-1 space-y-5">
+				<div className="row-start-2 space-y-5 md:col-span-1 md:row-start-1">
 					{/* shipping address */}
 					<AddressCard />
 

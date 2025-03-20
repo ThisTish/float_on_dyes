@@ -202,7 +202,7 @@ export async function updatePassword(prevState: unknown, formData: FormData) {
 
 		data.password = hashSync(data.password, 10)
 
-		const updatedUser = await prisma.user.update({
+		await prisma.user.update({
 			where: {
 				email: resetPasswordToken.email
 			},

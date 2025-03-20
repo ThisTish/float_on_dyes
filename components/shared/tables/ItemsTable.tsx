@@ -1,13 +1,13 @@
 "use client"
 
 import { useCheckout } from "@/context/CheckoutContext"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import Link from "next/link"
-import ProductPrice from "../product/ProductPrice"
+import ProductPrice from "@/components/product/ProductPrice"
 import { PiDotsThreeOutlineVertical, PiTrashDuotone } from "react-icons/pi"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import AddToCart from "../product/AddToCart"
-import AddToWishList from "../product/AddToWishList"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import AddToCart from "@/components/product/AddToCart"
+import AddToWishList from "@/components/product/AddToWishList"
 import Image from "next/image"
 import { Cart } from "@/types"
 
@@ -34,7 +34,7 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 
 						{/* item image and name */}
 						<TableCell>
-							<Link href={`/products/${item.slug}`} className="flex flex-col py-3 sm:flex-row gap-3 items-center w-fit md:text-lg">
+							<Link href={`/products/${item.slug}`} className="flex w-fit flex-col items-center gap-3 py-3 sm:flex-row md:text-lg">
 								<Image
 									src={item.image}
 									alt={item.name}
@@ -54,9 +54,9 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 
 						{/* item options */}
 						{showOptions ? (
-							<TableCell className="flex justify-end ">
+							<TableCell className="flex justify-end">
 								<DropdownMenu>
-									<DropdownMenuTrigger className="sm:hidden py-10">
+									<DropdownMenuTrigger className="py-10 sm:hidden">
 										<PiDotsThreeOutlineVertical size={25} />
 									</DropdownMenuTrigger>
 									<DropdownMenuContent className="bg-secondary dark:bg-primary">
@@ -68,7 +68,7 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 										</DropdownMenuItem>
 									</DropdownMenuContent>
 								</DropdownMenu>
-								<div className="hidden sm:flex flex-col gap-3 pt-5 items-center max-w-40">
+								<div className="hidden max-w-40 flex-col items-center gap-3 pt-5 sm:flex">
 									<AddToWishList item={item} size="cart" />
 									<AddToCart item={item} size="cart" />
 								</div>
