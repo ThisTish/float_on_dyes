@@ -12,18 +12,13 @@ import { Button } from "../ui/button"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { FaRegSave } from "react-icons/fa"
 import { updateUserProfile } from "@/lib/actions/users.actions"
-import { useEffect, useState } from "react"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import Image from "next/image"
 import { BiUserCircle } from "react-icons/bi"
 
 const UserProfileForm = () => {
-	const [isDisabled, setIsDisabled] = useState(false)
 	const { data: session, update } = useSession()
 
-	useEffect(() => {
-		if (session?.user.isOAuth) setIsDisabled(true)
-	}, [session])
 
 	const form = useForm<z.infer<typeof updatingUserProfileSchema>>({
 		resolver: zodResolver(updatingUserProfileSchema),
@@ -72,8 +67,8 @@ const UserProfileForm = () => {
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
 				<>
-					{isDisabled ? (
-						<div className="text-balance text-sm text-destructive">Since you signed in with Google or Discord, options to update your profile are limited.</div>
+					{session?.user.isOauth ? (
+						<div className="text-balance text-sm text-destructive">Signing in with Google or Discord will limit what you can update.</div>
 					) : null}
 					<div className="flex flex-col gap-5">
 
@@ -101,7 +96,7 @@ const UserProfileForm = () => {
 												)
 											}
 										</Avatar>
-										<Button size={'sm'} disabled={isDisabled}>
+										<Button size={'sm'} disabled={session?.user.isOauth}>
 											Change Picture
 										</Button>
 									</div>
@@ -119,7 +114,7 @@ const UserProfileForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>Name</FormLabel>
 									<FormControl>
-										<Input {...field} type="text" className="w-full border text-muted" />
+										<Input {...field} type="text" className="w-full border" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -134,14 +129,15 @@ const UserProfileForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>Email</FormLabel>
 									<FormControl>
-										<Input {...field} type="email" disabled={isDisabled} className="w-full border text-muted" />
+										<Input {...field} type="email" disabled={session?.user.isOauth} className="w-full border" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
 
-						<hr className="mt-3 border-t"/>
+						<hr className="mt-3 border-t" />
+
 						{/* password */}
 						<h2 className="text-lg font-semibold">Change Password</h2>
 						<FormField
@@ -151,7 +147,7 @@ const UserProfileForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>Password</FormLabel>
 									<FormControl>
-										<Input {...field} type="password" disabled={isDisabled} className="w-full border" value={field.value || ''} placeholder='*******' />
+										<Input {...field} type="password" disabled={session?.user.isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -164,7 +160,7 @@ const UserProfileForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>New Password</FormLabel>
 									<FormControl>
-										<Input {...field} type="password" disabled={isDisabled} className="w-full border" value={field.value || ''} placeholder='*******' />
+										<Input {...field} type="password" disabled={session?.user.isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -177,7 +173,7 @@ const UserProfileForm = () => {
 								<FormItem className="w-full">
 									<FormLabel>Confirm New Password</FormLabel>
 									<FormControl>
-										<Input {...field} type="password" disabled={isDisabled} className="w-full border" value={field.value || ''} placeholder='*******' />
+										<Input {...field} type="password" disabled={session?.user.isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
 									</FormControl>
 									<FormMessage />
 								</FormItem>

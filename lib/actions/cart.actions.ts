@@ -221,7 +221,6 @@ export async function mergeCarts(items: CartItem[], sessionCartId: string, userI
 				...calcPrice(updatingItems)
 			}
 		})
-		console.log('cart merged')
 	} catch (error) {
 		console.log('error merging cart', error)
 	}

@@ -13,12 +13,11 @@ const SignUpPage = async (props: { searchParams: Promise<{ callbackUrl: string }
 	const session = await auth()
 
 	if (session) {
-		console.log('session true')
 		return redirect(callbackUrl || '/')
 	}
 
 	return (
-		<main className="w-full max-w-md mx-auto">
+		<main className="mx-auto w-full max-w-md">
 			<SignUpForm />
 		</main>
 

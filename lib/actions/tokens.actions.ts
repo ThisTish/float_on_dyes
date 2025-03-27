@@ -48,10 +48,8 @@ export async function generateVerificationToken(email: string) {
 
 // generate reset password token
 export async function generatePasswordResetToken(email: string) {
-	console.log('generate password token', email)
 
 	const token = crypto.randomUUID()
-	console.log(token)
 	const expires = new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
 	const existingToken = await prisma.resetPasswordToken.findFirst({
 		where: {
@@ -59,7 +57,6 @@ export async function generatePasswordResetToken(email: string) {
 		}
 	})
 	if (existingToken) {
-		console.log(true)
 		await prisma.resetPasswordToken.delete({
 			where: {
 				id_token: {
@@ -77,7 +74,6 @@ export async function generatePasswordResetToken(email: string) {
 			expires,
 		}
 	})
-	console.log('reset password token', resetPasswordToken)
 	return resetPasswordToken
 }
 
@@ -122,7 +118,6 @@ export async function resetPassword(prevState: unknown, formData: FormData) {
 			email: data.email
 		}
 	})
-	console.log(user)
 	if (!user) return { success: false, message: 'User not found' }
 	user.name = user.name.split(' ')[0].slice(0, 1).toUpperCase() + user.name.split(' ')[0].slice(1).toLowerCase()
 

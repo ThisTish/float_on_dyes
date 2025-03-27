@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import { prisma } from '@/db/prisma'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import { PrismaAdapter } from '@auth/prisma-adapter'
 import { compare } from 'bcrypt-ts-edge'
 import Google from 'next-auth/providers/google'
 import Discord from "next-auth/providers/discord"
@@ -13,6 +14,7 @@ import { CartItem } from './types'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
 	secret: process.env.NEXTAUTH_SECRET,
+	adapter: PrismaAdapter(prisma),
 	trustHost: true,
 	session: {
 		strategy: 'jwt',
@@ -33,6 +35,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 				session.user.isOauth = token.isOauth as boolean
 			}
 
+
 			if (trigger == 'update') {
 				session.user.name = user.name
 				session.user.image = user.image
@@ -51,22 +54,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					token.name = user.email.split('@')[0]
 				}
 
-				await prisma.user.update({
-					where: {
-						id: user.id
-					},
-					data: {
-						name: token.name || 'NO_NAME',
-					}
-				})
-
 				if (trigger === 'signIn' || trigger === 'signUp') {
 					const cookiesObject = await cookies()
 					const sessionCartId = cookiesObject.get('sessionCartId')?.value
 
 					if (sessionCartId) {
 						const sessionCart = await getCart(undefined, sessionCartId)
-						console.log("sessionCart", sessionCart)
 
 						const userCart = await getCart(user.id)
 
@@ -83,7 +76,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 								})
 							}
 
-
 							if (userCart.items.length === 0 || !sessionCart.userId) {
 								await prisma.cart.update({
 									where: {
@@ -96,10 +88,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 							}
 						}
 
-						if (!userCart) {
+						if (!userCart && sessionCart) {
 							await prisma.cart.update({
 								where: {
-									id: sessionCart?.id
+									id: sessionCart.id
 								},
 								data: {
 									userId: user.id
@@ -121,11 +113,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 			})
 			if (!existingUser) return token
 
+			const existingAccount = await prisma.account.findFirst({
+				where: {
+					userId: existingUser.id
+				}
+			})
+
 			token.name = existingUser.name
 			token.email = existingUser.email
 			token.image = existingUser.image
 			token.role = existingUser.role
-			token.isOauth = !existingUser.password
+			token.isOauth = !!existingAccount
+
 
 			return token
 		}
