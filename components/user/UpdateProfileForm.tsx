@@ -7,7 +7,7 @@ import { ControllerRenderProps, useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
-import { updatingUserProfileSchema } from "@/lib/validators"
+import { updateNameEmailImageSchema } from "@/lib/validators"
 import { Button } from "../ui/button"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { FaRegSave } from "react-icons/fa"
@@ -20,21 +20,18 @@ const UserProfileForm = () => {
 	const { data: session, update } = useSession()
 
 
-	const form = useForm<z.infer<typeof updatingUserProfileSchema>>({
-		resolver: zodResolver(updatingUserProfileSchema),
+	const form = useForm<z.infer<typeof updateNameEmailImageSchema>>({
+		resolver: zodResolver(updateNameEmailImageSchema),
 		defaultValues: {
 			name: session?.user.name || undefined,
 			email: session?.user.email || undefined,
-			image: session?.user.image || undefined,
-			password: undefined,
-			newPassword: undefined,
-			confirmNewPassword: undefined
+			image: session?.user.image || undefined
 		}
 	})
 
 	const { toast } = useToast()
 
-	const onSubmit = async (values: z.infer<typeof updatingUserProfileSchema>) => {
+	const onSubmit = async (values: z.infer<typeof updateNameEmailImageSchema>) => {
 		const res = await updateUserProfile(values)
 
 		if (!res.success) {
@@ -76,7 +73,7 @@ const UserProfileForm = () => {
 						<FormField
 							control={form.control}
 							name="image"
-							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatingUserProfileSchema>> }) => (
+							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updateNameEmailImageSchema>> }) => (
 								<FormItem className="w-full">
 									<FormLabel>Image</FormLabel>
 									<FormControl><div className="flex items-center gap-3">
@@ -110,7 +107,7 @@ const UserProfileForm = () => {
 						<FormField
 							control={form.control}
 							name="name"
-							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatingUserProfileSchema>> }) => (
+							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updateNameEmailImageSchema>> }) => (
 								<FormItem className="w-full">
 									<FormLabel>Name</FormLabel>
 									<FormControl>
@@ -125,7 +122,7 @@ const UserProfileForm = () => {
 						<FormField
 							control={form.control}
 							name="email"
-							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatingUserProfileSchema>> }) => (
+							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updateNameEmailImageSchema>> }) => (
 								<FormItem className="w-full">
 									<FormLabel>Email</FormLabel>
 									<FormControl>
@@ -136,51 +133,8 @@ const UserProfileForm = () => {
 							)}
 						/>
 
-						<hr className="mt-3 border-t" />
-
-						{/* password */}
-						<h2 className="text-lg font-semibold">Change Password</h2>
-						<FormField
-							control={form.control}
-							name="password"
-							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatingUserProfileSchema>> }) => (
-								<FormItem className="w-full">
-									<FormLabel>Password</FormLabel>
-									<FormControl>
-										<Input {...field} type="password" disabled={session?.user.isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name="newPassword"
-							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatingUserProfileSchema>> }) => (
-								<FormItem className="w-full">
-									<FormLabel>New Password</FormLabel>
-									<FormControl>
-										<Input {...field} type="password" disabled={session?.user.isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name="confirmNewPassword"
-							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatingUserProfileSchema>> }) => (
-								<FormItem className="w-full">
-									<FormLabel>Confirm New Password</FormLabel>
-									<FormControl>
-										<Input {...field} type="password" disabled={session?.user.isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
 						<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isDirty}>
-							Update
+							Save
 							{form.formState.isSubmitting ? <PiSpinnerBallDuotone className="animate-spin" /> : <FaRegSave />}
 						</Button>
 
@@ -188,6 +142,7 @@ const UserProfileForm = () => {
 				</>
 			</form>
 		</Form>
+
 	)
 }
 

@@ -134,10 +134,13 @@ export const insertOrderItemSchema = z.object({
 	qty: z.number()
 })
 
-export const updatingUserProfileSchema = z.object({
+export const updateNameEmailImageSchema = z.object({
 	name: z.string().min(3, 'Name must be at least 3 characters long'),
 	email: z.string().email('Invalid email address').min(3, 'Email must be at least 3 characters long'),
-	image: z.string().optional(),
+	image: z.string().optional()
+})
+
+export const updatePasswordProfileFormSchema = z.object({
 	password: z.string().min(6, 'Password must be at least 6 characters long').optional(),
 	newPassword: z.string().min(6, 'New password must be at least 6 characters long').optional(),
 	confirmNewPassword: z.string().min(6, 'Confirm new password must be at least 6 characters long').optional()

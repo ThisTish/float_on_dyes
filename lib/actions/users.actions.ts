@@ -187,22 +187,12 @@ export async function updateUserPaymentMethod(data: z.infer<typeof paymentMethod
 export async function updateUserProfile(user: {
 	name: string,
 	email: string,
-	image?: string,
-	password?: string,
-	newPassword?: string,
-	confirmNewPassword?: string
+	image?: string
 }) {
 	try {
 		const session = await auth()
 		if (!session) throw new Error('User not found')
 		const currentUser = await getUserById(session?.user.id)
-
-		if (currentUser.password && user.password && user.newPassword && user.confirmNewPassword) {
-			const isMatch = await compare(user.password, currentUser.password)
-			if (!isMatch) return { success: false, message: 'Invalid original password.' }
-
-			if (user.newPassword !== user.confirmNewPassword) return { success: false, message: 'Passwords do not match.' }
-		}
 
 		await prisma.user.update({
 			where: {
@@ -212,10 +202,42 @@ export async function updateUserProfile(user: {
 				name: user.name,
 				email: user.email,
 				image: user.image,
-				...(user.newPassword && { password: hashSync(user.newPassword, 10) })
 			}
 		})
 		return { success: true, message: 'Profile updated successfully' }
+
+	} catch (error) {
+		return { success: false, message: formatError(error) }
+	}
+}
+
+// update user password from profile
+export async function updateProfilePassword(data: {
+	password?: string,
+	newPassword?: string,
+	confirmNewPassword?: string
+}) {
+	try {
+		const session = await auth()
+		if (!session) throw new Error('User not found')
+		const currentUser = await getUserById(session?.user.id)
+
+		if (currentUser.password && data.password && data.newPassword && data.confirmNewPassword) {
+			const isMatch = await compare(data.password, currentUser.password)
+			if (!isMatch) return { success: false, message: 'Invalid original password.' }
+
+			if (data.newPassword !== data.confirmNewPassword) return { success: false, message: 'Passwords do not match.' }
+		}
+
+		await prisma.user.update({
+			where: {
+				id: currentUser.id
+			},
+			data: {
+				...(data.newPassword && { password: hashSync(data.newPassword, 10) })
+			}
+		})
+		return { success: true, message: 'Password updated successfully' }
 
 	} catch (error) {
 		return { success: false, message: formatError(error) }
