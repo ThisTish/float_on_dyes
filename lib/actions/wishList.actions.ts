@@ -30,6 +30,30 @@ export async function addItemToWishList(data: CartItem) {
 			}
 		})
 
+		if (existingWishList) {
+
+			const existingItem = (existingWishList?.items as CartItem[]).find((x) => x.productId === item.productId)
+
+			if (existingItem) {
+				return {
+					success: false, message: "Would you like to add it to your cart instead?"
+				}
+			}
+
+			await prisma.wishList.update({
+				where: {
+					id: existingWishList?.id
+				},
+				data: {
+					items: {
+						push: {
+							...data
+						}
+					}
+				}
+			})
+		}
+
 		if (!existingWishList) {
 			await prisma.wishList.create({
 				data: {
@@ -42,28 +66,6 @@ export async function addItemToWishList(data: CartItem) {
 				}
 			})
 		}
-
-		const existingItem = (existingWishList?.items as CartItem[]).find((x) => x.productId === item.productId)
-
-		if (existingItem) {
-			return {
-				success: false, message: "Would you like to add it to your cart instead?"
-			}
-		}
-
-		await prisma.wishList.update({
-			where: {
-				id: existingWishList?.id
-			},
-			data: {
-				items: {
-					push: {
-						...data
-					}
-				}
-			}
-		})
-
 
 		return {
 			success: true, message: `${product.name} has been added to your wish list!`
