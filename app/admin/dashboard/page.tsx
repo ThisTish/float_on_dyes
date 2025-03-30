@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 
 const DashboardPage = async () => {
 	const summary = await getOrderSummary()
-	// console.log(summary)
 
 	return (
 		<div className="space-y-3">
