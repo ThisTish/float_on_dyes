@@ -9,7 +9,7 @@ const divVariants = cva(
 			variant: {
 				default: "group-hover:text-primary-foreground group-hover:bg-primary",
 				destructive: "group-hover:text-white group-hover:bg-lightCta",
-				outline: "group-hover:text-accent group-hover:bg-primary-foreground",
+				outline: " group-hover:bg-white",
 				secondary: "group-hover:text-darkBlue dark:group-hover:text-lightBlue",
 				ghost: " group-hover:bg-transparent",
 				link: " group-hover:bg-transparent",
@@ -32,10 +32,10 @@ const divVariants = cva(
 				pulse: "group-hover:animate-pulse group-hover:transition-all group-hover:duration-900 ",
 				ping: "group-hover:animate-ping group-hover:transition-all group-hover:duration-900 ",
 				hide: "bg-transparent group-hover:opacity-0 group-hover:transition-all group-hover:duration-1000 ",
-				
+
 			}
 		},
-		defaultVariants:{
+		defaultVariants: {
 			variant: "default",
 			size: "default",
 			animation: "default"

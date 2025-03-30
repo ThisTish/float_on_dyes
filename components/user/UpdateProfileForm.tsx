@@ -15,6 +15,7 @@ import { updateUserProfile } from "@/lib/actions/users.actions"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import Image from "next/image"
 import { BiUserCircle } from "react-icons/bi"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
 
 const UserProfileForm = () => {
 	const { data: session, update } = useSession()
@@ -138,7 +139,12 @@ const UserProfileForm = () => {
 
 						<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isDirty}>
 							Save
-							{form.formState.isSubmitting ? <PiSpinnerBallDuotone className="animate-spin" /> : <FaRegSave />}
+							{form.formState.isSubmitting
+								? <PiSpinnerBallDuotone className="animate-spin" />
+								: <AnimatedDiv animation={'pulse'} >
+									<FaRegSave />
+								</AnimatedDiv>
+							}
 						</Button>
 
 					</div>

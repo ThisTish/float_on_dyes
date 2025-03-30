@@ -11,6 +11,7 @@ import { Button } from "../ui/button"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { updateProfilePassword } from "@/lib/actions/users.actions"
 import { FaRegSave } from "react-icons/fa"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
 
 const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 
@@ -89,7 +90,12 @@ const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 				/>
 				<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isValid }>
 					Update
-					{form.formState.isSubmitting ? <PiSpinnerBallDuotone className="animate-spin" /> : <FaRegSave />}
+					{form.formState.isSubmitting
+								? <PiSpinnerBallDuotone className="animate-spin" />
+								: <AnimatedDiv animation={'pulse'} >
+									<FaRegSave />
+								</AnimatedDiv>
+							}
 				</Button>
 			</form>
 		</Form>

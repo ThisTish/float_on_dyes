@@ -9,12 +9,12 @@ const PaymentMethodLabels = ({ method }: { method: string }) => {
 				? (
 					<>
 						<span>{method}</span>
-						<div className="flex space-x-1">
+						<span className="flex space-x-1">
 
 						{payments.slice(0, 4).map((card) => (
-							<card.icon className="text-darkBlue" size={25} />
+							<card.icon key={card.name} className="text-darkBlue" size={25} />
 						))}
-						</div>
+						</span>
 					</>
 				) : method === 'PayPal'
 					? (
@@ -25,7 +25,7 @@ const PaymentMethodLabels = ({ method }: { method: string }) => {
 					) : (
 						<>
 							<span>{method}</span>
-							<span className="text-darkBlue text-xs text-balance text-end w-1/3">*Only available in the Salt Lake Valley, UT</span>
+							<span className="w-1/3 text-balance text-end text-xs text-darkBlue">*Only available in the Salt Lake Valley, UT</span>
 						</>
 					)}
 		</>

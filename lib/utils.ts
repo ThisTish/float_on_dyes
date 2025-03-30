@@ -91,6 +91,11 @@ export function formatDateTime(dateString: Date) {
     year: 'numeric',
     day: 'numeric'
   }
+  const dateNumberOptions: Intl.DateTimeFormatOptions = {
+    month: '2-digit',
+    day: '2-digit',
+    year: '2-digit',
+  }
   const timeOptions: Intl.DateTimeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',
@@ -105,6 +110,10 @@ export function formatDateTime(dateString: Date) {
     'en-US',
     dateOptions
   )
+  const formattedDateNumber: string = new Date(dateString).toLocaleString(
+    'en-US',
+    dateNumberOptions
+  )
   const formattedTime: string = new Date(dateString).toLocaleString(
     'en-US',
     timeOptions
@@ -113,7 +122,8 @@ export function formatDateTime(dateString: Date) {
   return {
     dateTime: formattedDateTime,
     dateOnly: formattedDate,
-    timeOnly: formattedTime
+    timeOnly: formattedTime,
+    dateNumber: formattedDateNumber
   }
 }
 

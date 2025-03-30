@@ -20,7 +20,7 @@ const VerifyEmailForm = ({ token }: { token: string }) => {
 	const TokenButton = () => {
 		const { pending, action } = useFormStatus()
 		return (
-			<div className="flex justify-center mb-5 z-10">
+			<div className="z-10 mb-5 flex justify-center">
 				<Button
 					variant={'cta'}
 					disabled={pending}
@@ -52,13 +52,13 @@ const VerifyEmailForm = ({ token }: { token: string }) => {
 			otherLinkHref="/contact"
 		// showProviders={true}
 		>
-			<p className="text-balance text-center mb-5">Click the sign in button to finish verifying and to go to the sign in page.</p>
+			<p className="mb-5 text-balance text-center">Finish verifying your account by signing in.</p>
 			<form action={action}>
 				<input type="hidden" name="token" value={token} />
 				{!data.success && data.message === 'Email already verified or you need a new token' ? (
-					<div className="text-center text-destructive flex flex-col gap-5">
+					<div className="flex flex-col gap-5 text-center text-destructive">
 						<p>{data.message}</p>
-						<Link href={'/sign-in'} className="text-white bg-black font-bold p-3">Try signing in here instead</Link>
+						<Link href={'/sign-in'} className="bg-black p-3 font-bold text-white">Try signing in here instead</Link>
 					</div>
 				) : !data.success && data.message ? (
 					<div className="text-center text-destructive">

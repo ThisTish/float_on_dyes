@@ -2,12 +2,13 @@
 
 import { BiLogoDiscord } from 'react-icons/bi'
 import { FcGoogle } from "react-icons/fc"
-import { BsDiscord } from "react-icons/bs";
-
+import { BsDiscord } from "react-icons/bs"
 import { Button } from '../ui/button'
 import { useTransition } from 'react'
 import { providerSignIn } from '@/lib/actions/users.actions'
 import { AnimatedDiv } from '../ui/AnimatedDiv'
+
+
 const Providers = () => {
 	const [isPending, startTransition] = useTransition()
 
@@ -38,7 +39,7 @@ const Providers = () => {
 			>
 				{isPending ? 'Signing in...' : 'Sign In with Discord'}
 				<AnimatedDiv variant={'outline'} animation={'scale'} >
-				<BsDiscord />
+					<BsDiscord className='group-hover:text-[#5562EA]' />
 				</AnimatedDiv>
 			</Button>
 		</div>
