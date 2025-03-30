@@ -1,3 +1,5 @@
+"use client"
+
 import { DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Button } from "../ui/button"
@@ -10,6 +12,7 @@ import Image from "next/image"
 import { signOutUser } from "@/lib/actions/users.actions"
 import { useTransition } from "react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
+import { USER_PAGE_LINKS } from "@/lib/constants/page-links"
 
 const UserButton = () => {
 	const [pending, startTransition] = useTransition()
@@ -21,7 +24,7 @@ const UserButton = () => {
 		return (
 			<Link href={'/sign-in'}>
 				<Tooltip label="Sign In" position="bottom" className="mt-1">
-					<BiUserCircle size={40} className="transition-all duration-300 ease-in hover:text-primary-foreground hover:bg-darkBlue rounded-full" />
+					<BiUserCircle size={40} className="rounded-full transition-all duration-300 ease-in hover:bg-darkBlue hover:text-white" />
 				</Tooltip>
 			</Link>
 		)
@@ -29,7 +32,7 @@ const UserButton = () => {
 
 
 	return (
-		<DropdownMenu modal={false}>
+		<DropdownMenu modal={false} >
 			<DropdownMenuTrigger className="rounded-full" >
 				<Tooltip label="User Menu" position="bottom" className="mt-2">
 					<Avatar>
@@ -42,7 +45,7 @@ const UserButton = () => {
 									height={40}
 								/>
 							) : (
-								<AvatarFallback className="bg-transparent text-primary border border-primary font-extrabold transition-all duration-300 ease-in hover:text-white hover:border-white hover:bg-darkBlue">
+								<AvatarFallback className="border border-primary bg-transparent font-extrabold text-primary transition-all duration-300 ease-in hover:border-white hover:bg-darkBlue hover:text-white">
 									{session.user.name?.charAt(0).toUpperCase() || <BiUserCircle />}
 								</AvatarFallback>
 							)
@@ -50,40 +53,32 @@ const UserButton = () => {
 					</Avatar>
 				</Tooltip>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent >
-				<DropdownMenuLabel>
-					<p className="font-semibold">{session.user.name}</p>
+			<DropdownMenuContent>
+				<DropdownMenuLabel className="mb-3">
+					<p className="font-bold">{session.user.name}</p>
 					<p className="text-muted-foreground">{session.user.email}</p>
 				</DropdownMenuLabel>
-				<DropdownMenuItem>
-					<Link href="/user/profile">
-						<Button variant={'link'} className="w-full text-start p-0 rounded-full">
-							Profile
-						</Button>
-					</Link>
-				</DropdownMenuItem>
-				<DropdownMenuItem>
-					<Link href="/user/orders">
-						<Button variant={'link'} className="w-full text-start p-0 rounded-full">
-							Orders
-						</Button>
-					</Link>
-				</DropdownMenuItem>
+				{USER_PAGE_LINKS.map((link) => (
+					<DropdownMenuItem key={link.name}>
+						<Link href={link.href} className="font-semibold">
+						{link.name}
+						</Link>
+					</DropdownMenuItem>
+				))}
+
 
 				{session.user.role === 'admin' ? (
 					<DropdownMenuItem>
-						<Link href="/admin/dashboard">
-							<Button variant={'link'} className="w-full text-start p-0 rounded-full">
+						<Link href="/admin/dashboard" className="font-semibold">
 								Dashboard
-							</Button>
 						</Link>
 					</DropdownMenuItem>
 				) : null
 				}
 
-				<form action={() => startTransition(() => signOutUser())}>
-					<Button variant={'link'} className={`relative justify-start ml-2 flex w-fit cursor-default select-none items-center gap-2 px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0 text-start p-0 before:hover:bg-destructive rounded-full ${pending ? 'focus:bg-transparent' : "focus:bg-blue-50/50}"}`}>
-						{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" /> : "Signout"}
+				<form action={() => startTransition(() => signOutUser())} >
+					<Button variant={'destructive'} size={'sm'} className="m-2" >
+						{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" /> : "Signout"}
 					</Button>
 				</form>
 			</DropdownMenuContent>

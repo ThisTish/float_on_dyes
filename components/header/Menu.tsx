@@ -21,9 +21,10 @@ const Menu = () => {
 	const pathname = usePathname()
 
 	return (
-		<>
+		<div className="flex">
+
 			{/* md: and up */}
-			<nav className="hidden md:flex md:flex-col items-center text-sm space-x-1">
+			<nav className="hidden items-center space-x-1 text-sm md:flex md:flex-col">
 				<div>
 					{PAGE_LINKS.map((link) => (
 						<Button variant={'link'} key={link.name} asChild className={cn(' font-extrabold rounded-full', pathname === link.href ? 'before:left-0 before:scale-150 before:bg-darkBlue before:absolute before:h-2 before:w-full before:bottom-0' : '')}>
@@ -32,14 +33,14 @@ const Menu = () => {
 					))}
 				</div>
 
-				<div className="w-full flex items-center justify-between">
+				<div className="flex w-full items-center justify-between">
 					<SearchButton />
-					<div className="flex gap-3 items-center">
+					<div className="flex items-center gap-3">
 						<Tooltip label="Light/Dark" position="bottom" >
 							<ModeToggle />
 						</Tooltip>
 
-						<Link href='/cart' className="p-2 -mr-2 border-transparent border transition-all duration-300 ease-in hover:ring-inset hover:border-darkBlue hover:ring-[3px] hover:ring-white rounded-full hover:bg-darkBlue hover:text-white hover:scale-90 active:translate-x-1 active:translate-y-1">
+						<Link href='/cart' className="-mr-2 rounded-full border border-transparent p-2 transition-all duration-300 ease-in hover:scale-90 hover:border-darkBlue hover:bg-darkBlue hover:text-white hover:ring-[3px] hover:ring-inset hover:ring-white active:translate-x-1 active:translate-y-1">
 							<Tooltip label="Cart" className="mt-4" position="bottom">
 								<ShoppingCart />
 							</Tooltip>
@@ -51,7 +52,12 @@ const Menu = () => {
 			</nav>
 
 			{/* mobile */}
-			<nav className="md:hidden">
+			<nav className="flex gap-3 md:hidden">
+				<Link href={'/cart'} className="mt-1 w-fit rounded-full p-2 hover:bg-darkBlue hover:text-primary-foreground">
+					<ShoppingCart />
+				</Link>
+
+				<UserButton />
 				<Sheet onOpenChange={(prev) => setIsOpen(prev)}>
 					<SheetTrigger>
 						<Hamburger isOpen={isOpen} />
@@ -65,25 +71,16 @@ const Menu = () => {
 
 						</SheetHeader>
 						{PAGE_LINKS.map((link) => (
-							link.name === 'Cart' ? (
-								null
-							) : (
-								<Links key={link.name} {...link} className="transition duration-300 hover:bg-darkBlue p-2 hover:text-white hover:font-semibold" />
-							)
+							<Links key={link.name} {...link} className="p-2 transition duration-300 hover:bg-darkBlue hover:font-semibold hover:text-white" />
 						))}
-						<Link href={'/cart'} className="p-2 rounded-full w-fit hover:bg-darkBlue hover:text-primary-foreground">
-							<ShoppingCart />
-						</Link>
 
-						<UserButton />
 						<div className="-ml-3 w-full">
-
 							<SearchButton />
 						</div>
 					</SheetContent>
 				</Sheet>
 			</nav>
-		</>
+		</div>
 	)
 }
 
