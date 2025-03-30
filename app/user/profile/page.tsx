@@ -15,7 +15,7 @@ const UserProfilePage = async () => {
 
 	return (
 		<SessionProvider session={session}>
-			<Heading first="User" second="Profile" className="mb-10"/>
+			<Heading first="User" second="Profile" className="mb-10" />
 			<div className="mx-auto flex flex-col justify-between gap-5 md:flex-row">
 
 				<h2 className="text-lg font-semibold text-darkGreen">Profile Information</h2>

@@ -44,7 +44,7 @@ const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 	return (
 		<Form {...form}>
 			<form
-				className="flex flex-col gap-5"
+				className="mt-1 flex flex-col gap-5"
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
 
@@ -53,9 +53,9 @@ const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 					name="password"
 					render={({ field }: { field: ControllerRenderProps<z.infer<typeof updatePasswordProfileFormSchema>> }) => (
 						<FormItem className="w-full">
-							<FormLabel>Password</FormLabel>
+							<FormLabel >Password</FormLabel>
 							<FormControl>
-								<Input {...field} type="password" disabled={isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
+								<Input {...field} type="password" disabled={isOauth} className="w-full border placeholder:text-muted" value={field.value || ''} placeholder='*******' />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -68,7 +68,7 @@ const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 						<FormItem className="w-full">
 							<FormLabel>New Password</FormLabel>
 							<FormControl>
-								<Input {...field} type="password" disabled={isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
+								<Input {...field} type="password" disabled={isOauth} className="w-full border placeholder:text-muted" value={field.value || ''} placeholder='*******' />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -81,13 +81,13 @@ const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 						<FormItem className="w-full">
 							<FormLabel>Confirm New Password</FormLabel>
 							<FormControl>
-								<Input {...field} type="password" disabled={isOauth} className="w-full border" value={field.value || ''} placeholder='*******' />
+								<Input {...field} type="password" disabled={isOauth} className="w-full border placeholder:text-muted" value={field.value || ''} placeholder='*******' />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isDirty}>
+				<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isValid }>
 					Update
 					{form.formState.isSubmitting ? <PiSpinnerBallDuotone className="animate-spin" /> : <FaRegSave />}
 				</Button>

@@ -45,7 +45,10 @@ const UserProfileForm = () => {
 			...session,
 			user: {
 				...session?.user,
-				name: values.name
+				name: values.name,
+				email: values.email,
+				image: values.image
+
 			}
 		}
 
@@ -60,7 +63,7 @@ const UserProfileForm = () => {
 	return (
 		<Form {...form}>
 			<form
-				className="flex flex-col gap-5"
+				className="mt-1 flex flex-col gap-5"
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
 				<>
@@ -76,19 +79,19 @@ const UserProfileForm = () => {
 							render={({ field }: { field: ControllerRenderProps<z.infer<typeof updateNameEmailImageSchema>> }) => (
 								<FormItem className="w-full">
 									<FormLabel>Image</FormLabel>
-									<FormControl><div className="flex items-center gap-3">
-										<Avatar className="h-12 w-12">
+									<FormControl><div className="-mb-1 flex items-center gap-5">
+										<Avatar className="h-10 w-10">
 											{session?.user.image
 												? (
 													<Image
 														src={session.user.image}
 														alt="user avatar"
-														width={48}
-														height={48}
+														width={40}
+														height={40}
 													/>
 												) : (
-													<AvatarFallback className="size-12 border border-primary bg-transparent font-extrabold text-primary transition-all duration-300 ease-in hover:border-white hover:bg-darkBlue hover:text-white">
-														{session?.user.name?.charAt(0).toUpperCase() || <BiUserCircle size={48} />}
+													<AvatarFallback className="size-10 border border-primary bg-transparent font-extrabold text-primary transition-all duration-300 ease-in hover:border-white hover:bg-darkBlue hover:text-white">
+														{session?.user.name?.charAt(0).toUpperCase() || <BiUserCircle size={40} />}
 													</AvatarFallback>
 												)
 											}

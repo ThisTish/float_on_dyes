@@ -213,9 +213,9 @@ export async function updateUserProfile(user: {
 
 // update user password from profile
 export async function updateProfilePassword(data: {
-	password?: string,
-	newPassword?: string,
-	confirmNewPassword?: string
+	password: string,
+	newPassword: string,
+	confirmNewPassword: string
 }) {
 	try {
 		const session = await auth()
@@ -229,14 +229,17 @@ export async function updateProfilePassword(data: {
 			if (data.newPassword !== data.confirmNewPassword) return { success: false, message: 'Passwords do not match.' }
 		}
 
+		const hashedPassword = hashSync(data.newPassword, 10)
+
 		await prisma.user.update({
 			where: {
 				id: currentUser.id
 			},
 			data: {
-				...(data.newPassword && { password: hashSync(data.newPassword, 10) })
+				...(data.newPassword && { password: hashedPassword })
 			}
 		})
+
 		return { success: true, message: 'Password updated successfully' }
 
 	} catch (error) {

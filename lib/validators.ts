@@ -141,9 +141,9 @@ export const updateNameEmailImageSchema = z.object({
 })
 
 export const updatePasswordProfileFormSchema = z.object({
-	password: z.string().min(6, 'Password must be at least 6 characters long').optional(),
-	newPassword: z.string().min(6, 'New password must be at least 6 characters long').optional(),
-	confirmNewPassword: z.string().min(6, 'Confirm new password must be at least 6 characters long').optional()
+	password: z.string().min(6, 'Password must be at least 6 characters long'),
+	newPassword: z.string().min(6, 'New password must be at least 6 characters long'),
+	confirmNewPassword: z.string().min(6, 'Confirm new password must be at least 6 characters long')
 }).refine((data) => {
 	if (!data.password && data.newPassword && data.confirmNewPassword) {
 		return false
