@@ -19,8 +19,8 @@ const ProductCard = async ({ product }: { product: Product }) => {
 	const cart = await getCart()
 
 	return (
-		<Card key={product.id} className="relative group w-64 max-w-72 border-2 border-darkBlue">
-			<div className="grid gap-1 text-darkBlue absolute top-1 right-0 transition md:translate-x-6 duration-300 ease-in md:opacity-0 md:group-hover:opacity-100 md:group-hover:-translate-x-0 z-30">
+		<Card key={product.id} className="group relative w-64 max-w-72 border-2 border-darkBlue">
+			<div className="absolute right-0 top-1 z-30 grid gap-1 text-darkBlue transition duration-300 ease-in md:translate-x-6 md:opacity-0 md:group-hover:-translate-x-0 md:group-hover:opacity-100">
 
 				<AddToWishList item={{
 					productId: product.id,
@@ -56,7 +56,7 @@ const ProductCard = async ({ product }: { product: Product }) => {
 				</Link>
 			</CardTitle>
 
-			<CardDescription className="flex justify-between items-stretch">
+			<CardDescription className="flex items-stretch justify-between">
 				{/* price */}
 				<ProductPrice value={Number(product.price)} />
 				{/* details button */}
@@ -78,7 +78,7 @@ const ProductCard = async ({ product }: { product: Product }) => {
 			</CardFooter>
 
 		</Card>
-	);
+	)
 }
 
-export default ProductCard;
+export default ProductCard

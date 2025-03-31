@@ -9,6 +9,8 @@ import { useCheckout } from "@/context/CheckoutContext"
 import Link from "next/link"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
+import { BsFillCartCheckFill } from "react-icons/bs"
+import { PiSpinnerBallDuotone } from "react-icons/pi"
 
 const PlaceOrderForm = () => {
 	const { cart, user } = useCheckout()
@@ -24,7 +26,13 @@ const PlaceOrderForm = () => {
 		const { pending } = useFormStatus()
 		return (
 			<Button variant={'cta'} type={'submit'} disabled={pending} >
-				{pending ? 'Placing Order ...' : 'Place Order'}
+				{pending ? 'Placing Order' : 'Place Order'}
+				{pending ? (
+					<PiSpinnerBallDuotone className="animate-spin" />
+				) : (
+
+					<AnimatedDiv variant={'cta'} animation={'ping'}><BsFillCartCheckFill /></AnimatedDiv>
+				)}
 			</Button>
 		)
 	}
