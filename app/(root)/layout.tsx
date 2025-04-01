@@ -21,8 +21,8 @@ export default async function RootLayout({
 		<>
 			<SessionProvider>
 				<Header layout="main" />
-				<div className="flex flex-col min-h-screen">
-					<main className="flex-1 wrapper my-40">
+				<div className="flex min-h-screen flex-col">
+					<main className="wrapper my-40 flex-1">
 						{children}
 					</main>
 					<Footer />

@@ -2,25 +2,25 @@
 
 import { useToast } from "@/hooks/use-toast"
 import { shippingAddressDefaultValues } from "@/lib/constants"
+import { STATES } from "@/lib/constants/places"
 import { shippingAddressSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useTransition } from "react"
+import { useCheckout } from "@/context/CheckoutContext"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
+import { updateUserAddress } from "@/lib/actions/users.actions"
+import { cn } from "@/lib/utils"
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
-import { updateUserAddress } from "@/lib/actions/users.actions"
-import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
-import { useCheckout } from "@/context/CheckoutContext"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
-import { STATES } from "@/lib/constants/places"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
-import { cn } from "@/lib/utils"
 
 const ShippingAddressForm = () => {
 	const router = useRouter()
@@ -52,12 +52,12 @@ const ShippingAddressForm = () => {
 
 	return (
 		<>
-			<Card className="p-5 max-w-md mx-auto">
+			<Card className="mx-auto max-w-md p-5">
 				<CardHeader>
-					<CardTitle className="text-2xl px-0">
+					<CardTitle className="px-0 text-2xl">
 						Shipping Address
 					</CardTitle>
-					<CardDescription className="-mt-2 px-0 text-pretty">
+					<CardDescription className="-mt-2 text-pretty px-0">
 						Please enter your shipping address
 
 					</CardDescription>
@@ -66,7 +66,7 @@ const ShippingAddressForm = () => {
 				<Form {...form}>
 					<form
 						method='post'
-						className="space-y-5 mb-5"
+						className="mb-5 space-y-5"
 						onSubmit={form.handleSubmit(onSubmit)}
 					>
 						{/* name */}
@@ -155,7 +155,7 @@ const ShippingAddressForm = () => {
 												<FormControl>
 													<button
 														role="combobox"
-														className="group inline-flex justify-between border text-black h-9 w-full bg-input px-3 py-1 text-base shadow-sm"
+														className="group inline-flex h-9 w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm"
 													>
 														{field.value
 															? STATES.find(
@@ -163,7 +163,7 @@ const ShippingAddressForm = () => {
 															)?.label
 															: ""
 														}
-														<ArrowDownRight size={18} className={`ml-auto group-hover:rotate-45 duration-300 text-muted group-hover:text-primary`} />
+														<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-primary`} />
 													</button>
 												</FormControl>
 											</PopoverTrigger>
