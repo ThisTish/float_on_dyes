@@ -1,3 +1,5 @@
+import { count } from "console"
+
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'Float On Dyes'
 export const APP_DESCRIPTION = process.env.NEXT_PUBLIC_APP_DESCRIPTION || 'Dyed discs fly better!'
 export const LATEST_PRODUCTS_LIMIT = Number(process.env.LATEST_PRODUCTS_LIMIT) || 6
@@ -17,7 +19,9 @@ export const SIGN_IN_DEFAULT_VALUES = {
 export const shippingAddressDefaultValues = {
 	fullName: 'Tish Tosh',
 	streetAddress: '123 Main st.',
+	streetAddress2: '',
 	city: 'Anytown',
 	zipCode: '12345',
-	state: 'Utah'
+	state: 'UT',
+	country: 'US',
 }

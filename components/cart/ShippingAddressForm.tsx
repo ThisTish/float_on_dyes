@@ -6,7 +6,7 @@ import { STATES } from "@/lib/constants/places"
 import { shippingAddressSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-import { useTransition } from "react"
+import { useRef, useTransition } from "react"
 import { useCheckout } from "@/context/CheckoutContext"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
@@ -21,6 +21,7 @@ import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
+import ComboBox from "./ComboBox"
 
 const ShippingAddressForm = () => {
 	const router = useRouter()
@@ -58,7 +59,10 @@ const ShippingAddressForm = () => {
 						Shipping Address
 					</CardTitle>
 					<CardDescription className="-mt-2 text-pretty px-0">
-						Please enter your shipping address
+						{user.address
+							? 'Verify your shipping address' :
+							'Please enter your shipping address'
+						}
 
 					</CardDescription>
 				</CardHeader>
@@ -78,7 +82,7 @@ const ShippingAddressForm = () => {
 									<FormItem>
 										<FormLabel>Full Name</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full border" />
+											<Input {...field} className="w-full border" autoComplete="given-name" />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -96,7 +100,24 @@ const ShippingAddressForm = () => {
 									<FormItem>
 										<FormLabel>Street Address</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full border" />
+											<Input {...field} className="w-full border" autoComplete="address-line1" placeholder="House number and street name" />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							>
+							</FormField>
+						</div>
+						{/* street address 2 */}
+						<div>
+							<FormField
+								control={form.control}
+								name="streetAddress2"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Address Line 2</FormLabel>
+										<FormControl>
+											<Input {...field} className="w-full border" autoComplete="address-line2" placeholder="Apt, suite, unit, etc" />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -114,7 +135,7 @@ const ShippingAddressForm = () => {
 									<FormItem>
 										<FormLabel>City</FormLabel>
 										<FormControl>
-											<Input {...field} className="w-full border" />
+											<Input {...field} className="w-full border" autoComplete="address-level1" />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -123,34 +144,15 @@ const ShippingAddressForm = () => {
 							</FormField>
 						</div>
 
-						{/* zip code */}
-						<div>
-							<FormField
-								control={form.control}
-								name="zipCode"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Zip Code</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border" />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							>
-							</FormField>
-						</div>
-
-						{/* country */}
-						<div>
-							<FormField
+						{/* state */}
+						<ComboBox form={form} label="State" list={STATES} user={user} onChange={() => console.log(form.getValues('state'))} />							{/* <FormField
 								control={form.control}
 								name="state"
 								render={({ field }) => (
 									<FormItem className="grid">
 										<FormLabel>State</FormLabel>
 										<Popover>
-											{/* button/input */}
+
 											<PopoverTrigger asChild>
 												<FormControl>
 													<button
@@ -168,15 +170,104 @@ const ShippingAddressForm = () => {
 												</FormControl>
 											</PopoverTrigger>
 
-											{/* content */}
 											<PopoverContent className="w-[var(--radix-popover-trigger-width)]">
 												<Command>
 													<CommandInput
-														placeholder="Search State..."
+														placeholder={user.address ? user.address.state : "Select State"}
+														autoComplete="address-level1"
 													/>
 													<CommandList>
 														<CommandEmpty>State Not Found</CommandEmpty>
 														<CommandGroup>
+															{STATES.map((state) => (
+																<CommandItem
+																	value={state.value}
+																	key={state.value}
+																	onSelect={() => {
+																		form.setValue("state", state.value)
+																	}}
+																>
+																	{state.label}
+																	<Check
+																		className={cn(
+																			"ml-auto",
+																			state.value === field.value
+																				? "opacity-100"
+																				: "opacity-0"
+																		)}
+																	/>
+																</CommandItem>
+															))}
+														</CommandGroup>
+													</CommandList>
+												</Command>
+											</PopoverContent>
+										</Popover>
+										<FormMessage />
+									</FormItem>
+								)}
+							>
+							</FormField> */}
+
+						{/* zip code */}
+						<div>
+							<FormField
+								control={form.control}
+								name="zipCode"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Zip Code</FormLabel>
+										<FormControl>
+											<Input {...field} className="w-full border" autoComplete="postal-code" />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							>
+							</FormField>
+						</div>
+
+						{/* country */}
+						<div>
+							<FormField
+								control={form.control}
+								name="country"
+								render={({ field }) => (
+									<FormItem className="grid">
+										<FormLabel>Country</FormLabel>
+										<Popover>
+											{/* button/input */}
+											<PopoverTrigger asChild>
+												<FormControl>
+													<button
+														role="combobox"
+														className="group inline-flex h-9 w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm"
+													>
+														{/* todo COUNTRIES LIST */}
+														{field.value
+															? STATES.find(
+																(state) => state.value === field.value
+															)?.label
+															: ""
+														}
+														<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-primary`} />
+													</button>
+												</FormControl>
+											</PopoverTrigger>
+
+											{/* content */}
+											<PopoverContent className="w-[var(--radix-popover-trigger-width)]">
+												<Command>
+													<CommandInput
+														placeholder={user.address ? user.address.country : "Select Country"} 
+														autoComplete="country"
+													/>
+													<CommandList>
+														<CommandEmpty>Country Not Found</CommandEmpty>
+														<CommandGroup>
+
+
+															{/* COUNTRIES LIST */}
 															{STATES.map((state) => (
 																<CommandItem
 																	value={state.value}

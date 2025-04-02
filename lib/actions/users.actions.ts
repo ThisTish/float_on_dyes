@@ -130,6 +130,12 @@ export async function getUserById(userId: string) {
 	return user
 }
 
+//validate address
+// todo hook up with google api
+export async function validateShippingAddress(address: ShippingAddress){
+	const { fullName, streetAddress, streetAddress2, city, state, zipCode } = address
+}
+
 // update user address
 export async function updateUserAddress(data: ShippingAddress) {
 	try {
