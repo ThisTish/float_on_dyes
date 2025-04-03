@@ -65,7 +65,7 @@ const SignUpForm = () => {
 		>
 			<form action={action}>
 				<input type="hidden" name="callbackUrl" value={callbackUrl} />
-				<div className="space-y-6 mb-6">
+				<div className="mb-6 space-y-6">
 					<div>
 						<Label htmlFor="name">Name</Label>
 						<Input
@@ -116,16 +116,16 @@ const SignUpForm = () => {
 						</div>
 					)}
 					<div>
-						<div className="flex items-center gap-3 mb-6">
-							<Checkbox 
-							id="isSubscribed"
-							name="isSubscribed" 
-							checked={checked} 
-							ref={checkBoxRef} 
-							onChange={handleCheckBoxChange} 
-							type="checkbox"
+						<div className="mb-6 flex items-center gap-3">
+							<Checkbox
+								id="isSubscribed"
+								name="isSubscribed"
+								checked={checked}
+								ref={checkBoxRef}
+								onChange={handleCheckBoxChange}
+								type="checkbox"
 							/>
-							<Label htmlFor="subscribe">Subscribe to Newsletter?</Label>
+							<Label htmlFor="isSubscribed">Subscribe to Newsletter?</Label>
 						</div>
 						<SignUpButton />
 					</div>

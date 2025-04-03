@@ -1,87 +1,82 @@
-import { STATES } from "@/lib/constants/places"
 import { cn } from "@/lib/utils"
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover"
-import { CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "cmdk"
-import { ArrowDownRight, Command, Check } from "lucide-react"
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
-import { ChangeEvent, forwardRef } from "react"
-
+import { Check, ArrowDownRight } from "lucide-react"
+import { ControllerRenderProps } from "react-hook-form"
+import { FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
+import { useState } from "react"
 
 type ComboBoxProps = {
-	form: any,
-	user: { address: { state: string } },
+	field: ControllerRenderProps<any, any>,
 	label: string,
 	list: { value: string, label: string }[],
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void
+	placeholder?: string
 }
 
-const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(({ form, user, label, list, onChange }, ref) => {
+const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
+	const [open, setOpen] = useState(false)
+
 	return (
-		<FormField
-			control={form.control}
-			name="state"
-			render={({ field }) => (
-				<FormItem className="grid">
-					<FormLabel>State</FormLabel>
-					<Popover>
+		<FormItem className="grid">
+			<FormLabel>{label}</FormLabel>
+			<Popover open={open} onOpenChange={setOpen}>
+				<PopoverTrigger asChild>
+					<FormControl>
+						<button
+							type="button"
+							role="combobox"
+							className="group inline-flex h-9 w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm"
+							{...field}
+							value={undefined}
+							onChange={undefined}
+							onClick={() => setOpen(!open)}
+						>
+							{field.value
+								? list.find(
+									(item) => item.value === field.value
+								)?.label
+								: placeholder || `Select ${label}`}
+							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-primary`} />
+						</button>
+					</FormControl>
+				</PopoverTrigger>
 
-						<PopoverTrigger asChild>
-							<FormControl>
-								<button
-									role="combobox"
-									className="group inline-flex h-9 w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm"
-								>
-									{field.value
-										? STATES.find(
-											(state) => state.value === field.value
-										)?.label
-										: ""
-									}
-									<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-primary`} />
-								</button>
-							</FormControl>
-						</PopoverTrigger>
-
-						<PopoverContent className="w-[var(--radix-popover-trigger-width)]">
-							<Command>
-								<CommandInput
-									placeholder={user.address ? user.address.state : "Select State"}
-									autoComplete="address-level1"
-								/>
-								<CommandList>
-									<CommandEmpty>State Not Found</CommandEmpty>
-									<CommandGroup>
-										{STATES.map((state) => (
-											<CommandItem
-												value={state.value}
-												key={state.value}
-												onSelect={() => {
-													form.setValue("state", state.value)
-												}}
-											>
-												{state.label}
-												<Check
-													className={cn(
-														"ml-auto",
-														state.value === field.value
-															? "opacity-100"
-															: "opacity-0"
-													)}
-												/>
-											</CommandItem>
-										))}
-									</CommandGroup>
-								</CommandList>
-							</Command>
-						</PopoverContent>
-					</Popover>
-					<FormMessage />
-				</FormItem>
-			)}
-		>
-		</FormField>
-
+				<PopoverContent className="w-[var(--radix-popover-trigger-width)]">
+					<Command>
+						<CommandInput
+							placeholder={placeholder || `Search ${label}...`}
+						/>
+						<CommandList>
+							<CommandEmpty>{label} Not Found</CommandEmpty>
+							<CommandGroup>
+								{list.map((item) => (
+									<CommandItem
+										value={item.value}
+										key={item.value}
+										onSelect={() => {
+											field.onChange(item.value)
+											setOpen(false) // Close the popover when an item is selected
+										}}
+									>
+										{item.label}
+										<Check
+											className={cn(
+												"ml-auto",
+												item.value === field.value
+													? "opacity-100"
+													: "opacity-0"
+											)}
+										/>
+									</CommandItem>
+								))}
+							</CommandGroup>
+						</CommandList>
+					</Command>
+				</PopoverContent>
+			</Popover>
+			<FormMessage />
+		</FormItem>
 	)
-})
+}
 
 export default ComboBox

@@ -23,7 +23,7 @@ const UserButton = () => {
 	if (status !== 'authenticated') {
 		return (
 			<Link href={'/sign-in'}>
-				<Tooltip label="Sign In" position="bottom" className="mt-1">
+				<Tooltip label="Sign In / Sign Up" position="bottom" className="mt-1">
 					<BiUserCircle size={40} className="rounded-full transition-all duration-300 ease-in hover:bg-darkBlue hover:text-white" />
 				</Tooltip>
 			</Link>
@@ -61,7 +61,7 @@ const UserButton = () => {
 				{USER_PAGE_LINKS.map((link) => (
 					<DropdownMenuItem key={link.name}>
 						<Link href={link.href} className="font-semibold">
-						{link.name}
+							{link.name}
 						</Link>
 					</DropdownMenuItem>
 				))}
@@ -70,7 +70,7 @@ const UserButton = () => {
 				{session.user.role === 'admin' ? (
 					<DropdownMenuItem>
 						<Link href="/admin/dashboard" className="font-semibold">
-								Dashboard
+							Dashboard
 						</Link>
 					</DropdownMenuItem>
 				) : null
