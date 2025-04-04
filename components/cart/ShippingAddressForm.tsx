@@ -2,7 +2,7 @@
 
 import { useToast } from "@/hooks/use-toast"
 import { shippingAddressDefaultValues } from "@/lib/constants"
-import { STATES } from "@/lib/constants/places"
+import { COUNTRIES, STATES } from "@/lib/constants/places"
 import { shippingAddressSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
@@ -11,16 +11,13 @@ import { useCheckout } from "@/context/CheckoutContext"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
 import { updateUserAddress } from "@/lib/actions/users.actions"
-import { cn } from "@/lib/utils"
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
-import { ArrowDownRight, ArrowUpRight, Check } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
 import ComboBox from "./ComboBox"
 
 const ShippingAddressForm = () => {
@@ -39,6 +36,7 @@ const ShippingAddressForm = () => {
 
 	const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (values) => {
 		startTransition(async () => {
+			console.log(values)
 			const res = await updateUserAddress(values)
 			if (!res.success) {
 				toast({
@@ -47,6 +45,7 @@ const ShippingAddressForm = () => {
 				})
 				return
 			}
+
 			router.push('/payment-method')
 		})
 	}
@@ -64,7 +63,6 @@ const ShippingAddressForm = () => {
 							? 'Verify your shipping address' :
 							'Please enter your shipping address'
 						}
-
 					</CardDescription>
 				</CardHeader>
 
@@ -152,69 +150,6 @@ const ShippingAddressForm = () => {
 							render={({ field }) => (
 
 								<ComboBox field={field} label="State" list={STATES} placeholder="Select State" />)} />
-						{/* <FormField
-							control={form.control}
-							name="state"
-							render={({ field }) => (
-								<FormItem className="grid">
-									<FormLabel>State</FormLabel>
-									<Popover>
-
-										<PopoverTrigger asChild>
-											<FormControl>
-												<button
-													role="combobox"
-													className="group inline-flex h-9 w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm"
-												>
-													{field.value
-														? STATES.find(
-															(state) => state.value === field.value
-														)?.label
-														: ""
-													}
-													<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-primary`} />
-												</button>
-											</FormControl>
-										</PopoverTrigger>
-
-										<PopoverContent className="w-[var(--radix-popover-trigger-width)]">
-											<Command>
-												<CommandInput
-													placeholder={user.address ? user.address.state : "Select State"}
-													autoComplete="address-level1"
-												/>
-												<CommandList>
-													<CommandEmpty>State Not Found</CommandEmpty>
-													<CommandGroup>
-														{STATES.map((state) => (
-															<CommandItem
-																value={state.value}
-																key={state.value}
-																onSelect={() => {
-																	form.setValue("state", state.value)
-																}}
-															>
-																{state.label}
-																<Check
-																	className={cn(
-																		"ml-auto",
-																		state.value === field.value
-																			? "opacity-100"
-																			: "opacity-0"
-																	)}
-																/>
-															</CommandItem>
-														))}
-													</CommandGroup>
-												</CommandList>
-											</Command>
-										</PopoverContent>
-									</Popover>
-									<FormMessage />
-								</FormItem>
-							)}
-						>
-						</FormField> */}
 
 						{/* zip code */}
 						<div>
@@ -234,6 +169,13 @@ const ShippingAddressForm = () => {
 							</FormField>
 						</div>
 
+						<FormField
+							control={form.control}
+							name='country'
+							render={({ field }) => (
+
+								<ComboBox field={field} label="Country" list={COUNTRIES} placeholder="Select Country" />)} />
+
 
 						<Button variant={'cta'} disabled={pending} className="w-full">
 							{pending ? (
@@ -248,8 +190,7 @@ const ShippingAddressForm = () => {
 										<ArrowUpRight />
 									</AnimatedDiv>
 								</>
-							)
-							}
+							)}
 						</Button>
 					</form>
 				</Form>
