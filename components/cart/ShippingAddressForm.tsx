@@ -10,7 +10,7 @@ import { useTransition } from "react"
 import { useCheckout } from "@/context/CheckoutContext"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
-import { updateUserAddress } from "@/lib/actions/users.actions"
+import { updateUserAddress, validateShippingAddress } from "@/lib/actions/address.actions"
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
@@ -36,17 +36,20 @@ const ShippingAddressForm = () => {
 
 	const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (values) => {
 		startTransition(async () => {
-			console.log(values)
-			const res = await updateUserAddress(values)
-			if (!res.success) {
+			const res = await validateShippingAddress(values)
+			if (!res.success || !res.isValid) {
 				toast({
 					variant: 'destructive',
+					title: "Please check your address",
 					description: res.message
 				})
 				return
 			}
 
-			router.push('/payment-method')
+			if(!res.isValid)
+
+			console.log(res)
+			// router.push('/payment-method')
 		})
 	}
 
@@ -111,7 +114,7 @@ const ShippingAddressForm = () => {
 						<div>
 							<FormField
 								control={form.control}
-								name="streetAddress2"
+								name="subpremise"
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Address Line 2</FormLabel>

@@ -1,13 +1,12 @@
 "use server"
 
-import { shippingAddressSchema, signInFormSchema, signUpFormSchema, paymentMethodSchema } from "../validators"
+import { signInFormSchema, signUpFormSchema, paymentMethodSchema } from "../validators"
 import { auth, signIn, signOut } from "@/auth"
 import { prisma } from "@/db/prisma"
 import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { formatError } from "../utils"
 import { compare, hashSync } from "bcrypt-ts-edge"
 import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
-import { ShippingAddress } from "@/types"
 import { z } from "zod"
 import { cookies } from "next/headers"
 
@@ -128,39 +127,6 @@ export async function getUserById(userId: string) {
 	})
 	if (!user) throw new Error('User not found')
 	return user
-}
-
-//validate address
-// todo hook up with google api
-export async function validateShippingAddress(address: ShippingAddress){
-	const { fullName, streetAddress, streetAddress2, city, state, zipCode } = address
-}
-
-// update user address
-export async function updateUserAddress(data: ShippingAddress) {
-	try {
-		const session = await auth()
-		if (!session) throw new Error('User not found')
-		const user = await getUserById(session.user.id)
-		if (!user) throw new Error('User not found')
-
-		const address = shippingAddressSchema.parse(data)
-
-		await prisma.user.update({
-			where: {
-				id: user.id
-			},
-			data: {
-				address
-			}
-		})
-
-		return { success: true, message: 'Address updated successfully' }
-
-
-	} catch (error) {
-		return { success: false, message: formatError(error) }
-	}
 }
 
 // update user payment method
