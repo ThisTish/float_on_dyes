@@ -2,7 +2,7 @@
 
 import { useToast } from "@/hooks/use-toast"
 import { shippingAddressDefaultValues } from "@/lib/constants"
-import { COUNTRIES, STATES } from "@/lib/constants/places"
+import { COUNTRIES } from "@/lib/constants/places"
 import { shippingAddressSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
@@ -37,7 +37,7 @@ const ShippingAddressForm = () => {
 	const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (values) => {
 		startTransition(async () => {
 			const res = await validateShippingAddress(values)
-			if (!res.success || !res.isValid) {
+			if (!res.success) {
 				toast({
 					variant: 'destructive',
 					title: "Please check your address",
@@ -45,10 +45,45 @@ const ShippingAddressForm = () => {
 				})
 				return
 			}
+			if(res.success && (res.missingComponentTypes || res.unconfirmedComponentTypes)){
+				// setIsDisabled(true)
+				const missingUnconfirmedTypes = [...res.missingComponentTypes, ...res.unconfirmedComponentTypes]
+				toast({
+					variant: 'destructive',
+					title: "Missing or unconfirmed information",
+					description: `Please check ${missingUnconfirmedTypes.join(', ')} and try again.`,
+				})
+				// if(res.onlyUnconfirmed) setIsDisabled(false)
+				// map through the missing and unconfirmed component types and show them in a toast
+			}
 
-			if(!res.isValid)
+			if (res.success && res.componentData) {
+				toast({
+					title: "Address validated successfully",
+					description: `${res.inputAddressFormatted} & ${res.correctedAddressFormatted}`,
 
-			console.log(res)
+				})
+				// setModalOpen(true)
+				// setSuggestedAddress(res.addressData)
+				// setOriginalAddress(res.originalAddress)
+				// const inferredOrReplacedComponents = res.addressData.components.filter((c: any) => c.replaced || c.inferred))
+				// inferredOrReplacedComponents.map((c) => setHighlighted(componentType)
+					// *this has to be a switch case.
+					// componentType === 'street_number || route'
+						// setHighlighted('streetAddress')
+					// = locality
+						// setHighlighted('city')
+					// componentType === 'administrative_area_level_1'
+						// setHighlighted('state')
+					// componentType === 'postal_code'
+						// setHighlighted('zipCode')
+					// componentType === 'country'
+						// setHighlighted('country')
+					// })
+			}
+
+
+				console.log(res)
 			// router.push('/payment-method')
 		})
 	}
@@ -76,101 +111,109 @@ const ShippingAddressForm = () => {
 						onSubmit={form.handleSubmit(onSubmit)}
 					>
 						{/* name */}
-						<div>
-							<FormField
-								control={form.control}
-								name="fullName"
-								render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>> }) => (
-									<FormItem>
-										<FormLabel>Full Name</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border" autoComplete="given-name" />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							>
-							</FormField>
-						</div>
+
+						<FormField
+							control={form.control}
+							name="fullName"
+							render={({ field }: { field: ControllerRenderProps<z.infer<typeof shippingAddressSchema>> }) => (
+								<FormItem>
+									<FormLabel>Full Name</FormLabel>
+									<FormControl>
+										<Input {...field} className="w-full border" autoComplete="given-name" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						>
+						</FormField>
+
 
 						{/* street address */}
-						<div>
-							<FormField
-								control={form.control}
-								name="streetAddress"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Street Address</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border" autoComplete="address-line1" placeholder="House number and street name" />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							>
-							</FormField>
-						</div>
+
+						<FormField
+							control={form.control}
+							name="streetAddress"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Street Address</FormLabel>
+									<FormControl>
+										<Input {...field} className="w-full border" autoComplete="address-line1" placeholder="House number and street name" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						>
+						</FormField>
+
 						{/* street address 2 */}
-						<div>
-							<FormField
-								control={form.control}
-								name="subpremise"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Address Line 2</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border" autoComplete="address-line2" placeholder="Apt, suite, unit, etc" />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							>
-							</FormField>
-						</div>
+
+						<FormField
+							control={form.control}
+							name="subpremise"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Address Line 2</FormLabel>
+									<FormControl>
+										<Input {...field} className="w-full border" autoComplete="address-line2" placeholder="Apt, suite, unit, etc" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						>
+						</FormField>
+
 
 						{/* city */}
-						<div>
-							<FormField
-								control={form.control}
-								name="city"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>City</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border" autoComplete="address-level1" />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							>
-							</FormField>
-						</div>
+
+						<FormField
+							control={form.control}
+							name="city"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>City</FormLabel>
+									<FormControl>
+										<Input {...field} className="w-full border" autoComplete="address-level1" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						>
+						</FormField>
+
 
 						{/* state */}
 						<FormField
 							control={form.control}
 							name='state'
 							render={({ field }) => (
+								<FormItem>
+									<FormLabel>State/Region</FormLabel>
+									<FormControl>
+										<Input {...field} className="w-full border" autoComplete="address-level1" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 
-								<ComboBox field={field} label="State" list={STATES} placeholder="Select State" />)} />
 
 						{/* zip code */}
-						<div>
-							<FormField
-								control={form.control}
-								name="zipCode"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Zip Code</FormLabel>
-										<FormControl>
-											<Input {...field} className="w-full border" autoComplete="postal-code" />
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							>
-							</FormField>
-						</div>
+
+						<FormField
+							control={form.control}
+							name="zipCode"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Zip Code</FormLabel>
+									<FormControl>
+										<Input {...field} className="w-full border" autoComplete="postal-code" />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						>
+						</FormField>
+
 
 						<FormField
 							control={form.control}
