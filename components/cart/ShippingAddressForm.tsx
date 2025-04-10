@@ -6,7 +6,7 @@ import { COUNTRIES } from "@/lib/constants/places"
 import { shippingAddressSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-import { useTransition } from "react"
+import { useState, useTransition } from "react"
 import { useCheckout } from "@/context/CheckoutContext"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
@@ -19,8 +19,16 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import ComboBox from "./ComboBox"
+import ValidateAddressDialog from "./ValidateAddressDialog"
 
 const ShippingAddressForm = () => {
+	const [isDialogOpen, setIsDialogOpen] = useState(false)
+	const [isDisabled, setIsDisabled] = useState(false)
+	const [userAddress, setUserAddress] = useState<z.infer<typeof shippingAddressSchema>>()
+	const [suggestedAddress, setSuggestedAddress] = useState<z.infer<typeof shippingAddressSchema>>()
+	const [changedFields, setChangedFields] = useState<Set<string>>(new Set())
+
+
 	const router = useRouter()
 	const { toast } = useToast()
 	const [pending, startTransition] = useTransition()
@@ -45,7 +53,7 @@ const ShippingAddressForm = () => {
 				})
 				return
 			}
-			if(res.success && (res.missingComponentTypes || res.unconfirmedComponentTypes)){
+			if (res.success && (res.missingComponentTypes || res.unconfirmedComponentTypes)) {
 				// setIsDisabled(true)
 				const missingUnconfirmedTypes = [...res.missingComponentTypes, ...res.unconfirmedComponentTypes]
 				toast({
@@ -58,34 +66,51 @@ const ShippingAddressForm = () => {
 			}
 
 			if (res.success && res.componentData) {
-				toast({
-					title: "Address validated successfully",
-					description: `${res.inputAddressFormatted} & ${res.correctedAddressFormatted}`,
-
-				})
-				// setModalOpen(true)
-				// setSuggestedAddress(res.addressData)
-				// setOriginalAddress(res.originalAddress)
-				// const inferredOrReplacedComponents = res.addressData.components.filter((c: any) => c.replaced || c.inferred))
-				// inferredOrReplacedComponents.map((c) => setHighlighted(componentType)
-					// *this has to be a switch case.
-					// componentType === 'street_number || route'
-						// setHighlighted('streetAddress')
-					// = locality
-						// setHighlighted('city')
-					// componentType === 'administrative_area_level_1'
-						// setHighlighted('state')
-					// componentType === 'postal_code'
-						// setHighlighted('zipCode')
-					// componentType === 'country'
-						// setHighlighted('country')
-					// })
+				
+				const specialComponents = res.componentData.components.filter((c: any) => c.replaced || c.inferred)
+				const changedInfo = specialComponents.map((c: any) => c.componentType)
+				const highlightedFields = new Set<string>()
+				
+				changedInfo.forEach((componentType: string) => {
+					switch (componentType) {
+						case 'street_number':
+							case 'route':
+								highlightedFields.add('streetAddress')
+								break
+								case 'locality':
+							highlightedFields.add('city')
+							break
+						case 'administrative_area_level_1':
+							highlightedFields.add('state')
+							break
+						case 'postal_code':
+							highlightedFields.add('zipCode')
+							break
+						case 'country':
+							highlightedFields.add('country')
+							break
+							default:
+								console.warn(`Unhandled component type: ${componentType}`)
+							}
+						})
+						
+						setChangedFields(highlightedFields)
+						setUserAddress(values)
+						setSuggestedAddress(res.componentData.suggestedAddress)
+						setIsDialogOpen(true)
 			}
-
-
-				console.log(res)
+			console.log(res)
 			// router.push('/payment-method')
 		})
+	}
+
+	const saveAndCloseAction = () => {
+		setIsDialogOpen(false)
+		console.log('Save and close action')
+	}
+	const updateAndCloseAction = () =>{
+		setIsDialogOpen(false)	
+		console.log('update and close action')
 	}
 
 
@@ -242,8 +267,21 @@ const ShippingAddressForm = () => {
 				</Form>
 
 			</Card>
+
+			{isDialogOpen && suggestedAddress ?  (
+				<ValidateAddressDialog
+					isOpen={isDialogOpen}
+					values={userAddress? userAddress : form.getValues()}
+					suggestedAddress={suggestedAddress }
+					changedFields={Array.from(changedFields)}
+					updateAndCloseAction={updateAndCloseAction}
+					saveAndCloseAction={saveAndCloseAction}
+				/>
+			) : null
+			}
 		</>
 	)
+
 }
 
 export default ShippingAddressForm

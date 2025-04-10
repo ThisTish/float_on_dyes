@@ -80,7 +80,7 @@ export async function validateShippingAddress(address: ShippingAddress) {
 		}
 
 		const componentData = data.result?.address?.formattedAddress
-			? extractAddressComponents(data.result)
+			? extractAddressComponents(data.result, address.fullName)
 			: null
 
 		const needsConfirming = data.result?.verdict?.hasInferredComponents || data.result?.verdict?.hasReplacedComponents
@@ -115,7 +115,7 @@ export async function validateShippingAddress(address: ShippingAddress) {
 	}
 }
 
-function extractAddressComponents(result: any) {
+function extractAddressComponents(result: any, fullName: string) {
 	try {
 		const components = result.address?.addressComponents || []
 		const postalAddress = result.address?.postalAddress || {}
@@ -126,11 +126,13 @@ function extractAddressComponents(result: any) {
 
 		return {
 			suggestedAddress: {
+				fullName,
 				streetAddress: `${streetNumber} ${route}`,
 				subpremise,
 				city: postalAddress.locality || '',
 				state: postalAddress.administrativeArea || '',
 				zipCode: postalAddress.postalCode || '',
+				country: postalAddress.country || ''
 			},
 			components
 		}
