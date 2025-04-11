@@ -74,8 +74,7 @@ export async function validateShippingAddress(address: ShippingAddress) {
 				success: true,
 				message: 'Missing or unconfirmed information. Please check the address and try again.',
 				missingComponentTypes,
-				unconfirmedComponentTypes,
-				onlyUnconfirmed: unconfirmedComponentTypes.length > 0 && missingComponentTypes.length === 0,
+				unconfirmedComponentTypes
 			}
 		}
 
@@ -132,7 +131,7 @@ function extractAddressComponents(result: any, fullName: string) {
 				city: postalAddress.locality || '',
 				state: postalAddress.administrativeArea || '',
 				zipCode: postalAddress.postalCode || '',
-				country: postalAddress.country || ''
+				country: postalAddress.regionCode || ''
 			},
 			components
 		}

@@ -26,7 +26,6 @@ const ShippingAddressForm = () => {
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [userAddress, setUserAddress] = useState<z.infer<typeof shippingAddressSchema>>()
 	const [suggestedAddress, setSuggestedAddress] = useState<z.infer<typeof shippingAddressSchema>>()
-	const [changedFields, setChangedFields] = useState<Set<string>>(new Set())
 
 
 	const router = useRouter()
@@ -38,7 +37,7 @@ const ShippingAddressForm = () => {
 
 	const form = useForm<z.infer<typeof shippingAddressSchema>>({
 		resolver: zodResolver(shippingAddressSchema),
-		defaultValues: user.address || shippingAddressDefaultValues
+		defaultValues: user.address || {}
 	})
 
 
@@ -56,48 +55,20 @@ const ShippingAddressForm = () => {
 			if (res.success && (res.missingComponentTypes || res.unconfirmedComponentTypes)) {
 				// setIsDisabled(true)
 				const missingUnconfirmedTypes = [...res.missingComponentTypes, ...res.unconfirmedComponentTypes]
+				const missingUnconfirmedTypesFormatted = missingUnconfirmedTypes.join(', ').replace('administrative_area_level_1', 'state').replace('locality', 'city').replaceAll('_', ' ')
 				toast({
 					variant: 'destructive',
 					title: "Missing or unconfirmed information",
-					description: `Please check ${missingUnconfirmedTypes.join(', ')} and try again.`,
+					description: `Please check ${missingUnconfirmedTypesFormatted} and try again.`,
 				})
-				// if(res.onlyUnconfirmed) setIsDisabled(false)
-				// map through the missing and unconfirmed component types and show them in a toast
 			}
 
 			if (res.success && res.componentData) {
-				
+
 				const specialComponents = res.componentData.components.filter((c: any) => c.replaced || c.inferred)
-				const changedInfo = specialComponents.map((c: any) => c.componentType)
-				const highlightedFields = new Set<string>()
-				
-				changedInfo.forEach((componentType: string) => {
-					switch (componentType) {
-						case 'street_number':
-							case 'route':
-								highlightedFields.add('streetAddress')
-								break
-								case 'locality':
-							highlightedFields.add('city')
-							break
-						case 'administrative_area_level_1':
-							highlightedFields.add('state')
-							break
-						case 'postal_code':
-							highlightedFields.add('zipCode')
-							break
-						case 'country':
-							highlightedFields.add('country')
-							break
-							default:
-								console.warn(`Unhandled component type: ${componentType}`)
-							}
-						})
-						
-						setChangedFields(highlightedFields)
-						setUserAddress(values)
-						setSuggestedAddress(res.componentData.suggestedAddress)
-						setIsDialogOpen(true)
+				setUserAddress(values)
+				setSuggestedAddress(res.componentData.suggestedAddress)
+				setIsDialogOpen(true)
 			}
 			console.log(res)
 			// router.push('/payment-method')
@@ -108,9 +79,13 @@ const ShippingAddressForm = () => {
 		setIsDialogOpen(false)
 		console.log('Save and close action')
 	}
-	const updateAndCloseAction = () =>{
-		setIsDialogOpen(false)	
+	const updateAndCloseAction = () => {
+		setIsDialogOpen(false)
 		console.log('update and close action')
+	}
+
+	const closeAction = () => {
+		setIsDialogOpen(false)
 	}
 
 
@@ -268,14 +243,14 @@ const ShippingAddressForm = () => {
 
 			</Card>
 
-			{isDialogOpen && suggestedAddress ?  (
+			{isDialogOpen && suggestedAddress ? (
 				<ValidateAddressDialog
 					isOpen={isDialogOpen}
-					values={userAddress? userAddress : form.getValues()}
-					suggestedAddress={suggestedAddress }
-					changedFields={Array.from(changedFields)}
+					values={userAddress ? userAddress : form.getValues()}
+					suggestedAddress={suggestedAddress}
 					updateAndCloseAction={updateAndCloseAction}
 					saveAndCloseAction={saveAndCloseAction}
+					closeAction={closeAction}
 				/>
 			) : null
 			}
