@@ -19,7 +19,7 @@ export const SIGN_IN_DEFAULT_VALUES = {
 export const shippingAddressDefaultValues = {
 	fullName: 'Tish Tosh',
 	streetAddress: '225 kensington ave',
-	streetAddress2: '4',
+	subpremise: '4',
 	city: 'slc',
 	zipCode: '12345',
 	state: 'Utah',
