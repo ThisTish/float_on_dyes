@@ -6,7 +6,7 @@ import { COUNTRIES } from "@/lib/constants/places"
 import { shippingAddressSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-import { useEffect, useState, useTransition } from "react"
+import { useState, useTransition } from "react"
 import { useCheckout } from "@/context/CheckoutContext"
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
@@ -57,7 +57,6 @@ const ShippingAddressForm = () => {
 			// missing or unconfirmed results
 			if (res.success && (res.missingComponentTypes || res.unconfirmedComponentTypes)) {
 				const missingUnconfirmedTypes = [...res.missingComponentTypes, ...res.unconfirmedComponentTypes]
-
 				const componentTypeToField: Record<string, keyof z.infer<typeof shippingAddressSchema>> = {
 					'locality': 'city',
 					'administrative_area_level_1': 'state',
@@ -71,7 +70,6 @@ const ShippingAddressForm = () => {
 				const missingUnconfirmedFieldNames = missingUnconfirmedTypes
 					.map((type) => componentTypeToField[type])
 					.filter(Boolean)
-
 
 				const missingUnconfirmedTypesFormatted = missingUnconfirmedTypes
 					.join(', ')
@@ -92,13 +90,18 @@ const ShippingAddressForm = () => {
 				})
 			}
 
+			// has a suggested address
 			if (res.success && res.componentData) {
 				const specialComponents = res.componentData.components.filter((c: any) => c.replaced || c.inferred)
 				setUserAddress(values)
 				setSuggestedAddress(res.componentData.suggestedAddress)
 				setIsDialogOpen(true)
+				setNeedsRevalidation(false)
 			}
-			console.log(res)
+
+			if(res.success && res.correct){
+				router.push('/payment-method')
+			}
 		})
 	}
 
@@ -115,20 +118,19 @@ const ShippingAddressForm = () => {
 					title: "Could not save address",
 					description: `${res.message}, please try again or reach out via our contact page`
 				})
-
 				router.push('/payment-method')
-
 			}
 		})
 	}
 
 	const saveAndCloseAction = () => {
 		setIsDialogOpen(false)
-		console.log('Save and close action')
+		sureSubmit(userAddress as z.infer<typeof shippingAddressSchema>)
+
 	}
 	const updateAndCloseAction = () => {
 		setIsDialogOpen(false)
-		console.log('update and close action')
+		sureSubmit(suggestedAddress as z.infer<typeof shippingAddressSchema>)
 	}
 
 	const closeAction = () => {
@@ -184,17 +186,17 @@ const ShippingAddressForm = () => {
 								<FormItem className={isNeedingReview('streetAddress') ? 'text-destructive' : ''}>
 									<FormLabel>Street Address</FormLabel>
 									<FormControl>
-										<Input 
-										{...field} 
-										className="w-full border" 
-										autoComplete="address-line1" 
-										placeholder="House number and street name" 
-										onChange={(e) =>
-											{ field.onChange(e)
-											if(isNeedingReview('streetAddress')){
-												setButtonType('Revalidate')
-											}
-										}}
+										<Input
+											{...field}
+											className="w-full border"
+											autoComplete="address-line1"
+											placeholder="House number and street name"
+											onChange={(e) => {
+												field.onChange(e)
+												if (isNeedingReview('streetAddress')) {
+													setButtonType('Revalidate')
+												}
+											}}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -210,17 +212,17 @@ const ShippingAddressForm = () => {
 								<FormItem className={isNeedingReview('subpremise') ? 'text-destructive' : ''}>
 									<FormLabel>Address Line 2</FormLabel>
 									<FormControl>
-										<Input 
-										{...field} 
-										className="w-full border" 
-										autoComplete="address-line2" 
-										placeholder="Apt, suite, unit, etc" 
-										onChange={(e) =>
-											{ field.onChange(e)
-											if(isNeedingReview('subpremise')){
-												setButtonType('Revalidate')
-											}
-										}}
+										<Input
+											{...field}
+											className="w-full border"
+											autoComplete="address-line2"
+											placeholder="Apt, suite, unit, etc"
+											onChange={(e) => {
+												field.onChange(e)
+												if (isNeedingReview('subpremise')) {
+													setButtonType('Revalidate')
+												}
+											}}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -236,17 +238,17 @@ const ShippingAddressForm = () => {
 								<FormItem className={isNeedingReview('city') ? 'text-destructive' : ''}>
 									<FormLabel>City</FormLabel>
 									<FormControl>
-										<Input 
-										{...field} 
-										className="w-full border" 
-										autoComplete="address-level1"
-										placeholder="City"
-										onChange={(e) =>
-											{ field.onChange(e)
-											if(isNeedingReview('city')){
-												setButtonType('Revalidate')
-											}
-										}}
+										<Input
+											{...field}
+											className="w-full border"
+											autoComplete="address-level1"
+											placeholder="City"
+											onChange={(e) => {
+												field.onChange(e)
+												if (isNeedingReview('city')) {
+													setButtonType('Revalidate')
+												}
+											}}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -262,17 +264,17 @@ const ShippingAddressForm = () => {
 								<FormItem className={isNeedingReview('state') ? 'text-destructive' : ''}>
 									<FormLabel>State/Region</FormLabel>
 									<FormControl>
-										<Input 
-										{...field} 
-										className="w-full border" 
-										autoComplete="address-level1" 
-										placeholder="State or Region"
-										onChange={(e) =>
-											{ field.onChange(e)
-											if(isNeedingReview('state')){
-												setButtonType('Revalidate')
-											}
-										}}
+										<Input
+											{...field}
+											className="w-full border"
+											autoComplete="address-level1"
+											placeholder="State or Region"
+											onChange={(e) => {
+												field.onChange(e)
+												if (isNeedingReview('state')) {
+													setButtonType('Revalidate')
+												}
+											}}
 										/>
 									</FormControl>
 									<FormMessage />
@@ -288,16 +290,16 @@ const ShippingAddressForm = () => {
 								<FormItem className={isNeedingReview('zipCode') ? 'text-destructive' : ''}>
 									<FormLabel>Zip Code</FormLabel>
 									<FormControl>
-										<Input 
-										{...field} 
-										className="w-full border" 
-										autoComplete="postal-code" 
-										onChange={(e) =>
-											{ field.onChange(e)
-											if(isNeedingReview('zipCode')){
-												setButtonType('Revalidate')
-											}
-										}}
+										<Input
+											{...field}
+											className="w-full border"
+											autoComplete="postal-code"
+											onChange={(e) => {
+												field.onChange(e)
+												if (isNeedingReview('zipCode')) {
+													setButtonType('Revalidate')
+												}
+											}}
 										/>
 									</FormControl>
 									<FormMessage />

@@ -84,8 +84,6 @@ export async function validateShippingAddress(address: ShippingAddress) {
 
 		const needsConfirming = data.result?.verdict?.hasInferredComponents || data.result?.verdict?.hasReplacedComponents
 		if (needsConfirming) {
-			console.log('Address validation response:', data.result)
-			console.dir(data.result.address.addressComponents)
 			return {
 				success: true,
 				message: 'Please select your address as is, or the updated suggested address.',
@@ -99,12 +97,11 @@ export async function validateShippingAddress(address: ShippingAddress) {
 		}
 
 		updateUserAddress(address)
-		console.log('address completely correct', data.result?.address?.formattedAddress)
 		return {
 			success: true,
 			message: 'Address saved successfully',
+			correct: true
 		}
-
 
 	} catch (error) {
 		return {
