@@ -22,7 +22,7 @@ const AddressCard = ({ address, isDelivered, deliveredAt }: { address?: Shipping
 	return (
 		<Card className="p-5">
 			<CardHeader>
-				<CardTitle className="text-xl font-semibold px-0">
+				<CardTitle className="px-0 text-xl font-semibold">
 					<h2 >Shipping Address</h2>
 				</CardTitle>
 			</CardHeader>
@@ -31,9 +31,10 @@ const AddressCard = ({ address, isDelivered, deliveredAt }: { address?: Shipping
 					<p>No shipping address</p>
 				) : (
 					<div className="space-y-0 pb-5">
-						<p className="text-lg pb-1">{shippingAddress.fullName}</p>
+						<p className="pb-1 text-lg">{shippingAddress.fullName}</p>
 						<p>{shippingAddress.streetAddress}</p>
 						<p>{shippingAddress.city}, {shippingAddress.state} {shippingAddress.zipCode}</p>
+						<p>{shippingAddress.country}</p>
 					</div>
 				)}
 				{!address ? (
