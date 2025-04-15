@@ -37,7 +37,7 @@ export async function addItemToCart(data: CartItem) {
 		const { userId, sessionCartId } = ids
 
 		// get cart
-		const cart = await getCart(userId, sessionCartId, 'this one')
+		const cart = await getCart(userId, sessionCartId)
 
 		// validate cart item
 		const item = cartItemSchema.parse(data)
@@ -49,7 +49,7 @@ export async function addItemToCart(data: CartItem) {
 			}
 		})
 		// checking if in stock or available
-		if (!product || product.stock < 1) return { success: false, message: 'but you can request a different custom disc!' }
+		if (!product || product.stock < 1) return { success: false, message: 'Try a custom order instead!' }
 		//> this will not work if there are more than one in stock to begin with, and they try to add more to their cart. when adding to their cart, the stock does not get updated. Not a problem until we add stickers/shirts/etc.
 		if (product.stock === 1 && !product.isAvailable) return { success: false, message: `Add to wish list to check back later.` }
 
@@ -62,7 +62,7 @@ export async function addItemToCart(data: CartItem) {
 					items: [item],
 					...calcPrice([item])
 				})
-				const createdCart = await prisma.cart.create({
+				await prisma.cart.create({
 					data: newCart
 				})
 

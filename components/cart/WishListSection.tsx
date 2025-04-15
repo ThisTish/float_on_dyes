@@ -11,8 +11,15 @@ import { WishList } from "@/types"
 
 const WishListSection
 	= ({ wishList }: { wishList: WishList }) => {
+
+		console.dir( wishList.items)
+		// wishList.items.map((item) => {
+		// 	console.log(item.isAvailable ? 'Available' : 'Not Available')
+		// })
+
+
 		return (
-			<Card className="space-y-5 mt-5 p-10 overflow-x-auto lg:mt-0 lg:col-span-3">
+			<Card className="mt-5 space-y-5 overflow-x-auto p-10 lg:col-span-3 lg:mt-0">
 				<CardHeader>
 					<CardTitle className="px-0">
 						<h2 className="h3-bold">
@@ -28,7 +35,7 @@ const WishListSection
 								<h2 className="h3-bold">There's nothing in your wish list yet.</h2>
 								<span>Search for something special or head to the shop.</span>
 
-								<div className="flex flex-col-reverse gap-3 items-start sm:flex-row sm:justify-between sm:items-center ">
+								<div className="flex flex-col-reverse items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
 									<SearchButton />
 									<Button
 										variant={"cta"}
@@ -45,7 +52,7 @@ const WishListSection
 								</div>
 							</div>
 						) : (
-							<div className="flex gap-5 flex-wrap">
+							<div className="flex flex-wrap gap-5">
 								{wishList.items.map((item) => (
 									<WishListCard key={item.productId} item={item} />
 								))}

@@ -8,8 +8,12 @@ import ProductPrice from "../product/ProductPrice"
 
 const WishListCard = ({ item }: { item: CartItem }) => {
 
+	const isAvailable = item.isAvailable || item.qty > 0
+
 	return (
-		<Card className="w-32 max-w-40 h-64 border transition border-darkBlue flex flex-col items-center">
+		<div className={isAvailable ? 'opacity-100 ' : 'opacity-50 bg-black'}>
+
+		<Card className="flex h-64 w-32 max-w-40 flex-col items-center border border-darkBlue transition">
 				<Link href={`/products/${item.slug}`}>
 				<CardHeader className="p-0">
 					<Image
@@ -17,7 +21,7 @@ const WishListCard = ({ item }: { item: CartItem }) => {
 						alt={item.name}
 						width={150}
 						height={100}
-					/>
+						/>
 				</CardHeader>
 				<CardContent className="p-1">
 					<span className="text-lg font-semibold">{item.name}</span>
@@ -29,6 +33,7 @@ const WishListCard = ({ item }: { item: CartItem }) => {
 					<AddToWishList item={item} size="wishList" />
 				</CardFooter>
 			</Card>
+						</div>
 	)
 }
 

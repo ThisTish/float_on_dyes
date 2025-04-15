@@ -14,19 +14,18 @@ import { CartItem } from "@/types"
 import { removeItemFromCart } from "@/lib/actions/cart.actions"
 import AddToCart from "./AddToCart"
 import Tooltip from "../ui/Tooltip"
+import ItemsTable from "../shared/tables/ItemsTable"
 
 
-// todo add tooltips for this.....
 // todo check if in wishlist lucide bookmark check
 // todo, if item isn't available, update to stay out of stock or something.
 
 const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
-
 	const [pending, startTransition] = useTransition()
-
 	const router = useRouter()
 	const domain = getBaseUrl()
 
+	
 	const handleAddToWishList = async () => {
 		startTransition(async () => {
 			const res = await addItemToWishList(item)
@@ -36,13 +35,13 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
 				toast({
 					variant: 'destructive',
-					title: res.message === 'but you can request a different custom disc!' ? `${item.name} has been snagged,`
+					title: res.message === 'Try a custom order instead!' ? `${item.name} has been snagged,`
 						: res.message === "Would you like to add it to your cart instead?" ? `${item.name} is already in your wish list,`
 							: undefined,
 					description: res.message,
 					action: res.message === 'Please sign in to save items to wishlist.' || res.message === "You've gotta be signed in to edit your wish list."
 						? <ToastAction altText="Sign in to save item" onClick={() => router.push(`/sign-in?callbackUrl=${domain}${previousPage}`)}>Go to Sign In</ToastAction>
-						: res.message === 'but you can request a different custom disc!'
+						: res.message === 'Try a custom order instead!'
 							? <ToastAction altText="Go to custom dye page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction>
 							: res.message === "Would you like to add it to your cart instead?"
 								? <AddToCart item={item} size="action" />
@@ -85,8 +84,11 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 			if (!res.success) {
 				toast({
 					variant: 'destructive',
+					title: res.title,
 					description: res.message === "Would you like to add it to your cart instead?"
 						? "This item is already in your wish list." : res.message,
+					action: res.message === 'Try a custom order instead!' 
+					? <ToastAction altText="Go to custom dye page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction> : undefined
 				})
 				return
 			}
@@ -114,8 +116,12 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 		<>
 			{size === 'icon'
 				? (
-					<button className="size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={handleAddToWishList}>
-						<Tooltip label={'Add to Wish List'} position={"top"} className="mb-2">
+					<button 
+					className={`size-fit p-1 transition duration-500 hover:bg-darkBlue hover:text-white ${item.isAvailable ? 'opacity-100' : 'opacity-50 hover:cursor-not-allowed'}`} 
+					disabled={!item.isAvailable}  
+					onClick={handleAddToWishList}
+					>
+						<Tooltip label={'Add to Wish List'} position={"top"} className={`mb-2 ${!item.isAvailable ? 'hover:cursor-not-allowed': ''}`}>
 
 							{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
 						</Tooltip>
@@ -123,7 +129,13 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 
 				) : size === 'button'
 					? (
-						<Button variant={'secondary'} size={'lg'} className="w-full " onClick={handleAddToWishList}>
+						<Button 
+						variant={'secondary'} 
+						size={'lg'} 
+						className={`w-full`} 
+						disabled={!item.isAvailable} 
+						onClick={handleAddToWishList}
+						>
 							Wish List
 							<AnimatedDiv variant={'outline'} animation={'pulse'} className="ml-2">
 								{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
@@ -134,28 +146,31 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 						? (
 							<button
 								onClick={handleAddToWishList}
-								className="inline-flex h-8 shrink-0 items-center justify-center px-3 text-sm font-medium transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive relative overflow-hidden z-10 border border-darkBlue shadow-xl text-darkBlue group-[.destructive]:before:bg-white before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
-								aria-label="Add to wishlist">
+								className="relative z-10 inline-flex h-8 shrink-0 items-center justify-center overflow-hidden border border-darkBlue px-3 text-sm font-medium text-darkBlue shadow-xl transition-all before:absolute before:-left-full before:-z-10 before:aspect-square before:w-full before:rounded-full before:bg-darkBlue before:transition-all before:duration-700 hover:text-white before:hover:left-0 before:hover:w-full before:hover:scale-150 before:hover:duration-700 focus:outline-none focus:ring-1 focus:ring-ring active:translate-x-1 active:translate-y-1 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:before:bg-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive"
+								aria-label="Add to wishlist"
+								disabled={!item.isAvailable} 
+								>
 								{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Add to Wish List"}
 							</button>
 						) :
 						size === 'cart'
 							? (
-								<Button variant={'outline'} size={'chip'} className="w-full border-darkBlue dark:border-lightBlue hover:font-bold" onClick={handleMoveToWishList}>
-									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={25} /> : "Move to Wish List"}
+								<Button variant={'outline'} size={'chip'} className="w-full border-darkBlue hover:font-bold dark:border-lightBlue"  onClick={handleMoveToWishList}>
+									{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={25} /> : "Move to Wish List"}
 								</Button>
 							) : size === 'dropdown'
 								? (
 									<button
 										onClick={handleMoveToWishList}
-										className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-darkBlue dark:text-lightBlue active:translate-x-1 active:translate-y-1"
-										aria-label="Add to wishlist">
-										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move to wish list"}
+										className="text-sm font-semibold tracking-wide text-darkBlue transition-all focus:outline-none focus:ring-1 focus:ring-ring active:translate-x-1 active:translate-y-1 disabled:pointer-events-none disabled:opacity-50 dark:text-lightBlue"
+										aria-label="Add to wishlist"
+										>
+										{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={15} /> : "Move to wish list"}
 									</button>
 								) : size === 'wishList'
 									? (
 										<Button variant={'destructive'} size={'chip'} className="w-full" onClick={handleRemoveItem}>
-											{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove"}
+											{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={15} /> : "Remove"}
 										</Button>
 									) : null
 			}

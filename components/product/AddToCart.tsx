@@ -34,12 +34,12 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 					title:
 						res.message === "And you've already snagged it!"
 							? `${item.name} is one of a kind!`
-							: res.message === 'but you can request a different custom disc!' ? `${item.name} has been snagged,`
+							: res.message === 'Try a custom order instead!' ? `${item.name} has been snagged,`
 								: res.message === 'Add to wish list to check back later.' ? `${item.name} is reserved in someone's cart.`
 									: undefined,
 					description: res.message,
 					action:
-						res.message === 'but you can request a different custom disc!'
+						res.message === 'Try a custom order instead!'
 							? <ToastAction altText="Go to custom order page" onClick={() => router.push('/custom')}>Custom Order Page</ToastAction>
 							: res.message === `And you've already snagged it!` || res.message === "You've snagged all we have in stock."
 								? <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
@@ -102,7 +102,7 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 	return (
 		<>
 			{size === 'icon' ? (
-				<button className="group relative size-fit p-1 hover:bg-darkBlue hover:text-white transition duration-500" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
+				<button className="group relative size-fit p-1 transition duration-500 hover:bg-darkBlue hover:text-white" onClick={existItem ? handleRemoveItem : () => handleAddToCart()}>
 					<Tooltip label={existItem ? 'Remove From Cart' : 'Add To Cart'} position={"bottom"} className="mt-2">
 						{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : itemStatusButtonIcon}
 					</Tooltip>
@@ -120,7 +120,7 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 					? (
 						<button
 							onClick={() => handleAddToCart()}
-							className="inline-flex h-8 shrink-0 items-center justify-center px-3 text-sm font-medium transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive relative overflow-hidden z-10 border border-darkBlue shadow-xl text-darkBlue group-[.destructive]:before:bg-white before:bg-darkBlue hover:text-white before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:-z-10 before:aspect-square before:hover:w-full before:hover:left-0 before:hover:scale-150 before:hover:duration-700 active:translate-x-1 active:translate-y-1"
+							className="relative z-10 inline-flex h-8 shrink-0 items-center justify-center overflow-hidden border border-darkBlue px-3 text-sm font-medium text-darkBlue shadow-xl transition-all before:absolute before:-left-full before:-z-10 before:aspect-square before:w-full before:rounded-full before:bg-darkBlue before:transition-all before:duration-700 hover:text-white before:hover:left-0 before:hover:w-full before:hover:scale-150 before:hover:duration-700 focus:outline-none focus:ring-1 focus:ring-ring active:translate-x-1 active:translate-y-1 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-white group-[.destructive]:text-white group-[.destructive]:before:bg-white group-[.destructive]:hover:text-destructive group-[.destructive]:focus:ring-destructive"
 							aria-label="Add to Cart">
 							{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : "Add to Cart"}
 						</button>
@@ -128,28 +128,28 @@ const AddToCart = ({ item, size, cart }: { item: CartItem, size: string, cart?: 
 					) : size === 'cart'
 						? (
 							<Button variant={'destructive'} size={'chip'} className="w-full" onClick={handleRemoveItem}>
-								{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove From Cart"}
+								{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={15} /> : "Remove From Cart"}
 							</Button>
 						) : size === 'dropdown'
 							? (
 								<button
 									onClick={handleRemoveItem}
-									className="text-sm font-semibold tracking-wide transition-all focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 text-destructive active:translate-x-1 active:translate-y-1"
+									className="text-sm font-semibold tracking-wide text-destructive transition-all focus:outline-none focus:ring-1 focus:ring-ring active:translate-x-1 active:translate-y-1 disabled:pointer-events-none disabled:opacity-50"
 									aria-label="Remove from cart">
-									{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Remove from cart"}
+									{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={15} /> : "Remove from cart"}
 								</button>
 							) : size === 'wishList'
 								? (
-									<Button variant={'outline'} size={'chip'} className="w-full border-darkBlue dark:border-lightBlue hover:font-bold" onClick={() => handleAddToCart(true)}>
+									<Button variant={'outline'} size={'chip'} className="w-full border-darkBlue hover:font-bold dark:border-lightBlue" onClick={() => handleAddToCart(true)}>
 
-										{pending ? <PiSpinnerBallDuotone className="animate-spin mx-auto" size={15} /> : "Move To Cart"}
+										{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={15} /> : "Move To Cart"}
 									</Button>
 								) : size === 'place-order' ? (
 									<Tooltip label="Remove" position="top" className="-ml-6 bg-destructive tracking-wide" >
 										<button className=""
 											onClick={handleRemoveItem}
 											aria-label="Remove From Cart">
-											{pending ? <PiSpinnerBallDuotone className="animate-spin  mx-auto" size={23} /> : <PiTrashDuotone size={25} className="hover:text-destructive" />}
+											{pending ? <PiSpinnerBallDuotone className="mx-auto animate-spin" size={23} /> : <PiTrashDuotone size={25} className="hover:text-destructive" />}
 										</button>
 									</Tooltip>
 								)

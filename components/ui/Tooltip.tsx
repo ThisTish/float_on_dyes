@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils"
 const Tooltip = ({ children, label, position, className }: { children: React.ReactNode, label: string, position?: string, className?: string }) => {
 	return (
 		<div
-			className={`relative flex items-center hover:cursor-pointer `}
+			className={`relative flex items-center`}
 		>
 			<div className={`peer ${position === 'bottom' ? 'bottom' : ''} `}>
 				{children}

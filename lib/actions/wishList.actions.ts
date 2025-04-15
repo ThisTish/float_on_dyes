@@ -21,8 +21,7 @@ export async function addItemToWishList(data: CartItem) {
 			}
 		})
 
-		if (!product || product.stock < 1) throw new Error('but you can request a different custom disc!')
-
+		if (!product || product.stock < 1 || !product.isAvailable) return {success: false, title: 'This item is no longer available', message: 'Try a custom order instead!'}
 
 		const existingWishList = await prisma.wishList.findFirst({
 			where: {

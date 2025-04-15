@@ -99,7 +99,7 @@ const ShippingAddressForm = () => {
 				setNeedsRevalidation(false)
 			}
 
-			if(res.success && res.correct){
+			if (res.success && res.correct) {
 				router.push('/payment-method')
 			}
 		})
@@ -171,7 +171,7 @@ const ShippingAddressForm = () => {
 								<FormItem>
 									<FormLabel>Full Name</FormLabel>
 									<FormControl>
-										<Input {...field} className="w-full border" autoComplete="given-name" />
+										<Input {...field}  name={field.name} className="w-full border" autoComplete="name" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -188,6 +188,7 @@ const ShippingAddressForm = () => {
 									<FormControl>
 										<Input
 											{...field}
+											name={field.name}
 											className="w-full border"
 											autoComplete="address-line1"
 											placeholder="House number and street name"
@@ -214,6 +215,7 @@ const ShippingAddressForm = () => {
 									<FormControl>
 										<Input
 											{...field}
+											name={field.name}
 											className="w-full border"
 											autoComplete="address-line2"
 											placeholder="Apt, suite, unit, etc"
@@ -240,8 +242,9 @@ const ShippingAddressForm = () => {
 									<FormControl>
 										<Input
 											{...field}
+											name={field.name}
 											className="w-full border"
-											autoComplete="address-level1"
+											autoComplete="address-level2"
 											placeholder="City"
 											onChange={(e) => {
 												field.onChange(e)
@@ -266,6 +269,7 @@ const ShippingAddressForm = () => {
 									<FormControl>
 										<Input
 											{...field}
+											name={field.name}
 											className="w-full border"
 											autoComplete="address-level1"
 											placeholder="State or Region"
@@ -292,6 +296,7 @@ const ShippingAddressForm = () => {
 									<FormControl>
 										<Input
 											{...field}
+											name={field.name}
 											className="w-full border"
 											autoComplete="postal-code"
 											onChange={(e) => {
@@ -352,7 +357,6 @@ const ShippingAddressForm = () => {
 			}
 		</>
 	)
-
 }
 
 export default ShippingAddressForm

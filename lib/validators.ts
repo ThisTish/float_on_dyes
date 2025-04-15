@@ -45,9 +45,6 @@ export const signUpFormSchema = z.object({
 	message: 'Passwords do not match',
 })
 
-
-
-
 export const resetPasswordFormSchema = z.object({
 	email: z.string().email('Invalid email address')
 })
@@ -66,7 +63,8 @@ export const cartItemSchema = z.object({
 	slug: z.string().min(1, 'Slug is required'),
 	qty: z.number().int().nonnegative('Quantity must be a positive integer'),
 	image: z.string().min(1, 'Image is required'),
-	price: currency
+	price: currency,
+	isAvailable: z.boolean().optional()
 })
 
 export const insertCartSchema = z.object({
@@ -97,7 +95,6 @@ export const shippingAddressSchema = z.object({
 	lat: z.number().optional(),
 	lng: z.number().optional()
 })
-
 
 export const paymentMethodSchema = z.object({
 	type: z.string().min(1, 'Payment method is required')

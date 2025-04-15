@@ -26,15 +26,15 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 
 	return (
 		<div className="space-y-10">
-			<header className="relative w-full h-28 bg-[url('/images/cellHeader.jpg')] dark:bg-[url('/images/cellHeader-dark.jpg')] bg-cover bg-center bg-no-repeat md:h-32 lg:h-40">
-				<h1 className="text-white backdrop-blur-sm size-fit absolute left-5 top-5">
+			<header className="relative h-28 w-full bg-[url('/images/cellHeader.jpg')] bg-cover bg-center bg-no-repeat dark:bg-[url('/images/cellHeader-dark.jpg')] md:h-32 lg:h-40">
+				<h1 className="absolute left-5 top-5 size-fit text-white backdrop-blur-sm">
 					<span className="text-4xl font-bold md:text-5xl lg:text-6xl">{product.name} </span>
-					<span className="block md:inline text-2xl font-light md:text-3xl lg:text-4xl">{product.dyeType}</span>
+					<span className="block text-2xl font-light md:inline md:text-3xl lg:text-4xl">{product.dyeType}</span>
 				</h1>
 				{/* Breadcrumb */}
 			</header>
 
-			<section className="grid grid-cols-1 gap-10 md:gap-5 md:grid-cols-2">
+			<section className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-5">
 
 				{/* images */}
 				<div className="w-full">
@@ -45,14 +45,14 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 				<Card className="p-10">
 					<CardHeader >
 						<CardTitle >
-							<span className="text-xl md:text-2xl font-extrabold">{product.name} </span>
-							<span className="text-lg md:text-xl font-bold">{product.brand} </span>
-							<div className="flex-between md:text-lg font-semibold">
+							<span className="text-xl font-extrabold md:text-2xl">{product.name} </span>
+							<span className="text-lg font-bold md:text-xl">{product.brand} </span>
+							<div className="flex-between font-semibold md:text-lg">
 								<span>{product.dyeType}</span>
 								<ProductPrice className="text-xl md:text-2xl" value={Number(product.price)} />
 							</div>
-							<p className="text-sm font-light block">{product.plastic}</p>
-							<p className="text-xs md:text-sm font-extralight">{product.weight}g</p>
+							<p className="block text-sm font-light">{product.plastic}</p>
+							<p className="text-xs font-extralight md:text-sm">{product.weight}g</p>
 						</CardTitle>
 					</CardHeader>
 
@@ -61,20 +61,20 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 						<p className="text-pretty leading-snug">{product.description}</p>
 
 						{/* flight numbers */}
-						<div className="grid grid-cols-4 py-5 gap-1 mx-auto max-w-60 text-center text-sm sm:text-base ">
-							<div className="aspect-square max-w-24 bg-brightBlue text-white content-evenly">
+						<div className="mx-auto grid max-w-60 grid-cols-4 gap-1 py-5 text-center text-sm sm:text-base">
+							<div className="aspect-square max-w-24 content-evenly bg-brightBlue text-white">
 								<h4 >Speed</h4>
 								<span className="font-bold tracking-widest">{product.speed}</span>
 							</div>
-							<div className="aspect-square max-w-24 bg-darkGreen text-white content-evenly ">
+							<div className="aspect-square max-w-24 content-evenly bg-darkGreen text-white">
 								<h4 >Glide</h4>
 								<span className="font-bold tracking-widest">{product.glide}</span>
 							</div>
-							<div className="aspect-square max-w-24 bg-darkBlue text-white content-evenly ">
+							<div className="aspect-square max-w-24 content-evenly bg-darkBlue text-white">
 								<h4 >Turn</h4>
 								<span className="font-bold tracking-widest">{product.turn}</span>
 							</div>
-							<div className="aspect-square max-w-24 bg-lightGreen text-white content-evenly ">
+							<div className="aspect-square max-w-24 content-evenly bg-lightGreen text-white">
 								<h4 >Fade</h4>
 								<span className="font-bold tracking-widest">{product.fade}</span>
 							</div>
@@ -82,14 +82,15 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 					</CardContent>
 
 					{/* cart buttons */}
-					<CardFooter className="flex flex-col lg:flex-row justify-center items-center w-full gap-3 mt-3">
+					<CardFooter className="mt-3 flex w-full flex-col items-center justify-center gap-3 lg:flex-row">
 						<AddToWishList item={{
 							productId: product.id,
 							name: product.name,
 							slug: product.slug,
 							price: product.price,
 							image: product.images[0],
-							qty: 1
+							qty: 1,
+							isAvailable: product.isAvailable
 						}} size={'button'} />
 
 						<AddToCart item={{
@@ -98,7 +99,8 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							slug: product.slug,
 							price: product.price,
 							image: product.images[0],
-							qty: 1
+							qty: 1,
+							isAvailable: product.isAvailable
 						}}
 							cart={cart}
 							size={'button'}

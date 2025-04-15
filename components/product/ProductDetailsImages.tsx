@@ -13,8 +13,8 @@ const ProductDetailsImages = ({ images, name }: { images: string[], name: string
 
 	return (
 		<div className="space-y-5">
-			<div className="size-fit group relative">
-				<Link href={images[currentImage]} className="absolute m-3 top-1 right-1 transition duration-500 text-darkBlue opacity-0 group-hover:opacity-100 group-hover:duration-500 group-hover:z-50 hover:scale-125" >
+			<div className="group relative size-fit">
+				<Link href={images[currentImage]} className="absolute right-1 top-1 m-3 text-darkBlue opacity-0 transition duration-500 hover:scale-125 group-hover:z-50 group-hover:opacity-100 group-hover:duration-500" >
 					<BiZoomIn size={30}	/>
 				</Link>
 					<ProductImage
