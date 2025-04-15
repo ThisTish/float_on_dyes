@@ -12,12 +12,6 @@ import { WishList } from "@/types"
 const WishListSection
 	= ({ wishList }: { wishList: WishList }) => {
 
-		console.dir( wishList.items)
-		// wishList.items.map((item) => {
-		// 	console.log(item.isAvailable ? 'Available' : 'Not Available')
-		// })
-
-
 		return (
 			<Card className="mt-5 space-y-5 overflow-x-auto p-10 lg:col-span-3 lg:mt-0">
 				<CardHeader>

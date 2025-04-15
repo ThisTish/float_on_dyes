@@ -113,10 +113,10 @@ export async function addItemToCart(data: CartItem) {
 // remove item from cart
 export async function removeItemFromCart(productId: string) {
 	try {
-		const sessionCartId = (await cookies()).get('sessionCartId')?.value
-		if (!sessionCartId) throw new Error('Cart session not found')
-
-		const cart = await getCart(undefined, sessionCartId)
+		const {userId, sessionCartId} = await sessionUserId()
+		if (!userId && !sessionCartId) throw new Error('Cart not foundssssss')
+		const cart = await getCart(userId, sessionCartId)
+		console.log('cart received', cart)
 		if (!cart) throw new Error('Cart not found')
 
 		const product = await prisma.product.findFirst({
@@ -157,7 +157,6 @@ export async function removeItemFromCart(productId: string) {
 export async function sessionUserId() {
 	const sessionCartId = (await cookies()).get('sessionCartId')?.value
 	if (!sessionCartId) throw new Error('Cart session not found')
-
 	const session = await auth()
 	const userId = session?.user?.id ? (session.user.id) : undefined
 
@@ -165,11 +164,14 @@ export async function sessionUserId() {
 }
 
 // find cart by userId or sessionCartId
-export async function getCart(passedUserId?: string, passedSessionCartId?: string, calling?: string) {
+export async function getCart(passedUserId?: string, passedSessionCartId?: string) {
+	console.log('passedUserId', passedUserId)
+	console.log('passedSessionCartId', passedSessionCartId)
 	let userId
 	let sessionCartId
 	if (!passedUserId && !passedSessionCartId) {
 		const ids = await sessionUserId()
+		console.dir(ids)
 		if (ids.userId) userId = ids.userId
 		sessionCartId = ids.sessionCartId
 	}
@@ -179,7 +181,7 @@ export async function getCart(passedUserId?: string, passedSessionCartId?: strin
 	}
 
 	const cart = await prisma.cart.findFirst({
-		where: userId ? { userId } : { sessionCartId },
+		where: userId ? { userId } : { sessionCartId }
 	})
 	if (!cart) return
 
@@ -189,9 +191,8 @@ export async function getCart(passedUserId?: string, passedSessionCartId?: strin
 		itemsPrice: cart.itemsPrice.toString(),
 		totalPrice: cart.totalPrice.toString(),
 		shippingPrice: cart.shippingPrice.toString(),
-		taxPrice: cart.taxPrice.toString(),
+		taxPrice: cart.taxPrice.toString()
 	}))
-
 	return cartPlain
 }
 
