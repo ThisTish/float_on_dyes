@@ -8,19 +8,19 @@ import Title from "../header/Title";
 const Hero = () => {
 
 	return (
-		<section className="flex flex-col w-full min-h-96 absolute inset-0 bg-[url('/images/heroLandscape.svg')] bg-cover bg-center bg-no-repeat items-center justify-center ">
-			<hgroup className="flex flex-col gap-16 w-64 h-full mt-32 md:w-72 lg:w-96 ">
+		<section className="absolute inset-0 flex min-h-96 w-full flex-col items-center justify-center bg-[url('/images/heroLandscape.svg')] bg-cover bg-center bg-no-repeat">
+			<hgroup className="mt-40 flex h-full w-64 flex-col gap-16 md:w-72 lg:w-96">
 				<Title />
-				<div className="text-end w-52 p-2 self-end backdrop-blur-sm text-balance rounded-full md:w-72 md:mt-5 lg:mt-8  lg:w-80 ">
-					<h2 className="text-2xl md:text-3xl lg:text-4xl mb-5 font-semibold tracking-wide">"Fly, My Pretty!"</h2>
+				<div className="w-52 self-end text-balance rounded-full p-2 text-end backdrop-blur-sm md:mt-5 md:w-72 lg:mt-8 lg:w-80">
+					<h2 className="mb-5 text-2xl font-semibold tracking-wide md:text-3xl lg:text-4xl">"Fly, My Pretty!"</h2>
 					<p className="text-lg leading-5 lg:text-xl">One of a kind dyes and custom designs for your favorite things...</p>
-					<span className="px-1 font-bold w-fit text-xl md:text-2xl lg:text-3xl">Discs</span>
+					<span className="w-fit px-1 text-xl font-bold md:text-2xl lg:text-3xl">Discs</span>
 				</div>
 			</hgroup>
-			<div className="flex gap-3 justify-end px-5 pb-5 -mt-14 md:pb-8 wrapper tracking-widest text-xs md:tracking-wider md:text-base md:font-semibold lg:tracking-wide lg:text-lg lg:font-bold">
+			<div className="wrapper -mt-14 flex justify-end gap-3 px-5 pb-5 text-xs tracking-widest md:pb-8 md:text-base md:font-semibold md:tracking-wider lg:text-lg lg:font-bold lg:tracking-wide">
 				<Button
 					variant={"outline"}
-					className="h-8 px-2 gap-1 md:h-10 md:px-3 md:gap-2 lg:px-4 lg:gap-3 lg:h-12"
+					className="h-8 gap-1 px-2 md:h-10 md:gap-2 md:px-3 lg:h-12 lg:gap-3 lg:px-4"
 					asChild
 				>
 					<Link href="/contact">
@@ -33,7 +33,7 @@ const Hero = () => {
 
 				<Button
 					variant={"cta"}
-					className="h-8 px-2 gap-1 md:h-10 md:px-3 md:gap-2 lg:px-4 lg:gap-3 lg:h-12"
+					className="h-8 gap-1 px-2 md:h-10 md:gap-2 md:px-3 lg:h-12 lg:gap-3 lg:px-4"
 					asChild
 				>
 					<Link href="/shop">

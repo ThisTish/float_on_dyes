@@ -24,12 +24,12 @@ const CartPage = async () => {
 
 	return (
 		<div className="grid lg:grid-cols-4 lg:gap-5">
-			<div className="mb-5 lg:mb-0 lg:col-span-4">
+			<div className="mb-5 lg:col-span-4 lg:mb-0">
 				<BackButton size={'sm'} />
 			</div>
 
 			{/* cart items table */}
-			<Card className="space-y-5 p-10 overflow-x-auto lg:col-span-3">
+			<Card className="space-y-5 overflow-x-auto p-10 lg:col-span-3">
 				<CardHeader>
 					<CardTitle>
 						<h2 className="h3-bold">Shopping Cart</h2>

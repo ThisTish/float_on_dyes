@@ -20,7 +20,7 @@ model Product {
   discType     String[]
   tags         String[]
   color        String[]
-  dyeType      String[]
+  dyeType      String
   price        Decimal     @default(0) @db.Decimal(12, 2)
   speed        Int         @default(0)
   glide        Int         @default(0)

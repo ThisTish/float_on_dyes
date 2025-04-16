@@ -1,3 +1,4 @@
+import Banner from "@/components/header/Banner"
 import AddToCart from "@/components/product/AddToCart"
 import AddToWishList from "@/components/product/AddToWishList"
 import ProductDetailsImages from "@/components/product/ProductDetailsImages"
@@ -26,6 +27,7 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 
 	return (
 		<div className="space-y-10">
+			<Banner url={'/images/cellHeader.jpg'} darkUrl={'/images/cellHeader-dark.jpg'} title={product.name} subtitle={product.dyeType} />
 			<header className="relative h-28 w-full bg-[url('/images/cellHeader.jpg')] bg-cover bg-center bg-no-repeat dark:bg-[url('/images/cellHeader-dark.jpg')] md:h-32 lg:h-40">
 				<h1 className="absolute left-5 top-5 size-fit text-white backdrop-blur-sm">
 					<span className="text-4xl font-bold md:text-5xl lg:text-6xl">{product.name} </span>

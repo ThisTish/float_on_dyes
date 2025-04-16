@@ -113,10 +113,9 @@ export async function addItemToCart(data: CartItem) {
 // remove item from cart
 export async function removeItemFromCart(productId: string) {
 	try {
-		const {userId, sessionCartId} = await sessionUserId()
+		const { userId, sessionCartId } = await sessionUserId()
 		if (!userId && !sessionCartId) throw new Error('Cart not foundssssss')
 		const cart = await getCart(userId, sessionCartId)
-		console.log('cart received', cart)
 		if (!cart) throw new Error('Cart not found')
 
 		const product = await prisma.product.findFirst({
@@ -165,13 +164,10 @@ export async function sessionUserId() {
 
 // find cart by userId or sessionCartId
 export async function getCart(passedUserId?: string, passedSessionCartId?: string) {
-	console.log('passedUserId', passedUserId)
-	console.log('passedSessionCartId', passedSessionCartId)
 	let userId
 	let sessionCartId
 	if (!passedUserId && !passedSessionCartId) {
 		const ids = await sessionUserId()
-		console.dir(ids)
 		if (ids.userId) userId = ids.userId
 		sessionCartId = ids.sessionCartId
 	}

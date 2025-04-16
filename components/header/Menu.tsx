@@ -53,10 +53,11 @@ const Menu = () => {
 
 			{/* mobile */}
 			<nav className="flex gap-3 md:hidden">
-				<Link href={'/cart'} className="mt-1 w-fit rounded-full p-2 hover:bg-darkBlue hover:text-primary-foreground">
-					<ShoppingCart />
+				<Link href='/cart' className="-mr-2 rounded-full border border-transparent p-2 transition-all duration-300 ease-in hover:scale-90 hover:border-darkBlue hover:bg-darkBlue hover:text-white hover:ring-[3px] hover:ring-inset hover:ring-white active:translate-x-1 active:translate-y-1">
+					<Tooltip label="Cart" className="mt-4" position="bottom">
+						<ShoppingCart />
+					</Tooltip>
 				</Link>
-
 				<UserButton />
 				<Sheet onOpenChange={(prev) => setIsOpen(prev)}>
 					<SheetTrigger>

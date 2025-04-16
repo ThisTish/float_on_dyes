@@ -39,7 +39,7 @@ const firstData = {
 			color: [
 				'red', 'orange', 'yellow'
 			],
-			dyeType: ['swirl'],
+			dyeType: 'swirl',
 			price: 30.99,
 			speed: 9,
 			glide: 5,
@@ -68,7 +68,7 @@ const firstData = {
 			color: [
 				'blue', 'purple', 'pink'
 			],
-			dyeType: ['layered circle pull'],
+			dyeType: 'layered circle pull',
 			price: 30.99,
 			speed: 12,
 			glide: 5,
@@ -97,7 +97,7 @@ const firstData = {
 			color: [
 				'blue', 'purple', 'yellow'
 			],
-			dyeType: ['layered circle pull'],
+			dyeType: 'layered circle pull',
 			price: 30.99,
 			speed: 2,
 			glide: 5,
@@ -126,7 +126,7 @@ const firstData = {
 			color: [
 				'blue', 'red', 'yellow', 'orange', 'green'
 			],
-			dyeType: ['swirl pull'],
+			dyeType: 'swirl pull',
 			price: 30.99,
 			speed: 5,
 			glide: 5,
@@ -155,7 +155,7 @@ const firstData = {
 			color: [
 				'blue', 'red', 'yellow', 'orange', 'green'
 			],
-			dyeType: ['swirl pull'],
+			dyeType: 'swirl pull',
 			price: 30.99,
 			speed: 3,
 			glide: 3,
