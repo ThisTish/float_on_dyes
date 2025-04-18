@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const CustomPage = () => {
 	return (
 		<>
-		<Banner title="Orders" subtitle="Custom" url="/images/cellHeader.jpg"/>
+		<Banner title="Custom" subtitle="Orders" url="/images/cellHeader.jpg"/>
 		<main className="">
 
 		</main>

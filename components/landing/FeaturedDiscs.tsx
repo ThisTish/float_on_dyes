@@ -9,7 +9,7 @@ const FeaturedDiscs = async () => {
 	const products = await getLatestProducts()
 
 	return (
-		<section className="mt-96 flex flex-col justify-center gap-10">
+		<section className="mt-96 flex flex-col items-center justify-center gap-10">
 			<Heading first="Featured" second="Discs" />
 			<div className="flex flex-wrap justify-center gap-2 p-2">
 				<Suspense fallback={(<>
@@ -25,7 +25,10 @@ const FeaturedDiscs = async () => {
 					))}
 				</Suspense>
 			</div>
+			<div className="self-start">
 			<SearchButton />
+
+			</div>
 
 		</section>
 	);

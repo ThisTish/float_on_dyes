@@ -28,15 +28,8 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 	return (
 		<div className="space-y-10">
 			<Banner url={'/images/cellHeader.jpg'} darkUrl={'/images/cellHeader-dark.jpg'} title={product.name} subtitle={product.dyeType} />
-			<header className="relative h-28 w-full bg-[url('/images/cellHeader.jpg')] bg-cover bg-center bg-no-repeat dark:bg-[url('/images/cellHeader-dark.jpg')] md:h-32 lg:h-40">
-				<h1 className="absolute left-5 top-5 size-fit text-white backdrop-blur-sm">
-					<span className="text-4xl font-bold md:text-5xl lg:text-6xl">{product.name} </span>
-					<span className="block text-2xl font-light md:inline md:text-3xl lg:text-4xl">{product.dyeType}</span>
-				</h1>
-				{/* Breadcrumb */}
-			</header>
 
-			<section className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-5">
+			<section className="grid grid-cols-1 gap-5 md:grid-cols-2">
 
 				{/* images */}
 				<div className="w-full">
@@ -50,10 +43,17 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							<span className="text-xl font-extrabold md:text-2xl">{product.name} </span>
 							<span className="text-lg font-bold md:text-xl">{product.brand} </span>
 							<div className="flex-between font-semibold md:text-lg">
+								<div>
+
+								<span className="text-xs font-extralight md:text-sm">Dye Type: </span>
 								<span>{product.dyeType}</span>
+								</div>
 								<ProductPrice className="text-xl md:text-2xl" value={Number(product.price)} />
 							</div>
-							<p className="block text-sm font-light">{product.plastic}</p>
+							<div>
+							<span className="text-xs font-extralight md:text-sm">Plastic: </span>
+							<span className="text-sm font-light md:text-base">{product.plastic}</span>
+							</div>
 							<p className="text-xs font-extralight md:text-sm">{product.weight}g</p>
 						</CardTitle>
 					</CardHeader>
@@ -109,14 +109,14 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 						/>
 					</CardFooter>
 				</Card>
-			</section>
-
 			{/* tags */}
-			<div className="flex justify-end space-x-2">
+			<div className="flex flex-wrap justify-end space-x-2 md:col-start-2">
 				{product.tags.map((tag: string) => (
 					<Button variant={'chip'} size={'chip'} key={`${product.id}-${tag}`}>{tag}</Button>
 				))}
 			</div>
+			</section>
+
 
 			{/* nav buttons */}
 			<BackButton size="sm" />

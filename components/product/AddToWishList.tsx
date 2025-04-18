@@ -120,7 +120,7 @@ const AddToWishList = ({ item, size }: { item: CartItem, size: string }) => {
 						disabled={!item.isAvailable}
 						onClick={handleAddToWishList}
 					>
-						<Tooltip label={'Add to Wish List'} position={"top"} className={`mb-2 ${!item.isAvailable ? 'hover:cursor-not-allowed' : ''}`}>
+						<Tooltip label={!item.isAvailable ? 'Not Available' : 'Add to Wish List'} position={"top"} className={`mb-2 ${!item.isAvailable ? 'hover:cursor-not-allowed' : ''}`}>
 
 							{pending ? <PiSpinnerBallDuotone className="animate-spin" size={25} /> : <LucideBookmarkPlus size={25} />}
 						</Tooltip>

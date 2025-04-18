@@ -29,7 +29,7 @@ const Banner = ({url, darkUrl, title, subtitle, children, className }: BannerPro
 				<Heading
 					first={title}
 					second={subtitle}
-					className="absolute left-5 top-5 size-fit px-3 text-white backdrop-blur-lg"
+					className="absolute left-5 top-5 size-fit px-3 py-1 text-white shadow-[0_35px_35px_rgba(0,0,0,0.25)] backdrop-blur-md"
 				/>
 				{children}
 			</div>

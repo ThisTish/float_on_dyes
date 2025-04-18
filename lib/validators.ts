@@ -17,7 +17,7 @@ export const insertProductSchema = z.object({
 	discType: z.array(z.string()),
 	tags: z.array(z.string()),
 	color: z.array(z.string()),
-	dyeType: z.array(z.string()),
+	dyeType: z.string(),
 	price: currency,
 	speed: z.number(),
 	glide: z.number(),

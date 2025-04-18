@@ -1,5 +1,4 @@
 import { auth } from "@/auth"
-import WishListCard from "@/components/cart/WishListCard"
 import Heading from "@/components/ui/Heading"
 import PasswordUpdateForm from "@/components/user/PasswordUpdateForm"
 import UserProfileForm from "@/components/user/UpdateProfileForm"
@@ -29,7 +28,7 @@ const UserProfilePage = async () => {
 			{/* password */}
 			<h2 className="text-lg font-semibold text-darkGreen">Change Password</h2>
 			<PasswordUpdateForm isOauth={session.user.isOauth ? true : false} />
-			
+
 		</div>
 	</>
 	)
