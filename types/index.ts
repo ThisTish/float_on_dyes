@@ -32,3 +32,9 @@ export type SalesDataType = {
 	month: string
 	totalSales: number
 }[]
+
+export type DyeType = {
+	name: string,
+	fragment: string,
+	images: string[]
+}

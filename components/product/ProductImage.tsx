@@ -21,7 +21,7 @@ const ProductImage = ({ src, width, height, alt }: ProductImageProps) => {
 					width={width}
 					height={height}
 					alt={alt}
-					className="object-cover object-center"
+					className="overflow-hidden object-cover object-center"
 					priority
 				/>
 			</Lens>
