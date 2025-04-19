@@ -9,9 +9,6 @@ import { useState } from "react"
 import { cn } from "@/lib/utils"
 
 
-
-
-
 const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
 	const [currentDye, setCurrentDye] = useState(0)
 	const [currentImage, setCurrentImage] = useState(0)
@@ -57,16 +54,16 @@ const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
 			{/* small images */}
 			<div className="flex flex-wrap gap-5">
 				{dyeTypes.map((type, index) => (
-					<div className={`group w-52 h-60 grid grid-rows-2 grid-cols-1 bg-transparent ${currentDye === index && "border border-darkBlue"}`} key={type.name}>
+					<div className={`group size-28 grid grid-rows-2 grid-cols-1 bg-transparent transition duration-500 hover:border hover:border-darkBlue ${currentDye === index && "border border-darkBlue"}`} key={type.name}>
 						<Image
 							src={type.images[0]}
 							width={100}
 							height={100}
 							alt={`Image of ${type.name}`}
 							onClick={() => setCurrentDye(index)}
-							className="size-12 cursor-pointer object-cover object-center md:size-24"
+							className="mx-auto size-12 cursor-pointer object-cover object-center md:size-24"
 						/>
-						<p className={`px-1 opacity-0 group-hover:opacity-100 text-center text-sm md:text-base font-semibold text-white bg-darkBlue transition-opacity duration-300 group-hover:duration-300  ${currentDye === index && 'opacity-100'}`}>
+						<p className={`px-1 h-fit opacity-0 self-end group-hover:opacity-100 text-center text-sm font-semibold text-white bg-darkBlue transition-opacity duration-500   ${currentDye === index && 'opacity-100'}`}>
 							{type.name}
 						</p>
 					</div>
