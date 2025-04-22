@@ -14,16 +14,21 @@ const ProductDetailsImages = ({ images, name }: { images: string[], name: string
 	return (
 		<div className="space-y-5">
 			<div className="group relative size-fit">
+				{/* button for big big */}
 				<Link href={images[currentImage]} className="absolute right-1 top-1 m-3 text-darkBlue opacity-0 transition duration-500 hover:scale-125 group-hover:z-50 group-hover:opacity-100 group-hover:duration-500" >
-					<BiZoomIn size={30}	/>
+					<BiZoomIn size={30} />
 				</Link>
-					<ProductImage
-						src={images[currentImage]}
-						width={1000}
-						height={1000}
-						alt={`Image of ${name}`}
-					/>
+
+				{/* main big image */}
+				<ProductImage
+					src={images[currentImage]}
+					width={1000}
+					height={1000}
+					alt={`Image of ${name}`}
+				/>
 			</div>
+
+			{/* small images */}
 			<div className="flex flex-wrap gap-5">
 				{images.map((image, index) => (
 					<Image

@@ -3,21 +3,24 @@ export const dyeTypes = [
 		name: "abstract cells",
 		fragment: "abstract_cells",
 		images: [
-			'/images/cloudbreaker.png'
+			'/images/cloudbreaker.png',
+			'/images/cloudbreaker.jpg',
+			'/images/benny.jpg'
 		]
 	},
 	{
 		name: "abstract pour",
 		fragment: "abstract_pour",
 		images: [
-			'/images/cloudbreaker.png'
+			'/images/hex.jpg',
+			'/images/passion.jpg'
 		]
 	},
 	{
 		name: "blowout cells",
 		fragment: "blowout_cells",
 		images: [
-			'/images/cloudbreaker.png'
+			'/images/insanity.jpg'
 		]
 	},
 	{

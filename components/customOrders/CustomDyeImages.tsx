@@ -22,7 +22,7 @@ const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
 
 				{/* button for more images */}
 				<Tooltip label="See More Examples" position="top" className="mb-2" >
-					<Link href={`/dyeTypeGallery#${fragment}`} className="absolute right-1 top-1 m-3 text-darkBlue opacity-0 transition duration-500 hover:scale-125 hover:bg-darkBlue hover:text-primary-foreground group-hover:z-50 group-hover:opacity-100 group-hover:duration-500" >
+					<Link href={`/dyeTypeGallery#${fragment}`} className="absolute right-1 top-1 m-3 text-darkBlue opacity-0 transition duration-500 hover:scale-125 hover:bg-darkBlue hover:text-primary-foreground group-hover:z-20 group-hover:opacity-100 group-hover:duration-500" >
 						<SquareStack size={30} className="-scale-x-90" />
 					</Link>
 				</Tooltip>
@@ -32,13 +32,13 @@ const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
 					src={images[currentImage]}
 					width={1000}
 					height={1000}
-					alt={`Image of ${name}`}
+					alt={`Image of ${name} dye bed`}
 					className="object-cover object-center"
 					onMouseEnter={() => {
 						const intervalId = setInterval(() => {
 							setCurrentImage((prev) => (prev + 1) % images.length)
 							setIntervalId(intervalId)
-						}, 3000)
+						}, 2000)
 					}}
 					onMouseLeave={() => {
 						clearInterval(intervalId as NodeJS.Timeout)

@@ -32,8 +32,8 @@ const CustomPage = () => {
 						<CardDescription>Please select from the options below or<Link href="/contact"> contact us</Link> for more options or complex requests.</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<Form>
-							<form>
+						{/* <Form >
+							<form >
 								<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 									<div className="flex flex-col gap-2">
 										<label htmlFor="name">Name</label>
@@ -58,7 +58,7 @@ const CustomPage = () => {
 								</div>
 								<Button type="submit" className="mt-5"><SquareStack size={20} /> Submit Order</Button>
 							</form>
-						</Form>
+						</Form> */}
 					</CardContent>
 				</Card>
 			</div>
