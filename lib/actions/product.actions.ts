@@ -31,3 +31,35 @@ export const getProductBySlug = async (slug: string) => {
 		throw new Error("Product couldn't be found")
 	}
 }
+
+// get dyeable discs
+export const getDyeableDiscs = async () => {
+	try {
+		return await prisma.product.findMany({
+			where: {
+				OR: [
+					{ discType: { has: 'none' } },
+					{ discType: { has: 'special' } }
+				],
+				isAvailable: true,
+				stock: {
+					gte: 1
+				}
+			},
+			select: {
+				id: true,
+				name: true,
+				brand: true,
+				plastic: true,
+				weight: true,
+				isStamped: true,
+				price: true,
+				images: true
+			}
+		})
+
+	} catch (error) {
+		console.error(error)
+		throw new Error("Dyeable discs couldn't be found")
+	}
+}

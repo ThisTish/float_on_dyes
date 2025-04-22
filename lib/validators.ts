@@ -77,6 +77,17 @@ export const insertCartSchema = z.object({
 	userId: z.string().optional().nullable()
 })
 
+export const customOrderSchema = z.object({
+	disc: z.object({ cartItemSchema }),
+	dyeType: z.string().min(1, 'Dye type is required'),
+	colors: z.array(z.string()).min(1, 'At least one color is required').max(3, 'Maximum of 3 colors are allowed'),
+	notes: z.string().optional(),
+	rimSpin: z.boolean().optional(),
+	rimDip: z.boolean().optional(),
+	fullBackDip: z.boolean().optional(),
+	glueMask: z.boolean().optional(),
+	wipeStamp: z.boolean().optional()
+})
 
 export const insertWishListItemSchema = z.object({
 	items: z.array(cartItemSchema),
