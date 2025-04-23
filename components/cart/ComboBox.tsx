@@ -4,12 +4,12 @@ import { ControllerRenderProps } from "react-hook-form"
 import { FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
-import { useState } from "react"
+import { JSXElementConstructor, ReactNode, useState } from "react"
 
 type ComboBoxProps = {
 	field: ControllerRenderProps<any, any>,
 	label: string,
-	list: { value: string, label: string }[],
+	list: { value: string, label: string | ReactNode }[],
 	placeholder?: string
 }
 
@@ -33,10 +33,10 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 						>
 							{field.value
 								? list.find(
-									(item) => item.value === field.value
+									(item) => item.value === field.value || item.label === field.value
 								)?.label
 								: placeholder || `Select ${label}`}
-							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-primary`} />
+							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
 						</button>
 					</FormControl>
 				</PopoverTrigger>
@@ -51,22 +51,24 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 							<CommandGroup>
 								{list.map((item) => (
 									<CommandItem
-										value={item.value}
-										key={item.value}
-										onSelect={() => {
-											field.onChange(item.value)
-											setOpen(false) // Close the popover when an item is selected
-										}}
+									value={item.value}
+									key={item.value}
+									onSelect={() => {
+										field.onChange(item.value)
+										setOpen(false)
+									}}
+									className="group pl-10"
 									>
-										{item.label}
-										<Check
+										<div
+										// todo i'm right here trying to get it to look right
 											className={cn(
-												"ml-auto",
+												"absolute -left-[.5px] size-7 rounded-full bg-accent group-hover:bg-primary-foreground",
 												item.value === field.value
 													? "opacity-100"
 													: "opacity-0"
 											)}
 										/>
+										{item.label}
 									</CommandItem>
 								))}
 							</CommandGroup>

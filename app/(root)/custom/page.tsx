@@ -17,10 +17,11 @@ const dyeTypeArray = dyeTypes
 const CustomPage = async () => {
 
 	const dyableDiscs = await getDyeableDiscs()
-	if(!dyableDiscs) return (
+	if (!dyableDiscs) return (
 		// todo make skeleton
-	<div>Loading...</div>
+		<div>Loading...</div>
 	)
+	// console.log('dyableDiscs', dyableDiscs)
 
 	const handleImageChange = (index: number) => {
 		console.log('do things to customdyeimages, and pass this to Form?')
@@ -44,7 +45,7 @@ const CustomPage = async () => {
 						</CardHeader>
 
 						<CardContent>
-							<CustomOrderForm discs={dyableDiscs}/>
+							<CustomOrderForm discs={dyableDiscs} />
 						</CardContent>
 
 					</Card>

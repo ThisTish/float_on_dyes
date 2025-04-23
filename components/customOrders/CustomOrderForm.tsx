@@ -1,14 +1,12 @@
 "use client"
 
-import { cartItemSchema, customOrderSchema } from "@/lib/validators"
+import { customOrderSchema } from "@/lib/validators"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Decimal } from "@prisma/client/runtime/library"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormField } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
-import { dyeTypes } from "@/lib/constants/dyeTypes"
-import SelectInput from "../ui/SelectInput"
 
 // todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -25,7 +23,23 @@ type CustomOrderFormProps = {
 	}[]
 }
 
-const CustomOrderForm = ({discs}: CustomOrderFormProps) => {
+
+const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
+	// console.log(discs)
+	const discOptions = discs.map((disc) => ({
+		value: `${disc.name} ${disc.brand}`,
+		label:
+		(
+			<>
+				<span className="font-semibold">{disc.name}</span>
+				<span className="italic">{disc.brand}</span>
+				<span className="font-light">{disc.plastic.toLowerCase()}</span>
+				<span className="font-thin">{disc.weight}</span>
+				<span className="absolute right-0">{disc.price as String}</span>
+			</>
+		)
+	}))
+
 
 	const form = useForm<z.infer<typeof customOrderSchema>>({
 		resolver: zodResolver(customOrderSchema),
@@ -42,7 +56,7 @@ const CustomOrderForm = ({discs}: CustomOrderFormProps) => {
 		}
 	})
 
-	const onSubmit = async (values: z.infer<typeof customOrderSchema>) =>{
+	const onSubmit = async (values: z.infer<typeof customOrderSchema>) => {
 		console.log('submit custom order', values)
 	}
 
@@ -50,19 +64,23 @@ const CustomOrderForm = ({discs}: CustomOrderFormProps) => {
 		<>
 			<Form {...form}>
 				<form
-				onSubmit={form.handleSubmit(onSubmit)}>
-					
+					onSubmit={form.handleSubmit(onSubmit)}>
+
 					{/* disc */}
 					<FormField
 						control={form.control}
 						name='disc'
-						render={({ field}) => (
-							// todo needs to be reusable component for this, dyeType, and colors(multi-select w/3 limit)???
-							// <SelectInput field={...field}/>
-<></>
-							// <ComboBox field={field} label="Disc" list={dyeTypes} placeholder="Choose your disc" />
+						render={({ field }) => (
+							<ComboBox
+								field={field}
+								label="Disc"
+								list={discOptions}
+								placeholder="Choose your disc..."
+							/>
+
 						)}
-						/>
+					/>
+
 					{/* dyeDesign */}
 					{/* colors */}
 					{/* extra options */}

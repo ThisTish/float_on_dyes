@@ -1,5 +1,6 @@
 import { prisma } from "@/db/prisma"
 import { LATEST_PRODUCTS_LIMIT } from "../constants"
+import { convertToPlainObject } from "../utils"
 
 
 // get Latest Products
@@ -35,11 +36,11 @@ export const getProductBySlug = async (slug: string) => {
 // get dyeable discs
 export const getDyeableDiscs = async () => {
 	try {
-		return await prisma.product.findMany({
+		const data = await prisma.product.findMany({
 			where: {
 				OR: [
-					{ discType: { has: 'none' } },
-					{ discType: { has: 'special' } }
+					{ dyeType: {equals: "none"} },
+					{ dyeType:  {equals: "special"}}
 				],
 				isAvailable: true,
 				stock: {
@@ -58,6 +59,8 @@ export const getDyeableDiscs = async () => {
 			}
 		})
 
+		console.log('dyable', data)
+		return convertToPlainObject(data)
 	} catch (error) {
 		console.error(error)
 		throw new Error("Dyeable discs couldn't be found")
