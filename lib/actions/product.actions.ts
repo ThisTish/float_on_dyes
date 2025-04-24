@@ -59,7 +59,6 @@ export const getDyeableDiscs = async () => {
 			}
 		})
 
-		console.log('dyable', data)
 		return convertToPlainObject(data)
 	} catch (error) {
 		console.error(error)

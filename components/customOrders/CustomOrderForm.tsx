@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormField } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
+import { formatCurrency, formatNumber, formatNumberWithDecimal } from "@/lib/utils"
 
 // todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -25,18 +26,22 @@ type CustomOrderFormProps = {
 
 
 const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
-	// console.log(discs)
+
 	const discOptions = discs.map((disc) => ({
 		value: `${disc.name} ${disc.brand}`,
 		label:
 		(
-			<>
+			<div className="flex w-full items-center gap-3 overflow-x-auto">
+				<img src={`${disc.images[0]}`} alt={disc.name} className="size-14 rounded-full object-cover hover:size-32" />
+				<div className="flex w-full flex-wrap gap-1 text-pretty p-1 text-sm sm:gap-3 md:text-base">
 				<span className="font-semibold">{disc.name}</span>
 				<span className="italic">{disc.brand}</span>
 				<span className="font-light">{disc.plastic.toLowerCase()}</span>
-				<span className="font-thin">{disc.weight}</span>
-				<span className="absolute right-0">{disc.price as String}</span>
-			</>
+				<span className="font-thin">{disc.weight} oz</span>
+				<span className="ml-auto italic">{Number(disc.price) > 35.99 ? `+ ${formatCurrency(Number(disc.price) - 35.99)}` : ''  }</span>
+
+				</div>
+			</div>
 		)
 	}))
 

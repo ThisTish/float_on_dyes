@@ -109,17 +109,22 @@ const ShippingAddressForm = () => {
 		return needsRevalidation && fieldsNeedingReview.includes(componentField)
 	}
 
+
+
+	// REALLY saving no matter what
 	const sureSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (values) => {
+		console.log('sureSubmit')
 		startTransition(async () => {
 			const res = await updateUserAddress(values)
+			console.log('sureSubmit res', res)
 			if (!res.success) {
 				toast({
 					variant: 'destructive',
 					title: "Could not save address",
 					description: `${res.message}, please try again or reach out via our contact page`
 				})
-				router.push('/payment-method')
 			}
+			router.push('/payment-method')
 		})
 	}
 
@@ -129,7 +134,9 @@ const ShippingAddressForm = () => {
 
 	}
 	const updateAndCloseAction = () => {
+		console.log('updateAndCloseAction')
 		setIsDialogOpen(false)
+		setNeedsRevalidation(false)
 		sureSubmit(suggestedAddress as z.infer<typeof shippingAddressSchema>)
 	}
 
@@ -171,7 +178,7 @@ const ShippingAddressForm = () => {
 								<FormItem>
 									<FormLabel>Full Name</FormLabel>
 									<FormControl>
-										<Input {...field}  name={field.name} className="w-full border" autoComplete="name" />
+										<Input {...field} name={field.name} className="w-full border" autoComplete="name" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>

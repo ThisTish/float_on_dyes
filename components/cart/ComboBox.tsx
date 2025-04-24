@@ -5,6 +5,7 @@ import { FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
 import { JSXElementConstructor, ReactNode, useState } from "react"
+import { isDirty } from "zod"
 
 type ComboBoxProps = {
 	field: ControllerRenderProps<any, any>,
@@ -25,7 +26,7 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 						<button
 							type="button"
 							role="combobox"
-							className="group inline-flex h-9 w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm"
+							className={`group inline-flex w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm ${label === 'Disc' ? 'h-20' : 'h-9'}`}
 							{...field}
 							value={undefined}
 							onChange={undefined}
@@ -57,18 +58,17 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 										field.onChange(item.value)
 										setOpen(false)
 									}}
-									className="group pl-10"
+									className="group pl-5"
 									>
+										{item.label}
 										<div
-										// todo i'm right here trying to get it to look right
 											className={cn(
-												"absolute -left-[.5px] size-7 rounded-full bg-accent group-hover:bg-primary-foreground",
+												"ml-auto size-3 rounded-full bg-accent group-hover:bg-primary-foreground",
 												item.value === field.value
 													? "opacity-100"
 													: "opacity-0"
 											)}
 										/>
-										{item.label}
 									</CommandItem>
 								))}
 							</CommandGroup>
