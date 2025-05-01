@@ -325,7 +325,12 @@ const ShippingAddressForm = () => {
 							name='country'
 							render={({ field }) => (
 								<div className={isNeedingReview('country') ? 'text-destructive' : ''}>
-									<ComboBox field={field} label="Country" list={COUNTRIES} placeholder="Select Country" />
+									<ComboBox
+										field={field}
+										label="Country"
+										list={COUNTRIES}
+										placeholder="Select Country"
+									/>
 								</div>
 							)}
 						/>

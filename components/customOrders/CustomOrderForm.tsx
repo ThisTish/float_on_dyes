@@ -8,6 +8,7 @@ import { z } from "zod"
 import { Form, FormField } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
 import { formatCurrency, formatNumber, formatNumberWithDecimal } from "@/lib/utils"
+import { dyeTypes } from "@/lib/constants/dyeTypes"
 
 // todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -31,15 +32,31 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 		value: `${disc.name} ${disc.brand}`,
 		label:
 		(
-			<div className="flex w-full items-center gap-3 overflow-x-auto">
+			<div className="flex w-full items-center gap-3 overflow-x-auto text-black">
 				<img src={`${disc.images[0]}`} alt={disc.name} className="size-14 rounded-full object-cover hover:size-32" />
 				<div className="flex w-full flex-wrap gap-1 text-pretty p-1 text-sm sm:gap-3 md:text-base">
 				<span className="font-semibold">{disc.name}</span>
 				<span className="italic">{disc.brand}</span>
 				<span className="font-light">{disc.plastic.toLowerCase()}</span>
 				<span className="font-thin">{disc.weight} oz</span>
-				<span className="ml-auto italic">{Number(disc.price) > 35.99 ? `+ ${formatCurrency(Number(disc.price) - 35.99)}` : ''  }</span>
+				<span className="ml-auto pr-3 italic">{Number(disc.price) > 35.99 ? `+ ${formatCurrency(Number(disc.price) - 35.99)}` : ''  }</span>
 
+				</div>
+			</div>
+		)
+	}))
+
+	const dyeOptions = dyeTypes.map((type) => ({
+		value: `${type.name}`,
+		label:
+		(
+			<div className="flex w-full items-center gap-3 overflow-x-auto text-black">
+				<img src={`${type.images[0]}`} alt={type.name} className="size-14 rounded-full object-cover" />
+				<div className="flex w-full flex-wrap gap-1 text-pretty p-1 text-sm sm:gap-3 md:text-base">
+				<span className="font-semibold">{type.name}</span>
+				{type.extra ? (
+					<span className="ml-auto pr-3 italic">+ ${type.extra}</span>
+				): null}
 				</div>
 			</div>
 		)
@@ -80,17 +97,31 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 								field={field}
 								label="Disc"
 								list={discOptions}
-								placeholder="Choose your disc..."
+								placeholder="Choose from available discs"
 							/>
-
 						)}
 					/>
 
+					{/* dyeType */}
+					<FormField
+						control={form.control}
+						name='dyeType'
+						render={({ field }) => (
+							<ComboBox
+								field={field}
+								label="Dye Type"
+								list={dyeOptions}
+								placeholder="Select a dye type"
+							/>
+						)}
+					/>
 					{/* dyeDesign */}
 					{/* colors */}
 					{/* extra options */}
 					{/* notes */}
 					{/* submit or clear buttons */}
+	{/* todo make extra pics button always available on smaller screens */}
+	{/* todo 'see more' on small screens for dye type pics */}
 
 
 				</form>

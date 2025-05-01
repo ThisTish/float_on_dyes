@@ -4,8 +4,7 @@ import { ControllerRenderProps } from "react-hook-form"
 import { FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command"
-import { JSXElementConstructor, ReactNode, useState } from "react"
-import { isDirty } from "zod"
+import { ReactNode, useState } from "react"
 
 type ComboBoxProps = {
 	field: ControllerRenderProps<any, any>,
@@ -19,14 +18,14 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 
 	return (
 		<FormItem className="grid">
-			<FormLabel>{label}</FormLabel>
+			<FormLabel className="mb-1">{label}</FormLabel>
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<FormControl>
 						<button
 							type="button"
 							role="combobox"
-							className={`group inline-flex w-full justify-between border bg-input px-3 py-1 text-base text-black shadow-sm ${label === 'Disc' ? 'h-20' : 'h-9'}`}
+							className={`group inline-flex w-full justify-between items-center border bg-input px-3 py-1 text-base text-muted shadow-sm placeholder:text-muted ${label === 'Country' ? 'h-9' : 'h-20'}`}
 							{...field}
 							value={undefined}
 							onChange={undefined}
@@ -34,9 +33,9 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 						>
 							{field.value
 								? list.find(
-									(item) => item.value === field.value || item.label === field.value
-								)?.label
-								: placeholder || `Select ${label}`}
+									(item) => item.value === field.value
+								)?.label || placeholder
+								: placeholder}
 							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
 						</button>
 					</FormControl>
@@ -52,13 +51,13 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 							<CommandGroup>
 								{list.map((item) => (
 									<CommandItem
-									value={item.value}
-									key={item.value}
-									onSelect={() => {
-										field.onChange(item.value)
-										setOpen(false)
-									}}
-									className="group pl-5"
+										value={item.value}
+										key={item.value}
+										onSelect={() => {
+											field.onChange(item.value)
+											setOpen(false)
+										}}
+										className="group pl-5"
 									>
 										{item.label}
 										<div

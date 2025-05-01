@@ -28,7 +28,8 @@ export const dyeTypes = [
 		fragment: "circle_cells",
 		images: [
 			'/images/cloudbreaker.png'
-		]
+		],
+		extra: 5
 	},
 	{
 		name: "feather",
