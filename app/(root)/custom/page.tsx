@@ -11,6 +11,9 @@ export const metadata: Metadata = {
 	title: 'Custom Orders'
 }
 
+// todo show more pictures icon always
+// todo picture cycle through going crazy
+
 const dyeTypeArray = dyeTypes
 
 

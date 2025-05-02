@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Check, ArrowDownRight } from "lucide-react"
+import { ArrowDownRight } from "lucide-react"
 import { ControllerRenderProps } from "react-hook-form"
 import { FormItem, FormLabel, FormControl, FormMessage } from "../ui/form"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"

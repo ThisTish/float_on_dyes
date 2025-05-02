@@ -9,7 +9,7 @@ import { Form, FormField } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
 import { formatCurrency, formatNumber, formatNumberWithDecimal } from "@/lib/utils"
 import { dyeTypes } from "@/lib/constants/dyeTypes"
-import MultipleSelector from "../ui/multi-select"
+import {MultiSelect} from "../ui/multi-select"
 
 // todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -72,7 +72,6 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	{ value: 'orange', label: 'Orange' },
 	{ value: 'red', label: 'Red' },
 	{ value: 'pink', label: 'Pink' },
-	{ value: 'white', label: 'White' },
 	{ value: 'rainbow', label: 'Rainbow'}
 	]
 
@@ -135,11 +134,13 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 						control={form.control}
 						name="colors"
 						render={({ field }) => (
-							<MultipleSelector
-								maxSelected={3}
-								// onMaxSelected={}
-								placeholder="Choose up to 3 colors for free. Each additional color $.50"
+							<MultiSelect
+								field={field}
+								label='Colors'
+								onValueChange={field.onChange}
+								placeholder="Select colors"
 								options={colorOptions}
+								variant={'inverted'}
 								
 							/>
 

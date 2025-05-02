@@ -2,7 +2,6 @@
 import { Label } from "./label"
 import { Input } from "./input"
 import { useState, useRef } from "react"
-import { Button } from "./button"
 import SearchIcon from "./searchIcon"
 import Tooltip from "./Tooltip"
 
