@@ -151,82 +151,82 @@ export const MultiSelect = React.forwardRef<
 				>
 					<PopoverTrigger asChild>
 						<FormControl>
-						<button
-							type="button"
-							role="select"
-							className='group inline-flex h-auto min-h-14 w-full items-center justify-between border bg-input px-3 py-1 text-base text-muted shadow-sm placeholder:text-muted'
-							{...field}
-							value={undefined}
-							onChange={undefined}
-							onClick={() => setOpen(!open)}
-							ref={ref}
-							{...props}
-						>
-							{selectedValues.length > 0 ? (
-								<div className="flex w-full items-center justify-between">
-									<div className="flex flex-wrap items-center">
-										{selectedValues.slice(0, maxCount).map((value) => {
-											const option = options.find((o) => o.value === value)
-											return (
-												<Badge
-												key={value}
-												className={cn(
-													multiSelectVariants({ variant })
-												)}
-												>
+							<button
+								type="button"
+								role="select"
+								className='group inline-flex h-auto min-h-14 w-full items-center justify-between border bg-input px-3 py-1 text-base text-muted shadow-sm placeholder:text-muted'
+								{...field}
+								value={undefined}
+								onChange={undefined}
+								onClick={() => setOpen(!open)}
+								ref={ref}
+								{...props}
+							>
+								{selectedValues.length > 0 ? (
+									<div className="flex w-full items-center justify-between">
+										<div className="flex flex-wrap items-center">
+											{selectedValues.slice(0, maxCount).map((value) => {
+												const option = options.find((o) => o.value === value)
+												return (
+													<Badge
+														key={value}
+														className={cn(
+															multiSelectVariants({ variant })
+														)}
+													>
 
-													{option?.label}
+														{option?.label}
+														<XCircle
+															className="ml-2 h-4 w-4 cursor-pointer"
+															onClick={(event) => {
+																event.stopPropagation()
+																toggleOption(value)
+															}}
+														/>
+													</Badge>
+												)
+											})}
+											{selectedValues.length > maxCount && (
+												<Badge
+													className={cn(
+														"bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
+														multiSelectVariants({ variant })
+													)}
+												>
+													{`+ ${selectedValues.length - maxCount} more`}
 													<XCircle
 														className="ml-2 h-4 w-4 cursor-pointer"
 														onClick={(event) => {
 															event.stopPropagation()
-															toggleOption(value)
+															clearExtraOptions()
 														}}
 													/>
 												</Badge>
-											)
-										})}
-										{selectedValues.length > maxCount && (
-											<Badge
-												className={cn(
-													"bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
-													multiSelectVariants({ variant })
-												)}
-												>
-												{`+ ${selectedValues.length - maxCount} more`}
-												<XCircle
-													className="ml-2 h-4 w-4 cursor-pointer"
-													onClick={(event) => {
-														event.stopPropagation()
-														clearExtraOptions()
-													}}
-													/>
-											</Badge>
-										)}
-									</div>
-									<div className="flex items-center justify-between">
-										<X
-											className="mx-2 h-4 cursor-pointer text-muted-foreground hover:scale-125 hover:text-black"
-											onClick={(event) => {
-												event.stopPropagation()
-												handleClear()
-											}}
+											)}
+										</div>
+										<div className="flex items-center justify-between">
+											<X
+												className="mx-2 h-4 cursor-pointer text-muted-foreground hover:scale-125 hover:text-black"
+												onClick={(event) => {
+													event.stopPropagation()
+													handleClear()
+												}}
 											/>
-							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
-										
-									</div>
-								</div>
-							) : (
-								<div className="mx-auto flex w-full items-center justify-between">
-									<span className="mx-3 text-sm text-muted-foreground">
-										{placeholder}
-									</span>
-							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
+											<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
 
-								</div>
-							)}
-						</button>
-							</FormControl>
+										</div>
+									</div>
+								) : (
+									<div className="mx-auto flex w-full items-center justify-between">
+										<span className="mx-3 text-sm text-muted-foreground">
+											{placeholder}
+										</span>
+										<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
+
+									</div>
+								)}
+							</button>
+						</FormControl>
 					</PopoverTrigger>
 					<PopoverContent
 						className="w-auto p-0"
@@ -262,13 +262,13 @@ export const MultiSelect = React.forwardRef<
 												</div> */}
 												<span>{option.label}</span>
 												<div
-											className={cn(
-												"ml-auto size-3 rounded-full bg-accent group-hover:bg-primary-foreground",
-												isSelected
-													? "opacity-100"
-													: "opacity-0"
-											)}
-										/>
+													className={cn(
+														"ml-auto size-3 rounded-full bg-accent group-hover:bg-primary-foreground",
+														isSelected
+															? "opacity-100"
+															: "opacity-0"
+													)}
+												/>
 											</CommandItem>
 										)
 									})}
