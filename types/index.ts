@@ -38,3 +38,4 @@ export type DyeType = {
 	fragment: string,
 	images: string[]
 }
+

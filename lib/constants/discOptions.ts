@@ -172,3 +172,6 @@ export const dyeTypes = [
 		]
 	}
 ]
+
+export const RIMOPTIONS = ['Rim Spin', 'Rim Dip', 'Full Back Dip'] as const
+export const STAMPOPTIONS = ['Glue Mask', 'Wipe Stamp'] as const

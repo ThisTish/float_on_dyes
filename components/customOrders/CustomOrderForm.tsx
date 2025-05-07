@@ -8,10 +8,11 @@ import { z } from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
 import { formatCurrency, formatNumber, formatNumberWithDecimal } from "@/lib/utils"
-import { dyeTypes } from "@/lib/constants/dyeTypes"
+import { dyeTypes, RIMOPTIONS, STAMPOPTIONS } from "@/lib/constants/discOptions"
 import { MultiSelect } from "../ui/multi-select"
 import Checkbox from "../ui/Checkbox"
 import { useRef } from "react"
+import { RadioGroup } from "@radix-ui/react-dropdown-menu"
 
 // todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -30,11 +31,8 @@ type CustomOrderFormProps = {
 
 
 const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
-	const rimSpinRef = useRef<HTMLInputElement>(null)
-	const rimDipRef = useRef<HTMLInputElement>(null)
-	const fullBackDipRef = useRef<HTMLInputElement>(null)
-	const glueMaskRef = useRef<HTMLInputElement>(null)
-	const wipeStampRef = useRef<HTMLInputElement>(null)
+	const rimOptionRef = useRef<HTMLInputElement>(null)
+	const stampOptionRef = useRef<HTMLInputElement>(null)
 
 	const discOptions = discs.map((disc) => ({
 		value: `${disc.name} ${disc.brand}`,
@@ -90,11 +88,8 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 			dyeType: '',
 			colors: [],
 			notes: '',
-			rimSpin: false,
-			rimDip: false,
-			fullBackDip: false,
-			glueMask: false,
-			wipeStamp: false
+			rimOptions: undefined,
+			stampOptions: undefined
 		}
 	})
 
@@ -153,131 +148,84 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 
 						)}
 					/>
+					{/* todo add none or clear options..... */}
 
-					{/* extra options */}
-					<fieldset>
-						<legend>Extra Options</legend>
+					{/* rim Options */}
+					<fieldset className="space-y-3 border-[1px] p-3">
+						<legend className="px-1">Extra Rim Options</legend>
 						{/* rimSpin */}
 						<FormField
 							control={form.control}
-							name='rimSpin'
+							name='rimOptions'
 							render={({ field }) => (
-								<FormItem >
+								<FormItem className='flex gap-1' >
 									<FormControl>
-										{/* todo playing here.... */}
-										<Checkbox
-											id={'rimSpin'}
-											name='rimSpin'
-											checked={field.value === true}
-											onChange={() => field.onChange(!field.value)}
-											ref={rimSpinRef}
-											type="checkbox"
-										/>
+										<RadioGroup
+											onValueChange={field.onChange}
+											className="flex flex-col space-y-2"
+											value={field.value}
+										>
+											{RIMOPTIONS.map((option) => (
+												<FormItem key={option} className="flex items-center space-x-3 space-y-0">
+													<FormControl>
+														<Checkbox
+															id={option}
+															name='rimOptions'
+															checked={field.value === option}
+															onChange={() => field.onChange(option)}
+															ref={rimOptionRef}
+															type="radio"
+														/>
+													</FormControl>
+													<FormLabel htmlFor="rimOptions" className="flex w-full items-center justify-between">
+														{option}
+													</FormLabel>
+												</FormItem>
+											))}
+										</RadioGroup>
 									</FormControl>
-									<FormLabel htmlFor="rimSpin" className="flex w-full items-center justify-between">
-										Rim Spin
-									</FormLabel>
 								</FormItem>
 							)}
 						/>
+					</fieldset>
 
-						{/* rimDip */}
+					{/* stamps options */}
+					<fieldset className="space-y-3 border-[1px] p-3">
+						<legend className="px-1">Stamped Discs Options</legend>
+						{/* Stamp options */}
 						<FormField
 							control={form.control}
-							name='rimDip'
+							name='stampOptions'
 							render={({ field }) => (
-								<FormItem >
+								<FormItem className='flex gap-1' >
 									<FormControl>
-										{/* todo playing here.... */}
-										<Checkbox
-											id={'rimDip'}
-											name='rimDip'
-											checked={field.value === true}
-											onChange={() => field.onChange(!field.value)}
-											ref={rimDipRef}
-											type="checkbox"
-										/>
+										<RadioGroup
+											onValueChange={field.onChange}
+											className="flex flex-col space-y-2"
+											value={field.value}
+										>
+											{STAMPOPTIONS.map((option) => (
+												<FormItem key={option} className="flex items-center space-x-3 space-y-0">
+													<FormControl>
+														<Checkbox
+															id={option}
+															name='stampOptions'
+															checked={field.value === option}
+															onChange={() => field.onChange(option)}
+															ref={rimOptionRef}
+															type="radio"
+														/>
+													</FormControl>
+													<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
+														{option}
+													</FormLabel>
+												</FormItem>
+											))}
+										</RadioGroup>
 									</FormControl>
-									<FormLabel htmlFor="rimDip" className="flex w-full items-center justify-between">
-										Rim Dip
-									</FormLabel>
 								</FormItem>
 							)}
 						/>
-
-						{/* fullBackDip */}
-						<FormField
-							control={form.control}
-							name='fullBackDip'
-							render={({ field }) => (
-								<FormItem >
-									<FormControl>
-										{/* todo playing here.... */}
-										<Checkbox
-											id={'fullBackDip'}
-											name='fullBackDip'
-											checked={field.value === true}
-											onChange={() => field.onChange(!field.value)}
-											ref={fullBackDipRef}
-											type="checkbox"
-										/>
-									</FormControl>
-									<FormLabel htmlFor="fullBackDip" className="flex w-full items-center justify-between">
-										Full Back Dip
-									</FormLabel>
-								</FormItem>
-							)}
-						/>
-
-						{/* glueMask */}
-						<FormField
-							control={form.control}
-							name='glueMask'
-							render={({ field }) => (
-								<FormItem >
-									<FormControl>
-										{/* todo playing here.... */}
-										<Checkbox
-											id={'glueMask'}
-											name='glueMask'
-											checked={field.value === true}
-											onChange={() => field.onChange(!field.value)}
-											ref={glueMaskRef}
-											type="checkbox"
-										/>
-									</FormControl>
-									<FormLabel htmlFor="glueMask" className="flex w-full items-center justify-between">
-										Glue Mask
-									</FormLabel>
-								</FormItem>
-							)}
-						/>
-
-						{/* wipeStamp */}
-						<FormField
-							control={form.control}
-							name='wipeStamp'
-							render={({ field }) => (
-								<FormItem >
-									<FormControl>
-										{/* todo playing here.... */}
-										<Checkbox
-											id={'wipeStamp'}
-											name='wipeStamp'
-											checked={field.value === true}
-											onChange={() => field.onChange(!field.value)}
-											ref={wipeStampRef}
-											type="checkbox"
-										/>
-									</FormControl>
-									<FormLabel htmlFor="wipeStamp" className="flex w-full items-center justify-between">
-										Rim Spin
-									</FormLabel>
-								</FormItem>
-							)}
-
-						/>
-
 					</fieldset>
 
 					{/* notes */}

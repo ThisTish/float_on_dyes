@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { formatNumberWithDecimal } from './utils'
 import { PAYMENT_METHODS } from './constants'
+import { STAMPOPTIONS, RIMOPTIONS } from './constants/discOptions'
 
 const currency = z
 	.string()
@@ -82,11 +83,12 @@ export const customOrderSchema = z.object({
 	dyeType: z.string().min(1, 'Dye type is required'),
 	colors: z.array(z.string()).min(1, 'At least one color is required').max(3, 'Maximum of 3 colors are allowed'),
 	notes: z.string().optional(),
-	rimSpin: z.boolean().optional(),
-	rimDip: z.boolean().optional(),
-	fullBackDip: z.boolean().optional(),
-	glueMask: z.boolean().optional(),
-	wipeStamp: z.boolean().optional()
+	rimOptions: z.enum(RIMOPTIONS).optional(),
+	stampOptions: z.enum(STAMPOPTIONS).optional()	// rimSpin: z.boolean().optional(),
+	// rimDip: z.boolean().optional(),
+	// fullBackDip: z.boolean().optional(),
+	// glueMask: z.boolean().optional(),
+	// wipeStamp: z.boolean().optional()
 })
 
 export const insertWishListItemSchema = z.object({

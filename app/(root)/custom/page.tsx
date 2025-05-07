@@ -1,7 +1,7 @@
 import CustomDyeImages from "@/components/customOrders/CustomDyeImages"
 import Banner from "@/components/header/Banner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { dyeTypes } from "@/lib/constants/dyeTypes"
+import { dyeTypes } from "@/lib/constants/discOptions"
 import { Metadata } from "next"
 import Link from "next/link"
 import CustomOrderForm from "@/components/customOrders/CustomOrderForm"
