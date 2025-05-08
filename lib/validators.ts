@@ -79,7 +79,7 @@ export const insertCartSchema = z.object({
 })
 
 export const customOrderSchema = z.object({
-	disc: z.object({ cartItemSchema }),
+	disc: z.string().min(1, 'Disc is required'),
 	dyeType: z.string().min(1, 'Dye type is required'),
 	colors: z.array(z.string()).min(1, 'At least one color is required').max(3, 'Maximum of 3 colors are allowed'),
 	notes: z.string().optional(),

@@ -11,6 +11,8 @@ export const metadata: Metadata = {
 	title: 'Custom Orders'
 }
 
+
+// todo 'see more' on small screens for dye type pics or carousel
 // todo show more pictures icon always
 // todo picture cycle through going crazy
 

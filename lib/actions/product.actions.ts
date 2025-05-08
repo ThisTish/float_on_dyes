@@ -55,7 +55,8 @@ export const getDyeableDiscs = async () => {
 				weight: true,
 				isStamped: true,
 				price: true,
-				images: true
+				images: true,
+				slug: true
 			}
 		})
 

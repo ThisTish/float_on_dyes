@@ -19,7 +19,11 @@ import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight, Send, X } from "lucide-react"
 
-// todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
+// todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
+//* todo multiselect does no clear on form.reset()
+
+//> todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
+
 
 type CustomOrderFormProps = {
 	discs: {
@@ -30,7 +34,8 @@ type CustomOrderFormProps = {
 		weight: number,
 		isStamped: boolean,
 		price: Decimal | string,
-		images: string[]
+		images: string[],
+		slug: string
 	}[]
 }
 
@@ -42,7 +47,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 
 
 	const discOptions = discs.map((disc) => ({
-		value: `${disc.name} ${disc.brand}`,
+		value: disc.slug,
 		label:
 			(
 				<div className="flex w-full items-center gap-3 overflow-x-auto text-black">
@@ -91,7 +96,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	const form = useForm<z.infer<typeof customOrderSchema>>({
 		resolver: zodResolver(customOrderSchema),
 		defaultValues: {
-			disc: {},
+			disc: '',
 			dyeType: '',
 			colors: [],
 			notes: '',
@@ -101,6 +106,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	})
 
 	const onSubmit = async (values: z.infer<typeof customOrderSchema>) => {
+		// todo find disc, make sure it is in stock, add to cart, basically, but add notes somehow-probably update addtocart schema.
 		console.log('submit custom order', values)
 	}
 
@@ -257,6 +263,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 
 					{/* notes */}
 					<FormField
+
 						name="notes"
 						control={form.control}
 						render={({ field }) => (
@@ -265,10 +272,14 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 									Notes
 								</FormLabel>
 								<FormDescription>
-									Include any additional details and we will try our best to accommodate your request.
 								</FormDescription>
 								<FormControl>
-									<Textarea />
+									<Textarea 
+									placeholder="Include any additional details and we will try our best to accommodate your request." 
+									id="notes" 
+									value={field.value}
+									onChange={field.onChange}
+									/>
 								</FormControl>
 							</FormItem>
 						)}
@@ -297,12 +308,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 							}
 						</Button>
 					</div>
-
-					{/* submit or clear buttons */}
-					{/* todo make extra pics button always available on smaller screens */}
-					{/* todo 'see more' on small screens for dye type pics */}
-
-
+					
 				</form>
 			</Form>
 		</>
