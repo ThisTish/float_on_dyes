@@ -5,14 +5,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Decimal } from "@prisma/client/runtime/library"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
 import { formatCurrency, formatNumber, formatNumberWithDecimal } from "@/lib/utils"
 import { dyeTypes, RIMOPTIONS, STAMPOPTIONS } from "@/lib/constants/discOptions"
 import { MultiSelect } from "../ui/multi-select"
 import Checkbox from "../ui/Checkbox"
-import { useRef } from "react"
+import { useRef, useTransition } from "react"
 import { RadioGroup } from "@radix-ui/react-dropdown-menu"
+import { Textarea } from "../ui/textarea"
+import { Button } from "../ui/button"
+import { PiSpinnerBallDuotone } from "react-icons/pi"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
+import { ArrowUpRight, Send, X } from "lucide-react"
 
 // todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -33,6 +38,8 @@ type CustomOrderFormProps = {
 const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	const rimOptionRef = useRef<HTMLInputElement>(null)
 	const stampOptionRef = useRef<HTMLInputElement>(null)
+	const [pending, startTransition] = useTransition()
+
 
 	const discOptions = discs.map((disc) => ({
 		value: `${disc.name} ${disc.brand}`,
@@ -143,92 +150,154 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 								placeholder="Select colors"
 								options={colorOptions}
 								variant={'inverted'}
-
 							/>
-
 						)}
 					/>
-					{/* todo add none or clear options..... */}
 
-					{/* rim Options */}
-					<fieldset className="space-y-3 border-[1px] p-3">
-						<legend className="px-1">Extra Rim Options</legend>
-						{/* rimSpin */}
-						<FormField
-							control={form.control}
-							name='rimOptions'
-							render={({ field }) => (
-								<FormItem className='flex gap-1' >
-									<FormControl>
-										<RadioGroup
-											onValueChange={field.onChange}
-											className="flex flex-col space-y-2"
-											value={field.value}
-										>
-											{RIMOPTIONS.map((option) => (
-												<FormItem key={option} className="flex items-center space-x-3 space-y-0">
-													<FormControl>
-														<Checkbox
-															id={option}
-															name='rimOptions'
-															checked={field.value === option}
-															onChange={() => field.onChange(option)}
-															ref={rimOptionRef}
-															type="radio"
-														/>
-													</FormControl>
-													<FormLabel htmlFor="rimOptions" className="flex w-full items-center justify-between">
-														{option}
-													</FormLabel>
-												</FormItem>
-											))}
-										</RadioGroup>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-					</fieldset>
+					<div className="grid grid-cols-2 gap-3">
+						{/* rim Options */}
+						<fieldset className="space-y-3 border-[1px] p-3">
+							<legend className="px-1 text-sm font-extralight md:text-base">Extra Rim Options</legend>
+							{/* rimSpin */}
+							<FormField
+								control={form.control}
+								name='rimOptions'
+								render={({ field }) => (
+									<RadioGroup
+										onValueChange={field.onChange}
+										className="flex flex-col space-y-2"
+										value={field.value}
+									>
+										{RIMOPTIONS.map((option) => (
+											<FormItem key={option} className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<Checkbox
+														id={option}
+														name='rimOptions'
+														checked={field.value === option}
+														onChange={() => field.onChange(option)}
+														ref={rimOptionRef}
+														type="radio"
+													/>
+												</FormControl>
+												<FormLabel htmlFor="rimOptions" className="flex w-full items-center justify-between">
+													{option}
+												</FormLabel>
+											</FormItem>
+										))}
+										<FormItem className="flex items-center space-x-3 space-y-0">
+											<FormControl>
+												<Checkbox
+													id="noRim"
+													name="rimOptions"
+													checked={field.value === undefined}
+													onChange={() => field.onChange(undefined)}
+													ref={rimOptionRef}
+													type="radio"
+												/>
+											</FormControl>
+											<FormLabel htmlFor="rimOptions" className="flex w-full items-center justify-between">
+												None
+											</FormLabel>
+										</FormItem>
+									</RadioGroup>
+								)}
+							/>
+						</fieldset>
 
-					{/* stamps options */}
-					<fieldset className="space-y-3 border-[1px] p-3">
-						<legend className="px-1">Stamped Discs Options</legend>
-						{/* Stamp options */}
-						<FormField
-							control={form.control}
-							name='stampOptions'
-							render={({ field }) => (
-								<FormItem className='flex gap-1' >
-									<FormControl>
-										<RadioGroup
-											onValueChange={field.onChange}
-											className="flex flex-col space-y-2"
-											value={field.value}
-										>
-											{STAMPOPTIONS.map((option) => (
-												<FormItem key={option} className="flex items-center space-x-3 space-y-0">
-													<FormControl>
-														<Checkbox
-															id={option}
-															name='stampOptions'
-															checked={field.value === option}
-															onChange={() => field.onChange(option)}
-															ref={rimOptionRef}
-															type="radio"
-														/>
-													</FormControl>
-													<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
-														{option}
-													</FormLabel>
-												</FormItem>
-											))}
-										</RadioGroup>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-					</fieldset>
+						{/* stamps options */}
+						<fieldset className="space-y-3 border-[1px] p-3">
+							<legend className="px-1 text-sm font-extralight md:text-base">Stamped Discs Options</legend>
+							<FormField
+								control={form.control}
+								name='stampOptions'
+								render={({ field }) => (
+									<RadioGroup
+										onValueChange={field.onChange}
+										className="flex flex-col space-y-2"
+										value={field.value}
+									>
+										{STAMPOPTIONS.map((option) => (
+											<FormItem key={option} className="flex items-center space-x-3 space-y-0">
+												<FormControl>
+													<Checkbox
+														id={option}
+														name='stampOptions'
+														checked={field.value === option}
+														onChange={() => field.onChange(option)}
+														ref={stampOptionRef}
+														type="radio"
+													/>
+												</FormControl>
+												<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
+													{option}
+												</FormLabel>
+											</FormItem>
+										))}
+										<FormItem className="flex items-center space-x-3 space-y-0">
+											<FormControl>
+												<Checkbox
+													id="noStampOption"
+													name="stampOptions"
+													checked={field.value === undefined}
+													onChange={() => field.onChange(undefined)}
+													ref={stampOptionRef}
+													type="radio"
+												/>
+											</FormControl>
+											<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
+												None
+											</FormLabel>
+										</FormItem>
+									</RadioGroup>
+								)}
+							/>
+						</fieldset>
+					</div>
 
 					{/* notes */}
+					<FormField
+						name="notes"
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className="space-y-1">
+								<FormLabel htmlFor="notes" className="flex w-full items-center justify-between">
+									Notes
+								</FormLabel>
+								<FormDescription>
+									Include any additional details and we will try our best to accommodate your request.
+								</FormDescription>
+								<FormControl>
+									<Textarea />
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+
+					{/* buttons */}
+					<div className="text-end">
+						<Button variant={'destructive'} type='reset' onClick={() => form.reset()}>
+							Clear
+							<AnimatedDiv variant={'destructive'} animation={'rotateFull'}><X /></AnimatedDiv>
+						</Button>
+						<Button variant={'default'} disabled={pending}>
+							{pending ? (
+								<>
+									<span className="animate-pulse">Saving</span>
+									<PiSpinnerBallDuotone className="animate-spin" />
+								</>
+							) : (
+								<>
+									<span>Submit</span>
+									<AnimatedDiv animation={'rotate'}>
+										<Send />
+									</AnimatedDiv>
+								</>
+							)
+							}
+						</Button>
+					</div>
+
 					{/* submit or clear buttons */}
 					{/* todo make extra pics button always available on smaller screens */}
 					{/* todo 'see more' on small screens for dye type pics */}
@@ -238,6 +307,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 			</Form>
 		</>
 	)
+
 }
 
 export default CustomOrderForm

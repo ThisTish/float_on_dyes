@@ -53,12 +53,12 @@ const PaymentMethodForm = () => {
 
 	return (
 		<>
-			<Card className="p-5 max-w-md mx-auto">
+			<Card className="mx-auto max-w-md p-5">
 				<CardHeader>
-					<CardTitle className="text-2xl px-0">
+					<CardTitle className="px-0 text-2xl">
 						Payment Method
 					</CardTitle>
-					<CardDescription className="-mt-2 px-0 text-pretty">
+					<CardDescription className="-mt-2 text-pretty px-0">
 						Please choose your preferred payment method
 					</CardDescription>
 				</CardHeader>
@@ -66,7 +66,7 @@ const PaymentMethodForm = () => {
 				<Form {...form}>
 					<form
 						method='post'
-						className="space-y-5 mb-5"
+						className="mb-5 space-y-5"
 						onSubmit={form.handleSubmit(onSubmit)}
 					>
 						{/* name */}
@@ -75,7 +75,8 @@ const PaymentMethodForm = () => {
 								control={form.control}
 								name="type"
 								render={({ field }: { field: ControllerRenderProps<z.infer<typeof paymentMethodSchema>> }) => (
-									<FormItem className="space-y-3 mb-2">
+									// todo test if need form item /form control here since used below again in radio group
+									<FormItem className="mb-2 space-y-3">
 										<FormControl>
 											<RadioGroup
 												name="type"
@@ -96,7 +97,7 @@ const PaymentMethodForm = () => {
 															/>
 
 														</FormControl>
-														<FormLabel htmlFor="type" className="flex items-center justify-between w-full">
+														<FormLabel htmlFor="type" className="flex w-full items-center justify-between">
 															<PaymentMethodLabels method={method} />
 
 														</FormLabel>
