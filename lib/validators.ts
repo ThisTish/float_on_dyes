@@ -58,6 +58,15 @@ export const updatePasswordFormSchema = z.object({
 	message: 'Passwords do not match',
 })
 
+export const customOrderSchema = z.object({
+	disc: z.string().min(1, 'Disc is required'),
+	dyeType: z.string().min(1, 'Dye type is required'),
+	colors: z.array(z.string()).min(1, 'At least one color is required').max(3, 'Maximum of 3 colors are allowed'),
+	notes: z.string().optional(),
+	rimOptions: z.enum(RIMOPTIONS).optional(),
+	stampOptions: z.enum(STAMPOPTIONS).optional()
+})
+
 export const cartItemSchema = z.object({
 	productId: z.string().min(1, 'Product is required'),
 	name: z.string().min(1, 'Name is required'),
@@ -65,7 +74,8 @@ export const cartItemSchema = z.object({
 	qty: z.number().int().nonnegative('Quantity must be a positive integer'),
 	image: z.string().min(1, 'Image is required'),
 	price: currency,
-	isAvailable: z.boolean().optional()
+	isAvailable: z.boolean().optional(),
+	customOrderDetails: customOrderSchema.optional()
 })
 
 export const insertCartSchema = z.object({
@@ -76,19 +86,6 @@ export const insertCartSchema = z.object({
 	taxPrice: currency,
 	sessionCartId: z.string().min(1, 'Session cart id is required'),
 	userId: z.string().optional().nullable()
-})
-
-export const customOrderSchema = z.object({
-	disc: z.string().min(1, 'Disc is required'),
-	dyeType: z.string().min(1, 'Dye type is required'),
-	colors: z.array(z.string()).min(1, 'At least one color is required').max(3, 'Maximum of 3 colors are allowed'),
-	notes: z.string().optional(),
-	rimOptions: z.enum(RIMOPTIONS).optional(),
-	stampOptions: z.enum(STAMPOPTIONS).optional()	// rimSpin: z.boolean().optional(),
-	// rimDip: z.boolean().optional(),
-	// fullBackDip: z.boolean().optional(),
-	// glueMask: z.boolean().optional(),
-	// wipeStamp: z.boolean().optional()
 })
 
 export const insertWishListItemSchema = z.object({

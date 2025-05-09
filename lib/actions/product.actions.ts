@@ -29,7 +29,7 @@ export const getProductBySlug = async (slug: string) => {
 		})
 	} catch (error) {
 		console.error(error)
-		throw new Error("Product couldn't be found")
+		throw new Error("Disc couldn't be found")
 	}
 }
 
@@ -39,8 +39,8 @@ export const getDyeableDiscs = async () => {
 		const data = await prisma.product.findMany({
 			where: {
 				OR: [
-					{ dyeType: {equals: "none"} },
-					{ dyeType:  {equals: "special"}}
+					{ dyeType: { equals: "none" } },
+					{ dyeType: { equals: "special" } }
 				],
 				isAvailable: true,
 				stock: {

@@ -20,10 +20,13 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Send, X } from "lucide-react"
 import Link from "next/link"
 import { BiDetail } from "react-icons/bi"
+import AddToCart from "../product/AddToCart"
+import { addItemToCart } from "@/lib/actions/cart.actions"
+import { getProductBySlug } from "@/lib/actions/product.actions"
+import { useToast } from "@/hooks/use-toast"
 
-// todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
+//? todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
 //* todo multiselect does no clear on form.reset()
-
 //> todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
 
@@ -46,6 +49,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	const rimOptionRef = useRef<HTMLInputElement>(null)
 	const stampOptionRef = useRef<HTMLInputElement>(null)
 	const [pending, startTransition] = useTransition()
+	const { toast } = useToast()
 
 
 	const discOptions = discs.map((disc) => ({
@@ -110,8 +114,38 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	const chosenDisc = form.watch('disc')
 
 	const onSubmit = async (values: z.infer<typeof customOrderSchema>) => {
-		// todo find disc, make sure it is in stock, add to cart, basically, but add notes somehow-probably update addtocart schema.
 		console.log('submit custom order', values)
+		startTransition(async () => {
+			const discProduct = await getProductBySlug(values.disc)
+			if (!discProduct) throw new Error("Disc couldn't be found")
+
+			const { name, images, price, slug, id, isAvailable } = discProduct
+
+			const res = await addItemToCart({
+				name,
+				image: images[0],
+				price,
+				slug,
+				productId: id,
+				qty: 1,
+				isAvailable,
+				customOrderDetails: { ...values }
+			})
+
+			if (!res.success) {
+				toast({
+					variant: 'destructive',
+					title: 'Something went wrong with your custom order',
+					description: 'Please try again or contact us on our Contact Page',
+					action: <Link href={'/contact'}>Contact Us</Link>
+				})
+			}
+			toast({
+				title: 'Custom Order Created',
+				description: 'Continue shopping or go to your cart to check out',
+				action: <Link href={'/cart'}>Go to Cart</Link>
+			})
+		})
 	}
 
 	return (
@@ -227,7 +261,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 						</fieldset>
 
 						{/* stamps options */}
-						<fieldset className={`space-y-3 border-[1px] p-3 ${!chosenDisc.includes('stamp') ? 'text-muted': ''}`}>
+						<fieldset className={`space-y-3 border-[1px] p-3 ${!chosenDisc.includes('stamp') ? 'text-muted' : ''}`}>
 							<legend className="px-1 text-sm font-extralight md:text-base">Stamped Discs Options</legend>
 							<FormField
 								control={form.control}
@@ -237,7 +271,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 										onValueChange={field.onChange}
 										className="flex flex-col space-y-2"
 										value={field.value}
-										
+
 									>
 										{STAMPOPTIONS.map((option) => (
 											<FormItem key={option} className="flex items-center space-x-3 space-y-0">
@@ -250,7 +284,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 														ref={stampOptionRef}
 														type="radio"
 														disabled={chosenDisc.includes('stamp') ? false : true}
-														
+
 													/>
 												</FormControl>
 												<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
