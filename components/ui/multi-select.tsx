@@ -27,7 +27,7 @@ import {
 	CommandSeparator,
 } from "@/components/ui/command"
 import { useState } from "react"
-import { FormControl, FormDescription, FormItem, FormLabel } from "./form"
+import { FormControl, FormItem, FormLabel } from "./form"
 import { ControllerRenderProps } from "react-hook-form"
 
 
@@ -91,7 +91,7 @@ export const MultiSelect = React.forwardRef<
 			variant,
 			defaultValue = [],
 			placeholder = "Select options",
-			maxCount = 3,
+			maxCount = 10,
 			modalPopover = false,
 			asChild = false,
 			className,
@@ -139,11 +139,10 @@ export const MultiSelect = React.forwardRef<
 			onValueChange(newSelectedValues)
 		}
 
-		// todo for every selection over 3, add .50 to the price and show in input button
+		//> todo for every selection over 3, add .50 to the price and show in input button
 		return (
 			<FormItem className="grid">
-				<FormLabel className="mb-1">{label}</FormLabel>
-				<FormDescription className="mb-1">Up to 3 colors included, 50 cents for each additional</FormDescription>
+				<FormLabel className="mb-1" htmlFor="colors">{label}</FormLabel>
 				<Popover
 					open={open}
 					onOpenChange={setOpen}
@@ -218,7 +217,7 @@ export const MultiSelect = React.forwardRef<
 									</div>
 								) : (
 									<div className="mx-auto flex w-full items-center justify-between">
-										<span className="mx-3 text-sm text-muted-foreground">
+										<span className="text-muted-foreground">
 											{placeholder}
 										</span>
 										<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
@@ -237,10 +236,11 @@ export const MultiSelect = React.forwardRef<
 							<CommandInput
 								placeholder="Search..."
 								onKeyDown={handleInputKeyDown}
+								id="colors"
 							/>
 							<CommandList>
 								<CommandEmpty>No results found.</CommandEmpty>
-								<CommandGroup>
+								<CommandGroup id="colors">
 									{options.map((option) => {
 										const isSelected = selectedValues.includes(option.value)
 										return (
@@ -249,17 +249,6 @@ export const MultiSelect = React.forwardRef<
 												onSelect={() => toggleOption(option.value)}
 												className="group cursor-pointer"
 											>
-												{/* <div
-													className={cn(
-														"mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-														isSelected
-															? "bg-primary text-primary-foreground"
-															: "opacity-50 [&_svg]:invisible"
-													)}
-												>
-													
-													<CheckIcon className="h-4 w-4" />
-												</div> */}
 												<span>{option.label}</span>
 												<div
 													className={cn(

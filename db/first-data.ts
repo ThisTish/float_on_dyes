@@ -184,7 +184,7 @@ const firstData = {
 			color: [
 				'red', 'orange', 'yellow'
 			],
-			dyeType: 'none',
+			dyeType: 'blank',
 			price: 30.99,
 			speed: 9,
 			glide: 5,

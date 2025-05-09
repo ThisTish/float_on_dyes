@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form"
 import ComboBox from "../cart/ComboBox"
-import { formatCurrency, formatNumber, formatNumberWithDecimal } from "@/lib/utils"
+import { formatCurrency } from "@/lib/utils"
 import { dyeTypes, RIMOPTIONS, STAMPOPTIONS } from "@/lib/constants/discOptions"
 import { MultiSelect } from "../ui/multi-select"
 import Checkbox from "../ui/Checkbox"
@@ -17,7 +17,9 @@ import { Textarea } from "../ui/textarea"
 import { Button } from "../ui/button"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
-import { ArrowUpRight, Send, X } from "lucide-react"
+import { Send, X } from "lucide-react"
+import Link from "next/link"
+import { BiDetail } from "react-icons/bi"
 
 // todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
 //* todo multiselect does no clear on form.reset()
@@ -51,7 +53,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 		label:
 			(
 				<div className="flex w-full items-center gap-3 overflow-x-auto text-black">
-					<img src={`${disc.images[0]}`} alt={disc.name} className="size-14 rounded-full object-cover hover:size-32" />
+					<img src={`${disc.images[0]}`} alt={disc.name} className="size-14 rounded-full object-cover" />
 					<div className="flex w-full flex-wrap gap-1 text-pretty p-1 text-sm sm:gap-3 md:text-base">
 						<span className="font-semibold">{disc.name}</span>
 						<span className="italic">{disc.brand}</span>
@@ -105,6 +107,8 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 		}
 	})
 
+	const chosenDisc = form.watch('disc')
+
 	const onSubmit = async (values: z.infer<typeof customOrderSchema>) => {
 		// todo find disc, make sure it is in stock, add to cart, basically, but add notes somehow-probably update addtocart schema.
 		console.log('submit custom order', values)
@@ -129,6 +133,16 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 							/>
 						)}
 					/>
+					{chosenDisc ? (
+						<Button variant={'cta'} size={'sm'} asChild>
+							<Link href={`/products/${chosenDisc}`} target="_blank" rel="noopener noreferrer">
+								See Disc Details
+								<AnimatedDiv variant={'cta'} animation={'scale'} size={'sm'}>
+									<BiDetail />
+								</AnimatedDiv>
+							</Link>
+						</Button>
+					) : null}
 
 					{/* dyeType */}
 					<FormField
@@ -143,6 +157,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 							/>
 						)}
 					/>
+					{/* **** See More Examples button???**** */}
 
 					{/* colors */}
 					<FormField
@@ -212,7 +227,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 						</fieldset>
 
 						{/* stamps options */}
-						<fieldset className="space-y-3 border-[1px] p-3">
+						<fieldset className={`space-y-3 border-[1px] p-3 ${!chosenDisc.includes('stamp') ? 'text-muted': ''}`}>
 							<legend className="px-1 text-sm font-extralight md:text-base">Stamped Discs Options</legend>
 							<FormField
 								control={form.control}
@@ -222,6 +237,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 										onValueChange={field.onChange}
 										className="flex flex-col space-y-2"
 										value={field.value}
+										
 									>
 										{STAMPOPTIONS.map((option) => (
 											<FormItem key={option} className="flex items-center space-x-3 space-y-0">
@@ -233,6 +249,8 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 														onChange={() => field.onChange(option)}
 														ref={stampOptionRef}
 														type="radio"
+														disabled={chosenDisc.includes('stamp') ? false : true}
+														
 													/>
 												</FormControl>
 												<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
@@ -249,6 +267,8 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 													onChange={() => field.onChange(undefined)}
 													ref={stampOptionRef}
 													type="radio"
+													disabled={chosenDisc.includes('stamp') ? false : true}
+
 												/>
 											</FormControl>
 											<FormLabel htmlFor="stampOptions" className="flex w-full items-center justify-between">
@@ -263,7 +283,6 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 
 					{/* notes */}
 					<FormField
-
 						name="notes"
 						control={form.control}
 						render={({ field }) => (
@@ -274,11 +293,11 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 								<FormDescription>
 								</FormDescription>
 								<FormControl>
-									<Textarea 
-									placeholder="Include any additional details and we will try our best to accommodate your request." 
-									id="notes" 
-									value={field.value}
-									onChange={field.onChange}
+									<Textarea
+										placeholder="Include any additional details and we will try our best to accommodate your request. If we cannot fulfill your request or have any questions, we will reach out to you."
+										id="notes"
+										value={field.value}
+										onChange={field.onChange}
 									/>
 								</FormControl>
 							</FormItem>
@@ -308,7 +327,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 							}
 						</Button>
 					</div>
-					
+
 				</form>
 			</Form>
 		</>

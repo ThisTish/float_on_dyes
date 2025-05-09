@@ -45,14 +45,14 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 							<div className="flex-between font-semibold md:text-lg">
 								<div>
 
-								<span className="text-xs font-extralight md:text-sm">Dye Type: </span>
-								<span>{product.dyeType}</span>
+									<span className="text-xs font-extralight md:text-sm">Dye Type: </span>
+									<span>{product.dyeType}</span>
 								</div>
 								<ProductPrice className="text-xl md:text-2xl" value={Number(product.price)} />
 							</div>
 							<div>
-							<span className="text-xs font-extralight md:text-sm">Plastic: </span>
-							<span className="text-sm font-light md:text-base">{product.plastic}</span>
+								<span className="text-xs font-extralight md:text-sm">Plastic: </span>
+								<span className="text-sm font-light md:text-base">{product.plastic}</span>
 							</div>
 							<p className="text-xs font-extralight md:text-sm">{product.weight}g</p>
 						</CardTitle>
@@ -109,12 +109,12 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 						/>
 					</CardFooter>
 				</Card>
-			{/* tags */}
-			<div className="flex flex-wrap justify-end space-x-2 md:col-start-2">
-				{product.tags.map((tag: string) => (
-					<Button variant={'chip'} size={'chip'} key={`${product.id}-${tag}`}>{tag}</Button>
-				))}
-			</div>
+				{/* tags */}
+				<div className="flex flex-wrap justify-end space-x-2 md:col-start-2">
+					{product.tags.map((tag: string) => (
+						<Button variant={'chip'} size={'chip'} key={`${product.id}-${tag}`}>{tag}</Button>
+					))}
+				</div>
 			</section>
 
 
