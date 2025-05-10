@@ -23,6 +23,8 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Send, X } from "lucide-react"
 import { BiDetail } from "react-icons/bi"
 import { RadioGroup } from "../ui/radio-group"
+import { ToastAction } from "../ui/toast"
+import { useRouter } from "next/navigation"
 
 //? todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
 //* todo multiselect does no clear on form.reset()
@@ -49,6 +51,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	const stampOptionRef = useRef<HTMLInputElement>(null)
 	const [pending, startTransition] = useTransition()
 	const { toast } = useToast()
+	const router = useRouter()
 
 	const discOptions = discs.map((disc) => ({
 		value: disc.slug,
@@ -140,7 +143,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 			toast({
 				title: 'Custom Order Created',
 				description: 'Continue shopping or go to your cart to check out',
-				action: <Link href={'/cart'}>Go to Cart</Link>
+				action: <ToastAction altText="Go To Cart" onClick={() => router.push('/cart')}>Go To Cart</ToastAction>
 			})
 			form.reset()
 		})

@@ -157,13 +157,15 @@ model Order {
 }
 
 model OrderItem {
-  orderId   String  @db.Uuid
-  productId String  @db.Uuid
-  qty       Int
-  price     Decimal @db.Decimal(12, 2)
-  name      String
-  slug      String
-  image     String
+  orderId            String  @db.Uuid
+  productId          String  @db.Uuid
+  qty                Int
+  price              Decimal @db.Decimal(12, 2)
+  name               String
+  slug               String
+  image              String
+  isAvailable        Boolean @default(true)
+  customOrderDetails Json?   @db.Json
 
   order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)

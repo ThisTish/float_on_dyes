@@ -45,6 +45,13 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 									{item.name}
 								</span>
 							</Link>
+							{item.customOrderDetails ? (
+								<span className="text-balance text-sm font-normal opacity-70">
+									{item.customOrderDetails.dyeType} - {item.customOrderDetails.colors.map((color) => color).join(', ')} {item.customOrderDetails.rimOptions ? '- ' + item.customOrderDetails.rimOptions : null} {item.customOrderDetails.stampOptions ? '- ' + item.customOrderDetails.stampOptions : null}
+								</span>
+
+							) : null
+							}
 						</TableCell>
 
 						{/* item price */}

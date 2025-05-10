@@ -11,10 +11,12 @@ import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { ArrowUpRight } from "lucide-react"
 import { BsFillCartCheckFill } from "react-icons/bs"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
+import { useToast } from "@/hooks/use-toast"
 
 const PlaceOrderForm = () => {
 	const { cart, user } = useCheckout()
 	const router = useRouter()
+	const { toast } = useToast()
 
 	useEffect(() => {
 		if (!user.address) {
@@ -41,6 +43,15 @@ const PlaceOrderForm = () => {
 		e.preventDefault()
 
 		const res = await createOrder()
+
+		if(!res.success){
+			toast({
+				title: 'Error',
+				description: res.message || 'Something went wrong',
+				variant: 'destructive'
+			})
+		}
+
 		if (res.redirectTo) {
 			router.push(res.redirectTo)
 		}

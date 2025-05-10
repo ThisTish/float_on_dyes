@@ -25,17 +25,27 @@ const ComboBox = ({ field, label, list, placeholder }: ComboBoxProps) => {
 						<button
 							type="button"
 							role="combobox"
-							className={`group inline-flex w-full justify-between items-center border bg-input px-3 py-1 text-base text-muted shadow-sm placeholder:text-muted ${label === 'Country' ? 'h-9' : 'h-20'}`}
+							className={`group inline-flex w-full justify-between items-center border bg-input px-3 py-1 text-base shadow-sm placeholder:text-muted ${label === 'Country' ? 'h-9' : 'h-20'}`}
 							{...field}
 							value={undefined}
 							onChange={undefined}
 							onClick={() => setOpen(!open)}
 						>
 							{field.value
-								? list.find(
-									(item) => item.value === field.value
-								)?.label || placeholder
-								: placeholder}
+								? (
+									<span>
+										{list.find(
+											(item) => item.value === field.value
+										)?.label}
+									</span>
+
+								)
+								: 
+								(
+									<span className="text-muted">{placeholder}</span>
+
+								)
+							}
 							<ArrowDownRight size={18} className={`ml-auto text-muted duration-300 group-hover:rotate-45 group-hover:text-black`} />
 						</button>
 					</FormControl>

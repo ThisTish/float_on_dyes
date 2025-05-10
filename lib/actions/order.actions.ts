@@ -13,6 +13,7 @@ import { Prisma } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
 export async function createOrder() {
+	console.log('Creating order...')
 	try {
 		const session = await auth()
 		if (!session) throw new Error("Unauthorized")
@@ -39,19 +40,23 @@ export async function createOrder() {
 			totalPrice: cart.totalPrice,
 		})
 
+		// console.log(order)
+
 		const createdOrderId = await prisma.$transaction(async (tx) => {
 			const createdOrder = await tx.order.create({
 				data: order
 			})
 
 			for (const item of cart.items as CartItem[]) {
+				console.log(Number(item.price))
 				await tx.orderItem.create({
 					data: {
 						...item,
-						price: item.price,
+						price: Number(item.price),
 						orderId: createdOrder.id
 					}
 				})
+				console.log('Creating order in transaction...')
 			}
 
 			await tx.cart.update({
@@ -66,16 +71,17 @@ export async function createOrder() {
 					totalPrice: 0,
 				}
 			})
-
+			console.log(createdOrder)
 			return createdOrder.id
-
 		})
 
-		if (!createdOrderId) throw new Error("Order failed")
+		if (!createdOrderId) return { success: false, message: 'Order could not be processed, please try again.' }
 
+			console.log('Order created successfully')
 		return { success: true, message: 'Order created', redirectTo: `/order/${createdOrderId}` }
 
 	} catch (error) {
+		// console.log('Error creating order', error)
 		if (isRedirectError(error)) throw error
 		return { success: false, error: formatError(error) }
 	}
