@@ -153,7 +153,9 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 		<>
 			<Form {...form}>
 				<form
-					onSubmit={form.handleSubmit(onSubmit)}>
+					onSubmit={form.handleSubmit(onSubmit)}
+					className="space-y-5"
+					>
 
 					{/* disc */}
 					<FormField
@@ -340,7 +342,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 					/>
 
 					{/* buttons */}
-					<div className="text-end">
+					<div className="space-x-3 text-end">
 						<Button variant={'destructive'} type='reset' onClick={() => form.reset()}>
 							Clear
 							<AnimatedDiv variant={'destructive'} animation={'rotateFull'}><X /></AnimatedDiv>

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 // todo 'see more' on small screens for dye type pics or carousel
 // todo show more pictures icon always
 // todo picture cycle through going crazy
+//> todo change big picture to dyetype when selected
 
 const dyeTypeArray = dyeTypes
 
@@ -26,7 +27,6 @@ const CustomPage = async () => {
 		// todo make skeleton
 		<div>Loading...</div>
 	)
-	// console.log('dyableDiscs', dyableDiscs)
 
 	const handleImageChange = (index: number) => {
 		console.log('do things to customdyeimages, and pass this to Form?')
@@ -43,13 +43,13 @@ const CustomPage = async () => {
 					<CustomDyeImages dyeTypes={dyeTypes} />
 				</div>
 				<div>
-					<Card>
+					<Card className="p-5">
 						<CardHeader>
-							<CardTitle>Custom Order Form</CardTitle>
-							<CardDescription>Please select from the options below or<Link href="/contact"> contact us</Link> for more options or complex requests.</CardDescription>
+							<CardTitle className="px-0 text-2xl">Custom Order Form</CardTitle>
+							<CardDescription className="-mt-2 text-pretty px-0">Please select from the options below or<Link href="/contact"> contact us</Link> for more options or complex requests.</CardDescription>
 						</CardHeader>
 
-						<CardContent>
+						<CardContent className="mb-5">
 							<CustomOrderForm discs={dyableDiscs} />
 						</CardContent>
 
