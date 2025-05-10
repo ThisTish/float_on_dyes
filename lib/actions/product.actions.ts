@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@/db/prisma"
 import { LATEST_PRODUCTS_LIMIT } from "../constants"
 import { convertToPlainObject } from "../utils"
@@ -22,11 +24,12 @@ export const getLatestProducts = async () => {
 // get Product By Slug
 export const getProductBySlug = async (slug: string) => {
 	try {
-		return await prisma.product.findFirst({
+		const product = await prisma.product.findFirst({
 			where: {
 				slug
 			}
 		})
+		return convertToPlainObject(product)
 	} catch (error) {
 		console.error(error)
 		throw new Error("Disc couldn't be found")

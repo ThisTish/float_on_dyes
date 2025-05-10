@@ -5,25 +5,24 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Decimal } from "@prisma/client/runtime/library"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form"
-import ComboBox from "../cart/ComboBox"
 import { formatCurrency } from "@/lib/utils"
 import { dyeTypes, RIMOPTIONS, STAMPOPTIONS } from "@/lib/constants/discOptions"
+import { useRef, useTransition } from "react"
+import Link from "next/link"
+import { addItemToCart } from "@/lib/actions/cart.actions"
+import { getProductBySlug } from "@/lib/actions/product.actions"
+import { useToast } from "@/hooks/use-toast"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form"
+import ComboBox from "../cart/ComboBox"
 import { MultiSelect } from "../ui/multi-select"
 import Checkbox from "../ui/Checkbox"
-import { useRef, useTransition } from "react"
-import { RadioGroup } from "@radix-ui/react-dropdown-menu"
 import { Textarea } from "../ui/textarea"
 import { Button } from "../ui/button"
 import { PiSpinnerBallDuotone } from "react-icons/pi"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Send, X } from "lucide-react"
-import Link from "next/link"
 import { BiDetail } from "react-icons/bi"
-import AddToCart from "../product/AddToCart"
-import { addItemToCart } from "@/lib/actions/cart.actions"
-import { getProductBySlug } from "@/lib/actions/product.actions"
-import { useToast } from "@/hooks/use-toast"
+import { RadioGroup } from "../ui/radio-group"
 
 //? todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
 //* todo multiselect does no clear on form.reset()
@@ -50,7 +49,6 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	const stampOptionRef = useRef<HTMLInputElement>(null)
 	const [pending, startTransition] = useTransition()
 	const { toast } = useToast()
-
 
 	const discOptions = discs.map((disc) => ({
 		value: disc.slug,
@@ -98,7 +96,6 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 		{ value: 'rainbow', label: 'Rainbow' }
 	]
 
-
 	const form = useForm<z.infer<typeof customOrderSchema>>({
 		resolver: zodResolver(customOrderSchema),
 		defaultValues: {
@@ -122,7 +119,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 			const { name, images, price, slug, id, isAvailable } = discProduct
 
 			const res = await addItemToCart({
-				name,
+				name: `Custom Order: ${name}`,
 				image: images[0],
 				price,
 				slug,
@@ -145,6 +142,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 				description: 'Continue shopping or go to your cart to check out',
 				action: <Link href={'/cart'}>Go to Cart</Link>
 			})
+			form.reset()
 		})
 	}
 
