@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import ShippingAddressForm from "@/components/cart/ShippingAddressForm"
+import BackButton from "@/components/ui/BackButton"
 
 export const metadata: Metadata = {
 	title: 'Shipping Address'
@@ -10,6 +11,9 @@ const ShippingAddressPage = async () => {
 
 		<div>
 			<ShippingAddressForm  />
+			<BackButton 
+				size="default"
+				/>
 		</div>
 	)
 }

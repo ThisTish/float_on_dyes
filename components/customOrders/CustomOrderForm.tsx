@@ -26,7 +26,7 @@ import { RadioGroup } from "../ui/radio-group"
 import { ToastAction } from "../ui/toast"
 import { useRouter } from "next/navigation"
 
-//? todo multiselect over 3 doesn't show, need to figure out way to charge for extra colors
+//? todo figure out way to charge for extra colors
 //* todo multiselect does no clear on form.reset()
 //> todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
 
@@ -215,7 +215,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 					<div className="grid grid-cols-2 gap-3">
 						{/* rim Options */}
 						<fieldset className="space-y-3 border-[1px] p-3">
-							<legend className="px-1 text-sm font-extralight md:text-base">Extra Rim Options</legend>
+							<legend className="px-1 text-sm font-extralight md:text-base">Rim Options</legend>
 							{/* rimSpin */}
 							<FormField
 								control={form.control}
@@ -331,10 +331,11 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 								</FormDescription>
 								<FormControl>
 									<Textarea
-										placeholder="Include any additional details and we will try our best to accommodate your request. If we cannot fulfill your request or have any questions, we will reach out to you."
+										placeholder="Include any additional details and we will try our best. If we cannot fulfill your request or have any questions, we will reach out to you."
 										id="notes"
 										value={field.value}
 										onChange={field.onChange}
+										className="placeholder:text-sm md:placeholder:text-base"
 									/>
 								</FormControl>
 							</FormItem>

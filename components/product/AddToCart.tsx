@@ -10,7 +10,7 @@ import AddToWishList from "./AddToWishList"
 import { useTransition } from "react"
 import { PiSpinnerBallDuotone, PiTrashDuotone } from "react-icons/pi";
 import { LucideCircleMinus, LucideCirclePlus } from "lucide-react"
-import { addItemToWishList, removeItemFromWishList } from "@/lib/actions/wishList.actions"
+import { removeItemFromWishList } from "@/lib/actions/wishList.actions"
 import Tooltip from "../ui/Tooltip"
 
 

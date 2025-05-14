@@ -6,7 +6,6 @@ import Link from "next/link"
 import Tooltip from "../ui/Tooltip"
 import Image from "next/image"
 import { useState } from "react"
-import { cn } from "@/lib/utils"
 
 
 const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
@@ -22,7 +21,7 @@ const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
 
 				{/* button for more images */}
 				<Tooltip label="See More Examples" position="top" className="mb-2" >
-					<Link href={`/dyeTypeGallery#${fragment}`} className="absolute right-1 top-1 m-3 text-darkBlue opacity-0 transition duration-500 hover:scale-125 hover:bg-darkBlue hover:text-primary-foreground group-hover:z-20 group-hover:opacity-100 group-hover:duration-500" >
+					<Link href={`/dyeTypeGallery#${fragment}`} className="absolute right-1 top-1 m-3 text-darkBlue transition duration-500 hover:scale-125 hover:bg-darkBlue hover:text-primary-foreground lg:opacity-0 lg:group-hover:z-20 lg:group-hover:opacity-100 lg:group-hover:duration-500" >
 						<SquareStack size={30} className="-scale-x-90" />
 					</Link>
 				</Tooltip>
