@@ -43,7 +43,9 @@ export const getDyeableDiscs = async () => {
 			where: {
 				OR: [
 					{ dyeType: { equals: "none" } },
-					{ dyeType: { equals: "special" } }
+					{ dyeType: { equals: "special" } },
+					{dyeType: { equals: "blank" }}
+
 				],
 				isAvailable: true,
 				stock: {
@@ -67,5 +69,32 @@ export const getDyeableDiscs = async () => {
 	} catch (error) {
 		console.error(error)
 		throw new Error("Dyeable discs couldn't be found")
+	}
+}
+
+// get dyed discs for dye type gallery
+export const getDyedDiscs = async () => {
+	try {
+		const data = await prisma.product.findMany({
+			where: {
+				OR: [
+					{dyeType: { not: "none" }},
+					{dyeType: { not: "special" }},
+					{dyeType: { not: "blank" }}
+				]
+			},
+			select: {
+				id: true,
+				name: true,
+				images: true,
+				dyeType: true,
+				slug: true,
+				stock: true,
+				isAvailable: true
+			}
+		})
+	}catch(error){
+		console.error(error)
+		throw new Error("Dyed discs couldn't be found")
 	}
 }

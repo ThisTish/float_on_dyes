@@ -53,7 +53,6 @@ const CustomPage = async () => {
 
 					</Card>
 				</div>
-
 			</section>
 		</main>
 	)
