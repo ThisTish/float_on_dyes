@@ -93,6 +93,8 @@ export const getDyedDiscs = async () => {
 				isAvailable: true
 			}
 		})
+
+		return convertToPlainObject(data)
 	}catch(error){
 		console.error(error)
 		throw new Error("Dyed discs couldn't be found")
