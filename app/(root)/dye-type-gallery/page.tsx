@@ -1,7 +1,13 @@
 import Banner from "@/components/header/Banner"
 import { dyeTypes } from "@/lib/constants/discOptions"
+import { Metadata } from "next"
 import Image from "next/image"
 import Marquee from 'react-fast-marquee'
+
+export const metadata: Metadata = {
+	title: 'Dye Type Gallery'
+}
+
 
 const DyeTypeGallery = async (props: { params: Promise<{ fragment: string }> }) => {
 
@@ -13,7 +19,7 @@ const DyeTypeGallery = async (props: { params: Promise<{ fragment: string }> }) 
 			<Banner title="Dye" subtitle="Types" url="/images/cellHeader.jpg" />
 			<section className="grid grid-cols-1 gap-10">
 				{dyeTypes.map((type) => (
-					<div className="space-y-3 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
+					<div key={type.name} className="space-y-3 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
 						<p id={type.fragment} key={type.name} >{type.name}</p>
 						<Marquee
 							speed={50}
@@ -30,7 +36,7 @@ const DyeTypeGallery = async (props: { params: Promise<{ fragment: string }> }) 
 									width={400}
 									height={400}
 									alt={`Image of ${type.name} dye bed`}
-									className="overflow-hidden rounded-full border object-cover object-center p-3"
+								// className="overflow-hidden rounded-full border object-cover object-center p-3"
 								/>
 							))}
 						</Marquee>

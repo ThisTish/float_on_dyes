@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { formatCurrency } from "@/lib/utils"
 import { dyeTypes, RIMOPTIONS, STAMPOPTIONS } from "@/lib/constants/discOptions"
-import { useRef, useTransition } from "react"
+import { useEffect, useRef, useTransition } from "react"
 import Link from "next/link"
 import { addItemToCart } from "@/lib/actions/cart.actions"
 import { getProductBySlug } from "@/lib/actions/product.actions"
@@ -27,9 +27,7 @@ import { ToastAction } from "../ui/toast"
 import { useRouter } from "next/navigation"
 
 //? todo figure out way to charge for extra colors
-//* todo multiselect does no clear on form.reset()
-//> todo pass index number of customDyeImages, and the setCurrentImage function to pass it back???
-
+//* todo multiselect does not clear on form.reset()
 
 type CustomOrderFormProps = {
 	discs: {
@@ -42,11 +40,11 @@ type CustomOrderFormProps = {
 		price: Decimal | string,
 		images: string[],
 		slug: string
-	}[]
+	}[],
+	handleDyeChange: (index: number) => void
 }
 
-
-const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
+const CustomOrderForm = ({ discs, handleDyeChange }: CustomOrderFormProps) => {
 	const rimOptionRef = useRef<HTMLInputElement>(null)
 	const stampOptionRef = useRef<HTMLInputElement>(null)
 	const [pending, startTransition] = useTransition()
@@ -112,6 +110,15 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 	})
 
 	const chosenDisc = form.watch('disc')
+	const chosenDye = form.watch('dyeType')
+	useEffect(() => {
+		if (chosenDye) {
+			const dyeTypeIndex = dyeTypes.findIndex((dyeTypes) => dyeTypes.name === chosenDye)
+			if (dyeTypeIndex !== -1) {
+				handleDyeChange(dyeTypeIndex)
+			}
+		}
+	}, [handleDyeChange, chosenDye])
 
 	const onSubmit = async (values: z.infer<typeof customOrderSchema>) => {
 		console.log('submit custom order', values)
@@ -155,7 +162,7 @@ const CustomOrderForm = ({ discs }: CustomOrderFormProps) => {
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					className="space-y-5"
-					>
+				>
 
 					{/* disc */}
 					<FormField

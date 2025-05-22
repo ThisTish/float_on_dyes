@@ -1,19 +1,29 @@
 "use client"
 
-import { DyeType } from "@/types"
+import { dyeTypes } from "@/lib/constants/discOptions"
 import { SquareStack } from "lucide-react"
 import Link from "next/link"
 import Tooltip from "../ui/Tooltip"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 
-const CustomDyeImages = ({ dyeTypes }: { dyeTypes: DyeType[] }) => {
-	const [currentDye, setCurrentDye] = useState(0)
+
+const CustomDyeImages = ({ currentDyeIndex }: { currentDyeIndex?: number }) => {
+	const [currentDye, setCurrentDye] = useState(currentDyeIndex || 0)
 	const [currentImage, setCurrentImage] = useState(0)
 	const [intervalId, setIntervalId] = useState<NodeJS.Timer | null>(null)
 
 	const { name, fragment, images } = dyeTypes[currentDye]
+
+	useEffect(() => {
+		if (currentDyeIndex !== undefined) {
+			setCurrentDye(currentDyeIndex)
+		}
+		else {
+			setCurrentDye(0)
+		}
+	}, [currentDyeIndex])
 
 	return (
 		<div className="space-y-5">
