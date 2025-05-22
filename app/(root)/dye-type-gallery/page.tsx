@@ -17,10 +17,10 @@ const DyeTypeGallery = async (props: { params: Promise<{ fragment: string }> }) 
 	return (
 		<main className="space-y-10">
 			<Banner title="Dye" subtitle="Types" url="/images/cellHeader.jpg" />
-			<section className="grid grid-cols-1 gap-10">
+			<section className="grid grid-cols-1 gap-5">
 				{dyeTypes.map((type) => (
-					<div key={type.name} className="space-y-3 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
-						<p id={type.fragment} key={type.name} >{type.name}</p>
+					<div id={type.fragment} key={type.name} className="space-y-3 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
+						<p  key={type.name} className="mt-5">{type.name}</p>
 						<Marquee
 							speed={50}
 							direction="left"
