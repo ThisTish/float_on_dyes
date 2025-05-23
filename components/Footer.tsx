@@ -1,10 +1,10 @@
-import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants"
+import { APP_NAME } from "@/lib/constants"
 import { Instagram, Mail } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { TbBrandBluesky } from 'react-icons/tb'
 import Links from "./shared/lists/Links"
-import {PAGE_LINKS} from "@/lib/constants/page-links"
+import { PAGE_LINKS } from "@/lib/constants/page-links"
 import { Button } from "./ui/button"
 import ContactForm from "./shared/contactForm/Form"
 import payments from "@/lib/constants/payments"
@@ -18,21 +18,21 @@ const Footer = () => {
 
 
 	return (
-		<footer className="w-full border-t pt-12 bg-lightGreen">
-			<div className="wrapper lg:flex lg:justify-between space-y-12 lg:space-y-0">
+		<footer className="w-full border-t bg-lightGreen pt-12">
+			<div className="wrapper space-y-12 lg:flex lg:justify-between lg:space-y-0">
 
-				<div className="space-y-12 md:space-y-0 md:flex md:justify-between lg:grid lg:grid-cols-2 lg:justify-normal">
+				<div className="space-y-12 md:flex md:justify-between md:space-y-0 lg:grid lg:grid-cols-2 lg:justify-normal">
 					{/* Left Side */}
-					<div className="text-white space-y-12">
-						<div className="flex gap-3 items-center justify-end lg:grid ">
+					<div className="space-y-12 text-white">
+						<div className="flex items-center justify-end gap-3 lg:grid">
 							<Image
-						src='/images/logo.png'
-						alt={`${APP_NAME} logo`}
-						width={55}
-						height={55}
-					/>
+								src='/images/logo.png'
+								alt={`${APP_NAME} logo`}
+								width={55}
+								height={55}
+							/>
 							<div className="space-y-1 text-end lg:text-start">
-								<span className="text-2xl text-black font-semibold md:text-lg lg:text-xl">{APP_NAME}</span>
+								<span className="text-2xl font-semibold text-black md:text-lg lg:text-xl">{APP_NAME}</span>
 								<p className="text-pretty text-sm md:text-base lg:text-lg">Because dyed discs fly better!</p>
 							</div>
 						</div>
@@ -57,20 +57,20 @@ const Footer = () => {
 									</a>
 								</li>
 							</ul>
-									<a className="text-xs md:text-sm" href='mailto: info@floatondyes.com'>
-										info@floatondyes.com
-									</a>
+							<a className="text-xs md:text-sm" href='mailto: info@floatondyes.com'>
+								info@floatondyes.com
+							</a>
 						</div>
 
 					</div>
 
 					{/* Right side/Middle */}
-					<div className="text-end space-y-3 text-white ">
+					<div className="space-y-3 text-end text-white">
 
 						{/* Site Links */}
 						<div className="space-y-1">
 							<p className="footer-header">Site Links</p>
-							<ul className="space-y-2 items-center text-end">
+							<ul className="items-center space-y-2 text-end">
 
 								{PAGE_LINKS.map((link, index) => (
 									<li className="text-sm" key={index}>
@@ -85,7 +85,7 @@ const Footer = () => {
 						</div>
 
 						{/* Tracking */}
-						<Button variant={'cta'} className="text-xs px-2">
+						<Button variant={'cta'} className="px-2 text-xs">
 							Track Order
 							<AnimatedDiv variant={'cta'} animation={'pulse'}>
 								<FaShippingFast />
@@ -101,7 +101,7 @@ const Footer = () => {
 				</div>
 
 				{/* Form */}
-				<div className="space-y-1 text-primary-foreground min-w-64 lg:w-96">
+				<div className="min-w-64 space-y-1 text-primary-foreground lg:w-96">
 					<p className="footer-header">Contact Form</p>
 					<ContactForm />
 				</div>
@@ -110,13 +110,13 @@ const Footer = () => {
 
 				{/* footer of footer */}
 			</div>
-				{/* Payments */}
-			<div className="space-y-1 justify-end text-end wrapper">
+			{/* Payments */}
+			<div className="wrapper justify-end space-y-1 text-end">
 				<p className="footer-header">We accept</p>
-				<ul className="flex space-x-1 items-center justify-end text-primary-foreground text-3xl">
+				<ul className="flex items-center justify-end space-x-1 text-3xl text-primary-foreground">
 					{payments.map((payment) => (
 						<li key={payment.name}>
-								<payment.icon  />
+							<payment.icon />
 						</li>
 					))}
 
@@ -124,10 +124,10 @@ const Footer = () => {
 			</div>
 			<div >
 				<hr className="m-3" />
-				<div className="grid items-center justify-center sm:flex sm:justify-between text-sm px-5">
+				<div className="grid items-center justify-center px-5 text-sm sm:flex sm:justify-between">
 
 					<p >{currentYear} {APP_NAME}. All rights reserved.</p>
-					<p className=" text-white">Website created by <a href="https://tish-sirface-portfolio.netlify.app/" target="blank" className="text-primary-foreground"><strong>Tish Sirface</strong></a></p>
+					<p className="text-white">Website created by <a href="https://tish-sirface-portfolio.netlify.app/" target="blank" className="text-primary-foreground"><strong>Tish Sirface</strong></a></p>
 				</div>
 			</div>
 

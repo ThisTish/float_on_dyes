@@ -15,9 +15,9 @@ export default async function UserLayout({
 
 	return (
 		<>
-			<header className="w-full fixed top-0 z-50 backdrop-blur-md shadow-md">
+			<header className="fixed top-0 z-50 w-full shadow-md backdrop-blur-md">
 				<div className="wrapper flex-between">
-					<Link href="/" className="flex-start ">
+					<Link href="/" className="flex-start">
 						<Image
 							src={'/images/logo.svg'}
 							alt={`{APP_NAME} logo`}
@@ -26,16 +26,16 @@ export default async function UserLayout({
 						/>
 					</Link>
 					<UserMainNav className="mx-6" />
-					<div className="ml-auto items-center flex space-x-5">
+					<div className="ml-auto flex items-center space-x-5">
 						<Menu />
 					</div>
 
 				</div>
 
 			</header>
-			<div className="flex flex-col min-h-screen mt-40">
-				<main className="flex-1 wrapper">
-					<div className="flex-1 space-y-4 p-8 pt-6 container mx-auto">
+			<div className="mt-40 flex min-h-screen flex-col">
+				<main className="wrapper flex-1">
+					<div className="container mx-auto flex-1 space-y-4 p-8 pt-6">
 						{children}
 					</div>
 				</main>

@@ -3,8 +3,6 @@ import Image from "next/image"
 import Link from "next/link"
 import Menu from "./Menu"
 import MainNav from "../user/UserMainNav"
-import ShoppingCart from "../ui/shoppingcart"
-import UserButton from "../auth/UserButton"
 
 
 const Header = ({ layout }: { layout: string }) => {
