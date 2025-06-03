@@ -6,10 +6,26 @@ import { convertToPlainObject } from "../utils"
 
 
 // get Latest Products
+// todo change to featured products
 export const getLatestProducts = async () => {
 	try {
 		const data = await prisma.product.findMany({
 			take: LATEST_PRODUCTS_LIMIT,
+			orderBy: {
+				createdAt: 'desc'
+			}
+		})
+		return data
+	} catch (error) {
+		console.error(error)
+		throw new Error("Products couldn't be found")
+	}
+}
+
+// get all products
+export const getAllProducts = async() => {
+	try {
+		const data = await prisma.product.findMany({
 			orderBy: {
 				createdAt: 'desc'
 			}

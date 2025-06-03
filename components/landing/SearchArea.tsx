@@ -17,7 +17,7 @@ const SearchArea = () => {
 					pauseOnClick={true}
 				>
 					{BRANDS.map((brand) => (
-						<Link href={`/shop?${brand.name}`}>
+						<Link href={`/shop/${brand.name}`}>
 							<button
 								className="size-20 rounded-full p-1 hover:bg-darkBlue md:size-40"
 							>
