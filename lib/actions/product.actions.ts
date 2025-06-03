@@ -100,3 +100,23 @@ export const getDyedDiscs = async () => {
 		throw new Error("Dyed discs couldn't be found")
 	}
 }
+
+// get products by keyword
+// export const getProductByKeyword = async (search: string) => {
+// 	try {
+// 		const product = await prisma.product.findFirst({
+// 			where: {
+// 				OR:[
+// 					{name: search},
+// 					{brand: search},
+// 					{dyeType: search},
+// 					{discType: search}
+// 				]
+// 			}
+// 		})
+// 		return convertToPlainObject(product)
+// 	} catch (error) {
+// 		console.error(error)
+// 		throw new Error("Disc couldn't be found")
+// 	}
+// }

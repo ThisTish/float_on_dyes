@@ -178,12 +178,28 @@ export const STAMPOPTIONS = ['Glue Mask', 'Wipe Stamp'] as const
 
 export const BRANDS = [
 	{
-		name: 'Axiom',
-		image: '/images/logos/Axiom.svg',
+		name: 'MVP',
+		image: '/images/logos/MVP.svg',
 	},
 	{
-		name: 'Clash',
-		image: '/images/logos/Clash.svg',
+		name: 'Discraft',
+		image: '/images/logos/Discraft.svg',
+	},
+	{
+		name: 'Innova',
+		image: '/images/logos/Innova.svg',
+	},
+	{
+		name: 'Dynamic Discs',
+		image: '/images/logos/DynamicDiscs.svg',
+	},
+	{
+		name: 'Latitude 64',
+		image: '/images/logos/Latitude64.svg',
+	},
+	{
+		name: 'Trash Panda',
+		image: '/images/logos/TrashPanda.svg',
 	},
 	{
 		name: 'DGA',
@@ -194,12 +210,12 @@ export const BRANDS = [
 		image: '/images/logos/Discmania.svg',
 	},
 	{
-		name: 'Discraft',
-		image: '/images/logos/Discraft.svg',
+		name: 'Axiom',
+		image: '/images/logos/Axiom.svg',
 	},
 	{
-		name: 'Dynamic Discs',
-		image: '/images/logos/DynamicDiscs.svg',
+		name: 'Clash',
+		image: '/images/logos/Clash.svg',
 	},
 	{
 		name: 'Handeye',
@@ -210,16 +226,8 @@ export const BRANDS = [
 		image: '/images/logos/Infinite.svg',
 	},
 	{
-		name: 'Innova',
-		image: '/images/logos/Innova.svg',
-	},
-	{
 		name: 'Kastaplast',
 		image: '/images/logos/Kastaplast.svg',
-	},
-	{
-		name: 'Latitude 64',
-		image: '/images/logos/Latitude64.svg',
 	},
 	{
 		name: 'Lone Star',
@@ -228,10 +236,6 @@ export const BRANDS = [
 	{
 		name: 'Mint',
 		image: '/images/logos/Mint.svg',
-	},
-	{
-		name: 'MVP',
-		image: '/images/logos/MVP.svg',
 	},
 	{
 		name: 'Streamline',
@@ -243,11 +247,7 @@ export const BRANDS = [
 	// },
 	{
 		name: 'Thought Space',
-		image: '/images/logos/Thought-Space.svg',
-	},
-	{
-		name: 'Trash Panda',
-		image: '/images/logos/TrashPanda.svg',
+		image: '/images/logos/ThoughtSpace.svg',
 	},
 	{
 		name: 'Westside',
