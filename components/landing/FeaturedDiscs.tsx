@@ -1,11 +1,11 @@
-import { getLatestProducts } from "@/lib/actions/product.actions"
+import { getFeaturedProducts, getLatestProducts } from "@/lib/actions/product.actions"
 import ProductCard from "../product/ProductCard"
 import Heading from "../ui/Heading"
 import { Suspense } from "react"
 import ProductCardSkeleton from "../skeletons/ProductCardSkeleton"
 
 const FeaturedDiscs = async () => {
-	const products = await getLatestProducts()
+	const products = await getFeaturedProducts()
 
 	return (
 		<section className="mt-96 flex flex-col items-center justify-center gap-10">

@@ -254,3 +254,8 @@ export const BRANDS = [
 		image: '/images/logos/Westside.svg',
 	}
 ]
+
+export const BRAND_OPTIONS = BRANDS.map((brand) => ({
+	value: brand.name,
+	label: brand.name
+}))
