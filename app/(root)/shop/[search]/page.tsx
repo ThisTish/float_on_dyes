@@ -2,11 +2,11 @@ import ProductCard from "@/components/product/ProductCard"
 import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton"
 import SearchButton from "@/components/ui/SearchButton"
 import { getAllProducts } from "@/lib/actions/product.actions"
-import { Product } from "@/types"
 import { notFound } from "next/navigation"
-import { Suspense, useState } from "react"
+import { Suspense } from "react"
 
-const ShopPage = async (props: { params: Promise<{ search: string }> }) => {
+const ShopSearchPage
+ = async (props: { params: Promise<{ search: string }> }) => {
 
 	const { search } = await props.params
 
@@ -45,7 +45,7 @@ const ShopPage = async (props: { params: Promise<{ search: string }> }) => {
 						</div>
 					</div>
 				):(
-					(search ? filteredProducts : allProducts).map((product) => (
+					(search === 'all' ? allProducts : filteredProducts ).map((product) => (
 						<ProductCard key={product.id} product={product} />
 					))
 
@@ -56,4 +56,4 @@ const ShopPage = async (props: { params: Promise<{ search: string }> }) => {
 	)
 }
 
-export default ShopPage
+export default ShopSearchPage

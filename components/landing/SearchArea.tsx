@@ -3,6 +3,9 @@ import SearchButton from "../ui/SearchButton"
 import Link from "next/link"
 import Heading from "../ui/Heading"
 import Marquee from "react-fast-marquee"
+import { Button } from "../ui/button"
+import { AnimatedDiv } from "../ui/AnimatedDiv"
+import { ArrowUpRight } from "lucide-react"
 
 
 const SearchArea = () => {
@@ -17,17 +20,32 @@ const SearchArea = () => {
 					pauseOnClick={true}
 				>
 					{BRANDS.map((brand) => (
-						<Link href={`/shop/${brand.name}`}>
+						<Link href={`/shop/${brand.name}`} key={brand.name}>
 							<button
-								className="size-20 rounded-full p-1 hover:bg-darkBlue md:size-40"
+								className="size-20 p-1 hover:bg-foreground md:size-40"
 							>
-								<img src={brand.image} />
+								<img src={brand.image} className="bg-darkBlue"/>
 							</button>
 						</Link>
 					))}
 				</Marquee>
 			</div>
+			<div className="flex justify-between">
+
 			<SearchButton />
+			<Button
+					variant={"cta"}
+					className="h-8 gap-1 px-2 md:h-10 md:gap-2 md:px-3 lg:h-12 lg:gap-3 lg:px-4"
+					asChild
+					>
+					<Link href="/shop">
+						Go to Shop
+						<AnimatedDiv variant={'cta'} animation={'rotate'}>
+							<ArrowUpRight />
+						</AnimatedDiv>
+					</Link>
+				</Button>
+					</div>
 		</section>
 	)
 }

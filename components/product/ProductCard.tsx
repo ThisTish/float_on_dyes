@@ -14,12 +14,12 @@ import { getCart } from "@/lib/actions/cart.actions"
 // todo add logic to wishlist and add to cart if added- icon changes to checkmark
 // todo when more products available, change qty to product.stock
 
-const ProductCard = async ({ product }: { product: Product }) => {
+const ProductCard = async ({ product, site }: { product: Product, site: string }) => {
 
 	const cart = await getCart()
 
 	return (
-		<Card key={product.id} className="group relative w-64 max-w-72 border-2 border-darkBlue">
+		<Card key={product.id} className={`group ${site === 'home' ? 'w-72' : 'w-64'} relative border-2 border-darkBlue`}>
 			<div className="absolute right-0 top-1 z-30 grid gap-1 text-darkBlue transition duration-300 ease-in md:translate-x-6 md:opacity-0 md:group-hover:-translate-x-0 md:group-hover:opacity-100">
 
 				<AddToWishList item={{
@@ -59,13 +59,15 @@ const ProductCard = async ({ product }: { product: Product }) => {
 			</CardTitle>
 
 			<CardDescription className="flex items-stretch justify-between">
+				
 				{/* price */}
 				<ProductPrice value={Number(product.price)} />
+
 				{/* details button */}
-				<Button variant={'cta'} asChild>
+				<Button size={'sm'} asChild>
 					<Link href={`/products/${product.slug}`}>
 						See Details
-						<AnimatedDiv variant={'cta'} animation={'scale'}>
+						<AnimatedDiv size={'sm'} animation={'scale'}>
 							<BiDetail />
 						</AnimatedDiv>
 					</Link>

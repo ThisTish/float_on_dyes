@@ -10,7 +10,7 @@ const FeaturedDiscs = async () => {
 	return (
 		<section className="mt-96 flex flex-col items-center justify-center gap-10">
 			<Heading first="Featured" second="Discs" />
-			<div className="flex flex-wrap justify-center gap-2 p-2">
+			<div className="flex flex-wrap justify-center gap-3">
 				<Suspense fallback={(
 					<>
 						{Array.from({ length: 5 }).map((_, i) => (
@@ -19,7 +19,7 @@ const FeaturedDiscs = async () => {
 					</>
 				)}>
 					{products.map((product) => (
-						<ProductCard key={product.id} product={product} />
+						<ProductCard key={product.id} product={product} site={'home'}/>
 					))}
 				</Suspense>
 			</div>
