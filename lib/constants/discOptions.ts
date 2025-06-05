@@ -259,3 +259,82 @@ export const BRAND_OPTIONS = BRANDS.map((brand) => ({
 	value: brand.name,
 	label: brand.name
 }))
+
+export const DISC_TYPES = [
+	{
+		value: 'Distance Driver',
+		label: 'Distance Driver'
+	},
+	{
+		value: 'Fairway Driver',
+		label: 'Fairway Driver'
+	},
+	{
+		value: 'Midrange',
+		label: 'Midrange'
+	},
+	{
+		value: 'Putter',
+		label: 'Putter'
+	},
+	{
+		value: 'Glow',
+		label: 'Glow'
+	},
+	{
+		value: 'Blanks',
+		label: 'Blanks & Dyeables'
+	},
+	{
+		value: 'Sale',
+		label: 'Sale'
+	},
+	{
+		value: 'Special Edition',
+		label: 'Special Edition & Rare'
+	},
+	{
+		value: 'Preowned',
+		label: 'Preowned'
+	},
+	{
+		value: 'Floetrol',
+		label: 'Floetrol'
+	},
+	{
+		value: 'Glue Bed',
+		label: 'Glue Bed'
+	},
+	{
+		value: 'Vinyl Cut',
+		label: 'Vinyl Cut'
+	}
+]
+
+// sorting options for shop
+export const SORT_OPTIONS = [
+	{
+		value: 'Latest',
+		label: 'Latest'
+	},
+	{
+		value: 'Oldest',
+		label: 'Oldest'
+	},
+	{
+		value: 'LowPrice',
+		label: 'Price: Low to High'
+	},
+	{
+		value: 'HighPrice',
+		label: 'Price: High to Low'
+	},
+	{
+		value: 'Speed',
+		label: 'Speed'
+	},
+	{
+		value: 'Brand',
+		label: 'Brand'
+	},
+]

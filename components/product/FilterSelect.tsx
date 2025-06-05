@@ -25,7 +25,7 @@ export function FilterSelect({group, placeholder, list}: FilterSelectProps) {
 
 		<Label>{group}</Label>
 		<Select>
-			<SelectTrigger className="w-64">
+			<SelectTrigger className="w-60">
 				<SelectValue placeholder={placeholder} />
 			</SelectTrigger>
 			<SelectContent>
