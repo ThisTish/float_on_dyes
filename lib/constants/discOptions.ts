@@ -5,7 +5,11 @@ export const dyeTypes = [
 		images: [
 			'/images/discs/cloudbreaker.png',
 			'/images/discs/cloudbreaker.jpg',
-			'/images/discs/benny.jpg'
+			'/images/discs/benny.jpg',
+			'/images/discs/hex.jpg',
+			'/images/discs/passion.jpg'
+
+
 		]
 	},
 	{
@@ -13,21 +17,29 @@ export const dyeTypes = [
 		fragment: "abstract_pour",
 		images: [
 			'/images/discs/hex.jpg',
-			'/images/discs/passion.jpg'
+			'/images/discs/passion.jpg',
+			'/images/discs/insanity.jpg',
+			'/images/discs/cloudbreaker.png'
+
+
 		]
 	},
 	{
 		name: "blowout cells",
 		fragment: "blowout_cells",
 		images: [
-			'/images/discs/insanity.jpg'
+			'/images/discs/insanity.jpg',
+			'/images/discs/passion.jpg',
+			'/images/discs/cloudbreaker.png'
+
 		]
 	},
 	{
 		name: "circle cells",
 		fragment: "circle_cells",
 		images: [
-			'/images/discs/cloudbreaker.png'
+			'/images/discs/cloudbreaker.png',
+			'/images/discs/passion.jpg'
 		],
 		extra: 5
 	},
