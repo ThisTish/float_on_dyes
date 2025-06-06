@@ -22,7 +22,7 @@ export default async function RootLayout({
 			<SessionProvider>
 				<Header layout="main" />
 				<div className="flex min-h-screen flex-col">
-					<main className="wrapper my-40 flex-1">
+					<main className="wrapper my-20 flex-1 md:my-40">
 						{children}
 					</main>
 					<Footer />

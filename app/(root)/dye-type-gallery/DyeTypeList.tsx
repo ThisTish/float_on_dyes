@@ -27,12 +27,12 @@ const DyeTypeList = () => {
 			</section>
 
 			<Drawer >
-				<DrawerTrigger className="w-full">
-					<button  className="mx-auto mt-20 flex w-2/3 justify-center gap-3 bg-lightGreen p-5 text-center text-darkBlue shadow-md md:hidden">
+				<DrawerTrigger asChild className="w-2/3">
+					<button  className="mx-auto mt-20 flex justify-center gap-3 bg-lightGreen p-5 text-center text-darkBlue shadow-md dark:bg-card md:hidden">
 						List	<List className="hover:scale-110"/>
 					</button>
 				</DrawerTrigger>
-				<DrawerContent className="flex flex-wrap justify-center bg-lightGreen p-5 text-center leading-loose dark:bg-card md:hidden">
+				<DrawerContent className="flex flex-wrap justify-center bg-lightGreen p-5 text-center dark:bg-card md:hidden">
 					<DrawerClose className="ml-auto text-darkBlue hover:text-white">
 						<X size={20} />
 					</DrawerClose>
@@ -41,19 +41,17 @@ const DyeTypeList = () => {
 							Dye Types
 						</DrawerTitle>
 					</DrawerHeader>
-					<DrawerDescription>
-						<div className="my-3 flex flex-wrap justify-center gap-3">
+					<DrawerDescription className="my-3 flex flex-wrap justify-center">
 						{dyeTypes.map((type) => (
 								<span>
 									<a
 										key={type.name}
 										href={`#${type.fragment}`}
-										className="font-semibold text-darkBlue hover:text-white md:text-xl">
+										className="px-3 font-semibold text-darkBlue hover:text-white md:text-xl">
 										{type.name}
 									</a>
 								</span>
 						))}
-						</div>
 					</DrawerDescription>
 
 				</DrawerContent>
