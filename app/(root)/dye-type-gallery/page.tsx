@@ -21,7 +21,7 @@ const DyeTypeGallery = async () => {
 			<Banner title="Dye" subtitle="Types" url="/images/cellHeader.jpg" />
 
 			{/* list of dye types */}
-			<section className="hidden flex-wrap justify-center bg-lightGreen p-5 text-center md:flex">
+			<section className="hidden flex-wrap justify-center bg-lightGreen text-center md:flex">
 				{dyeTypes.map((type) => (
 					<span className="p-3">
 						<a
@@ -40,61 +40,135 @@ const DyeTypeGallery = async () => {
 			</div>
 
 			{/* dye type images */}
-			<section className="grid grid-cols-1 gap-5">
+			<section className="grid grid-cols-1">
 				{dyeTypes.map((type) => (
-					<div id={type.fragment} key={type.name} className="space-y-3 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
-						<p key={type.name} className="mt-5">{type.name}</p>
-						{/* small screen */}
-						<div className="md:hidden">
-							<Marquee
-								speed={50}
-								direction="left"
-								pauseOnHover={true}
-								pauseOnClick={true}
-							>
-								{type.images.map((image) => (
-									<Image
-										key={image}
-										src={image}
-										width={200}
-										height={200}
-										alt={`Image of ${type.name} dye bed`}
-									/>
-								))}
-							</Marquee>
-						</div>
+					<div key={type.name}>
+						{/* div to help center anchor jump */}
+						<div className="h-20" id={type.fragment}></div>
+						<div className="space-y-3 p-5 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
+							<p key={type.name} className="mt-5" >{type.name}</p>
 
-						{/* md and up screen */}
-						<div className="hidden md:flex">
-							{type.images.length > 3 ? (
+							{/* small screen
+							<div className="md:hidden">
 								<Marquee
 									speed={50}
 									direction="left"
 									pauseOnHover={true}
 									pauseOnClick={true}
+									delay={2}
 								>
 									{type.images.map((image) => (
 										<Image
 											key={image}
 											src={image}
-											width={400}
-											height={400}
+											width={200}
+											height={200}
 											alt={`Image of ${type.name} dye bed`}
 										/>
 									))}
 								</Marquee>
-							) : (
-								// if not enough to carousel
-								type.images.map((image: string) => (
-									<Image
-										key={image}
-										src={image}
-										width={400}
-										height={400}
-										alt={`Image of ${type.name} dye bed`}
-									/>
-								))
-							)}
+							</div> */}
+
+							{/* sm screen */}
+							<div className="flex sm:hidden">
+								{type.images.length > 1 ? (
+									<Marquee
+										speed={50}
+										direction="left"
+										pauseOnHover={true}
+										pauseOnClick={true}
+										delay={2}
+									>
+										{type.images.map((image) => (
+											<Image
+												key={image}
+												src={image}
+												width={200}
+												height={200}
+												alt={`Image of ${type.name} dye bed`}
+											/>
+										))}
+									</Marquee>
+								) : (
+									// if not enough to carousel
+									type.images.map((image: string) => (
+										<Image
+											key={image}
+											src={image}
+											width={200}
+											height={200}
+											alt={`Image of ${type.name} dye bed`}
+										/>
+									))
+								)}
+
+							</div>
+							{/* md and up screen */}
+							<div className="hidden sm:flex lg:hidden">
+								{type.images.length > 2 ? (
+									<Marquee
+										speed={50}
+										direction="left"
+										pauseOnHover={true}
+										pauseOnClick={true}
+										delay={2}
+									>
+										{type.images.map((image) => (
+											<Image
+												key={image}
+												src={image}
+												width={300}
+												height={300}
+												alt={`Image of ${type.name} dye bed`}
+											/>
+										))}
+									</Marquee>
+								) : (
+									// if not enough to carousel
+									type.images.map((image: string) => (
+										<Image
+											key={image}
+											src={image}
+											width={300}
+											height={300}
+											alt={`Image of ${type.name} dye bed`}
+										/>
+									))
+								)}
+							</div>
+							{/* lg and up screen */}
+							<div className="hidden lg:flex">
+								{type.images.length > 3 ? (
+									<Marquee
+										speed={50}
+										direction="left"
+										pauseOnHover={true}
+										pauseOnClick={true}
+										delay={2}
+									>
+										{type.images.map((image) => (
+											<Image
+												key={image}
+												src={image}
+												width={375}
+												height={375}
+												alt={`Image of ${type.name} dye bed`}
+											/>
+										))}
+									</Marquee>
+								) : (
+									// if not enough to carousel
+									type.images.map((image: string) => (
+										<Image
+											key={image}
+											src={image}
+											width={375}
+											height={375}
+											alt={`Image of ${type.name} dye bed`}
+										/>
+									))
+								)}
+							</div>
 						</div>
 					</div>
 				))}

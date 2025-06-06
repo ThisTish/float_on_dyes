@@ -37,6 +37,7 @@
   .footer-header {
     @apply text-lg font-semibold tracking-wide text-black;
   }
+
 }
 
  /* :root {
@@ -154,6 +155,7 @@
     --darkCta: hsl(355, 100%, 55%);
     --lightCta: hsl(351, 73%, 30%);
   }
+
 }
 
 /* @layer base {
