@@ -3,6 +3,7 @@ import { dyeTypes } from "@/lib/constants/discOptions"
 import { Metadata } from "next"
 import Image from "next/image"
 import Marquee from 'react-fast-marquee'
+import DyeTypeList from "./DyeTypeList"
 
 export const metadata: Metadata = {
 	title: 'Dye Type Gallery'
@@ -21,53 +22,17 @@ const DyeTypeGallery = async () => {
 			<Banner title="Dye" subtitle="Types" url="/images/cellHeader.jpg" />
 
 			{/* list of dye types */}
-			<section className="hidden flex-wrap justify-center bg-lightGreen text-center md:flex">
-				{dyeTypes.map((type) => (
-					<span className="p-3">
-						<a
-							key={type.name}
-							href={`#${type.fragment}`}
-							className="font-semibold text-darkBlue hover:text-white md:text-xl">
-							{type.name}
-						</a>
-					</span>
-				))}
-			</section>
-
-			{/* mobile dye type list */}
-			<div className="md:hidden">
-
-			</div>
-
+			<DyeTypeList />
+		
 			{/* dye type images */}
 			<section className="grid grid-cols-1">
 				{dyeTypes.map((type) => (
 					<div key={type.name}>
 						{/* div to help center anchor jump */}
-						<div className="h-20" id={type.fragment}></div>
-						<div className="space-y-3 p-5 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
-							<p key={type.name} className="mt-5" >{type.name}</p>
+						<div className="h-20 md:h-28" id={type.fragment}></div>
+						<div className="space-y-3 bg-card p-5 text-xl font-bold tracking-wide text-darkBlue md:text-2xl">
+							<p >{type.name}</p>
 
-							{/* small screen
-							<div className="md:hidden">
-								<Marquee
-									speed={50}
-									direction="left"
-									pauseOnHover={true}
-									pauseOnClick={true}
-									delay={2}
-								>
-									{type.images.map((image) => (
-										<Image
-											key={image}
-											src={image}
-											width={200}
-											height={200}
-											alt={`Image of ${type.name} dye bed`}
-										/>
-									))}
-								</Marquee>
-							</div> */}
 
 							{/* sm screen */}
 							<div className="flex sm:hidden">
