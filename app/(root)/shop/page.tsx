@@ -30,7 +30,7 @@ const ShopSearchPage = async () => {
 				</>
 			)}>
 				{allProducts.map((product) => (
-					<ProductCard key={product.id} product={product} site={'Shop'}/>
+					<ProductCard key={product.id} product={product} site={'Shop'} />
 				))}
 
 			</Suspense>

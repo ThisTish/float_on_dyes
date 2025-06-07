@@ -30,7 +30,7 @@ export function FilterSelect({group, placeholder, list}: FilterSelectProps) {
 			</SelectTrigger>
 			<SelectContent>
 					{list.map((item) => (
-						<SelectItem value={item.value}>{item.label}</SelectItem>
+						<SelectItem key={item.label} value={item.value}>{item.label}</SelectItem>
 						
 					))}
 			</SelectContent>
