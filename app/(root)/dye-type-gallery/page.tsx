@@ -139,7 +139,12 @@ const DyeTypeGallery = async () => {
 					</div>
 				))}
 			</section>
-
+			<section className="mx-auto w-2/3 bg-brightBlue p-3 text-white">
+				<h3 className="self-start font-semibold italic">*Disclaimer</h3>
+				<p className="text-sm font-extralight">
+					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure dolore itaque molestiae rem maiores et debitis. Asperiores iste praesentium aperiam?
+				</p>
+			</section>
 		</main>
 	)
 }
