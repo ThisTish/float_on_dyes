@@ -8,7 +8,7 @@ const FeaturedDiscs = async () => {
 	const products = await getFeaturedProducts()
 
 	return (
-		<section className="mt-96 flex flex-col items-center justify-center gap-10">
+		<section className="mt-[650px] flex flex-col items-center justify-center gap-10">
 			<Heading first="Featured" second="Discs" />
 			<div className="flex flex-wrap justify-center gap-3">
 				<Suspense fallback={(

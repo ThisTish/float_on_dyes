@@ -92,6 +92,20 @@ export default {
 						transform: 'translateX(0px);'
 					},
 				},
+				'float': {
+					'0%': {
+						transform: 'translateY(0px);'
+					},
+					'40%': {
+						transform: 'translateY(20px);'
+					},
+					// '80%': {
+					// 	transform: 'translateY(-8px);'
+					// },
+					'100%': {
+						transform: 'translateY(0px);'
+					},
+				},
 				'star-twinkle': {
 					'0%': {
 						transform: 'scale(1);'
@@ -142,7 +156,8 @@ export default {
 				'cloud-move': 'cloud-move 6s infinite',
 				'star-twinkle': 'star-twinkle 2s infinite',
 				'loading-disc': 'loading-disc 4s ease-in-out infinite',
-				'loading': 'loading 2s ease-in-out infinite'
+				'loading': 'loading 2s ease-in-out infinite',
+				'float': 'float 5s ease-in-out infinite',
 			},
 			transitionDelay:{
 				'400' : '400ms',
