@@ -1,7 +1,7 @@
 const Loader = () => {
 	return (
 		<>
-			<div className="loading border border-black text-center text-xl font-semibold text-primary md:text-2xl lg:text-4xl">
+			<div className="loading text-center text-xl font-semibold text-primary md:text-2xl lg:text-4xl">
 				<span className="ml-3 animate-loading opacity-0 md:ml-5">L</span>
 				<span className="animate-loading opacity-0 delay-200">o</span>
 				<span className="animate-loading opacity-0 delay-400">a</span>

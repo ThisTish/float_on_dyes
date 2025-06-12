@@ -5,11 +5,11 @@ import SearchArea from "@/components/landing/SearchArea"
 const HomePage = async () => {
 
   return (
-    <div>
+    <main >
       <Hero />
       <FeaturedDiscs />
       <SearchArea />
-    </div>
+    </main>
   )
 }
 export default HomePage

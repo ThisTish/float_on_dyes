@@ -8,29 +8,29 @@ import Title from "../header/Title";
 const Hero = () => {
 
 	return (
-		<section className="absolute inset-0 mt-24 flex max-h-max min-h-96 flex-col items-center gap-5 bg-[url('/images/herolandscape.svg')] bg-cover bg-center bg-no-repeat p-5 md:mt-32">
-			<hgroup className="mx-auto w-72 space-y-20">
+		<section className="absolute inset-0 mt-24 flex max-h-max min-h-96 flex-col gap-5 bg-[url('/images/herolandscape.svg')] bg-cover bg-center bg-no-repeat p-5 md:mt-32">
+			<hgroup className="mx-auto w-72">
 				<Title />
-				<div className="space-y-3 self-center text-balance p-3 text-end text-primary-foreground backdrop-contrast-50 md:-mr-32">
-					<h2>Fly, my pretty!</h2>
+				<div className="mb-5 mt-20 space-y-3 text-balance p-3 text-end text-primary-foreground backdrop-contrast-50 md:w-96 lg:ml-44">
+					<h2 className="text-2xl">Fly, my pretty!</h2>
 					<p>Dye your discs, find your discs, love your discs.<br />
 						Choose from our available dyes, or request a custom order, just for you.</p>
 				</div>
+				<div className="ml-auto flex w-44 flex-col gap-3 md:w-96 md:flex-row md:justify-end lg:ml-44">
+					<Button variant={'outline'} className="">
+						<Link href='/custom'>Custom Order</Link>
+						<AnimatedDiv variant={'outline'} animation={'pulse'}>
+							<MessageCircle />
+						</AnimatedDiv>
+					</Button>
+					<Button variant={'cta'} className="">
+						<Link href='/shop'>Go to Shop</Link>
+						<AnimatedDiv variant={'cta'} animation={'rotate'}>
+							<ArrowUpRight />
+						</AnimatedDiv>
+					</Button>
+				</div>
 			</hgroup>
-			<div className="flex w-44 flex-col gap-3 self-end md:w-96 md:flex-row">
-				<Button variant={'outline'} className="">
-					<Link href='/custom'>Custom Order</Link>
-					<AnimatedDiv variant={'outline'} animation={'pulse'}>
-						<MessageCircle />
-					</AnimatedDiv>
-				</Button>
-				<Button variant={'cta'} className="">
-					<Link href='/shop'>Go to Shop</Link>
-					<AnimatedDiv variant={'cta'} animation={'rotate'}>
-						<ArrowUpRight />
-					</AnimatedDiv>
-				</Button>
-			</div>
 		</section>
 		// <section className="absolute inset-0 flex min-h-96 w-full flex-col items-center justify-center bg-[url('/images/heroLandscape.svg')] bg-cover bg-center bg-no-repeat">
 		// 	<hgroup className="mt-40 flex h-full w-64 flex-col gap-16 md:w-72 lg:w-96">

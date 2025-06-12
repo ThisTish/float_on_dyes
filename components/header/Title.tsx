@@ -5,7 +5,7 @@ const dyes = "Dyes".split("")
 
 const Title = () => {
 	return (
-		<h1 className="flex w-1/2 flex-col justify-around gap-3 text-5xl text-darkBlue dark:text-lightBlue md:text-6xl lg:gap-7 lg:text-7xl">
+		<h1 className="flex w-1/2 flex-col justify-around gap-3 text-5xl text-darkBlue dark:text-lightBlue md:text-6xl lg:-mt-5 lg:ml-5">
 			<div className="flex h-10 gap-1" >
 				{float.map((character, i) => (
 					<span

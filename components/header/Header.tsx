@@ -20,7 +20,7 @@ const Header = ({ layout }: { layout: string }) => {
 							height={55}
 						/>
 						{layout === 'main'
-							? <h1 className="hidden text-2xl font-bold md:inline">{APP_NAME}</h1> : null}
+							? <h1 className="hidden text-2xl font-bold lg:inline">{APP_NAME}</h1> : null}
 					</Link>
 					{layout === 'user'
 						? <MainNav className="mx-6" />
