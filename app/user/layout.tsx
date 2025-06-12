@@ -16,7 +16,7 @@ export default async function UserLayout({
 	return (
 		<>
 			<header className="fixed top-0 z-50 w-full shadow-md backdrop-blur-md">
-				<div className="wrapper flex-between">
+				<div className="wrapper flex-between flex-wrap">
 					<Link href="/" className="flex-start">
 						<Image
 							src={'/images/logo.svg'}
