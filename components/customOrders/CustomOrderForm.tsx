@@ -121,7 +121,6 @@ const CustomOrderForm = ({ discs, handleDyeChange }: CustomOrderFormProps) => {
 	}, [handleDyeChange, chosenDye])
 
 	const onSubmit = async (values: z.infer<typeof customOrderSchema>) => {
-		console.log('submit custom order', values)
 		startTransition(async () => {
 			const discProduct = await getProductBySlug(values.disc)
 			if (!discProduct) throw new Error("Disc couldn't be found")

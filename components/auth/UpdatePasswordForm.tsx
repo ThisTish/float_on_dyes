@@ -80,7 +80,7 @@ const UpdatePasswordForm = ({ token }: { token: string }) => {
 							{data.message === 'Invalid token,' ? (
 								<div className="flex justify-center gap-1">
 									<span>{data.message}</span>
-									<Link href={'/reset-password'} className="font-bold hover:text-base hover:text-white">try resetting your password again</Link>
+									<Link href={'/reset-password'} className="font-bold hover:text-base hover:text-white">try resetting your password again.</Link>
 								</div>
 							) : (
 								<span>{data.message}</span>

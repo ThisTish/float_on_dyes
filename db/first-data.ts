@@ -1,4 +1,3 @@
-import { emailVerification } from "@/lib/actions/email.actions";
 import { hashSync } from "bcrypt-ts-edge";
 
 const firstData = {
@@ -9,7 +8,7 @@ const firstData = {
 			password: hashSync('123456', 10),
 			role: 'admin',
 			emailVerified: new Date()
-			
+
 		},
 		{
 			name: 'user',
@@ -92,7 +91,7 @@ const firstData = {
 				'putter', 'pro series', 'special edition'
 			],
 			tags: [
-				'putter', 'floetrol', 'cells', 'swirl', 
+				'putter', 'floetrol', 'cells', 'swirl',
 			],
 			color: [
 				'blue', 'purple', 'yellow'
@@ -145,7 +144,7 @@ const firstData = {
 			plastic: 'Total Eclipse Glow',
 			description: "Mesmerizingly straight, with flight numbers of 5/5/-1/1, the Hex will find a place in anyone’s bag as a versatile and reliably straight midrange. At the highest arm speeds, the Hex will produce slightly understable lines from flat, but the 1 fade keeps it from flipping over completely. For lower arm speeds, the Hex has enough turn to make shaping lines a breeze. If you are looking for control in the woods, or simply a versatile line shaper, the Hex is the midrange for you. Mesmerizingly straight, with flight numbers of 5/5/-1/1, the Hex will find a place in anyone’s bag as a versatile and reliably straight midrange. At the highest arm speeds, the Hex will produce slightly understable lines from flat, but the 1 fade keeps it from flipping over completely. For lower arm speeds, the Hex has enough turn to make shaping lines a breeze. If you are looking for control in the woods, or simply a versatile line shaper, the Hex is the midrange for you.",
 			category: 'dyed',
-			images: ['/images/discs/benny.jpg', '/images/discs/vortex.jpg',  '/images/discs/cloudbreaker.jpg'],
+			images: ['/images/discs/benny.jpg', '/images/discs/vortex.jpg', '/images/discs/cloudbreaker.jpg'],
 			discType: [
 				'putter', 'special edition'
 			],
@@ -237,7 +236,7 @@ const firstData = {
 				'putter', 'pro series', 'special edition'
 			],
 			tags: [
-				'putter', 'floetrol', 'cells', 'swirl', 
+				'putter', 'floetrol', 'cells', 'swirl',
 			],
 			color: [
 				'blue', 'purple', 'yellow'
@@ -290,7 +289,7 @@ const firstData = {
 			plastic: 'Total Eclipse Glow',
 			description: "Mesmerizingly straight, with flight numbers of 5/5/-1/1, the Hex will find a place in anyone’s bag as a versatile and reliably straight midrange. At the highest arm speeds, the Hex will produce slightly understable lines from flat, but the 1 fade keeps it from flipping over completely. For lower arm speeds, the Hex has enough turn to make shaping lines a breeze. If you are looking for control in the woods, or simply a versatile line shaper, the Hex is the midrange for you. Mesmerizingly straight, with flight numbers of 5/5/-1/1, the Hex will find a place in anyone’s bag as a versatile and reliably straight midrange. At the highest arm speeds, the Hex will produce slightly understable lines from flat, but the 1 fade keeps it from flipping over completely. For lower arm speeds, the Hex has enough turn to make shaping lines a breeze. If you are looking for control in the woods, or simply a versatile line shaper, the Hex is the midrange for you.",
 			category: 'dyed',
-			images: ['/images/discs/benny.jpg', '/images/discs/vortex.jpg',  '/images/discs/cloudbreaker.jpg'],
+			images: ['/images/discs/benny.jpg', '/images/discs/vortex.jpg', '/images/discs/cloudbreaker.jpg'],
 			discType: [
 				'putter', 'special edition'
 			],
