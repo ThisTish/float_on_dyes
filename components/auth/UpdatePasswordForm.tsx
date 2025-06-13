@@ -4,9 +4,8 @@ import { useActionState } from "react"
 import { useFormStatus } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
-import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
-import { emailVerification, updatePassword } from "@/lib/actions/tokens.actions"
+import { updatePassword } from "@/lib/actions/tokens.actions"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import Link from "next/link"
@@ -19,10 +18,12 @@ const UpdatePasswordForm = ({ token }: { token: string }) => {
 		message: ''
 	})
 
+
+
 	const UpdatePasswordButton = () => {
 		const { pending } = useFormStatus()
 		return (
-			<div className="flex justify-center mb-5">
+			<div className="mb-5 flex justify-center">
 				<Button variant={'cta'} disabled={pending} className="w-1/2">
 					{pending ? (
 						<>
@@ -75,12 +76,20 @@ const UpdatePasswordForm = ({ token }: { token: string }) => {
 						/>
 					</div>
 					{data && !data.success ? (
-						<div className="text-center text-destructive mb-5">
-							{data.message}
+						<div className="mb-5 text-center text-destructive">
+							{data.message === 'Invalid token,' ? (
+								<div className="flex justify-center gap-1">
+									<span>{data.message}</span>
+									<Link href={'/reset-password'} className="font-bold hover:text-base hover:text-white">try resetting your password again</Link>
+								</div>
+							) : (
+								<span>{data.message}</span>
+							)
+							}
 						</div>
 					) : (
-						<div className=" text-white flex items-center w-fit mx-auto mb-5">
-							{data.message} <Link href="/sign-in" className="text-brightBlue font-semibold text-lg ml-2">Sign In</Link>
+						<div className="mx-auto mb-5 flex w-fit items-center text-white">
+							{data.message} <Link href="/sign-in" className="ml-2 text-lg font-semibold text-brightBlue">Sign In</Link>
 						</div>
 					)}
 					<div>

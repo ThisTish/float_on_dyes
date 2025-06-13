@@ -4,7 +4,7 @@ import { useActionState, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
-import { BiLogInCircle, BiMailSend } from "react-icons/bi"
+import {  BiMailSend } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
 import { resetPassword } from "@/lib/actions/tokens.actions"
 import { Label } from "../ui/label"
@@ -51,7 +51,7 @@ const ResetPasswordForm = () => {
 		// showProviders={true}
 		>
 			<form action={action}>
-				<div className="space-y-6 mb-5">
+				<div className="mb-5 space-y-6">
 					<div>
 						<Label htmlFor="email">Email</Label>
 						<Input
@@ -71,7 +71,7 @@ const ResetPasswordForm = () => {
 							{data.message}
 						</div>
 					)}
-					<div className="flex justify-center mb-5">
+					<div className="mb-5 flex justify-center">
 						<ResetPasswordButton />
 					</div>	
 				</div>

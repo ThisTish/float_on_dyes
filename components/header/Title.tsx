@@ -9,6 +9,7 @@ const Title = () => {
 			<div className="flex h-10 gap-1" >
 				{float.map((character, i) => (
 					<span
+					key={character + i}
 						className={`animate-float transition`}
 						style={{ animationDelay: `${i * 0.3}s` }}
 					>
@@ -19,6 +20,7 @@ const Title = () => {
 			<div className="flex h-10 gap-1">
 				{on.map((character, i) => (
 					<span
+					key={character + i}
 						className={`animate-float transition`}
 						style={{ animationDelay: `${i + 1 * 0.3}s` }}
 					>
@@ -29,6 +31,7 @@ const Title = () => {
 			<div className="flex h-10 gap-1">
 				{dyes.map((character, i) => (
 					<span
+					key={character + i}
 						className={`animate-float transition`}
 						style={{ animationDelay: `${i + 2 * 0.3}s` }}
 					>

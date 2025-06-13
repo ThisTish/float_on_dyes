@@ -108,7 +108,8 @@ const SignUpForm = () => {
 					</div>
 					{data && !data.success ? (
 						<div className="text-center text-destructive">
-							{data.message}
+							{/* Something went wrong. Please try again or contact us. */}
+							{data.message || 'Something went wrong. Please try again or contact us.'}
 						</div>
 					) : (
 						<div className="text-center text-white">

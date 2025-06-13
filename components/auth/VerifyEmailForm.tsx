@@ -1,12 +1,11 @@
 "use client"
 
-import { useActionState, useEffect, useState } from "react"
+import { useActionState, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { Button } from "@/components/ui/button"
 import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
-import { BiLogInCircle } from "react-icons/bi"
 import AuthCard from "@/components/auth/AuthCard"
-import { emailVerification } from "@/lib/actions/tokens.actions"
+import { emailVerification } from "@/lib/actions/email.actions"
 import Link from "next/link"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 

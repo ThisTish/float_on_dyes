@@ -88,7 +88,7 @@ const PasswordUpdateForm = ({ isOauth }: { isOauth: boolean }) => {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.isValid }>
+				<Button type="submit" disabled={form.formState.isSubmitting || !form.formState.dirtyFields.password || !form.formState.dirtyFields.newPassword || !form.formState.dirtyFields.confirmNewPassword} >
 					Update
 					{form.formState.isSubmitting
 								? <PiSpinnerBallDuotone className="animate-spin" />

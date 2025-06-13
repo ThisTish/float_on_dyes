@@ -6,7 +6,8 @@ import { prisma } from "@/db/prisma"
 import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { formatError } from "../utils"
 import { compare, hashSync } from "bcrypt-ts-edge"
-import { generateVerificationToken, sendVerificationEmail } from "./tokens.actions"
+import { generateVerificationToken } from "./tokens.actions"
+import {sendVerificationEmail} from "./email.actions"
 import { z } from "zod"
 import { cookies } from "next/headers"
 
@@ -62,7 +63,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 		user.password = hashSync(user.password, 10)
 		user.email = user.email.toLowerCase()
 
-		await prisma.user.create({
+		const createdUser = await prisma.user.create({
 			data: {
 				name: user.name,
 				email: user.email,
@@ -70,6 +71,8 @@ export async function signUp(prevState: unknown, formData: FormData) {
 				isSubscribed: user.isSubscribed
 			}
 		})
+
+		if(!createdUser) return { success: false, message: 'Something went wrong. Try again or contact us.' }
 
 		const greeting = `Hi ${user.name ? user.name.split(' ')[0].slice(0, 1).toUpperCase() + user.name.split(' ')[0].slice(1).toLowerCase() : 'User'}`
 

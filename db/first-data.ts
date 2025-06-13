@@ -1,4 +1,4 @@
-import { emailVerification } from "@/lib/actions/tokens.actions";
+import { emailVerification } from "@/lib/actions/email.actions";
 import { hashSync } from "bcrypt-ts-edge";
 
 const firstData = {

@@ -25,7 +25,7 @@ const Footer = () => {
 					{/* Left Side */}
 					<div className="space-y-12 text-white">
 						<div className="flex items-center justify-end gap-3 lg:grid">
-							<Image
+							<img
 								src='/images/logo.png'
 								alt={`${APP_NAME} logo`}
 								width={55}
