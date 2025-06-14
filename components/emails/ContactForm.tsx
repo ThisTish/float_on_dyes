@@ -57,14 +57,14 @@ const ContactForm = () => {
 			toast({
 				variant: 'default',
 				title: "Message sent!",
-				description: `We will reply as soon as possible, ${values.name}.`
-			})
+				style: { maxWidth: '200px', fontSize: '1.2rem' }			})
+			form.reset()
 		})
 	}
 
 
 	return (
-		<Card className="bg-lightGreen p-5 dark:bg-card">
+		<Card className="mx-auto w-full max-w-md bg-lightGreen p-5 dark:bg-card">
 			<CardHeader className="inline-flex flex-row gap-10 px-10">
 				<Link href={'/'} className="flex">
 					<Image

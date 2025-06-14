@@ -32,10 +32,8 @@ export async function sendContactEmail(prevState: unknown, formData: FormData) {
 		subject: `Contact Form Submission from ${contactData.name}`,
 		html: `${contactData.message}<br><br>From: ${contactData.name} <${contactData.email}>`,
 	})
-	if (error) return { error: error.message }
-	if (data) return { data }
-
-	return { success: true, message: `Message sent! We will reply ASAP, ${name}` }
+	if (error) return { success: false, message: error.message }
+	return { success: true, message: `Message sent!` }
 }
 
 // send verification email
