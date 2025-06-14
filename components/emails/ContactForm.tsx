@@ -57,7 +57,8 @@ const ContactForm = () => {
 			toast({
 				variant: 'default',
 				title: "Message sent!",
-				style: { maxWidth: '200px', fontSize: '1.2rem' }			})
+				style: { maxWidth: '200px', fontSize: '1.2rem' }
+			})
 			form.reset()
 		})
 	}
