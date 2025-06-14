@@ -30,17 +30,17 @@ const SearchArea = () => {
 					))}
 				</Marquee>
 			</div>
-			<div className="flex justify-between">
 
+			<div className="flex items-center justify-around">
 			<SearchButton />
 			<Button
-					variant={"cta"}
+					variant={"default"}
 					className="h-8 gap-1 px-2 md:h-10 md:gap-2 md:px-3 lg:h-12 lg:gap-3 lg:px-4"
 					asChild
 					>
 					<Link href="/shop">
 						Go to Shop
-						<AnimatedDiv variant={'cta'} animation={'rotate'}>
+						<AnimatedDiv variant={'default'} animation={'rotate'}>
 							<ArrowUpRight />
 						</AnimatedDiv>
 					</Link>
