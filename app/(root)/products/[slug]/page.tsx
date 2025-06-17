@@ -9,10 +9,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { getCart } from "@/lib/actions/cart.actions"
 import { getProductBySlug } from "@/lib/actions/product.actions"
 import { notFound } from "next/navigation"
-// todo Breadcrumb
 // todo Related Products
 // todo tags search
-// todo when more products available, change qty to product.stock
 
 
 const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) => {
@@ -21,9 +19,9 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 
 	const product = await getProductBySlug(slug)
 	if (!product) notFound()
-
+		
 	const cart = await getCart()
-
+	
 
 	return (
 		<div className="space-y-10">
@@ -129,3 +127,5 @@ const ProductDetailsPage = async (props: { params: Promise<{ slug: string }> }) 
 export default ProductDetailsPage
 
 // >previous and next buttons?
+//> todo Breadcrumb
+//* todo when more products available, change qty to product.stock

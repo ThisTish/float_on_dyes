@@ -24,20 +24,22 @@ const SearchArea = () => {
 							<button
 								className="size-20 p-1 hover:bg-foreground md:size-40"
 							>
-								<img src={brand.image} className="bg-darkBlue"/>
+								<img src={brand.image} className="bg-darkBlue" />
 							</button>
 						</Link>
 					))}
 				</Marquee>
 			</div>
 
-			<div className="flex items-center justify-around">
-			<SearchButton />
-			<Button
+			<div className="flex flex-col items-start gap-3 md:w-96">
+				<div className="-ml-3 w-fit">
+					<SearchButton />
+
+				</div>
+				<Button
 					variant={"default"}
-					className="h-8 gap-1 px-2 md:h-10 md:gap-2 md:px-3 lg:h-12 lg:gap-3 lg:px-4"
 					asChild
-					>
+				>
 					<Link href="/shop">
 						Go to Shop
 						<AnimatedDiv variant={'default'} animation={'rotate'}>
@@ -45,7 +47,7 @@ const SearchArea = () => {
 						</AnimatedDiv>
 					</Link>
 				</Button>
-					</div>
+			</div>
 		</section>
 	)
 }
