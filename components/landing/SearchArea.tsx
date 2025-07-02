@@ -22,7 +22,7 @@ const SearchArea = () => {
 					{BRANDS.map((brand) => (
 						<Link href={`/shop/${brand.name}`} key={brand.name}>
 							<button
-								className="size-20 p-1 hover:bg-foreground md:size-40"
+								className="size-40 p-1 hover:bg-foreground"
 							>
 								<img src={brand.image} className="bg-darkBlue" />
 							</button>
@@ -31,22 +31,24 @@ const SearchArea = () => {
 				</Marquee>
 			</div>
 
-			<div className="flex flex-col items-start gap-3 md:w-96">
-				<div className="-ml-3 w-fit">
-					<SearchButton />
+			<div className="flex flex-col items-start gap-3">
+				<div className="flex w-full items-center justify-between">
+					<div className="-ml-3 w-fit">
+						<SearchButton />
+					</div>
 
+					<Button
+						variant={"default"}
+						asChild
+					>
+						<Link href="/shop">
+							Go to Shop
+							<AnimatedDiv variant={'default'} animation={'rotate'}>
+								<ArrowUpRight />
+							</AnimatedDiv>
+						</Link>
+					</Button>
 				</div>
-				<Button
-					variant={"default"}
-					asChild
-				>
-					<Link href="/shop">
-						Go to Shop
-						<AnimatedDiv variant={'default'} animation={'rotate'}>
-							<ArrowUpRight />
-						</AnimatedDiv>
-					</Link>
-				</Button>
 			</div>
 		</section>
 	)

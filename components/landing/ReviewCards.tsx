@@ -23,7 +23,6 @@ const ReviewCards = ({ name, image, review }: ReviewCardProps) => {
 					-{name}
 				</span>
 			</div>
-
 		</div>
 
 
