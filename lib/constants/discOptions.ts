@@ -16,6 +16,8 @@ export const dyeTypes = [
 		name: "abstract pour",
 		fragment: "abstract_pour",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/hex.jpg',
 			'/images/discs/passion.jpg',
 			'/images/discs/insanity.jpg',
@@ -28,6 +30,8 @@ export const dyeTypes = [
 		name: "blowout cells",
 		fragment: "blowout_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/insanity.jpg',
 			'/images/discs/passion.jpg',
 			'/images/discs/cloudbreaker.png'
@@ -39,6 +43,8 @@ export const dyeTypes = [
 		fragment: "circle_cells",
 		images: [
 			'/images/discs/cloudbreaker.png',
+
+			'/images/discs/cloudbreaker.png',
 			'/images/discs/passion.jpg'
 		],
 		extra: 5
@@ -47,6 +53,8 @@ export const dyeTypes = [
 		name: "feather",
 		fragment: "feather",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -54,6 +62,8 @@ export const dyeTypes = [
 		name: "flower",
 		fragment: "flower",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -61,6 +71,8 @@ export const dyeTypes = [
 		name: "planet cells",
 		fragment: "planet_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -68,6 +80,8 @@ export const dyeTypes = [
 		name: "rainbow cells",
 		fragment: "rainbow_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -75,6 +89,8 @@ export const dyeTypes = [
 		name: "solid back fill",
 		fragment: "solid_back_fill",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -82,6 +98,8 @@ export const dyeTypes = [
 		name: "spiderweb cells",
 		fragment: "spiderweb_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -89,6 +107,8 @@ export const dyeTypes = [
 		name: "spin dye gradient",
 		fragment: "spin_dye_gradient",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -96,6 +116,8 @@ export const dyeTypes = [
 		name: "spin dye lines",
 		fragment: "spin_dye_lines",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -103,6 +125,8 @@ export const dyeTypes = [
 		name: "spiral cells",
 		fragment: "spiral_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -110,6 +134,8 @@ export const dyeTypes = [
 		name: "spiral lines",
 		fragment: "spiral_lines",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -117,6 +143,8 @@ export const dyeTypes = [
 		name: "spiral pour",
 		fragment: "spiral_pour",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -124,6 +152,8 @@ export const dyeTypes = [
 		name: "spiral wave",
 		fragment: "spiral_wave",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -131,6 +161,8 @@ export const dyeTypes = [
 		name: "starburst in",
 		fragment: "starburst_in",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -138,6 +170,8 @@ export const dyeTypes = [
 		name: "starburst out",
 		fragment: "starburst_out",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -145,6 +179,8 @@ export const dyeTypes = [
 		name: "stencil(cell fill)",
 		fragment: "stencil_cell_fill",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -152,6 +188,8 @@ export const dyeTypes = [
 		name: "stencil(negative space)",
 		fragment: "stencil_negative_space",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -159,6 +197,8 @@ export const dyeTypes = [
 		name: "stencil(solid fill)",
 		fragment: "stencil_solid_fill",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -166,6 +206,8 @@ export const dyeTypes = [
 		name: "swipe cells",
 		fragment: "swipe_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -173,6 +215,8 @@ export const dyeTypes = [
 		name: "twisted cells",
 		fragment: "twisted_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	},
@@ -180,6 +224,8 @@ export const dyeTypes = [
 		name: "wave cells",
 		fragment: "wave_cells",
 		images: [
+			'/images/discs/cloudbreaker.png',
+
 			'/images/discs/cloudbreaker.png'
 		]
 	}

@@ -3,7 +3,7 @@ import ReviewCards from "./ReviewCards"
 
 const CustomerReviews = () => {
 	return (
-		<section className="mt-32 flex h-fit flex-col space-y-5 bg-lightGreen p-3 pt-5 dark:bg-darkGreen">
+		<section className="mt-32 flex h-fit flex-col space-y-5 bg-lightGreen p-3 py-5 dark:bg-darkGreen">
 			<Heading first="Customer" second="Reviews" className="flex justify-center" />
 			<div className="flex h-fit w-full flex-col items-center justify-around gap-3 p-3 md:flex-row">
 
