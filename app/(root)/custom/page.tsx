@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 // todo 'see more' on small screens for dye type pics or carousel
 // todo picture cycle through going crazy
 
-const dyeTypeArray = dyeTypes
+// const dyeTypeArray = dyeTypes
 
 const CustomPage = async () => {
 

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { AnimatedDiv } from "../ui/AnimatedDiv";
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 
 const CustomOrders = async () => {
 
@@ -18,7 +17,7 @@ const CustomOrders = async () => {
 
 			{/* dye style  */}
 			<div className="flex flex-col space-y-3">
-				<p className="text-lg font-semibold text-darkBlue">
+				<p className="text-xl font-semibold text-darkBlue">
 					Choose from a bunch of styles...
 				</p>
 				<Marquee
@@ -30,7 +29,7 @@ const CustomOrders = async () => {
 					{dyeTypes.map((dye) => (
 						<div className="-mx-5 grid py-3">
 							<img src={dye.images[0]} alt={`Image of ${dye.name} dye bed`} key={dye.name} className="mx-auto h-48 w-auto" />
-							<span className="p-1 text-center font-semibold text-darkBlue">{dye.name}</span>
+							<span className="p-1 text-center font-light text-darkBlue">{dye.name}</span>
 						</div>
 					))}
 				</Marquee>
@@ -38,15 +37,15 @@ const CustomOrders = async () => {
 
 			{/* disc selection */}
 			<div className="flex flex-col space-y-3">
-				<p className="text-lg font-semibold text-darkBlue">
+				<p className="text-xl font-semibold text-darkBlue">
 					Pick a blank disc...
 				</p>
 				<div className="flex flex-wrap gap-5">
 					{dyableDiscs.map((disc) => (
 						<Link href={`/products/${disc.slug}`} key={disc.name} className="grid py-3">
-							<img 
-							src={disc.images[0]} alt={`Image of ${disc.name}`} 
-							className="mx-auto h-48 w-auto"
+							<img
+								src={disc.images[0]} alt={`Image of ${disc.name}`}
+								className="mx-auto h-48 w-auto"
 							/>
 						</Link>
 					))}
@@ -55,7 +54,7 @@ const CustomOrders = async () => {
 
 			{/* extras */}
 			<div className="flex w-full flex-col items-center justify-between md:flex-row">
-				<span className="mb-3 text-balance text-center text-lg font-semibold text-darkGreen md:text-start">
+				<span className="mb-3 text-balance text-center text-xl font-semibold text-darkGreen md:text-start">
 					Add some color, extra options, and notes to make it yours!
 				</span>
 
