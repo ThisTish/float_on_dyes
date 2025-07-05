@@ -9,6 +9,7 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { AnimatedDiv } from "../ui/AnimatedDiv"
 import { Send } from "lucide-react"
+import ContactFootnote from "../shared/ContactFootnote"
 
 type CustomOrderFormProps = {
 	discs: {
@@ -53,26 +54,11 @@ const CustomPageClient = ({ discs }: CustomOrderFormProps) => {
 			</Card>
 
 			{/* contact */}
-			<Card className="p-5 md:col-start-2">
-				<CardHeader>
-					<CardTitle className="text-lg">Looking for something really special, have a big idea, or just have some questions about the process?
-					</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<Link href={'/contact'}>
-						<Button variant={"outline"}>
-							Contact Us
-							<AnimatedDiv variant={'outline'} animation={'rotate'}>
-								<Send />
-							</AnimatedDiv>
-						</Button>
-					</Link>
-				</CardContent>
-				<CardFooter className="mt-5">
-					<p>or Email us at <a href="mailto:info@floatondyes.com" className="font-semibold text-darkGreen hover:text-darkBlue"> info@floatondyes.com</a></p>
-				</CardFooter>
+			<div className="mx-5 mt-20 space-y-20 md:col-span-2 md:col-start-1">
+			<ContactFootnote message="Looking for something really special, have a big idea, or just want to chat about your custom order? We'd love to hear from you!" />
 
-			</Card>
+			</div>
+
 		</section>
 	)
 }

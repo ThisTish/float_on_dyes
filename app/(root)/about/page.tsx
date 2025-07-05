@@ -1,14 +1,10 @@
 import Banner from "@/components/header/Banner"
-import { AnimatedDiv } from "@/components/ui/AnimatedDiv"
-import { Button } from "@/components/ui/button"
-import { CardContent, CardFooter } from "@/components/ui/card"
-import { Send } from "lucide-react"
-import Link from "next/link"
 import Image from "next/image"
+import ContactFootnote from "@/components/shared/ContactFootnote"
 
 const AboutPage = () => {
 	return (
-		<main className="space-y-10">
+		<main className="space-y-20">
 			<Banner url={'/images/cellHeader.jpg'} darkUrl={'/images/cellHeader-dark.jpg'} title='About' subtitle='Us' />
 
 			<div className="flex flex-wrap justify-around space-y-5">
@@ -38,19 +34,7 @@ const AboutPage = () => {
 					</figcaption>
 				</figure>
 			</div>
-			<hr className="mx-auto w-2/3 border border-darkGreen"/>
-				<section className="mx-auto w-1/3 text-balance p-10">
-					<p className="mb-3">Questions, comments, ideas? We would love to hear them...</p>
-						<Link href={'/contact'} className="w-full">
-							<Button variant={"default"} className="w-full bg-darkGreen" size={'sm'}>
-								Contact Us
-								<AnimatedDiv variant={'default'} animation={'rotate'} className="bg-darkGreen" size={'sm'}>
-									<Send />
-								</AnimatedDiv>
-							</Button>
-						</Link>
-						<p className="mt-3 text-sm">or Email us at <a href="mailto:info@floatondyes.com" className="font-semibold text-darkGreen hover:text-darkBlue"> info@floatondyes.com</a></p>
-				</section>
+			<ContactFootnote message="Questions, comments, ideas? We would love to hear them..." />
 		</main>
 	)
 }

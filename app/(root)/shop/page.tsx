@@ -14,10 +14,8 @@ export const metadata: Metadata = {
 
 const ShopSearchPage = async () => {
 
-
 	const allProducts = await getAllProducts()
 	if (!allProducts) notFound()
-
 
 	return (
 		<section className="mx-auto flex flex-wrap justify-center gap-3">

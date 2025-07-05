@@ -31,7 +31,7 @@ const SortFilterSearchSection = () => {
 				/>
 
 			</div>
-			<div className="flex items-baseline justify-between">
+			<div className="flex flex-col-reverse items-baseline justify-between gap-5 md:flex-row">
 				<div className="flex flex-wrap gap-3">
 
 
@@ -56,7 +56,7 @@ const SortFilterSearchSection = () => {
 					variant={'outline'}
 					size={'sm'}
 					type={'submit'}
-					className="mt-1 w-fit p-3 md:mt-5"
+					className="mt-1 w-fit self-end p-3 md:mt-5"
 				>
 					<AnimatedDiv
 						variant={'outline'}
