@@ -10,7 +10,7 @@ const AboutPage = () => {
 			<div className="flex flex-wrap justify-around space-y-5">
 
 				{/* text */}
-				<section className="my-auto flex h-fit flex-col space-y-3 bg-darkBlue p-5 text-primary-foreground md:w-1/3">
+				<section className="my-auto flex size-96 flex-col justify-center space-y-3 rounded-full border bg-darkBlue p-5 text-center text-primary-foreground">
 					<p>
 						We are a team of passionate individuals dedicated to providing the best service possible. Our mission is to create a platform that connects people and fosters community.
 					</p>
