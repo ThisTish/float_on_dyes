@@ -1,4 +1,3 @@
-import Banner from "@/components/header/Banner"
 import ProductCard from "@/components/product/ProductCard"
 import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton"
 import { getAllProducts } from "@/lib/actions/product.actions"
