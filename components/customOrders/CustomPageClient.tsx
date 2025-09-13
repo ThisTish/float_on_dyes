@@ -3,12 +3,9 @@
 import { Decimal } from "@prisma/client/runtime/library"
 import { useCallback, useState } from "react"
 import CustomDyeImages from "./CustomDyeImages"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import CustomOrderForm from "./CustomOrderForm"
 import Link from "next/link"
-import { Button } from "../ui/button"
-import { AnimatedDiv } from "../ui/AnimatedDiv"
-import { Send } from "lucide-react"
 import ContactFootnote from "../shared/ContactFootnote"
 
 type CustomOrderFormProps = {

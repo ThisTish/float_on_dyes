@@ -8,8 +8,6 @@ export const dyeTypes = [
 			'/images/discs/benny.jpg',
 			'/images/discs/hex.jpg',
 			'/images/discs/passion.jpg'
-
-
 		]
 	},
 	{
@@ -20,8 +18,6 @@ export const dyeTypes = [
 			'/images/discs/passion.jpg',
 			'/images/discs/insanity.jpg',
 			'/images/discs/cloudbreaker.png'
-
-
 		]
 	},
 	{
@@ -31,7 +27,6 @@ export const dyeTypes = [
 			'/images/discs/insanity.jpg',
 			'/images/discs/passion.jpg',
 			'/images/discs/cloudbreaker.png'
-
 		]
 	},
 	{

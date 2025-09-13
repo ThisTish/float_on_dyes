@@ -44,6 +44,7 @@ const CustomDyeImages = ({ currentDyeIndex }: { currentDyeIndex?: number }) => {
 					alt={`Image of ${name} dye bed`}
 					className="object-cover object-center"
 					onMouseEnter={() => {
+						// todo work here? images flash and timing is off, it counts it as if there are five to flash through everytime, but if there isn't one it errors out.
 						const intervalId = setInterval(() => {
 							setCurrentImage((prev) => (prev + 1) % images.length)
 							setIntervalId(intervalId)
