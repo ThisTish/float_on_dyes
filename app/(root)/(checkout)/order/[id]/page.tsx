@@ -50,10 +50,8 @@ const OrderPage = async (props: { params: Promise<{ id: string }> }) => {
 						<CardContent>
 							<Table className="text-lg">
 								<TableHeader>
-									<TableRow>
 										<TableHead>Item</TableHead>
 										<TableHead>Price</TableHead>
-									</TableRow>
 								</TableHeader>
 
 								<TableBody>

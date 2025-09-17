@@ -27,7 +27,7 @@ const CustomOrders = async () => {
 					pauseOnClick={true}
 				>
 					{dyeTypes.map((dye) => (
-						<div className="-mx-5 grid py-3">
+						<div className="-mx-5 grid py-3" key={dye.name}>
 							<img src={dye.images[0]} alt={`Image of ${dye.name} dye bed`} key={dye.name} className="mx-auto h-48 w-auto" />
 							<span className="p-1 text-center font-light text-darkBlue">{dye.name}</span>
 						</div>

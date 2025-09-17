@@ -78,12 +78,10 @@ const DashboardPage = async () => {
 					<CardContent>
 						<Table>
 							<TableHeader>
-								<TableRow>
 									<TableHead>BUYER</TableHead>
 									<TableHead>DATE</TableHead>
 									<TableHead>TOTAL</TableHead>
 									<TableHead className="text-end">ACTIONS</TableHead>
-								</TableRow>
 							</TableHeader>
 							<TableBody>
 								{summary.latestOrders.map((order) => (

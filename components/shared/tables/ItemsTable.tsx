@@ -19,13 +19,11 @@ const ItemsTable = ({ cart, showOptions }: { cart?: Cart, showOptions: boolean }
 	return (
 		<Table>
 			<TableHeader>
-				{/* <TableRow> */}
 					<TableHead>Item</TableHead>
 					<TableHead className="text-center">Price</TableHead>
 					{showOptions ? (
 						<TableHead className="text-end">Options</TableHead>
 					) : null}
-				{/* </TableRow> */}
 			</TableHeader>
 
 			<TableBody>

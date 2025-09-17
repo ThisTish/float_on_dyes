@@ -1,5 +1,4 @@
 import Banner from "@/components/header/Banner"
-import { dyeTypes } from "@/lib/constants/discOptions"
 import { Metadata } from "next"
 import { getDyeableDiscs } from "@/lib/actions/product.actions"
 import CustomPageClient from "@/components/customOrders/CustomPageClient"

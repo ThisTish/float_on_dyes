@@ -9,7 +9,7 @@ const GalleryPage = () => {
 		<main className="space-y-20">
 			<Banner title="Disc" subtitle="Gallery" url="/images/cellHeader.jpg" />
 
-			<div className="flex flex-wrap space-x-1 space-y-3">
+			<div className="grid justify-center grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
 				<GalleryDisc
 					image="/images/discs/cloudbreaker.png"

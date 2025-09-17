@@ -6,7 +6,7 @@ import {
 	DrawerDescription,
 	DrawerHeader,
 	DrawerTitle,
-	DrawerTrigger,
+	DrawerTrigger
 } from "@/components/ui/drawer"
 import { List, X } from "lucide-react"
 
@@ -15,21 +15,27 @@ const DyeTypeList = () => {
 		<>
 			<section className="hidden flex-wrap justify-center bg-lightGreen p-5 text-center leading-loose dark:bg-card md:flex">
 				{dyeTypes.map((type) => (
-					<span className="px-3">
+					<span
+						className="px-3"
+						key={type.name}
+					>
 						<a
-							key={type.name}
 							href={`#${type.fragment}`}
-							className="font-semibold text-darkBlue hover:text-white md:text-xl">
+							className="font-semibold text-darkBlue hover:text-white md:text-xl"
+						>
 							{type.name}
 						</a>
 					</span>
 				))}
 			</section>
 
-			<Drawer >
-				<DrawerTrigger asChild className="w-2/3">
-					<button  className="mx-auto mt-20 flex justify-center gap-3 bg-lightGreen p-5 text-center text-darkBlue shadow-md dark:bg-card md:hidden">
-						List	<List className="hover:scale-110"/>
+			<Drawer>
+				<DrawerTrigger
+					asChild
+					className="w-2/3"
+				>
+					<button className="mx-auto mt-20 flex justify-center gap-3 bg-lightGreen p-5 text-center text-darkBlue shadow-md dark:bg-card md:hidden">
+						List <List className="hover:scale-110" />
 					</button>
 				</DrawerTrigger>
 				<DrawerContent className="flex flex-wrap justify-center bg-lightGreen p-5 text-center dark:bg-card md:hidden">
@@ -37,27 +43,24 @@ const DyeTypeList = () => {
 						<X size={20} />
 					</DrawerClose>
 					<DrawerHeader className="hidden">
-						<DrawerTitle >
-							Dye Types
-						</DrawerTitle>
+						<DrawerTitle>Dye Types</DrawerTitle>
 					</DrawerHeader>
 					<DrawerDescription className="my-3 flex flex-wrap justify-center">
 						{dyeTypes.map((type) => (
-								<span>
-									<a
-										key={type.name}
-										href={`#${type.fragment}`}
-										className="px-3 font-semibold text-darkBlue hover:text-white md:text-xl">
-										{type.name}
-									</a>
-								</span>
+							<span>
+								<a
+									key={type.name}
+									href={`#${type.fragment}`}
+									className="px-3 font-semibold text-darkBlue hover:text-white md:text-xl"
+								>
+									{type.name}
+								</a>
+							</span>
 						))}
 					</DrawerDescription>
-
 				</DrawerContent>
 			</Drawer>
 		</>
-
 	)
 }
 

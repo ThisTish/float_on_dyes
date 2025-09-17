@@ -29,8 +29,8 @@ const GalleryDisc = ({ image, isAvailable, dyeType, slug, discName }: GalleryDis
 								<Image
 									key={image}
 									src={image}
-									width={300}
-									height={300}
+									width={450}
+									height={450}
 									alt={`Image of ${dyeType}`}
 									className="hover:cursor-zoom-in"
 								/>
@@ -58,8 +58,8 @@ const GalleryDisc = ({ image, isAvailable, dyeType, slug, discName }: GalleryDis
 							<Image
 								key={image}
 								src={image}
-								width={300}
-								height={300}
+								width={450}
+								height={450}
 								alt={`Image of ${dyeType}`}
 							/>
 							<span className="text-sm font-light" >{discName}</span>
